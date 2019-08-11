@@ -17,18 +17,24 @@ npm i docsify-cli -g
 ```
 docsify serve docs
 ```
+This will serve the documentation website in a local port, reloading the webpage each time that a file is updated.
 
 More details: https://docsify.js.org/#/quickstart
 
 ## Deploying on server
-Just need to download this repository
+- just need to download this repository
 ```
 git clone https://github.com/iden3/docs.git
 ```
 
-And then run:
+- then run:
 ```
 ./gitconnect
 ```
-
 This will automatically pull new commits added to this repo, to have always in the server the last version of this docs repositoy.
+
+- run local server:
+```
+docsify serve docs
+```
+This will serve the documentation website in a local port, reloading the webpage each time that a file is updated.
