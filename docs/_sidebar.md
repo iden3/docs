@@ -12,11 +12,26 @@
 - Guides
 	- [Circom and snarkjs](guides/circom-and-snarkjs.md)
 - Services and protocols
-    - [Services and protocols](technology/technology.md#services)
-    - [Services and infrastructure](repositories/repositories.md#services)
-	- [Misc](repositories/repositories.md#misc)
+    - Claim Server
+	- Identity Agent
+	- Identity Management System
+    - Login Protocol
+	- Name Service
+	- Relayer
+	- Wallet
+	- Libraries
+		- [iden3js](https://github.com/iden3/iden3js)
+		- [go-iden3](https://github.com/iden3/go-iden3-core)
+		- [tx-forwarder](https://github.com/iden3/tx-forwarder)
+		- [discovery-node](https://github.com/iden3/discovery-node)
+		- [wasmbuilder](https://github.com/iden3/wasmbuilder)
+		
 - zkSnarks
-    - [Zero Knowledge Proof](repositories/repositories.md#zkp)
+    - Utilities
+    	- [circom](https://github.com/iden3/circom)
+		- [circomlib](https://github.com/iden3/circomlib)
+		- [snarkjs](https://github.com/iden3/snarkjs)
+		- [websnark](https://github.com/iden3/websnark)
 - Publications
 	- [Research Papers](publications/publications.md#researchpapers)
 	- [Presentations](publications/publications.md#presentations)
