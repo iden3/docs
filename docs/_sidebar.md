@@ -10,8 +10,10 @@
 		- [Merkle Tree](basics/glossary/merkletree.md)
 		- [Zero Knowledge](basics/glossary/zeroknowledge.md)
 - Guides
+	- [Introduction](guides/introduction.md)
 	- [Circom and snarkjs](guides/circom-and-snarkjs.md)
 - Services and protocols
+	- [Introduction](services/introduction.md)
     - Claim Server
 	- Identity Agent
 	- Identity Management System
@@ -20,6 +22,7 @@
 	- Relayer
 	- Wallet
 	- Libraries
+		- [Introduction](services/libraries/introduction.md)
 		- [iden3js](https://github.com/iden3/iden3js)
 		- [go-iden3](https://github.com/iden3/go-iden3-core)
 		- [tx-forwarder](https://github.com/iden3/tx-forwarder)
@@ -27,6 +30,7 @@
 		- [wasmbuilder](https://github.com/iden3/wasmbuilder)
 		
 - zkSnarks
+    - [Introduction](zksnarks/introduction.md)
     - Utilities
     	- [circom](https://github.com/iden3/circom)
 		- [circomlib](https://github.com/iden3/circomlib)
