@@ -41,8 +41,41 @@ At Iden3 we're focused on building the tools and developing the protocols to mak
 
 ## More on identity
 
-...
+### Why does identity matter?
 
+In the [words of Vitalik](https://vitalik.ca/general/2019/04/03/collusion.html):
+
+>Mechanisms that do not rely on identity cannot solve the problem of concentrated interests outcompeting dispersed communities; an identity-free mechanism that empowers distributed communities cannot avoid over-empowering centralized plutocrats pretending to be distributed communities.
+
+In other words, without an identity mechanism, one can't ensure one human one address, or one human one vote. This means that however you structure the rules of the system, those with the most resources will be able to game it.
+
+### How is the existing system failing us?
+
+Since the emergence of the modern state, identities have typically been verified by credentials such as a passport or social network account issued by a central authority such as a state or corporation.
+
+However, as noted in the paper [Verifying Identity as a Social Intersection](), such identity systems have several interrelated flaws:
+
+1. They are insecure. Crucial data such as an ID number constantly has to be given out. Yet this is also sufficient to impersonate an individual. On top of this, since all data is stored in a single repository managed by the state or a corporation, it becomes particularly vulnerable to external hacking or internal corruption.
+
+2. They narrow you down to one thing (in system or out, criminal or not, a credit score, etc.). The central database has little use for more information than this. This limits the functionality of the system and results in great injustices (for example convicted individuals find it hard to re-enter society as this is the only information about themselves they can reliably convey).
+
+3. They are artificial, in the sense that the information stored about you usually bears little relation to what you or your friends think of as your identity.
+
+To quote directly from [the paper]():
+
+>Recently, new identity paradigms have tried to get around some of these elements. One approach, adopted by “big data” platforms like Facebook and Google, is to overcome thin- ness by storing enormous amounts of detailed information about each individual. we might call this “panoptic identity”. However, such solutions have greatly exacerbated the other two problems, as they require extremely artificial compromises to intimacy through the global sharing of data with platforms that would not otherwise store it, creating exceptional potential security risks.
+
+### Why do we need this vision now?
+
+Given the rising political polarization and the increasing amount of information collected, shared, and cross-correlated by governments and corporations about us, there's a real risk our information will be used against us in ways we cannot imagine.
+
+Decentralized identity systems provide a natural technological check on the ability of governments and corporations to abuse their power. A check that goes beyond formal legal protections.
+
+On top of this, in the developing world, decentralized identity systems have the potential to help bring millions of people out of poverty.
+
+To quote the words of [Timothy Ruff](https://medium.com/evernym/7-myths-of-self-sovereign-identity-67aea7416b1):
+
+>Most of us take for granted that we can prove things about ourselves, unaware that over a billion people cannot. Identity is a prerequisite to financial inclusion, and financial inclusion is a big part of solving poverty
 
 ## Contributing
 
