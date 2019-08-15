@@ -39,7 +39,7 @@ If we design them well, they will allow us to redefine how modern society thinks
 
 At Iden3 we're focused on building the tools and developing the protocols to make this happen.
 
-## More on identity
+## More on decentralized identity
 
 ### Why does identity matter?
 
@@ -53,7 +53,7 @@ In other words, without an identity mechanism, one can't ensure one human one ad
 
 Since the emergence of the modern state, identities have typically been verified by credentials such as a passport or social network account issued by a central authority such as a state or corporation.
 
-However, as noted in the paper [Verifying Identity as a Social Intersection](), such identity systems have several interrelated flaws:
+However, as noted in the paper [Verifying Identity as a Social Intersection](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3375436), such identity systems have several interrelated flaws:
 
 1. They are insecure. Crucial data such as an ID number constantly has to be given out. Yet this is also sufficient to impersonate an individual. On top of this, since all data is stored in a single repository managed by the state or a corporation, it becomes particularly vulnerable to external hacking or internal corruption.
 
@@ -61,21 +61,57 @@ However, as noted in the paper [Verifying Identity as a Social Intersection](), 
 
 3. They are artificial, in the sense that the information stored about you usually bears little relation to what you or your friends think of as your identity.
 
-To quote directly from [the paper]():
+To quote directly from [the paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3375436):
 
 >Recently, new identity paradigms have tried to get around some of these elements. One approach, adopted by “big data” platforms like Facebook and Google, is to overcome thin- ness by storing enormous amounts of detailed information about each individual. we might call this “panoptic identity”. However, such solutions have greatly exacerbated the other two problems, as they require extremely artificial compromises to intimacy through the global sharing of data with platforms that would not otherwise store it, creating exceptional potential security risks.
 
 ### Why do we need this vision now?
 
-Given the rising political polarization and the increasing amount of information collected, shared, and cross-correlated by governments and corporations about us, there's a real risk our information will be used against us in ways we cannot imagine.
+Given the rising political polarization and the increasing amount of information about us collected, shared, and cross-correlated by governments and corporations, there's a real risk our information will be used against us in ways we cannot imagine.
 
 Decentralized identity systems provide a natural technological check on the ability of governments and corporations to abuse their power. A check that goes beyond formal legal protections.
 
-On top of this, in the developing world, decentralized identity systems have the potential to help bring millions of people out of poverty.
+### How can the developing world benefit?
+
+In the developing world, decentralized identity systems have the potential to help bring millions of people out of poverty.
 
 To quote the words of [Timothy Ruff](https://medium.com/evernym/7-myths-of-self-sovereign-identity-67aea7416b1):
 
->Most of us take for granted that we can prove things about ourselves, unaware that over a billion people cannot. Identity is a prerequisite to financial inclusion, and financial inclusion is a big part of solving poverty
+>Most of us take for granted that we can prove things about ourselves, unaware that over a billion people cannot. Identity is a prerequisite to financial inclusion, and financial inclusion is a big part of solving poverty.
+
+### Use Cases
+
+#### Liquid democracy
+
+Imagine if you could vote every two weeks to express your political sentiment regarding interest rates.
+
+Imagine if you could have a direct say in any decision, rather than relying on elected politicians to represent you.
+
+Imagine if those in power were held accountable in real-time, rather than once every few years.
+
+This is the promise of liquid democracy.
+
+Liquid democracy exists somewhere in the sweetspot between direct and representative democracy. 
+
+As with direct democracy, everyone has the opportunity to vote on every issue. However, unlike direct democracy, you also have the choice to delegate your vote to someone else.
+
+You can even choose to delegate your votes on different issues to different people. For example, on environmental issues you might choose to delegate your vote to [insert your favourite environmentalist]. Whereas on issues concerning government debt and taxation you might prefer your brother-in-law.
+
+Note that this ability to delegate is recursive. Meaning that if your brother-in-law in turn chooses to delegate his vote on financial issues to his mother, your vote will also be delegated to her.
+
+All votes are transparent and easily verifiable by anyone. If you're unhappy with how one of your delegates is voting, you can take that power away from him/her immediately and either vote yourself or redelegate to someone you deem more trustworthy.
+
+Those with the most delegations essentially become our representatives. Except unlike representative democracy, they are held accountable in real time.
+
+This sounds like a fair, transparent and corruption-free government... why haven't we implemented this before?
+
+Since there's no real central government under this form of democracy, we need a way to store and verify identities in a secure and decentralized way.
+
+On top of this we need to ensure one person is not able to vote multiple times (what's known as a Sybil attack).
+
+The key is a voting protocol with a built in decentralized identity system  -- one that can resist Sybil attacks by requiring some basic verification and reputation for each user while still protecting their pseudonymous identity.
+
+In other words, what we're building.
 
 ## Contributing
 
