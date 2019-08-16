@@ -103,17 +103,19 @@ If you're unhappy with how one of your delegates is voting, you can take that po
 
 Those with the most delegations essentially become our representatives. Except unlike representative democracy, they are held accountable in real time.
 
+>A system like this addresses the uninformed voter issue that a direct democracy creates by allowing voters to allot their votes to experts in their fields. It also addresses the corruption issues of a representative democracy because citizens can rescind their vote from someone instantly, forcing delegates to vote in the best interest of their constituents. It is the best of both worlds that truly gives the power of influence to the voters. [Source](https://media.consensys.net/liquid-democracy-and-emerging-governance-models-df8f3ce712af)
+
 On top of this all votes are transparent and easily verifiable by anyone (whilst preserving anonymity).
 
 This sounds like a fair, transparent and corruption-free government... why haven't we implemented this before?
 
-Since there's no central government under this form of democracy, before we can implement such a system we need to figure out how to store and verify identities in a secure and decentralized way.
+Since there's no central government under this form of democracy, before we can implement such a system we first need to figure out how to store and verify identities in a secure, private, and decentralized way.
 
 We also need to ensure one person is not able to vote multiple times (what's known as a Sybil attack).
 
-The key is a voting protocol with a built in decentralized identity system  -- one that can resist Sybil attacks by requiring some basic verification and reputation for each user while still protecting their pseudonymous identity.
+The key is a voting protocol with a built in (privacy-preserving) decentralized identity system  -- one that can resist Sybil attacks by requiring some basic verification and reputation for each user while still protecting their pseudonymous identity.
 
-In other words, a decentralized identity system is the first big unlock that's needed to turn liquid democracy into a reality.
+In other words, decentralized identity is the first big unlock that's needed to turn liquid democracy into a reality.
 
 ## Contributing
 
