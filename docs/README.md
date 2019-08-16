@@ -95,23 +95,25 @@ Liquid democracy exists somewhere in the sweetspot between direct and representa
 
 As with direct democracy, everyone has the opportunity to vote on every issue. However, unlike direct democracy, you also have the choice to delegate your vote to someone else.
 
-You can even choose to delegate your votes on different issues to different people. For example, on environmental issues you might choose to delegate your vote to [insert your favourite environmentalist]. Whereas on issues concerning government debt and taxation you might prefer your brother-in-law.
+You can even choose to delegate your votes on different issues to different people. For example, on environmental issues you might choose to delegate your vote to your favourite environmentalist. Whereas on issues concerning government debt and taxation you might choose your brother-in-law.
 
-Note that this ability to delegate is recursive. Meaning that if your brother-in-law in turn chooses to delegate his vote on financial issues to his mother, your vote will also be delegated to her.
+Note that this ability to delegate is recursive. Meaning that if your brother-in-law in turn chooses to delegate his vote on financial issues to his favourite economist, your vote will also be delegated to him.
 
-All votes are transparent and easily verifiable by anyone. If you're unhappy with how one of your delegates is voting, you can take that power away from him/her immediately and either vote yourself or redelegate to someone you deem more trustworthy.
+If you're unhappy with how one of your delegates is voting, you can take that power away from him/her immediately and either vote yourself or redelegate to someone you deem more trustworthy.
 
 Those with the most delegations essentially become our representatives. Except unlike representative democracy, they are held accountable in real time.
 
+On top of this all votes are transparent and easily verifiable by anyone (whilst preserving anonymity).
+
 This sounds like a fair, transparent and corruption-free government... why haven't we implemented this before?
 
-Since there's no real central government under this form of democracy, we need a way to store and verify identities in a secure and decentralized way.
+Since there's no central government under this form of democracy, before we can implement such a system we need to figure out how to store and verify identities in a secure and decentralized way.
 
-On top of this we need to ensure one person is not able to vote multiple times (what's known as a Sybil attack).
+We also need to ensure one person is not able to vote multiple times (what's known as a Sybil attack).
 
 The key is a voting protocol with a built in decentralized identity system  -- one that can resist Sybil attacks by requiring some basic verification and reputation for each user while still protecting their pseudonymous identity.
 
-In other words, what we're building.
+In other words, a decentralized identity system is the first big unlock that's needed to turn liquid democracy into a reality.
 
 ## Contributing
 
