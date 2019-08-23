@@ -2,8 +2,9 @@
 [<img src="./imgs/iden3-icon2.png" style="width: 50px; margin-left: 20px;">](/)
 
 - [Home](/)
+	- [More on decentralized identity](/more-on-decentralized-identity.md)
 - The basics
-    - [Getting started](basics/gettingstarted.md)
+    - [Getting started](basics/getting-started.md)
 	- Glossary
 		- [Claims](basics/glossary/claims.md)
 		- [Identity](basics/glossary/identity.md)
