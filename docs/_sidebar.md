@@ -11,7 +11,6 @@
 		- [Merkle Tree](basics/glossary/merkletree.md)
 		- [Zero Knowledge](basics/glossary/zeroknowledge.md)
 - Guides
-	- [Introduction](guides/introduction.md)
 	- [Circom and snarkjs](guides/circom-and-snarkjs.md)
 - Services and protocols
 	- [Introduction](services/introduction.md)

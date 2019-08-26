@@ -1,32 +1,62 @@
-# Circom and snarkjs guide
+# How to use circom and snarkjs
 
-This guide will guide you in creating your first Zero Knowledge
-zkSnark circuit. It will navigate across the various techniques to write
-circuits and it will show you how to create proofs and verify them
-off-chain and on-chain on Ethereum.
+In this guide we'll guide you through the creation of your first zero-knowledge zk-snark circuit using [circom](https://github.com/iden3/circom) and [snarkjs](https://github.com/iden3/snarkjs).
+
+[Circom](https://github.com/iden3/circom) is a library that allows you to build circuits to be used in zero knowledge proofs. 
+
+While [snarkjs](https://github.com/iden3/snarkjs) is an independent implementation of the zk-snarks protocol -- fully written in JavaScript.
+
+Circom is designed to work in snarkjs. In other words any circuit you build in circom can be used in snarkjs.
+
+We'll start by covering the various techniques to write circuits, and finish off by creating and verifying a proof off-chain, and then on-chain on Ethereum.
+
+If you have zero knowledge about zero-knowledge or are unsure about what a zk-snark is, we recommend you read [this page](basics/glossary/zeroknowledge.md) first.
+
 
 ## 1. Installing the tools
 
-### 1.1 Pre-requisites
+### 1.1 Prerequisites
 
-If you don’t have it installed yet, you need to install `Node.js` in
-your laptop.
+First off, we need to be sure we have a recent version of `Node.js` installed.
 
-Last stable version of ``Node.js``(0r 8.12.0) works just fine. But if
-you install the latest current version ``Node.js`` (10.12.0) you will
-see significant performance increase. This is because last versions of
-node includes Big Integer Libraries nativelly. The ``snarkjs`` library
-makes use of this feature if available, and this improves the
-performance x10 (!).
+While any version after `8.12.0` should work fine, we recommend you install version `10.12.0` or later.
+
+Why? These later versions of Node include big integer libraries natively. `snarkjs` makes use of this feature (if available) to improve performance by up to **10x**.
+
+To see which version of Node you have installed, from the command line run:
+
+```node -v```
+
+To download the latest version of Node, [click here](https://nodejs.org/en/download/).
 
 ### 1.2 Install **circom** and **snarkjs**
 
-Just run:
-```
-   npm install -g circom
-   npm install -g snarkjs
-   ```
+As stated in the introduction, circom and snarkjs are the libraries we use to create zero-knowledge proofs.
 
+If you haven't done so already, you can install them from NPM by running the following commands:
+```
+   npm install -global circom
+   npm install -global snarkjs
+```
+
+Hopefully both libraries installed successfully.
+
+If you're on a Unix machine and you're seeing some errors (e.g. `node-gyp rebuild`) it's probably because you need to update your version of Node to the latest long term support (LTS) version, currently `10.15.3`.
+
+If you're seeing one or more errors that look like:
+
+`EACCES: permission denied`
+
+It's probably because you originally installed Node with root permissions. Because of this, writing to your npm directory (`npm install -global`) requires root permissions too.
+
+While it's not a good idea to have Node  installed this way, one way to quickly give yourself root permissions is to run the slightly modified commands:
+
+```
+sudo npm install -global --unsafe-perm circom
+sudo npm install -global --unsafe-perm snarkjs
+```
+
+An arguably better way to fix this is to follow the steps outlined in this [stackoverflow answer.](https://stackoverflow.com/a/24404451)
 
 ## 2. Working with a circuit
 
