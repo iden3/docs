@@ -1,16 +1,18 @@
 # How to use circom and snarkjs
 
+Hello and welcome!
+
 In this guide we'll guide you through the creation of your first zero-knowledge zk-snark circuit using [circom](https://github.com/iden3/circom) and [snarkjs](https://github.com/iden3/snarkjs).
 
 [Circom](https://github.com/iden3/circom) is a library that allows you to build circuits to be used in zero knowledge proofs. 
 
 While [snarkjs](https://github.com/iden3/snarkjs) is an independent implementation of the zk-snarks protocol -- fully written in JavaScript.
 
-Circom is designed to work in snarkjs. In other words any circuit you build in circom can be used in snarkjs.
+Circom is designed to work with snarkjs. In other words, any circuit you build in circom can be used in snarkjs.
 
-We'll start by covering the various techniques to write circuits, and finish off by creating and verifying a proof off-chain, and then on-chain on Ethereum.
+We'll start by covering the various techniques to write circuits, then move on to creating and verifying a proof off-chain, and finish off by doing the same thing on-chain on Ethereum.
 
-If you have zero knowledge about zero-knowledge or are unsure about what a zk-snark is, we recommend you read [this page](basics/glossary/zeroknowledge.md) first.
+If you have zero knowledge about zero-knowledge 😋 or are unsure about what a zk-snark is, we recommend you read [this page](basics/glossary/zeroknowledge.md) first.
 
 
 ## 1. Installing the tools
@@ -60,8 +62,20 @@ An arguably better way to fix this is to follow the steps outlined in this [stac
 
 ## 2. Working with a circuit
 
-Let’s create a circuit that tries to prove that you are able to factor a
-number!
+Now that we have our toolchain setup, let’s create a circuit that tries to prove that we are able to factor an integer c into primes.
+
+Factoring an integer can be quite difficult -- in particular, the prime factorization of very large numbers can be [very difficult](https://www.reddit.com/r/math/comments/2jo786/why_is_the_prime_factorization_of_very_large/cldj3a9/).
+
+For very large numbers, no efficient, non-quantum integer factorization algorithm is known. However it has not been proven that no efficient algorithm exists.
+
+The presumed difficulty of this problem is at the heart of widely used algorithms in cryptography such as [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)).
+
+If this problem were easy to solve, cryptography as we know it would break down. Which means there's a big chance that cryptocurrencies would cease to exist from one day to the next!
+
+In this toy example we'll work with very small numbers, but the principle remains the same.
+
+The idea here is to prove that we know two prime numbers (call them *a* and *b*) that multiply together to give *c*. Without revealing *a* and *b*.
+
 
 ### 2.1 Create a circuit in a new directory
 
