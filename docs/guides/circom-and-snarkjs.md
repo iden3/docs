@@ -31,7 +31,7 @@ To see which version of Node you have installed, from the command line run:
 
 To download the latest version of Node, [click here](https://nodejs.org/en/download/).
 
-### 1.2 Install **circom** and **snarkjs**
+### 1.2 Installing **circom** and **snarkjs**
 
 As stated in the introduction, circom and snarkjs are the libraries we use to create zero-knowledge proofs.
 
@@ -60,9 +60,28 @@ sudo npm install -global --unsafe-perm snarkjs
 
 An arguably better way to fix this is to follow the steps outlined in this [stackoverflow answer.](https://stackoverflow.com/a/24404451)
 
-## 2. Working with a circuit
+## 2. Building a circuit with circom
 
-Now that we have our toolchain setup, let’s create a circuit that tries to prove that we are able to factor an integer c into primes.
+### 2.1 Definition
+First off, let's define what we mean by a circuit.
+
+For our purposes, a circuit is equivalent to a statement or deterministic program which has an output and one or more inputs. 
+
+**[insert image]**
+
+There are two types of possible inputs to a circuit: `private` and `public`. The difference being that a `private` input is hidden from the verifier.
+
+### 2.2 Motivation
+
+The idea here is that given a `circom` circuit and its inputs, the prover can run the circuit and generate a proof (using `snarkjs`) that she ran it correctly.
+
+With the proof, the output, and the public input(s), the prover can then prove to the verifier that she knows one or more private inputs that satisfy the constraints of the circuit, **without revealing anything about the private input(s)** (this is what we mean by zero-knowledge).
+
+### 2.3 Toy example
+
+Don't worry if some (or all) of the above sounded a little abstract. An example should help clarify things.
+
+Let’s create a circuit that tries to prove to someone (the verifier) that we are able to factor an integer `c`.
 
 Factoring an integer can be quite difficult -- in particular, the prime factorization of very large numbers can be [very difficult](https://www.reddit.com/r/math/comments/2jo786/why_is_the_prime_factorization_of_very_large/cldj3a9/).
 
@@ -72,28 +91,19 @@ The presumed difficulty of this problem is at the heart of widely used algorithm
 
 If this problem were easy to solve, cryptography as we know it would break down. Which means there's a big chance that cryptocurrencies would cease to exist from one day to the next!
 
-In this toy example we'll work with very small numbers, but the principle remains the same.
+In this toy example we'll neither work with very large numbers, nor restrict their factors to primes. Nevertheless the general principle remains the same.
 
-The idea here is to prove that we know two prime numbers (call them *a* and *b*) that multiply together to give *c*. Without revealing *a* and *b*.
+We want to prove that we know two numbers (call them `a` and `b`) that multiply together to give `c`. Without revealing `a` and `b`.
 
-
-### 2.1 Create a circuit in a new directory
-
-1. Create an empty directory called ``factor`` where you will put all
-   the files that you will use in this tutorial.
-
+1. The first step is to create (and move into) a new directory called ``factor`` where we'll put all the files that we want to use in this guide.
 ```
-   mkdir factor
-   cd factor
-   ```
+mkdir factor
+cd factor
+```
 
-   In a real circuit, you will probably want to create a ``git``
-   repository with a ``circuits`` directory and a ``test`` directory
-   with all your tests, and the needed scripts to build all the
-   circuits.
+   >Note: if we were designing a circuit for actual use, we'd probably be better off creating a ``git`` repository with a ``circuits`` directory containing the necessary scripts to build all our circuits, and a ``test`` directory with all our tests.
 
-2. Create a new file named ``circuit.circom`` with the following
-   content:
+2. Next, create a new file (in `factor`) named `circuit.circom` which looks like this:
 ```
    template Multiplier() {
        signal private input a;
@@ -105,26 +115,20 @@ The idea here is to prove that we know two prime numbers (call them *a* and *b*)
 
    component main = Multiplier();
    ```
+   As you can see, this circuit has **two private input** signals named ``a`` and `b` and **one output** signal named `c`.
+   
+   The only thing this circuit does is force the signal `c` to be
+   the value of `a*b`.
 
-This circuit has 2 private input signals named ``a`` and ``b`` and one
-output named ``c``.
-
-The only thing that the circuit does is forcing the signal ``c`` to be
-the value of ``a*b``
-
-After declaring the ``Multiplier`` template, we instantiate it with a
-component named\ ``main``.
-
-Note: When compiling a circuit a component named ``main`` must always
-exist.
-
-### 2.2 Compile the circuit
-
-We are now ready to compile the circuit. Run the following command:
-
-``circom circuit.circom -o circuit.json`
-
-to compile the circuit to a file named ``circuit.json``
+   **[Explain <==]**
+   
+   >Note: after declaring the ``Multiplier`` template, we instantiate it with a component named ``main``. When compiling a circuit a component named ``main`` must always exist.
+   
+3. We are now ready to compile the circuit. To compile the circuit to a file named `circuit.json`, run the following command:
+```
+circom circuit.circom -o circuit.json
+```
+**[Explain the need to compile and explain circuit.json]**
 
 ## 3. Taking the compiled circuit to *snarkjs*
 
