@@ -138,6 +138,7 @@ You've just built your first circuit using `circom`.
 
 Now that the circuit is compiled, we can use it in `snarkjs` to create a proof.
 
+
 ### 3.1 Viewing information about the circuit
 
 Before we start, let's have a look at some of the information `circuit.json` gives us.
@@ -155,10 +156,11 @@ You should see the following output:
 # Public Inputs: 0
 # Outputs: 1
 ```
+This information seems to fit the multiplication circuit we defined in section 2. Remember, we had two private inputs `a` and `b`, and one output `c`. And the one constraint we specified was that `a` * `b` = `c`.
 
 Wires refers to...
 
-To see the constraints of the circuit, run:
+To see the constraints of the circuit, we can run:
 
 `snarkjs printconstraints -c circuit.json`
 
@@ -166,11 +168,11 @@ You should see the following output:
 
 `[  -1main.a ] * [  1main.b ] - [  -1main.c ] = 0`
 
-The `1main` prefix just means... So this can be read as:
+Don't worry if this looks a little strange. The `1main` prefix just means... So this can be read as:
 
 `(-a) * b - (-c) = 0`
 
-Which is the same as `a * b = c` (the constraint we defined in `circuit.circom`).
+Which is the same as `a * b = c`. Reassuringly, this is the same constraint we defined in `circuit.circom`.
 
 It's written in this strange way because...
 
@@ -183,21 +185,38 @@ It's written in this strange way because...
 
 ### 3.2 Setting up using *snarkjs*
 
-Ok, let’s run a setup for our circuit:
+The first step in generating a zero-knowledge proof requires what we call a **trusted setup**.
+
+While explaining exactly what a trusted setup is is beyond the scope of this guide, let's try and develop some intuition for why it is necessary.
+
+The need for a trusted setup essentially boils down to the fact that **the balance between privacy for the prover and assurance of not cheating for the verifier is delicate.**
+
+To maintain this delicate balance, zero-knowledge protocols require the use of some randomness.
+
+Usually, this randomness is encoded in the challenge the verifier sends to the prover, and serves to prevent the prover from cheating.
+
+The randomness however can't be public, because it's essentially a backdoor to generating fake proofs.
+
+This implies that a trusted entity should generate the randomness. Hence the term **trusted setup**.
+
+Ok, now that we have a better intuition for what we are doing, let’s go ahead and create a setup for our circuit.
+
+From the command line, run:
 
 `snarkjs setup`
 
-   By default ``snarkjs`` will look for and use ``circuit.json``. You
-   can always specify a different circuit file by adding
-   ``-c <circuit JSON file name>``
+   >Note: By default `snarkjs` will look for and use `circuit.json`. You
+   can specify a different circuit file by adding
+   `-c <circuit JSON file name>`
 
-The output of the setup will in the form of 2 files:
-``proving_key.json`` and ``verification_key.json``
+This will generate both a proving and a verification key in the form of 2 files:
+`proving_key.json` and `verification_key.json`
+
+These keys can be used by any prover and any verifier to engage in the zero-knowledge proof protocol.
 
 ### 3.3. Calculating a witness
 
-Before creating any proof, we need to calculate all the signals of the
-circuit that match (all) the constrains of the circuit.
+Before creating any proof, we need to calculate all the signals of the circuit that match (all) the constrains of the circuit.
 
 ``snarkjs`` calculates these for you. You need to provide a file with
 the inputs and it will execute the circuit and calculate all the
@@ -228,8 +247,7 @@ And now let’s calculate the witness:
 You may want to take a look at ``witness.json`` file with all the
 signals.
 
-Create the proof
-~~~~~~~~~~~~~~~~
+### 3.4 Creating the proof
 
 Now that we have the witness generated, we can create the proof.
 
@@ -239,10 +257,9 @@ This command will use the ``prooving_key.json`` and the ``witness.json``
 files by default to generate ``proof.json`` and ``public.json``
 
 The ``proof.json`` file will contain the actual proof. And the
-``public.json`` file will contain just the values of the public inputs
-and the outputs.
+``public.json`` file will contain just the values of the public inputs and the outputs.
 
-### 3.4 Verifying the proof
+### 3.5 Verifying the proof
 
 To verify the proof run:
 
@@ -257,44 +274,7 @@ the outputs matches the ones in the ``public.json`` file.
 If the proof is ok, you will see an ``OK`` in the screen or ``INVALID``
 otherwise.
 
-### 3.5 Generate the solidity verifier
-
-`snarkjs generateverifier`
-
-This command will take the ``verification_key.json`` and generate a
-solidity code in ``verifier.sol`` file.
-
-You can take the code in ``verifier.sol`` and cut and paste in remix.
-
-This code contains two contracts: Pairings and Verifier. You just need
-to deploy the ``Verifier`` contract.
-
-   You may want to use a test net like Rinkeby, Kovan or Ropsten. You
-   can also use the Javascript VM, but in some browsers, the
-   verification takes long and it may hang the page.
-
-### 3.6 Verifying the proof on-chain
-
-
-The verifier contract deployed in the last step has a ``view`` function
-called ``verifyProof``.
-
-This function will return true if the proof and the inputs are valid.
-
-To facilitiate the call, you can use snarkjs to generate the parameters
-of the call by typing:
-
-`snarkjs generatecall`
-
-Just cut and paste the output to the parameters field of the
-``verifyProof`` method in Remix.
-
-If every thing works ok, this method should return true.
-
-If you just change any bit in the parameters, you can check that the
-result will be false.
-
-### 3.7 Bonus track
+### 3.6 Bonus
 
 We can fix the circuit to not accept one as any of the values by adding
 some extra constraints.
@@ -343,7 +323,47 @@ in Zr, so we need to guarantee too that the multiplication does not
 overflow. This can be done by binarizing the inputs and checking the
 ranges, but we will reserve it for future tutorials.
 
-## 4. Where to go from here.
+## 4 Proving on-chain
+
+### 4.1 Generating the solidity verifier
+
+`snarkjs generateverifier`
+
+This command will take the ``verification_key.json`` and generate a
+solidity code in ``verifier.sol`` file.
+
+You can take the code in ``verifier.sol`` and cut and paste in remix.
+
+This code contains two contracts: Pairings and Verifier. You just need
+to deploy the ``Verifier`` contract.
+
+   You may want to use a test net like Rinkeby, Kovan or Ropsten. You
+   can also use the Javascript VM, but in some browsers, the
+   verification takes long and it may hang the page.
+
+### 4.2 Verifying the proof on-chain
+
+
+The verifier contract deployed in the last step has a ``view`` function
+called ``verifyProof``.
+
+This function will return true if the proof and the inputs are valid.
+
+To facilitiate the call, you can use snarkjs to generate the parameters
+of the call by typing:
+
+`snarkjs generatecall`
+
+Just cut and paste the output to the parameters field of the
+``verifyProof`` method in Remix.
+
+If every thing works ok, this method should return true.
+
+If you just change any bit in the parameters, you can check that the
+result will be false.
+
+
+## 5. Where to go from here.
 
 You may want to read the [README](https://github.com/iden3/circom) to
 learn more features about circom.
@@ -355,7 +375,7 @@ binaritzations, comparators, eddsa, hashes, merkle trees etc
 Or a exponentiation in the Baby Jub curve
 [here](https://github.com/iden3/circomlib) (Work in progress).
 
-## 5. Final note
+## 6. Final note
 
 There is nothing worst for a dev than working with a buggy compiler.
 This is a very early stage of the compiler, so there are many bugs and
