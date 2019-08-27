@@ -43,7 +43,7 @@ If you haven't done so already, you can install them from NPM by running the fol
 
 Hopefully both libraries installed successfully.
 
-If you're on a Unix machine and you're seeing some errors (e.g. `node-gyp rebuild`) it's probably because you need to update your version of Node to the latest long term support (LTS) version, currently `10.15.3`.
+If you're on a Unix machine and you're seeing some errors (e.g. `node-gyp rebuild`) it's probably because you need to update your version of Node to the latest long term support (LTS) version, at the time of writing this is `v10.15.3`.
 
 If you're seeing one or more errors that look like:
 
@@ -65,7 +65,7 @@ An arguably better way to fix this is to follow the steps outlined in this [stac
 ### 2.1 Definition
 First off, let's define what we mean by a circuit.
 
-For our purposes, a circuit is equivalent to a statement or deterministic program which has an output and one or more inputs. 
+For our purposes, a circuit is equivalent to a **statement** or **deterministic program** which has an output and one or more inputs. 
 
 **[insert image]**
 
@@ -73,17 +73,19 @@ There are two types of possible inputs to a circuit: `private` and `public`. The
 
 ### 2.2 Motivation
 
-The idea here is that given a `circom` circuit and its inputs, the prover can run the circuit and generate a proof (using `snarkjs`) that she ran it correctly.
+The idea here is that given a `circom` circuit and its inputs, the prover can run the circuit and generate a proof -- using `snarkjs` -- that she ran it correctly.
 
-With the proof, the output, and the public input(s), the prover can then prove to the verifier that she knows one or more private inputs that satisfy the constraints of the circuit, **without revealing anything about the private input(s)** (this is what we mean by zero-knowledge).
+With the proof, the output, and the public input(s), the prover can then prove to the verifier that she knows one or more private inputs that satisfy the constraints of the circuit, **without revealing anything about the private input(s)**.
+
+In other words, even though the verifier has **zero knowledge about the private inputs** to the circuit, the proof, the output, and the public inputs(s) are enough to convince her that the prover's statement is valid (hence the term zero-knowledge proof).
 
 ### 2.3 Toy example
 
-Don't worry if some (or all) of the above sounded a little abstract. An example should help clarify things.
+Don't worry if some (or all) of the above sounded a little abstract. In this section we'll go through an example that should help clarify things.
 
 Let’s create a circuit that tries to prove to someone (the verifier) that we are able to factor an integer `c`.
 
-Factoring an integer can be quite difficult -- in particular, the prime factorization of very large numbers can be [very difficult](https://www.reddit.com/r/math/comments/2jo786/why_is_the_prime_factorization_of_very_large/cldj3a9/).
+It turns out that factoring an integer can be quite difficult -- in particular, the prime factorization of very large numbers can be [very difficult](https://www.reddit.com/r/math/comments/2jo786/why_is_the_prime_factorization_of_very_large/cldj3a9/).
 
 For very large numbers, no efficient, non-quantum integer factorization algorithm is known. However it has not been proven that no efficient algorithm exists.
 
@@ -103,7 +105,7 @@ cd factor
 
    >Note: if we were designing a circuit for actual use, we'd probably be better off creating a ``git`` repository with a ``circuits`` directory containing the necessary scripts to build all our circuits, and a ``test`` directory with all our tests.
 
-2. Next, create a new file (in `factor`) named `circuit.circom` which looks like this:
+2. Next, we want to create a new file (in `factor`) named `circuit.circom` which looks like this:
 ```
    template Multiplier() {
        signal private input a;
