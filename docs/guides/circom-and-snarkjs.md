@@ -105,7 +105,7 @@ cd factor
 
    >Note: if we were designing a circuit for actual use, we'd probably be better off creating a ``git`` repository with a ``circuits`` directory containing the necessary scripts to build all our circuits, and a ``test`` directory with all our tests.
 
-2. Next, we want to create a new file (in `factor`) named `circuit.circom` which looks like this:
+2. Next, we want to create a new file (in `factor`) named `circuit.circom`. The contents should look like this:
 ```
    template Multiplier() {
        signal private input a;
@@ -119,18 +119,19 @@ cd factor
    ```
    As you can see, this circuit has **two private input** signals named ``a`` and `b` and **one output** signal named `c`.
    
-   The only thing this circuit does is force the signal `c` to be
-   the value of `a*b`.
-
-   **[Explain <==]**
+   The `<==` operator does two things. The first is to connect signals. The second is to apply a constaint.
+   
+   In our case, we're using it to connect `c` to `a` and `b` and at the same time constrain `c` to be the value of `a*b`. 
    
    >Note: after declaring the ``Multiplier`` template, we instantiate it with a component named ``main``. When compiling a circuit a component named ``main`` must always exist.
    
-3. We are now ready to compile the circuit. To compile the circuit to a file named `circuit.json`, run the following command:
+3. We are now ready to compile the circuit -- we need to do this to be able to use it in `snarkjs` later. To compile the circuit to a file named `circuit.json`, run the following command:
 ```
 circom circuit.circom -o circuit.json
 ```
-**[Explain the need to compile and explain circuit.json]**
+
+Congratulations! 🎉🎉
+You've just built your first circuit using `circom`.
 
 ## 3. Taking the compiled circuit to *snarkjs*
 
