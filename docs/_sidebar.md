@@ -2,7 +2,7 @@
 [<img src="./imgs/iden3-icon2.png" style="width: 50px; margin-left: 20px;">](/)
 
 - [Home](/)
-	- [More on decentralized identity](/more-on-decentralized-identity.md)
+	- [More on identity](/more-on-identity.md)
 - The basics
     - [Getting started](basics/getting-started.md)
 	- Glossary

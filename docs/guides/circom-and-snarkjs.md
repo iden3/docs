@@ -119,7 +119,7 @@ cd factor
    ```
    As you can see, this circuit has **two private input** signals named ``a`` and `b` and **one output** signal named `c`.
    
-   The `<==` operator does two things. The first is to connect signals. The second is to apply a constaint.
+   Note that, in circom, the `<==` operator does two things. The first is to connect signals. The second is to apply a constaint.
    
    In our case, we're using it to connect `c` to `a` and `b` and at the same time constrain `c` to be the value of `a*b`. 
    
@@ -131,25 +131,55 @@ circom circuit.circom -o circuit.json
 ```
 
 Congratulations! 🎉🎉
+
 You've just built your first circuit using `circom`.
 
 ## 3. Taking the compiled circuit to *snarkjs*
 
-Now that the circuit is compiled, we will continue with ``snarkjs``.
-Please note that you can always access the help of ``snarkjs`` by
-typing:
+Now that the circuit is compiled, we can use it in `snarkjs` to create a proof.
 
-`snarkjs --help`
+### 3.1 Viewing information about the circuit
 
-### 3.1 View information and stats regarding a circuit
+Before we start, let's have a look at some of the information `circuit.json` gives us.
 
-To show general statistics of this circuit, you can run:
+From the command line run:
 
 `snarkjs info -c circuit.json`
 
-You can also print the constraints of the circuit by running:
+You should see the following output:
+
+```
+# Wires: 4
+# Constraints: 1
+# Private Inputs: 2
+# Public Inputs: 0
+# Outputs: 1
+```
+
+Wires refers to...
+
+To see the constraints of the circuit, run:
 
 `snarkjs printconstraints -c circuit.json`
+
+You should see the following output:
+
+`[  -1main.a ] * [  1main.b ] - [  -1main.c ] = 0`
+
+The `1main` prefix just means... So this can be read as:
+
+`(-a) * b - (-c) = 0`
+
+Which is the same as `a * b = c` (the constraint we defined in `circuit.circom`).
+
+It's written in this strange way because...
+
+
+...
+
+
+>Note: to see a list of  all `snarkjs` commands, as well as descriptions about their inputs and outputs, run `snarkjs --help` from the command line.
+
 
 ### 3.2 Setting up using *snarkjs*
 
