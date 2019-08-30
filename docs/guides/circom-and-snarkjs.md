@@ -121,7 +121,7 @@ cd factor
    
    Note that, in circom, the `<==` operator does two things. The first is to connect signals. The second is to apply a constaint.
    
-   In our case, we're using it to connect `c` to `a` and `b` and at the same time constrain `c` to be the value of `a*b`. 
+   In our case, we're using `<==` to connect `c` to `a` and `b` and at the same time constrain `c` to be the value of `a*b`. 
    
    >Note: after declaring the ``Multiplier`` template, we instantiate it with a component named ``main``. When compiling a circuit a component named ``main`` must always exist.
    
@@ -187,7 +187,7 @@ It's written in this strange way because...
 
 The first step in generating a zero-knowledge proof requires what we call a **trusted setup**.
 
-While explaining exactly what a trusted setup is is beyond the scope of this guide, let's try and develop some intuition for why it is necessary.
+While explaining exactly what a trusted setup is is beyond the scope of this guide, let's try and develop some intuition for why we need it.
 
 The need for a trusted setup essentially boils down to the fact that **the balance between privacy for the prover and assurance of not cheating for the verifier is delicate.**
 
@@ -199,7 +199,7 @@ The randomness however can't be public, because it's essentially a backdoor to g
 
 This implies that a trusted entity should generate the randomness. Hence the term **trusted setup**.
 
-Ok, now that we have a better intuition for what we are doing, let’s go ahead and create a setup for our circuit.
+Ok, now that we have a better intuition for what we are doing, let’s go ahead and create a trusted setup for our circuit.
 
 From the command line, run:
 
@@ -212,82 +212,120 @@ From the command line, run:
 This will generate both a proving and a verification key in the form of 2 files:
 `proving_key.json` and `verification_key.json`
 
-These keys can be used by any prover and any verifier to engage in the zero-knowledge proof protocol.
+We'll need these later on to create and verify the proof.
 
 ### 3.3. Calculating a witness
 
-Before creating any proof, we need to calculate all the signals of the circuit that match (all) the constrains of the circuit.
+Before creating the proof, we need to calculate all the intermediate signals of the circuit. In other words, we need to calculate the signals that match the constraints of the circuit.
 
-``snarkjs`` calculates these for you. You need to provide a file with
-the inputs and it will execute the circuit and calculate all the
-intermediate signals and the output. This set of signals is the
-*witness*.
+`snarkjs`'s `calculatewitness` command calculates these for us.
 
-The zero knowledge proofs prove that you know a set of signals (witness)
-that match all the constraints but without revealing any of the signals
-except the public inputs plus the outputs.
+`calculatewitness` takes as input a file with the inputs to the circuit. It executes the circuit with these inputs, keeping track of all the intermediate signals along the way.
 
-For example, Imagine that you want to prove that you are able to factor
-33 that means that you know two numbers ``a`` and ``b`` that when you
-multiply them, it results in 33.
+This set of signals -- the input, the intermediate signals, and the output -- is called the *witness*.
 
-   Of course you can always use one and the same number as ``a`` and
-   ``b``. We will deal with this problem later.
+We need to do this because of the way zero knowledge proofs work.
 
-So you want to prove that you know 3 and 11.
+Remember, in a zk proof, the prover needs to prove to the verifier that she knows a set of signals that match all the constraints of the circuit, without revealing any of the signals except the public input(s) and the output. **The witness contains this set of signals.**
 
-Let’s create a file named ``input.json``, with the following content:
+>Note: the witness is kept secret from the verifier. It's used by the prover to generate the proof that she knows the set of signals contained in the witness.
+
+In our case, we don't have any intermediate signals because we just have one constraint -- `a * b = c` -- so the witness is just the inputs -- `a` and `b` -- and the output -- `c`.
+
+For example, imagine that we want to prove that we are able to factor 33. That means that we need to prove that we know two numbers `a` and `b` that multiply to give 33.
+
+Since the only two (distinct) numbers that multiply to give 33 are 3 and 11, let’s create a file named `input.json`, with the following content:
 
 `{"a": 3, "b": 11}`
 
-And now let’s calculate the witness:
+And run the following command to calculate the witness:
 
-`snarkjs calculatewitness`
+`snarkjs calculatewitness --circuit input.json`
 
-You may want to take a look at ``witness.json`` file with all the
-signals.
+You should see that a `witness.json` file has been created with all of the relevant signals.
+
+If you open it up, it should look something like this:
+
+```
+[
+ "1",
+ "33",
+ "3",
+ "11"
+]
+```
+Where `33` is the output, and `3` and `11` are the inputs.
+
+>Note: In addition to the output, inputs, intermediate signals, you should see that the witness contains a dummy variable `1` at the beginning. To understand why this `1` is needed requires diving too deep into the details of zk proofs and as such is beyond the scope of this post. If you're curious as to why, see [this post by Vitalik](https://medium.com/@VitalikButerin/quadratic-arithmetic-programs-from-zero-to-hero-f6d558cea649).
+
+>Note: You might have noticed that there's nothing about the circuit that prevents us from setting `a = 1` and `b = 33`. We will deal with this problem later.
 
 ### 3.4 Creating the proof
 
-Now that we have the witness generated, we can create the proof.
+Now that we have the witness and the proving key, we're ready to create the proof.
 
-`snarkjs proof`
+To create the proof, run:
 
-This command will use the ``prooving_key.json`` and the ``witness.json``
-files by default to generate ``proof.json`` and ``public.json``
+```
+snarkjs proof --witness witness.json --provingkey proving_key.json
+```
 
-The ``proof.json`` file will contain the actual proof. And the
-``public.json`` file will contain just the values of the public inputs and the outputs.
+This will generate the files `proof.json` and `public.json`.
+
+`proof.json` contains the actual proof. Whereas
+`public.json` contains just the values of the public inputs and outputs.
 
 ### 3.5 Verifying the proof
 
+In practice at this stage you would hand over both the `proof.json` and `public.json` files to the verifier.
+
+In this toy example, however, we're going to double up as the verifier.
+
+Remember, with the proof, and the public input and outputs, the prover can now prove to the verifier that she knows one or more private signals that satisfy the constraints of the circuit, without revealing anything about those private signals.
+
+From the verifier's point of view, the verifier can verify that the prover knows the set of private signals contained in the witness -- without having access to the witness.
+
+With the proof at hand (`proof.json`), this amounts to checking that the prover knows a witness with public inputs and outputs that match the ones in `public.json`.
+
 To verify the proof run:
 
-`snarkjs verify`
+```
+snarkjs verify --verificationkey verification_key.json --proof proof.json --public public.json
+```
 
-This command will use ``verification_key.json``, ``proof.json`` and
-``public.json`` to verify that is valid.
+You should see `OK` as the output. This signifies the proof is valid.
 
-Here we are veifying that we know a witness that the public inputs and
-the outputs matches the ones in the ``public.json`` file.
+For invalid proofs, you'll see `INVALID` instead.
 
-If the proof is ok, you will see an ``OK`` in the screen or ``INVALID``
-otherwise.
+To see this create a new file called `public-invalid.json` with `34` as the public output instead of `33`.
+
+It should something look like:
+
+```
+[
+ "34"
+]
+```
+
+Now run:
+
+```
+snarkjs verify --verificationkey verification_key.json --proof proof.json --public public-invalid.json
+```
+
+You should see that the output of this command is now `INVALID`.
 
 ### 3.6 Bonus
 
-We can fix the circuit to not accept one as any of the values by adding
-some extra constraints.
+At the end of section 3.4 we noted that there's nothing about the circuit we created that prevents us from using `a = 1` and `b = c` (or vice-versa) to satisify the constraints of the circuit, for any `c`.
 
-Here the trick is that we use the property that 0 has no inverse. so
-``(a-1)`` should not have an inverse.
+We can fix this by adding some extra constraints.
 
-that means that ``(a-1)*inv = 1`` will be inpossible to match if ``a``
-is one.
+The trick is to use the property that **0 has no inverse**. This means that if we want to prevent `a` or `b` from being set to `1` we can just add a couple of constraints that prevent `a-1` and `b-1` from having an inverse.
 
-We just calculate inv by ``1/(a-1)``
+>Note: the inverse of `a-1` is `1/(a-1)`
 
-So let’s modify the circuit:
+With the above insight, we can modify the circuit as follows:
 
 ```
    template Multiplier() {
@@ -309,19 +347,16 @@ So let’s modify the circuit:
    component main = Multiplier();
 ```
 
-A nice thing of circom language is that you can split a <== into two
-independent acions: <– and ===
+You should notice that we have two new operators here, `<--` and `===`.
 
-The <– and –> operators Just assign a value to a signal without creating
-any constraints.
+`<--` assigns a value to a signal without adding a constraint.
 
-The === operator just adds a constraint without assigning any value to
-any signal.
+Whereas `===` adds a constraint without assigning a value to
+a signal.
 
-The circuit has also another problem and it’s that the operation works
-in Zr, so we need to guarantee too that the multiplication does not
-overflow. This can be done by binarizing the inputs and checking the
-ranges, but we will reserve it for future tutorials.
+>Note: `<==` is just the combination of `===` and `<--`. In other words `<==` assigns a value and adds a constraint in one go. This isn't always desirable. The flexibility of circom allows us to split this up into two steps.
+
+>Note: It turns out there's still a subtle problem with the circuit. Since the operations take place over a [finite field](https://en.wikipedia.org/wiki/Finite_field), we need to guarantee that the multiplication doesn't overflow. This can be done by binarizing the inputs and checking the ranges. Don't worry about the details for the time being, we'll cover it in a future tutorial.
 
 ## 4 Proving on-chain
 
