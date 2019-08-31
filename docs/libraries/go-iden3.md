@@ -23,7 +23,4 @@ Go-iden3 is a Go implementation of the iden3 system.
 ### Misc
 
 - - [Useful functions for public key encryption](https://github.com/iden3/go-iden3-core/tree/master/crypto/public-key-encryption)
- 
-
-
 
