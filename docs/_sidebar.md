@@ -12,12 +12,13 @@
 		- [Zero Knowledge](basics/glossary/zeroknowledge.md)
 - Guides
 	- [Circom and snarkjs](guides/circom-and-snarkjs.md)
+	- [Centralized login](guides/centralized-login.md)
 - Services and protocols
 	- [Introduction](services/introduction.md)
+	- [Login Protocol](services/login-protocol.md)
     - Claim Server
 	- Identity Agent
 	- Identity Management System
-    - [Login Protocol](services/login-protocol.md)
 	- Name Service
 	- Relayer
 	- Wallet
