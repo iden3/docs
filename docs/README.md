@@ -43,6 +43,6 @@ At Iden3 we're focused on building the tools and developing the protocols to mak
 
 Our team can always use your feedback and help to improve the tutorials and materials included. If you don't understand something, or cannot find what you are looking for, or have any suggestion, help us make the documentation better by letting us know! You can do this by submitting an issue or pull request on the [GitHub repository](https://github.com/iden3/docs/issues).
 
-P.S. Before you submit any changes, please make sure to read our [contribution guidelines](https://github.com/iden3/docs/CONTRIBUTING.md).
+P.S. Before you submit any changes, please make sure to read our [contribution guidelines](https://github.com/iden3/docs/blob/master/CONTRIBUTING.md).
 
 
