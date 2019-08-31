@@ -25,7 +25,7 @@
 	- Libraries
 		- [Introduction](services/libraries/introduction.md)
 		- [iden3js](https://github.com/iden3/iden3js)
-		- [go-iden3](https://github.com/iden3/go-iden3-core)
+		- [go-iden3](libraries/go-iden3.md)
 		- [tx-forwarder](https://github.com/iden3/tx-forwarder)
 		- [discovery-node](https://github.com/iden3/discovery-node)
 		- [wasmbuilder](https://github.com/iden3/wasmbuilder)
