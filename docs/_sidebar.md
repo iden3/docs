@@ -17,7 +17,7 @@
     - Claim Server
 	- Identity Agent
 	- Identity Management System
-    - Login Protocol
+    - [Login Protocol](services/login-protocol.md)
 	- Name Service
 	- Relayer
 	- Wallet
