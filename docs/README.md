@@ -3,7 +3,7 @@
 
 Welcome to the Iden3 developer portal. Here you'll find eveything you need to get started building with Iden3.
 
-## What is Iden3 and what are its aims
+## What is Iden3
 
 Iden3 is an open source project offering a complete decentralized identity management solution over the public blockchain. It is designed with four fundamental goals in mind:
 
