@@ -16,27 +16,26 @@
 - Services and protocols
 	- [Introduction](services/introduction.md)
 	- [Login Protocol](services/login-protocol.md)
-    - Claim Server
-	- Identity Agent
-	- Identity Management System
-	- Name Service
-	- Relayer
-	- Wallet
+    - *Claim Server*
+	- *Identity Agent*
+	- *Identity Management System*
+	- *Name Service*
+	- *Relayer*
+	- *Wallet*
 	- Libraries
-		- [Introduction](services/libraries/introduction.md)
-		- [iden3js](https://github.com/iden3/iden3js)
-		- [go-iden3](libraries/go-iden3.md)
-		- [tx-forwarder](https://github.com/iden3/tx-forwarder)
-		- [discovery-node](https://github.com/iden3/discovery-node)
-		- [wasmbuilder](https://github.com/iden3/wasmbuilder)
-		
+		- [iden3js](services/libraries/iden3js.md)
+		- [go-iden3](services/libraries/go-iden3.md)
+		- [transactions-forwarder](services/libraries/transaction-forwarder.md)
+		- [discovery-node](services/libraries/discovery-node.md)
+		- [notifications](services/libraries/notifications.md)	
 - zkSnarks
     - [Introduction](zksnarks/introduction.md)
     - Utilities
-    	- [circom](https://github.com/iden3/circom)
-		- [circomlib](https://github.com/iden3/circomlib)
-		- [snarkjs](https://github.com/iden3/snarkjs)
-		- [websnark](https://github.com/iden3/websnark)
+    	- [circom](zksnarks/utilities/circom.md)
+		- [circomlib](zksnarks/utilities/circomlib.md)
+		- [snarkjs](zksnarks/utilities/snarkjs.md)
+		- [websnark](zksnarks/utilities/websnark.md)
+		- [wasmbuilder](zksnarks/utilities/wasmbuilder.md)
 - Publications
 	- [Research Papers](publications/publications.md#researchpapers)
 	- [Presentations](publications/publications.md#presentations)
