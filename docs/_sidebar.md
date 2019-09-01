@@ -1,42 +1,21 @@
 
 [<img src="./imgs/iden3-icon2.png" style="width: 50px; margin-left: 20px;">](/)
 
-- [Home](/)
-	- [More on identity](/more-on-identity.md)
-- The basics
-    - [Getting started](basics/getting-started.md)
-	- Glossary
-		- [Claims](basics/glossary/claims.md)
-		- [Identity](basics/glossary/identity.md)
-		- [Merkle Tree](basics/glossary/merkletree.md)
-		- [Zero Knowledge](basics/glossary/zeroknowledge.md)
-- Guides
+- **The basics**
+    - [Introduction](basics/introduction.md)
+	- [More on identity](basics/more-on-identity.md)
+	- [Glossary](basics/glossary.md)
+- **Services and protocols**
+
+	- [Libraries](services/libraries.md)
+	- [Login Protocol](services/login-protocol.md)
+- **zkSnarks**
+    - [Utilities](zksnarks/utilities.md)
+
+- **Guides**
 	- [Circom and snarkjs](guides/circom-and-snarkjs.md)
 	- [Centralized login](guides/centralized-login.md)
-- Services and protocols
-	- [Introduction](services/introduction.md)
-	- [Login Protocol](services/login-protocol.md)
-    - *Claim Server*
-	- *Identity Agent*
-	- *Identity Management System*
-	- *Name Service*
-	- *Relayer*
-	- *Wallet*
-	- Libraries
-		- [iden3js](services/libraries/iden3js.md)
-		- [go-iden3](services/libraries/go-iden3.md)
-		- [transactions-forwarder](services/libraries/transaction-forwarder.md)
-		- [discovery-node](services/libraries/discovery-node.md)
-		- [notifications](services/libraries/notifications.md)	
-- zkSnarks
-    - [Introduction](zksnarks/introduction.md)
-    - Utilities
-    	- [circom](zksnarks/utilities/circom.md)
-		- [circomlib](zksnarks/utilities/circomlib.md)
-		- [snarkjs](zksnarks/utilities/snarkjs.md)
-		- [websnark](zksnarks/utilities/websnark.md)
-		- [wasmbuilder](zksnarks/utilities/wasmbuilder.md)
-- Publications
+- **Publications**
 	- [Research Papers](publications/publications.md#researchpapers)
 	- [Videos](publications/publications.md#videos)
 	- [Slides](publications/publications.md#slides)
