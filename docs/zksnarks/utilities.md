@@ -8,9 +8,11 @@ In particular, it's designed to work well with [snarkjs](https://github.com/iden
 
 For a guide on how to get started with circom and snarkjs, see [here](../../guides/circom-and-snarkjs.md).
 
+For an **experimental port of the circom compiler to rust**, see [here](https://github.com/iden3/rust-circom-experimental).
+
 ## Circomlib
 
-[Circomlib](https://github.com/iden3/circomlib) is a library containing circuits implemented in [circom](zksnarks/utilities/circom.md).
+[Circomlib](https://github.com/iden3/circomlib) is a library containing circuits implemented in [circom](https://github.com/iden3/circom).
 
 It contains an implementation of the [Pederson Hash](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/pedersen-hash/pedersen.rst) and Exponentiation circuits using the [Baby-Jubjub](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/baby-jubjub/baby-jubjub.rst) elliptic Curve.
 

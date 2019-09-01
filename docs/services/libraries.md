@@ -32,6 +32,11 @@ Go-iden3 is a Go implementation of the iden3 system.
 
 - - [Useful functions for public key encryption](https://github.com/iden3/go-iden3-core/tree/master/crypto/public-key-encryption)
 
+## Iden3ts (light wallet)
+
+[Iden3ts](https://github.com/iden3/ts-iden3-light-wallet) is a light wallet client library implementation in Typescript for browser wallets.
+
+
 ## Transactions forwarder
 
 [Transactions forwarder](https://github.com/iden3/tx-forwarder) (or tx-forwarder) is an implementation of a  server that pays gas on behalf of users for client signed transactions.
