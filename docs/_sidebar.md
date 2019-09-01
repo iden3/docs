@@ -38,6 +38,7 @@
 		- [wasmbuilder](zksnarks/utilities/wasmbuilder.md)
 - Publications
 	- [Research Papers](publications/publications.md#researchpapers)
-	- [Presentations](publications/publications.md#presentations)
 	- [Videos](publications/publications.md#videos)
+	- [Slides](publications/publications.md#slides)
+		
 
