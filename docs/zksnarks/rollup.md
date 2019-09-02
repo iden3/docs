@@ -1,5 +1,6 @@
 # Rollup
 
+## Introduction
 [Rollup](https://github.com/barryWhiteHat/roll_up) is a project to scale ethereum with zk-snarks.
 
 In the words of [Vitalik](https://github.com/barryWhiteHat/roll_up):
@@ -8,8 +9,10 @@ In the words of [Vitalik](https://github.com/barryWhiteHat/roll_up):
 
 By some estimates, rollup could help ethereum scale to [17,000 transactions-per-second](https://ethresear.ch/t/roll-up-roll-back-snark-side-chain-17000-tps/3675/3). To put this in context, the ethereum blockchain currently supports roughly 15 tps compared to around 45,000 processed by Visa.
 
-For an introduction, see this [video](https://www.youtube.com/watch?v=TtsDNneTDDY).
+For a more complete introduction, see this [video](https://www.youtube.com/watch?v=TtsDNneTDDY).
 
-For an implementation using [circom](https://github.com/iden3/circom) and [circomlib](https://github.com/iden3/circomlib) see [here](https://github.com/iden3/rollup).
+## Our implementation
+
+For our implementation using [circom](https://github.com/iden3/circom) and [circomlib](https://github.com/iden3/circomlib) see [here](https://github.com/iden3/rollup).
 
 >Note: this is very much a work in progress.

@@ -264,3 +264,7 @@ Now, from the perspective of R', B is valid either if A is valid or R knows her 
 But since R clearly knows her own private key, R' can't tell whether A is valid.
 
 *[image]*
+
+### Zk-snarks
+
+You can think of zk-snarks as an efficient way to produce zero-knowledge proofs. Proofs that are short enough to publish to a blockchain and that can be read later by a verifier.
