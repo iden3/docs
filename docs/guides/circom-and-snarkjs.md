@@ -400,24 +400,22 @@ result will be false.
 
 ## 5. Where to go from here.
 
-You may want to read the [README](https://github.com/iden3/circom) to
-learn more features about circom.
+If you've been inspired by this guide, we recommend you checkout the [circom repository](https://github.com/iden3/circom) to
+learn more about circom.
 
-You can also check a a library with many basic circuits lib
-binaritzations, comparators, eddsa, hashes, merkle trees etc
-[here](https://github.com/iden3/circomlib) (Work in progress).
+You should also take a look [circomlib](https://github.com/iden3/circomlib): a library containing circuits implemented in [circom](https://github.com/iden3/circom).
 
-Or a exponentiation in the Baby Jub curve
-[here](https://github.com/iden3/circomlib) (Work in progress).
+>Note: circomlib contains some useful basic circuits, as well as an implementation of the [Pederson Hash](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/pedersen-hash/pedersen.rst) and Exponentiation circuits using the [Baby-Jubjub](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/baby-jubjub/baby-jubjub.rst) elliptic Curve.
+
 
 ## 6. Final note
 
-There is nothing worst for a dev than working with a buggy compiler.
-This is a very early stage of the compiler, so there are many bugs and
-lots of works needs to be done. Please have it present if you are doing
-anything serious with it.
+From a developer's point of view, there are few things worse than working with a buggy compiler.
 
-And please contact us for any isue you have. In general, a github issue
-with a small piece of code with the bug is very worthy!.
+The compiler is still at an early stage, and work still needs to be done, so there may be bugs.
 
-Enjoy zero knowledge proving!
+Please keep this in mind if you are using circom to do anything serious :)
+
+>Note: If you find a bug, please don't hesitate to let us know: a [github issue](https://github.com/iden3/circom/issues) with a small piece of code highlighting the bug is perfect..
+
+In the meantime, enjoy zero knowledge proving! 💛
