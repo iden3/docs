@@ -251,7 +251,7 @@ Since the only two (distinct) numbers that multiply to give 33 are 3 and 11, let
 Now run the following command to calculate the witness:
 
 ```
-snarkjs calculatewitness --circuit input.json
+snarkjs calculatewitness --circuit circuit.json --input input.json
 ```
 
 You should see that a `witness.json` file has been created with all of the relevant signals.
@@ -372,62 +372,65 @@ a signal.
 
 ## 4 Proving on-chain
 
-### 4.1 Generating the solidity verifier
+### 4.1 Generating a solidity version of the proof
 
-`snarkjs generateverifier`
+We can use `snarkjs generateverifier` to generate a solidity smart contract that verifies the zero knowledge proof.
 
-This command will take the ``verification_key.json`` and generate a
-solidity code in ``verifier.sol`` file.
+From the command line run:
 
-You can take the code in ``verifier.sol`` and cut and paste in remix.
+```
+snarkjs generateverifier --verificationkey verification_key.json --verifier verifier.sol
+```
 
-This code contains two contracts: Pairings and Verifier. You just need
-to deploy the ``Verifier`` contract.
+As you can see, `generateverifier` takes a verification key as input -- in our case `verification_key.json` -- and generates a solidity version of the verifier in a file we specify -- in our case `verifier.sol`.
 
-   You may want to use a test net like Rinkeby, Kovan or Ropsten. You
-   can also use the Javascript VM, but in some browsers, the
-   verification takes long and it may hang the page.
+### 4.2 Publishing the proof
 
-### 4.2 Verifying the proof on-chain
+To publish the proof, we can upload `verifier.sol` directly into [Remix](https://remix.ethereum.org).
 
+For those of you who are unfamiliar, Remix is an open source tool that helps you write (and publish) Solidity contracts straight from the browser. If this is your first time using it, we recommend you have a look at [this tutorial](https://kauri.io/article/124b7db1d0cf4f47b414f8b13c9d66e2/remix-ide-your-first-smart-contract) before continuing.
 
-The verifier contract deployed in the last step has a ``view`` function
-called ``verifyProof``.
+If you take a look inside `verifier.sol` you should see that it contains two contracts: Pairings and Verifier. For our purposes, we just need to deploy the `Verifier` contract.
 
-This function will return true if the proof and the inputs are valid.
+>Note: You may want to use a test net like Rinkeby, Kovan or Ropsten to avoid spending real money. You can also use the Javascript VM, but in some browsers, the verification takes a long time and it may hang the page.
 
-To facilitiate the call, you can use snarkjs to generate the parameters
-of the call by typing:
+### 4.3 Verifying the proof
 
-`snarkjs generatecall`
+The verifier contract deployed in the last step has a function
+called `verifyProof`.
 
-Just cut and paste the output to the parameters field of the
-``verifyProof`` method in Remix.
+It takes as input nine parameters and returns `true` if the proof and the inputs are valid.
 
-If every thing works ok, this method should return true.
+To make things easy, you can use snarkjs to output the nine parameters into the console
+by running:
 
-If you just change any bit in the parameters, you can check that the
-result will be false.
+`snarkjs generatecall --proof proof.json --public public.json`
+
+Now, just cut and paste the output of this command into the parameters field of the
+`verifyProof` method in Remix and run it.
+
+If everything works as expected, it should return `true`.
+
+If you change one of the parameters and run it again, you should see that the result is now `false`.
 
 
 ## 5. Where to go from here.
 
-If you've been inspired by this guide, we recommend you checkout the [circom repository](https://github.com/iden3/circom) to
-learn more about circom.
+If you've enjoyed this guide and want to deepen your understanding of our tools, we recommend you checkout the [circom repository](https://github.com/iden3/circom).
 
-You should also take a look [circomlib](https://github.com/iden3/circomlib): a library containing circuits implemented in [circom](https://github.com/iden3/circom).
+You may also be interested in taking a look at [circomlib](https://github.com/iden3/circomlib): a library containing useful and reusable circuits implemented in [circom](https://github.com/iden3/circom).
 
->Note: circomlib contains some useful basic circuits, as well as an implementation of the [Pederson Hash](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/pedersen-hash/pedersen.rst) and Exponentiation circuits using the [Baby-Jubjub](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/baby-jubjub/baby-jubjub.rst) elliptic Curve.
+>Note: circomlib contains some useful basic circuits, as well as implementations of the [Pederson Hash](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/pedersen-hash/pedersen.rst) and Exponentiation circuits using the [Baby-Jubjub](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/baby-jubjub/baby-jubjub.rst) elliptic Curve.
 
 
 ## 6. Final note
 
 From a developer's point of view, there are few things worse than working with a buggy compiler.
 
-The compiler is still at an early stage, and work still needs to be done, so there may be bugs.
+The compiler is still in its early stages, and work still needs to be done, so you may come across bugs.
 
-Please keep this in mind if you are using circom to do anything serious :)
+Please keep this in mind if you are using circom to do anything serious.
 
->Note: If you find a bug, please don't hesitate to let us know: a [github issue](https://github.com/iden3/circom/issues) with a small piece of code highlighting the bug is perfect..
+>Note: If you come across what you believe to be a bug, please don't hesitate to let us know: a [github issue](https://github.com/iden3/circom/issues) with a small piece of code highlighting the problem is perfect.
 
 In the meantime, enjoy zero knowledge proving! 💛
