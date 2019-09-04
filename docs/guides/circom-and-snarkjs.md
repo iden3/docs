@@ -27,7 +27,9 @@ Why? These later versions of Node include big integer libraries natively. `snark
 
 To see which version of Node you have installed, from the command line run:
 
-```node -v```
+```
+node -v
+```
 
 To download the latest version of Node, [click here](https://nodejs.org/en/download/).
 
@@ -87,7 +89,9 @@ Let’s create a circuit that tries to prove to someone (the verifier) that we a
 
 It turns out that factoring an integer can be quite difficult -- in particular, the prime factorization of very large numbers can be [very difficult](https://www.reddit.com/r/math/comments/2jo786/why_is_the_prime_factorization_of_very_large/cldj3a9/).
 
-For very large numbers, no efficient, non-quantum integer factorization algorithm is known. However it has not been proven that no efficient algorithm exists.
+For very large numbers, no efficient, non-quantum integer factorization algorithm is known.
+
+>Note: While common consensus is that no efficient algorithm exists, it has not been proven to be the case. To prove such a thing would be equivalent to proving that [P = NP](https://en.wikipedia.org/wiki/P_versus_NP_problem) -- in other words it would require solving one of the major unsolved problems in computer science. For more on how NP and complexity-theoritic reductions relate to zk-snarks see this excellent [post by Chrisitian Reitwiessner](https://blog.ethereum.org/2016/12/05/zksnarks-in-a-nutshell/#p=np).
 
 The presumed difficulty of this problem is at the heart of widely used algorithms in cryptography such as [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)).
 
@@ -98,6 +102,7 @@ In this toy example we'll neither work with very large numbers, nor restrict the
 We want to prove that we know two numbers (call them `a` and `b`) that multiply together to give `c`. Without revealing `a` and `b`.
 
 1. The first step is to create (and move into) a new directory called ``factor`` where we'll put all the files that we want to use in this guide.
+
 ```
 mkdir factor
 cd factor
@@ -106,6 +111,7 @@ cd factor
    >Note: if we were designing a circuit for actual use, we'd probably be better off creating a ``git`` repository with a ``circuits`` directory containing the necessary scripts to build all our circuits, and a ``test`` directory with all our tests.
 
 2. Next, we want to create a new file (in `factor`) named `circuit.circom`. The contents should look like this:
+
 ```
    template Multiplier() {
        signal private input a;
@@ -117,22 +123,23 @@ cd factor
 
    component main = Multiplier();
    ```
+   
    As you can see, this circuit has **two private input** signals named ``a`` and `b` and **one output** signal named `c`.
    
-   Note that, in circom, the `<==` operator does two things. The first is to connect signals. The second is to apply a constaint.
+   The inputs and the outputs are related to each other using the `<==` operator. In circom, the `<==` operator does two things. The first is to connect signals. The second is to apply a constaint.
    
    In our case, we're using `<==` to connect `c` to `a` and `b` and at the same time constrain `c` to be the value of `a*b`. 
    
-   >Note: after declaring the ``Multiplier`` template, we instantiate it with a component named ``main``. When compiling a circuit a component named ``main`` must always exist.
+   >Note: after declaring the ``Multiplier`` template, we instantiate it with a component named ``main``. When compiling a circuit, a component named ``main`` must always exist.
    
 3. We are now ready to compile the circuit -- we need to do this to be able to use it in `snarkjs` later. To compile the circuit to a file named `circuit.json`, run the following command:
 ```
 circom circuit.circom -o circuit.json
 ```
 
-Congratulations! 🎉🎉
+If you've made it this far, congratulations! 🎉🎉
 
-You've just built your first circuit using `circom`.
+You've just built and compiled your first circuit using `circom`.
 
 ## 3. Taking the compiled circuit to *snarkjs*
 
@@ -145,7 +152,10 @@ Before we start, let's have a look at some of the information `circuit.json` giv
 
 From the command line run:
 
-`snarkjs info -c circuit.json`
+```
+snarkjs info -c circuit.json
+
+```
 
 You should see the following output:
 
@@ -158,27 +168,23 @@ You should see the following output:
 ```
 This information seems to fit the multiplication circuit we defined in section 2. Remember, we had two private inputs `a` and `b`, and one output `c`. And the one constraint we specified was that `a` * `b` = `c`.
 
-Wires refers to...
-
 To see the constraints of the circuit, we can run:
 
-`snarkjs printconstraints -c circuit.json`
+```
+snarkjs printconstraints -c circuit.json
+```
 
 You should see the following output:
 
-`[  -1main.a ] * [  1main.b ] - [  -1main.c ] = 0`
+```
+[  -1main.a ] * [  1main.b ] - [  -1main.c ] = 0
+```
 
-Don't worry if this looks a little strange. The `1main` prefix just means... So this can be read as:
+Don't worry if this looks a little strange. You can ignore the `1main` prefix and just read this as:
 
 `(-a) * b - (-c) = 0`
 
 Which is the same as `a * b = c`. Reassuringly, this is the same constraint we defined in `circuit.circom`.
-
-It's written in this strange way because...
-
-
-...
-
 
 >Note: to see a list of  all `snarkjs` commands, as well as descriptions about their inputs and outputs, run `snarkjs --help` from the command line.
 
@@ -203,7 +209,9 @@ Ok, now that we have a better intuition for what we are doing, let’s go ahead 
 
 From the command line, run:
 
-`snarkjs setup`
+```
+snarkjs setup
+```
 
    >Note: By default `snarkjs` will look for and use `circuit.json`. You
    can specify a different circuit file by adding
@@ -224,7 +232,7 @@ Before creating the proof, we need to calculate all the intermediate signals of 
 
 This set of signals -- the input, the intermediate signals, and the output -- is called the *witness*.
 
-We need to do this because of the way zero knowledge proofs work.
+Why do we need a witness?
 
 Remember, in a zk proof, the prover needs to prove to the verifier that she knows a set of signals that match all the constraints of the circuit, without revealing any of the signals except the public input(s) and the output. **The witness contains this set of signals.**
 
@@ -236,11 +244,15 @@ For example, imagine that we want to prove that we are able to factor 33. That m
 
 Since the only two (distinct) numbers that multiply to give 33 are 3 and 11, let’s create a file named `input.json`, with the following content:
 
-`{"a": 3, "b": 11}`
+```
+{"a": 3, "b": 11}
+```
 
-And run the following command to calculate the witness:
+Now run the following command to calculate the witness:
 
-`snarkjs calculatewitness --circuit input.json`
+```
+snarkjs calculatewitness --circuit input.json
+```
 
 You should see that a `witness.json` file has been created with all of the relevant signals.
 
@@ -254,7 +266,7 @@ If you open it up, it should look something like this:
  "11"
 ]
 ```
-Where `33` is the output, and `3` and `11` are the inputs.
+Where `33` is the output, and `3` and `11` are the inputs we defined in `input.json`.
 
 >Note: In addition to the output, inputs, intermediate signals, you should see that the witness contains a dummy variable `1` at the beginning. To understand why this `1` is needed requires diving too deep into the details of zk proofs and as such is beyond the scope of this post. If you're curious as to why, see [this post by Vitalik](https://medium.com/@VitalikButerin/quadratic-arithmetic-programs-from-zero-to-hero-f6d558cea649).
 
@@ -279,7 +291,7 @@ This will generate the files `proof.json` and `public.json`.
 
 In practice at this stage you would hand over both the `proof.json` and `public.json` files to the verifier.
 
-In this toy example, however, we're going to double up as the verifier.
+In this toy example, however, we're going to play the role of the verifier too.
 
 Remember, with the proof, and the public input and outputs, the prover can now prove to the verifier that she knows one or more private signals that satisfy the constraints of the circuit, without revealing anything about those private signals.
 
@@ -297,7 +309,7 @@ You should see `OK` as the output. This signifies the proof is valid.
 
 For invalid proofs, you'll see `INVALID` instead.
 
-To see this create a new file called `public-invalid.json` with `34` as the public output instead of `33`.
+To check this create a new file called `public-invalid.json` with `34` as the public output instead of `33`.
 
 It should something look like:
 
@@ -354,9 +366,9 @@ You should notice that we have two new operators here, `<--` and `===`.
 Whereas `===` adds a constraint without assigning a value to
 a signal.
 
->Note: `<==` is just the combination of `===` and `<--`. In other words `<==` assigns a value and adds a constraint in one go. This isn't always desirable. The flexibility of circom allows us to split this up into two steps.
+>Note: `<==` is just the combination of `===` and `<--`. In other words `<==` assigns a value and adds a constraint in one go. But since this isn't always desirable, the flexibility of circom allows us to split this up into two steps.
 
->Note: It turns out there's still a subtle problem with the circuit. Since the operations take place over a [finite field](https://en.wikipedia.org/wiki/Finite_field), we need to guarantee that the multiplication doesn't overflow. This can be done by binarizing the inputs and checking the ranges. Don't worry about the details for the time being, we'll cover it in a future tutorial.
+>Note: It turns out there's still a subtle problem with our circuit. Since the operations take place over a [finite field](https://en.wikipedia.org/wiki/Finite_field), we need to guarantee that the multiplication doesn't overflow. This can be done by binarizing the inputs and checking the ranges. If that didn't make any sense to you, don't worry, we'll coverthis in a future tutorial.
 
 ## 4 Proving on-chain
 
