@@ -414,7 +414,7 @@ If everything works as expected, it should return `true`.
 If you change one of the parameters and run it again, you should see that the result is now `false`.
 
 
-## 5. Where to go from here.
+## 5. Where to go from here
 
 If you've enjoyed this guide and want to deepen your understanding of our tools, we recommend you checkout the [circom repository](https://github.com/iden3/circom).
 
