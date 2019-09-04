@@ -69,7 +69,7 @@ First off, let's define what we mean by a circuit.
 
 For our purposes, a circuit is equivalent to a **statement** or **deterministic program** which has an output and one or more inputs. 
 
-**[insert image]**
+![image0](images/circuit.png)
 
 There are two types of possible inputs to a circuit: `private` and `public`. The difference being that a `private` input is hidden from the verifier.
 
