@@ -11,9 +11,11 @@
 	- [Libraries](services/libraries.md)
 	- [Login Protocol](services/login-protocol.md)
 	
-- **zkSnarks**
+- **zkSnark tooling**
     - [Utilities](zksnarks/utilities.md)
-	- [Rollup](zksnarks/rollup.md)
+
+-  **Rollup**
+    - [About](rollup/rollup.md)
 
 - **Guides**
 	- [Circom and snarkjs](guides/circom-and-snarkjs.md)
