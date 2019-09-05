@@ -7,13 +7,13 @@ Welcome to the Iden3 developer portal. Here you'll find eveything you need to ge
 
 Iden3 is an open source project offering a complete decentralized identity management solution over the public blockchain. It is designed with four fundamental goals in mind:
 
-**Enable Self Sovereign Identities**, whereby identities are created, owned and controlled by the user.
+**Enable Self Sovereign Identities**, whereby [identities](basics/key-concepts#identity) are created, owned and controlled by the user.
 
 **Accessibility**, by promoting the development of open standards and ease of use.
 
 **Scalability**, by minimizing the number of accesses to the blockchain that identity management and claim processing requires.   
 
-**Privacy by design** by using [zero-knowledge proofs](basics/glossary#zero-knowledge) to prove claims without revealing any information other than the validity of the claim.
+**Privacy by design** by using [zero-knowledge proofs](basics/key-concepts#zero-knowledge) to prove [claims](basics/key-concepts#claims) without revealing any information other than the validity of the claim.
 
 
 ## Contributing

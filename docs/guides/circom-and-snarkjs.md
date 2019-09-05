@@ -2,7 +2,7 @@
 
 Hello and welcome!
 
-In this guide we'll guide you through the creation of your first [zero-knowledge snark](basics/glossary#zk-snarks) circuit using [circom](https://github.com/iden3/circom) and [snarkjs](https://github.com/iden3/snarkjs).
+In this guide we'll guide you through the creation of your first [zero-knowledge snark](basics/key-concepts#zk-snarks) circuit using [circom](https://github.com/iden3/circom) and [snarkjs](https://github.com/iden3/snarkjs).
 
 [Circom](https://github.com/iden3/circom) is a library that allows you to build circuits to be used in zero knowledge proofs. 
 
@@ -12,7 +12,7 @@ Circom is designed to work with snarkjs. In other words, any circuit you build i
 
 We'll start by covering the various techniques to write circuits, then move on to creating and verifying a proof off-chain, and finish off by doing the same thing on-chain on Ethereum.
 
-If you have zero knowledge about zero-knowledge 😋 or are unsure about what a zk-snark is, we recommend you read [this page](basics/glossary/zeroknowledge.md) first.
+If you have zero knowledge about zero-knowledge 😋 or are unsure about what a zk-snark is, we recommend you read [this page](basics/key-concepts#zero-knowledge) first.
 
 
 ## 1. Installing the tools

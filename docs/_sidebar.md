@@ -3,12 +3,12 @@
 
 - **The basics**
     - [Introduction](basics/introduction.md)
-	- [Getting Started](basics/getting-started.md)
-	- [Glossary](basics/glossary.md)
+	- [Key concepts](basics/key-concepts.md)
+	- [Getting started](basics/getting-started.md)
 	
 - **Services and protocols**
 	- [Libraries](services/libraries.md)
-	- [Login Protocol](services/login-protocol.md)
+	- [Login protocol](services/login-protocol.md)
 	
 - **zkSnark tooling**
     - [Utilities](zksnarks/utilities.md)
@@ -21,7 +21,7 @@
 	- [Centralized login](guides/centralized-login.md)
 	
 - **Publications**
-	- [Research Papers](publications/publications.md#researchpapers)
+	- [Research papers](publications/publications.md#researchpapers)
 	- [Videos](publications/publications.md#videos)
 	- [Slides](publications/publications.md#slides)
 		
