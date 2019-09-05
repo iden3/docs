@@ -4,7 +4,6 @@
 - **The basics**
     - [Introduction](basics/introduction.md)
 	- [Getting Started](basics/getting-started.md)
-	- [More on identity](basics/more-on-identity.md)
 	- [Glossary](basics/glossary.md)
 	
 - **Services and protocols**
