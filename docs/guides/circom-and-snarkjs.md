@@ -12,7 +12,7 @@ Circom is designed to work with snarkjs. In other words, any circuit you build i
 
 We'll start by covering the various techniques to write circuits, then move on to creating and verifying a proof off-chain, and finish off by doing the same thing on-chain on Ethereum.
 
-If you have zero knowledge about zero-knowledge 😋 or are unsure about what a zk-snark is, we recommend you read [this page](basics/key-concepts#zero-knowledge) first.
+If you have zero knowledge about zero-knowledge 😋 or are unsure about what a zk-snark is, we recommend you read [this page](basics/key-concepts#zero-knowledge-proofs) first.
 
 
 ## 1. Installing the tools
