@@ -66,7 +66,7 @@ This is where indirect claims come in handy. Instead of having to pay gas everyt
 
 The idea is that with relayers, millions of users can create millions of claims on mainnet **without** spending any **gas** (since the relayer is responsible for batching the claims and publishing the transactions).
 
-On top of this, using [zero knowledge proofs](basics/key-concepts#zero-knowledge) we can ensure that the relayer is trustless. In other words we can make sure the relayer can't lie about the claims we sent them. The worst they can do is not publish them (and if this happens we as the user always have the choice to change relayers).
+On top of this, using [zero knowledge proofs](basics/key-concepts#zero-knowledge-proof) we can ensure that the relayer is trustless. In other words we can make sure the relayer can't lie about the claims we sent them. The worst they can do is not publish them (and if this happens we as the user always have the choice to change relayers).
 
 ## Zero knowledge proofs
 

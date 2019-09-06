@@ -13,7 +13,7 @@ Iden3 is an open source project offering a complete decentralized identity manag
 
 **Scalability**, by minimizing the number of accesses to the blockchain that identity management and claim processing requires.   
 
-**Privacy by design** by using [zero-knowledge proofs](basics/key-concepts#zero-knowledge) to prove [claims](basics/key-concepts#claims) without revealing any information other than the validity of the claim.
+**Privacy by design** by using [zero-knowledge proofs](basics/key-concepts#zero-knowledge-proof) to prove [claims](basics/key-concepts#claims) without revealing any information other than the validity of the claim.
 
 
 ## Contributing
