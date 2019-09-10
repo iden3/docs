@@ -8,13 +8,12 @@
 
 - [Sparse Merkle Trees](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/merkle-tree/merkle-tree.rst) ([pdf](publications/pdfs/Merkle-Tree.pdf ':ignore'))
 
-
 ### Videos
 
 - [Intro to iden3](https://www.youtube.com/watch?v=YzUSaCSzPaM)
 - [Circom and snarkjs](https://www.youtube.com/watch?v=-9TJa1hVsKA)
 - [Scalable distributed identity infrastructure using zero-knowledge proofs to guarantee privacy](https://www.youtube.com/watch?v=VFD2Z_mlSbM)
-
+- [Websnarks - DappCon 2019](https://www.youtube.com/watch?v=IxkpYfNfo5o)
 
 ### Slides
 
