@@ -91,7 +91,7 @@ It turns out that factoring an integer can be quite difficult -- in particular, 
 
 For very large numbers, no efficient, non-quantum integer factorization algorithm is known.
 
->Note: While common consensus is that no efficient algorithm exists, it has not been proven to be the case. To prove such a thing would be equivalent to proving that [P = NP](https://en.wikipedia.org/wiki/P_versus_NP_problem) -- in other words it would require solving one of the major unsolved problems in computer science. For more on how NP and complexity-theoritic reductions relate to zk-snarks see this excellent [post by Chrisitian Reitwiessner](https://blog.ethereum.org/2016/12/05/zksnarks-in-a-nutshell/#p=np).
+>Note: For more on how NP and complexity-theoretic reductions relate to zk-snarks see this excellent [post by Chrisitian Reitwiessner](https://blog.ethereum.org/2016/12/05/zksnarks-in-a-nutshell/#p=np).
 
 The presumed difficulty of this problem is at the heart of widely used algorithms in cryptography such as [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)).
 
