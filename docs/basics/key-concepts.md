@@ -60,7 +60,7 @@ For example, one could imagine a government adding/modifying millions of claims 
 
 ### Indirect claims
 
-While direct claims scale really well for identities that make a lot of claims (since million of claims can be batched in a single transaction), the average user will probably only need to make a few claims a day, and so won't benefit from this batching.
+While direct claims scale really well for identities that make a lot of claims (since millions of claims can be batched in a single transaction), the average user will probably only need to make a few claims a day, and so won't benefit from this batching.
 
 This is where indirect claims come in handy. Instead of having to pay gas everytime to update the Merkle root on-chain, indirect claims allow users to send claims off-chain to a **relayer**.
 
