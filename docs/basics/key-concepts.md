@@ -52,7 +52,7 @@ For example, when a university (identity) says that a student (identity) has a d
 
 ### Direct claims
 
-If an identity wants to create many claims, they can put them all in a database, construct a [Merkle tree](basics/key-concepts#merkle-tree) of that database, and just publish (with a transaction) the root of the Merkle tree on-chain.
+If an identity wants to create many claims, they can put them all in a database, construct a [Merkle tree](basics/key-concepts#merkle-trees) of that database, and just publish (with a transaction) the root of the Merkle tree on-chain.
 
 If the identity wants to update the claims later, they repeat the same process and just publish the new root of the Merkle tree.
 
