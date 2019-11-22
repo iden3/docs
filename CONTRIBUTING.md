@@ -18,7 +18,7 @@ Don't forget to check if [an issue is already open][issues].
 > *be ready to have your pull requested remained open indefinitely or closed and your changes left unmerged*,
 > if your changes do not align with the current work and docs of Iden3.
 
-[docs repository]: https://github.com/iden3/iden3-docs
-[issues]: https://github.com/iden3/iden3-docs/issues
-[issue-new]: https://github.com/iden3/iden3-docs/issues/new
+[docs repository]: https://github.com/iden3/docs
+[issues]: https://github.com/iden3/docs/issues
+[issue-new]: https://github.com/iden3/docs/issues/new
 [chat]: https://matrix.to/#/#iden3:matrix.org
