@@ -13,7 +13,7 @@
 - **zkSnark tooling**
     - [Utilities](zksnarks/utilities.md)
 
--  **Rollup**
+-  **zkRollup**
     - [About](rollup/rollup.md)
 
 - **Guides**
