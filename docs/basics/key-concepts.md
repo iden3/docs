@@ -144,73 +144,74 @@ Merkle trees satisfy these three properties.
 
 Before we take a closer look at the above properties, let's go through how to build a Merkle tree given some data.
 
+![](img/)
+
 Suppose we have a number of blocks containing data. And that these blocks make up the leaves of our tree.
 
-*image coming soon*
+![](img/)
 
-The first step is to group these data blocks into pairs.
+The first step is to create a parent node for each data block. These parent nodes make up the next level in the tree and store the hash of their descendent data block.
 
-*image coming soon*
+![](img/)
 
-Then for each pair of blocks, we build a data structure that has two hash
-pointers, one to each block.
+Next, we group the parent nodes into pairs, and store their hashes one level up the tree.
 
-*image coming soon*
-
-In other words, the hash of each block is stored in a parent node. And these parent nodes make up the next level of the tree.
-
-*image coming soon*
-
-Next, the parent nodes are in turn grouped in pairs, and their hashes stored one level up the tree.
-
-*image coming soon*
+![](img/)
 
 We continue doing this until we reach a single block, the root of the tree.
 
-*image coming soon*
 
 ### Tamper resistance
 
-It turns out that any attempt to tamper with any piece of data can be detected by simply remembering
-the hash pointer at the root of the tree.
+It turns out that any attempt to tamper with any piece of data can be detected by simply remembering the hash at the root of the tree.
 
 To understand why this is the case, let’s look at what happens if an adversary wants to tamper with a data block.
 
+![](img/)
 If an adversary tampers with a block at the leaf of our tree.
 
-*image coming soon*
+![](img/)
+That will cause the hash in the node that’s one level up to not match.
 
-That will cause the hash pointer that's one level up to not match.
+![](img/)
+So he’ll have to tamper with that too.
 
-*image coming soon*
+![](img/)
+Which means, he’ll have to tamper with the node one level up from there.
 
-So she'll have to tamper with that too.
-
-*image coming soon*
-
-Which means, she'll have to tamper with the hash pointer one level up from there.
-
-*image coming soon*
-
-And so on... Eventually she'll get to the root. If she tries to tamper with the hash pointer here, we'll know because this is the pointer we've remembered.
-
-*image coming soon*
+![](img/)
+And so on… Eventually he’ll get to the root. If he tries to tamper with the root, we’ll know because this is the node we’ve kept track of.
 
 ### Proof of membership
 
-Merkle trees allow us to quickly check membership. What do we mean by that?
+Merkle trees allow us to quickly check membership (through a neat mechanism known as Merkle proofs).. What do we mean by that?
 
-Say that, as usual, we remember just the root. And we want to prove that a certain data block is a member of the Merkle tree.
+![](img/)
+Say that, as usual, we remember just the root (on-chain). And we want to prove that a certain data block - data0, say - is a member of the Merkle tree.
 
-*image coming soon*
+![](img/)
+All we need are the blocks on the path from the data block to the root.
 
-All we need to find is this data block, and the blocks on the path from the data block to the root.
+![](img/)
+And each of data0's siblings on the way up the path.
 
-*image coming soon*
+![](img/)
+We can ignore the rest of the tree, as these blocks are enough to allow us to verify the hashes all the way up to the root of the tree. How exactly?
 
-We can ignore the rest of the tree, as the blocks on this path are enough to allow us to verify the hashes all the way up to the root of the tree.
+![](img/)
+The idea is to recalculate the root by recursively hashing the data we want to prove exists. If the calculated root is equal to the on-chain root, this proves the data block exists in the Merkle tree.
 
-*image coming soon*
+![](img/)
+In our case, we start by calculating the hash of data0 and storing it in the block labelled 0.
+
+![](img/)
+We then calculate the hash of the hash of data0 concatenated with the hash of data1 - in other words, the hash of the concatenation of blocks 0 and 1 - and store it in block 4.
+
+![](img/)
+Finally, we calculate the hash of blocks 4 and 5 to obtain the recalculated root.
+
+![](img/)
+If the calculated root is equal to the on-chain root, we’ve proven that data0 exists in the Merkle tree.
 
 In technical terms:
 
