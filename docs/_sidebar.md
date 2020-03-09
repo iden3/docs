@@ -13,8 +13,10 @@
 - **zkSnark tooling**
     - [Utilities](zksnarks/utilities.md)
 
--  **Rollup**
+-  **zkRollup**
     - [About](rollup/rollup.md)
+	- [FAQ](rollup/faq.md)
+	- [Glossary](rollup/glossary.md)
 
 - **Guides**
 	- [Circom and snarkjs](guides/circom-and-snarkjs.md)
