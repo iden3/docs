@@ -13,29 +13,8 @@ For a more complete introduction, see this [video](https://www.youtube.com/watch
 
 ## Our implementation
 
-For our implementation using [circom](https://github.com/iden3/circom) and [circomlib](https://github.com/iden3/circomlib) see [here](https://github.com/iden3/rollup).
+We've just released our first public testnet. Checkout [zkrollup.io](zkrollup.io) for an overvire of how it works.
 
->Note: this is very much a work in progress.
+It's an implementation that uses both [circom](https://github.com/iden3/circom) and [circomlib](https://github.com/iden3/circomlib).
 
-## Definitions
-
-### Rollup
-I don't think we can do much better than [Ed Felton's](https://medium.com/offchainlabs/whats-up-with-rollup-db8cd93b314e) definition :
-
->Rollup is a general approach to scaling open contracts, that is, contracts that everyone can see and interact with. In rollup, calls to the contract and their arguments are written on-chain as calldata, but the actual computation and storage of the contract are done off-chain. Somebody posts an on-chain assertion about what the contract will do. You can think of the assertion as "rolling up" all of the calls and their results into a single on-chain transaction. Where rollup systems differ is in how they ensure that the assertions are correct.
-
-### zkSnark
-A zkSnark is a short (and efficiently checkable) cryptographic proof that allow us to prove something specific without revealing any extra information.
-
-### zkRollup
-ZkRollup is a specific type of rollup that relies on zkSnarks to prove that on-chain assertions are correct. In other words, every assertion is accompanied by an easily verifiable proof which proves that the computations and data described in the assertion are correct.
-
-### BabyJubJub
-BabyJubJub is an elliptic curve defined over a large prime sub-group. It's useful in zkSnark proofs.
-A batch is a rollup block.
-
-### Operator
-An operator is a rollup block producer.
-
-### Forging
-Forging refers to the creation of a batch (off-chain) and the subsequent (on-chain) verification of the attached zkSnark.
+>Note: this is very much a work in progress. If you have any comments at all, please don't hesitate to join our [Telegram group](https://t.me/joinchat/G89XThj_TdahM0HASZEHwg). All feedback is welcome :)
