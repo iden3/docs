@@ -14,12 +14,14 @@
 - [Circom and snarkjs](https://www.youtube.com/watch?v=-9TJa1hVsKA)
 - [Scalable distributed identity infrastructure using zero-knowledge proofs to guarantee privacy](https://www.youtube.com/watch?v=VFD2Z_mlSbM)
 - [Websnarks - DappCon 2019](https://www.youtube.com/watch?v=IxkpYfNfo5o)
+- [Big zkSnark circuits for zkRollups with circom - EthCC 2020](https://www.youtube.com/watch?v=cF6sG47pcws)
 
 ### Slides
 
 - [Intro to iden3](https://github.com/iden3/iden3-docs/blob/master/source/docs/iden3_ethcc_presentation.pdf)
 - [Circom and snarkjs](https://github.com/iden3/iden3-docs/blob/master/source/docs/circom_and_snarkJS.pdf)
 - [Scalabled distributed identity infrastructure using zero-knowledge proofs to guarantee privacy](https://slideslive.com/38911825/iden3-scalable-distributed-identity-infrastructure-using-zeroknowledge-proofs-to-guarantee-privac)
+- [Big zkSnark circuits for zkRollups with circom - EthCC 2020](https://docs.google.com/presentation/d/1oz8K7y2LvfcWrOvEs8lfOodbTQ7mlHXr5Fj610nBiQg/)
 
 
 
