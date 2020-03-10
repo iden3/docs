@@ -13,7 +13,7 @@ For a more complete introduction, see this [video](https://www.youtube.com/watch
 
 ## Our implementation
 
-We've just released our first public testnet. Checkout [zkrollup.io](http://zkrollup.io) for an overvire of how it works.
+We've just released our first public testnet. Checkout [zkrollup.io](http://zkrollup.io) for an overview of how it works.
 
 It's an implementation that uses both [circom](https://github.com/iden3/circom) and [circomlib](https://github.com/iden3/circomlib).
 
