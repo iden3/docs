@@ -20,9 +20,9 @@ It contains an implementation of the [Pederson Hash](https://github.com/iden3/id
 
 [Snarkjs](https://github.com/iden3/snarkjs) is an independent implementation of the zk-snarks protocol -- fully written in JavaScript.
 
-## Websnark
+## WasmSnark
 
-[Websnark](https://github.com/iden3/websnark) is a fast zk-snark proof generator written in native web assembly.
+[WasmSnark](https://github.com/iden3/websnark) is a fast zk-snark proof generator written in native web assembly.
 
 ## Wasmbuilder
 
