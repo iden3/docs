@@ -288,9 +288,3 @@ The blockchain verification algorithm is  used
 It can be different kind of verification e.g.
 1. Check of that issuer states of provided claim proofs are published on the blockchain (same as for identity state)
 2. Check of query signals, so claim schema and specific values can be verified.
-
-### Full example
-
-
-
-[Link to github](https://github.com/iden3/go-iden3-auth) === TODO: add proper link
