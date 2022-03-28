@@ -1,15 +1,15 @@
 <div align="center">
-<img src="mkdocs/docs/logo-dark.svg" width="150"/>
+<img src="logo-dark.svg" align="center" width="128px"/>
+<br /><br />
 </div>
-<br />
-<div align="center">
 
 [![Chat on Twitter][ico-twitter]][link-twitter]
 [![Chat on Telegram][ico-telegram]][link-telegram]
 [![Website][ico-website]][link-website]
 <!-- [![GitHub repo][ico-github]][link-github] -->
-
-</div>
+<!-- ![Issues](https://img.shields.io/github/issues-raw/iden3/docs?color=blue) -->
+<!-- ![GitHub top language](https://img.shields.io/github/languages/top/iden3/docs) -->
+<!-- ![Contributors](https://img.shields.io/github/contributors-anon/iden3/docs) -->
 
 [ico-twitter]: https://img.shields.io/twitter/url?color=black&label=Iden3&logoColor=black&style=social&url=https%3A%2F%2Ftwitter.com%2Fidenthree
 [ico-telegram]: https://img.shields.io/badge/telegram-telegram-black
@@ -21,27 +21,36 @@
 [link-website]: https://iden3.io
 <!-- [link-github]: https://github.com/iden3/docs -->
 
-# Identity protocol 
+---
 
-## Prove your access rights, not your identity
+# Iden3 Docs
 
-iden3 is a next-generation private access control based on self-sovereign identity, designed for decentralised and trust-minimised environments.
+Welcome to the documentation site of the Iden3 project, future-proof tech stack for self-sovereign identity.
 
-## Privacy for all
+---
 
-Everyone has the right to liberty and equality, the right freely to participate in their community, and the right to privacy.
+# <div align="center"><b>[Iden3 on GitHub](https://github.com/iden3)</b></div>
 
-The aim of the iden3 protocol is to empower people and create a more inclusive and egalitarian foundation for better human relationships through open-source cryptography and decentralised technologies.
+---
 
-<div align="center">
-<br />
+## Versatility of applications
 
-Privacy by design            | Decentralised                     |  Open source 
-:---------------------------:|:---------------------------------:|:-------------------------------:
-![](mkdocs/docs/imgs/icons/privacy.svg)  | ![](mkdocs/docs/imgs/icons/decentralised.svg) | ![](mkdocs/docs/imgs/icons/open-source.svg)
+The main idea of the iden3 protocol is that each identity is self-soverign and can issue claims on another identity (which can be for an individual, an organisation or a system/machine).
 
-<br />
-</div>
+This simple and unique characteristics can lead to creation complex adaptive systems and the following use cases:
+
+<ul>
+    <li>Decentralised trust models / web-of-trust</li>
+    <li>Decentralised ID verification / proof-of-personhood</li>
+    <li>Decentralised voting systems</li>
+    <li>Interaction with DeFi / dApps / Web3</li>
+    <li>Decentralised payment identifiers</li>
+    <li>Private access control</li>
+    <li>Authentication and authorisation</li>
+    <li>Signing documents and private messaging</li>
+    <li>Supply chain and IoT</li>
+    <li>NFT ownership</li>
+</ul>
 
 ## Iden3 protocol libraries
 
@@ -65,33 +74,3 @@ Privacy by design            | Decentralised                     |  Open source
 
 - **Authorization library ([go-iden3-auth](https://github.com/iden3/go-iden3-auth))**
     <br />Library for authentication with zkp verification (edited)
-
----
-
-# How to run this documentation (locally)
-## Install mkdocs
-```
-pip3 install mkdocs
-```
-
-In case you have a rendering problem with the pieces of code, please execute:
-```
-pip install --upgrade mkdocs
-```
-
-## Install mkdocs-material theme
-```
-pip install mkdocs-material
-```
-
-## Install mkdocs-markdown-graphviz (1.3)
-```
-pip3 install mkdocs-markdown-graphviz==1.3
-```
-
-## Run the webserver
-At the mkdocs directory execute:
-
-```
-mkdocs serve
-```

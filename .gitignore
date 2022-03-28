@@ -1,0 +1,8 @@
+# Mkdocs build
+site/
+
+# Editors
+.vscode/
+
+# System files
+**/.DS_Store

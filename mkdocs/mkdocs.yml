@@ -1,0 +1,60 @@
+site_name: Iden3 Documentation
+site_url: https://docs.iden3.io/
+theme:
+  name: material
+  palette:
+    primary: black
+  logo: logo.svg
+  favicon: favicon.ico
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.tracking
+repo_url: https://github.com/iden3/docs
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - mkdocs_markdown_graphviz
+  - def_list
+  - attr_list
+  - md_in_html
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+extra:
+  social:
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/iden3io
+    - icon: fontawesome/brands/github
+      link: https://github.com/iden3/docs
+    - icon: octicons/browser-24
+      link: https://iden3.io/
+
+nav:
+  - The basics:
+    - Introduction: "basics/introduction.md"
+    - Key concepts: "basics/key-concepts.md"
+    - Getting started: "basics/getting-started.md"
+  - Iden3 protocol:
+      - Iden3 protocol specs: "protocol/spec.md"
+      - Claim:
+          - Structure: "protocol/claims-structure.md"
+          - AuthBJJCredential: "protocol/bjjkey.md"
+  - Services and protocols:
+#    - Libraries: "services/libraries.md"
+    - Login protocol: "protocol/zklogin.md"
+    - Proof Query language: "protocol/querylanguage.md"
+  - Circuits: "protocol/circuits.md"
+  - Circom / snarkjs: "circom-snarkjs/index.md"
+#  - Guides:
+#    - Circom and snarkjs: "guides/circom-and-snarkjs.md"
+#    - Centralized login: "guides/centralized-login.md"
+  - Publications: "publications/publications.md"
+
+# If you declare plugins, you need to declare all of them, 
+# including search (which would otherwise have been installed by default.)
+plugins:
+  - search
+  - mermaid2
