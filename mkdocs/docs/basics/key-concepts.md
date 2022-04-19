@@ -84,7 +84,7 @@ Say you want to enter a nightclub, and you need to prove to the bouncer that you
 
 With zero-knowledge proof, you can prove that you hold the key that belongs to an identity that the state says is over 18, without revealing anything else about that identity.
 
-#### ICO participation
+#### ICO Participation
 
 Say an ICO is available only to the KYC-approved or authorized users. With zk proofs, you can prove that you are an authorized person to participate in the ICO without revealing who you are or how much you spent.
 
