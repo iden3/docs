@@ -12,12 +12,12 @@ Nevertheless, we don't need a precise definition to see that there are problems 
 
 How can we improve on this?
 
-It's clear we're at an inflection point with respect to how the digital world interacts with the physical world.
+It's clear that we're at an inflection point with respect to how the digital world interacts with the physical world.
 
-**The legacy systems of the physical world have not kept up with the digital world's rising importance to it**. As both worlds continue merging, this will have to change.
+**The legacy systems of the physical world have not kept up with the rising importance of the digital world.** As both worlds continue to merge, this scenario will need to change.
 
-This gives us an opportunity to create systems -- from the ground up -- that bridge the two. Systems that operate with a different conception of identity.
+This gives us an opportunity to create systems -- from the ground up -- that bridge the two. The systems that operate with a different concept of identity.
 
-If we design them well, they will allow us to redefine how modern society thinks about identity. Perhaps getting us closer to that ineffable "I" of self-consciousness.
+If we design them well, these systems will allow us to redefine how modern society thinks about identity. Perhaps getting us closer to that ineffable "I" of self-consciousness.
 
-At Iden3 **we're focused on building the tools and developing the protocols to make this happen**.
+At Iden3, **we're focused on building the tools and developing the protocols to make this happen.**
