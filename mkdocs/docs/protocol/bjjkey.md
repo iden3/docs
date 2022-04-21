@@ -1,19 +1,17 @@
 # AuthBJJCredential
 
-AuthBJJCredential is primary credential for each identity. It represents authorization operational key.
+AuthBJJCredential is a primary credential for each identity. It represents an authorization operational key.
 Hex of the current auth claim schema is _ca938857241db9451ea329256b9c06e5_.
-This claim must be presented in the most circuits for identity verification.
+This claim must be presented in most circuits for identity verification.
 
 
-BabyJubjub key is using a specific elliptic curve defined over the large prime subgroup of BN128
-elliptic curve. More about bjj key you can find [here](https://iden3-docs.readthedocs.io/en/latest/_downloads/33717d75ab84e11313cc0d8a090b636f/Baby-Jubjub.pdf).
+A Baby Jubjub key uses a specific elliptic curve defined over the large prime subgroup of the BN128 elliptic curve. To know more about the bjj key, you can [visit this page](https://iden3-docs.readthedocs.io/en/latest/_downloads/33717d75ab84e11313cc0d8a090b636f/Baby-Jubjub.pdf).
 
-X and Y values of bjj public key are part of Index data slots [I_3] and [I_4].
+X and Y values of the bjj public key are part of the Index data slots [I_3] and [I_4].
 
-Below you can find an example of claim entry:
+You can find below an example of a claim entry:
 
 ```
-
 Index:
  i_0: [ 128 bits] 269270088098491255471307608775043319525 // auth schema (big integer from ca938857241db9451ea329256b9c06e5)
       [ 32 bits ] 00010000000000000000 // header flags: first 000 - self claim 1 - expiration is set. 
