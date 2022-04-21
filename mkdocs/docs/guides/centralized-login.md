@@ -1,4 +1,4 @@
-Centralized login use case
+Centralized Login Use Case
 ==========================
 
 **Overview**
