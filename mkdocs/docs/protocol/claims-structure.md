@@ -1,4 +1,4 @@
-# Claims data structure
+# Claim Data Structure
 
 ```mermaid
 graph TD
@@ -16,17 +16,16 @@ Ht-->Hi
 Ht-->Hv
 ```
 
-## Common structure
+## Common Structure
 
-The claim always contains a subject:
-- **Self**: the claim says something about themself.  The subject is implicit, and it's the claiming identity.
-- **OtherIden**: the claim says something about another identity by its ID.
-- **Object**: the claim says something about an object by its ID.
+A claim always contains a subject, that can be:
+- **Self**: The claim says something about itself.  The subject is implicit, and it's the identity that makes claim.
+- **OtherIden**: The claim says something about some other identity (identifies by other's ID).
+- **Object**: The claim says something about an object (identifies by the object's ID).
 
-If the subject is _Self_ -  _identity_ sections  i_1, v_1 can be empty. 
+If the subject is _Self_ -  _identity_, sections  i_1, v_1 can be empty. 
 
-if the subject is NOT _Self_, the id(OtherIden) of the Identity/Object can be in the Index(i_1)
-or the Value(v_1) part of the Claim.  This is encoded in a header bit.
+if the subject is NOT _Self_, the id(OtherIden) of the Identity/Object can be in the Index(i_1) or the Value(v_1) part of the claim.  This is encoded in a header bit.
 
 ```go
 h_i = H(i_0, i_1, i_2, i_3)
@@ -62,13 +61,14 @@ Value:
  v_3: [ 253 bits] 0
 ```
 
-**Claim shema** - schemas define the kind of data inside a claim [link](../spec#claims)
+### Claim Schema 
+Schemas define the type of data inside a claim [link](../spec#claims).
 
-_Idex slots_ **i_2**, **i_3** and _value slots_ **v_2**, **v_3** are data slots for user data
+_Index slots_ **i_2**, **i_3** and _value slots_ **v_2**, **v_3** are the data slots for user data.
 
-####Index VS Value 
-When to use index slots and when value?
+#### Index vs Value 
+**When to Use Index Slots and Value Slots?**
 
-Claims are stored in the Merkle tree and the hash of index slots ( hash(i_0,i_1,i_2,i_3) ) is unique for the whole tree. It means that you can not have two claims with the same index inside the tree. 
+Claims are stored in the Merkle tree and the hash of the index slots ( hash(i_0,i_1,i_2,i_3) ) is unique for the whole tree. It means that you cannot have two claims with the same index inside the tree. 
 
-As opposite to index, values slots could be the same for different claims if their index is different. 
+As opposite to the index, the values slots could be the same for different claims if their indexes are different. 
