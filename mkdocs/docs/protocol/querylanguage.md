@@ -148,8 +148,8 @@ A Query Circuit should accept query requests and perform the mandatory verificat
 
 **Optional**
 
-- Check schema
-- Check the issuer of the claim
+- Check schema.
+- Check the issuer of the claim.
 
 > In some cases, *schema* and *issuer* are not important. And in such cases, we can have the possibility to omit these fields.
 >
