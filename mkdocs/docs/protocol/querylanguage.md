@@ -214,7 +214,7 @@ signal input value[valueArraySize]; // value for check
 signal input operator; // >,<, =,in, notin operations of CQL
 ```
 
-**Public Inputs:**
+Public Inputs:
 
 ```json
 challenge,
