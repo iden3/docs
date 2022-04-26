@@ -236,9 +236,8 @@ The identity states can be published on the blockchain in one of the two ways: *
 The `Genesis State` is the initial state of any identity, and does not need to be published on the blockchain, as the claims under it can be verified against the identifier itself (that contains that identity state).
 
 ![](../../imgs/identity_state_transition.png)
-
 #### Identity State Transition Function
-The `ITF` (Identity state Transition Function) is verified each time a state is updated This ensures that the identity follows the protocol while updating.
+The `ITF` (Identity State Transition Function) is verified each time a state is updated This ensures that the identity follows the protocol while updating.
 
 An identity's Merkle Tree is a sparse binary tree that allows only the addition of the leaves (no edition or deletion). Adding new claims, updating them through versions and revoking need to be done according to the `ITF`. To ensure this, we use zero-knowledge proofs in a way that when an identity is publishing a new state to the smart contract, it also sends a zero-knowledge proof (`π`), proving that the `ϕ` is satisfied following the `ITF`. In this way, all the identity states published on the blockchain are validated to be following the protocol.
 
