@@ -238,9 +238,9 @@ The `Genesis State` is the initial state of any identity, and does not need to b
 ![](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/identity_state_transition.png)
 
 #### Identity State Transition Function
-The `ITF` (Identity State Transition Function) is verified each time a state is updated This ensures that the identity follows the protocol while updating.
+The `ITF` (Identity State Transition Function) is verified each time a state is updated. This ensures that the identity follows the protocol while updating.
 
-An identity's Merkle Tree is a sparse binary tree that allows only the addition of the leaves (no edition or deletion). Adding new claims, updating them through versions and revoking need to be done according to the `ITF`. To ensure this, we use zero-knowledge proofs in a way that when an identity is publishing a new state to the smart contract, it also sends a zero-knowledge proof (`π`), proving that the `ϕ` is satisfied following the `ITF`. In this way, all the identity states published on the blockchain are validated to be following the protocol.
+An Identity Merkle Tree is a sparse binary tree that allows only the addition of the leaves (no edition or deletion). Adding new claims, updating them through versions and revoking need to be done according to the `ITF`. To ensure this, we use zero-knowledge proofs in a way that when an identity is publishing a new state to the smart contract, it also sends a zero-knowledge proof (`π`), proving that the `ϕ` is satisfied following the `ITF`. In this way, all the identity states published on the blockchain are validated to be following the protocol.
 
 > NOTE: In the initial version of the implementation, there will be no checks to verify that the trees are append-only in the smart contract. This is due to the fact that complex computations are required to generate the zk proofs for multiple claim additions, (a requirement for scalability).
 
@@ -285,7 +285,7 @@ The full circuit can be found here: https://github.com/iden3/circuits/blob/maste
 
 An identity can self-issue and revoke many `private keys` and the corresponding `claims` of the type `operational key authorization`, enabling key rotation. To support verification of such claims, an identity state should be publicly available on the blockchain. An identity can publish the state to the blockchain directly or via the Relay.
 
-Any private key for which a corresponding claim exists in the identity's Claims Tree and does not exist in the identity's Revocation Tree, can be used to create a zero-knowledge proof for valid credentials. Such proof should pass verification by a verifier as it is able to check the latest identity state in the blockchain.
+Any private key for which a corresponding claim exists in the Identity Claims Tree and does not exist in the Identity Revocation Tree, can be used to create a zero-knowledge proof for valid credentials. Such proof should pass verification by a verifier as it is able to check the latest identity state in the blockchain.
 
 In the same way, any valid and non-revoked identity private key can be used to create a valid zk proof for the Identity State Transition Function.
 
