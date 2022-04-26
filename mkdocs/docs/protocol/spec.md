@@ -235,7 +235,8 @@ The identity states can be published on the blockchain in one of the two ways: *
 
 The `Genesis State` is the initial state of any identity, and does not need to be published on the blockchain, as the claims under it can be verified against the identifier itself (that contains that identity state).
 
-![](../../imgs/identity_state_transition.png)
+![](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/identity_state_transition.png)
+
 #### Identity State Transition Function
 The `ITF` (Identity State Transition Function) is verified each time a state is updated This ensures that the identity follows the protocol while updating.
 
