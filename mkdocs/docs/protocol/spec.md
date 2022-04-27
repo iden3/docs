@@ -18,20 +18,20 @@ A Merkle Tree (MT) or a hash tree is a cryptographically verifiable data structu
 The MTs used in the protocol have a few particularities:
 - **Binary**: Each node can only have two children.
 - **Sparse and Deterministic**: The contained data is indexed, and each data block is placed at the leaf that corresponds to that data block's index, so insert order doesn't influence the final Merkle Tree Root. This also means that some nodes are empty.
-- **ZK-Friendly**: The used hash function, [poseidon](https://www.poseidon-hash.info/), plays well with the zero-knowledge proofs (ZKP) used in different parts of the protocol.
+- **ZK-friendly**: The used hash function, [poseidon](https://www.poseidon-hash.info/), plays well with the zero-knowledge proofs (ZKP) used in different parts of the protocol.
 
 In order to ensure that these particularities are respected and to have a history of all the changes that occurred on different trees (without revealing the actual content stored in the leaves), **the root of each MT is indirectly stored on the blockchain**. The EVM-based blockchains are chosen for this purpose.
 
 The `Merkle Tree` specification is defined in [this document](https://github.com/iden3/iden3-docs/blob/master/source/docs/MerkleTree.pdf). In future, the MT implementation could be changed.
 
-### Zero-Knowledge Proof (ZKP)
+### Zero-knowledge Proof (ZKP)
 
 In cryptography, a zero-knowledge proof is a method by which one party (the prover) can prove to a second party (the verifier) that the prover knows a value x (that fulfills some constraints), without revealing any other information apart from the fact that s/he knows the value x.
 
 The technologies that implement these techniques are evolving rapidly. As of now, the protocol uses zkSNARKs Groth16, but in future, the zk protocol could be changed.
-zkSNARK stands for "Zero-Knowledge Succinct Non-Interactive Argument of Knowledge", and has the following properties:
+zkSNARK stands for "Zero-knowledge Succinct Non-interactive Argument of Knowledge", and has the following properties:
 
-- **Non-Interactive**: With a single message (credential) from the prover, the verifier can verify the proof.  This is good because it allows sending proofs to a smart contract that can verify these proofs immediately.
+- **Non-interactive**: With a single message (credential) from the prover, the verifier can verify the proof.  This is good because it allows sending proofs to a smart contract that can verify these proofs immediately.
 - **Efficient Verification**: It is computationally efficient to verify proofs, both in terms of the size and the operations. This is apt for the protocol because verification happens on the blockchain with its inherent costs.
 - **Heavy Proof Generation**: Generating a proof is computationally very expensive and can be time-consuming even with powerful hardware.
 - **Setup**: A pre-existing setup between the prover and the verifier is required for the construction of zkSNARKs. In order to ensure that the verifier cannot cheat, one has to be sure that the keys used for the setup have been destroyed. There are protocols to ensure that, resulting in a "trusted setup".
@@ -452,7 +452,7 @@ Where `t` is a recent time.
 
 A claim can be made expirable by setting an expiration flag in the options and specifying an expiration date in the Unix timestamp format in the corresponding claim value part (see **Claim Format**).
 
-#### Zero-Knowledge Proof of Valid Credential
+#### Zero-knowledge Proof of Valid Credentials
 
 A zero-knowledge proof allows hiding some information about a claim while proving that it was issued by a particular identity and that it is currently valid. The same checks mentioned in the previous sections are performed:
 - Prove that a claim was issued at least at time t.
