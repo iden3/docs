@@ -1,16 +1,14 @@
-# Server-side login (ZKP Login)
+# Server-side Login (ZKP Login)
 
-## **Introduction**
+## Introduction
 
-Iden3 is SSI solution that allows users to leverage their pre-existing validated identities to prove they are who they claim to be based on zero-knowledge proofs. One of the direct applications of iden3’s technology is to allow web applications to reuse these identities for login into their portals.
+Iden3 is a Self-Sovereign Identity (SSI) solution that allows users to leverage their pre-existing validated identities. With SSI, they are able to prove they are who they claim to be based on the zero-knowledge proofs. One of the direct applications of the iden3 technology is to allow web applications to reuse these identities for logging into their portals.
 
-![Login workflow](../../imgs/login.png)
+[Login Workflow](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/login.png)
 
-Login workflow
+## Login Workflow
 
-In a simple example application request a user identifier, which is done through zero-knowledge proof (zk proof) generation.
-
-The server generates an authentication request
+In a simple example, an application requests a user identifier; this is done through the zero-knowledge proof (zk proof) generation. The server generates an authentication request.
 
 _Auth request_
 
@@ -33,17 +31,16 @@ _Auth request_
     }
 ```
 
-This is an example of an authorization request. Scope field is a set of objects describes an array of proofs that must be generated on a user device and presented later.
-Each scope member has a unique definition of a circuit that must be used and rules (public inputs) that must be applied.
+Shown above is an example of an authorization request. Scope field is a set of objects that describes an array of proofs that must be generated on a user device and presented later.
+Each scope member has a unique definition of a circuit that must be used and a set of rules (public inputs) that must be applied.
 
-This message can be delivered to user through different communication channels: QR code, email, deep-linking, .etc .
-On scan mobile has to implement:
+This message can be delivered to a user through different communication channels: QR code, email, deep-linking, etc.
+On scanning, mobile needs to implement the following:
 
-1. Parsing the auth request and understand which proof handler it should use
-2. Resolve verifier identifier if it’s needed.
-3. Generate proofs using a specific handler. It can be signature proof or zero-knowledge
+1. Parse the authorization request and understand which proof handler it should use.
+2. Resolve the verifier identifier if required.
+3. Generate proofs using a specific handler. It can be a signature proof or a zero-knowledge proof.
 4. Prepare an authentication response message.
-
 
 On mobile user generates ZK proof using [auth](https://github.com/iden3/circuits/blob/master/circuits/authentication.circom) circuit that will prove identity ownership, and send the response to the callback URL
 
@@ -96,37 +93,37 @@ _Auth response_
 }
 ```
 
-Client after receiving authorization response performs  verification procedure:
+The client, after receiving an authorization response, performs the verification process:
 
-  1. Zero-knowledge proof verification
-  2. Extraction of metadata: (auth and circuit-specific)
-  3. Verification of user identity states
-  4. Verification of circuits public inputs (e.g. issuer state)
+  1. Verification with zero-knowledge proof.
+  2. Extraction of metadata (auth and circuit-specific).
+  3. Verification of the user identity states.
+  4. Verification of the circuit's public inputs (e.g. issuer state).
 
 
-## Authentication based on zero-knowledge proof
+## Authentication based on Zero-knowledge Proof
 
-ZK proof is based on [Circom 2.0](https://docs.circom.io/) language.
+ZK proof is based on the [Circom 2.0](https://docs.circom.io/) language.
 
-Auth circuit repository: [https://github.com/iden3/circuits/blob/master/circuits/authentication.circom](https://github.com/iden3/circuits/blob/master/circuits/authentication.circom)
+Auth Circuit Repository: [https://github.com/iden3/circuits/blob/master/circuits/authentication.circom](https://github.com/iden3/circuits/blob/master/circuits/authentication.circom)
 
 The circuit verifies that the user is the owner of the identity and his auth key is not revoked in the provided user state.
 
-## Prerequisite
+## Prerequisites
 
-Identity wallet installed
+The identity wallet should be installed.
 
 ## Integration
 
 ### Back-end
 
-Generate auth request
+**Generate Auth Request**
 
 ```go
 request := auth.CreateAuthorizationRequest("<challenge>","<verifier identity|app-url>", "<callbackURI>") // create auth request
 ```
 
-Validate auth request
+**Validate Auth Request**
 
 ```go
 // unpack raw message
@@ -140,21 +137,21 @@ stateInfo, err := token.VerifyState(ctx.Background(),"< rpc url >", "< state con
 
 ```
 
-In future releases of auth library the verification procedure will be simplified and optimized for verifier.
+In future releases of the auth library, the verification procedure will be simplified and optimized for a verifier.
 
 ### Front-end
 
-On the front-end side, you need to embed a button to start the login process. After the button is pressed, the front-end makes a request to the back-end to generate an authentication request and displays it in QR code. When the user scans the QR code, the phone generates ZK proof and sends the proof to the call-back URL from QR-code.
-Currently, we are working on js-iden3-auth library.
+On the front-end, you need to embed a button to initiate the login process. After this button is pressed, the front-end makes a request to the back-end to generate an authentication request and displays it in the QR code. When a user scans the QR code, the phone generates a zk proof and sends this proof to the call-back URL from the QR code.
+Currently, we are working on the js-iden3-auth library.
 
-## Tutorial simple go app
+## Tutorial: A Simple Go Application
 
-We need a simple web server with two endpoint
+For this, we need a web server with two endpoints:
 
 - GET /sign-in should return auth request
-- POST /call-back endpoint to receive callback request from the phone and validate the request
+- POST /call-back endpoint to receive a callback request from the phone and validate the same
 
-Let’s write a simple web-server
+Let us write a simple web server:
 
 ```go
 func main() {
@@ -174,27 +171,27 @@ func callBack(w http.ResponseWriter, req *http.Request) {
 }
 ```
 
-### Auth package
+### Auth Package
 
-Add authorization package to the project.
+Add the authorization package to the project.
 
 ```go
 go get https://github.com/iden3/go-iden3-auth
 ```
 
-### Sign in
+### Sign-in
 
-To generate a ZK auth request we need a callback URL, to this URL we will receive a response from the mobile application with an authentication response. And verifier identity [do we really need this identity?]
+To generate a zk auth request, we need a callback URL where we will receive a response from the mobile application along with an authentication response and the verifier's identity. <!--[Do we really need this identity?]-->
 
-go-iden3-auth library contains a method for generating the authentication request
+The go-iden3-auth library contains a method for generating the authentication request.
 
-[Descrition]
+[Description]
 
 ```go
 func CreateAuthorizationRequest(challenge int64, aud, callbackURL string) *types.AuthorizationMessageRequest
 ```
 
-Now we are ready to generate auth request
+Now, we are ready to generate the auth request:
 
 ```go
 const CallBackUrl      = "http:localhost:8001/call-back"
@@ -214,18 +211,18 @@ func signIn(w http.ResponseWriter, req *http.Request) {
 
 ### Callback
 
-When we receive a callback request with ZK response we have to do a couple of things to validate this response
+When we receive a callback request with a zk response, to validate, we need to take the following actions:
 
-- Validate ZK proof, and make sure that the proof is valid
-- Validate identity state on-chain, we are doing it to verify that user identity state is valid and his auth keys are not revoked
+1. Validate zk proof and make sure that the proof is valid.
+2. Validate identity's state on-chain so as to verify that the user identity state is valid and his/her auth keys are not revoked.
 
-First, let’s validate ZK proof, for this we have a function
+First, let’s validate the zk proof. For this, we have the following function:
 
 ```go
 func VerifyProofs(message types.Message) (err error)
 ```
 
-but before we can call it we need to unpack raw bytes to a message. Packer can be used to process encrypted message in future releases.
+But before we can call it, we need to unpack raw bytes to a message. Packer can be used to process the encrypted message for future releases.
 
 ```go
 p := &packer.PlainMessagePacker{}
@@ -235,16 +232,16 @@ message, _ := p.Unpack(msgBytes)
 proofErr := auth.VerifyProofs(message)
 ```
 
-Now ZK proof is verified and we can check identity status on chain
+Now that the zk proof is verified, we can check the identity's status on-chain.
 
-Fist we need access to RPC URL, and address of identity smart-contract
+First, we need access the RPC URL and the address of the identity's smart contract:
 
 ```go
 const rpc = "https://polygon-mumbai.infura.io/v3/<your-token>"
 const IdentityContract = "0x3e95a7B12e8905E01126E1beA3F1a52D1624A725"
 ```
 
-Before we can verify a state, we need to extract metadata, and then verify it on chain
+Before we can verify a state, we need to extract the metadata and then verify it on-chain.
 
 ```go
 token, _:= auth.ExtractMetadata(message)
@@ -253,38 +250,33 @@ token, _:= auth.ExtractMetadata(message)
 stateInfo, err := token.VerifyState(ctx, rpc, IdentityContract)
 ```
 
-## Verification procedure details
+## Verification Procedure
 
-### Zero-knowledge proof verification
+### Zero-knowledge Proof Verification
 
-> Groth16 proof are supported now by auth library
->
+> Groth16 proofs are now supported by the auth library.
 
-Verification keys for circuits are known by the library itself. In the future, they can be resolved from circuits registries.
+Verification keys for the circuits can be referred to from the library. In the future, they can be resolved from the circuit registries.
 
-### Extraction of metadata
+### Extraction of Metadata
 
-Each circuit has a schema of its public inputs that links the public signal name to its position in the resulted array.
+Each circuit has a schema of its public inputs that links the public signal name to its position in the resulting array. This allows extracting user identifiers and challenges from the proof for authentication.
 
-This allows extracting user identifiers and challenges for authentication from proof.
+Other signals are added to the user token (scope field) as attributes of a specific circuit. The circuit's public signal schemas are known by this library or can be retrieved from a registry.
 
-Other signals are added to the user token ( scope field) as attributes of a specific circuit.
+### Verification of User Identity States
 
-Circuit public signals schemas are known by this library or can be retrieved from some registry.
+The blockchain verification algorithm is used to:
 
-### Verification of user identity states
+1. Get state from the blockchain (address of the id state contract and URL must be provided by the caller of the library):
+    1. **Empty State is Returned**: It indicates that the identity state has not been updated or the updated state has not been published. We need to compare the id with the state. If they are different, it is not the genesis state of the identity and it is not valid.
+    2. **Non-empty State is Returned and Equals to the State Provided in Proof**: This indicates that the user state is new and we work with the latest user state.
+    3. **Non-empty State is Returned and is not Equal to the State Provided in Proof**: Gets the time of the state transition. The verification party can make a decision if it can accept this state based on that time frame.
 
-The blockchain verification algorithm is  used
+2.  Accept or reject the provided state (The verification party makes this decision). 
 
-1. Get state from the blockchain (address of id state contract and URL must be provided by the caller of the library):
-    1. Empty state is returned - it means that identity state hasn’t been updated or updated state hasn’t been published. We need to compare id and state. If they are different it’s not a genesis state of identity then it’s not valid.
-    2. The non-empty state is returned and equals to the state in provided proof which means that the user state is fresh enough and we work with the latest user state.
-    3. The non-empty state is returned and it’s not equal to the state that the user has provided. Gets the time of the state transition. The verification party can make a decision if it can accept this state based on that time frame
+### Verification of Circuit's Public Signals
 
-2.  Verification party can make a decision to accept provided state or not.
-
-### Verification of circuits public signals
-
-It can be different kind of verification e.g.
-1. Check of that issuer states of provided claim proofs are published on the blockchain (same as for identity state)
-2. Check of query signals, so claim schema and specific values can be verified.
+This verification includes the following:
+1. Check if the issuer states of the provided claim proofs are published on the blockchain (same as for identity state).
+2. Check the query signals so that the claim schema and the specific values can be verified.
