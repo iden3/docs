@@ -64,7 +64,7 @@ If you're unhappy with your father's decision, you can take that power away from
 
 Under such a system, those with the most delegations become our representatives. But unlike representative democracy, they are held accountable in real-time.
 
->A system like this addresses the uninformed voters' issue that a direct democracy creates by allowing these voters allot their votes to experts. It also addresses the corruption issues of representative democracy because citizens can rescind their vote from someone instantly, forcing delegates to vote in the best interest of their constituents. It is the best of both worlds that truly gives the power of influence to the voters. [Source](https://media.consensys.net/liquid-democracy-and-emerging-governance-models-df8f3ce712af)
+>A system like this addresses the uninformed voters' issue that a direct democracy creates by allowing these voters allot their votes to experts. It also addresses the corruption issues of representative democracy because citizens can rescind their vote from someone instantly, forcing delegates to vote in the best interest of their constituents. It is the best of both worlds that truly gives the power of influence to the voters. ([Source](https://media.consensys.net/liquid-democracy-and-emerging-governance-models-df8f3ce712af))
 
 This sounds almost too good to be true. A fair, transparent, and corruption-free government! Why haven't we implemented this before?
 
