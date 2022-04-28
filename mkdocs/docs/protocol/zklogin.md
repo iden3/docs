@@ -4,9 +4,10 @@
 
 Iden3 is a Self-Sovereign Identity (SSI) solution that allows users to leverage their pre-existing validated identities. With SSI, they are able to prove they are who they claim to be based on the zero-knowledge proofs. One of the direct applications of the iden3 technology is to allow web applications to reuse these identities for logging into their portals.
 
-[Login Workflow](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/login.png)
 
 ## Login Workflow
+
+[Login Workflow](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/login.png)
 
 In a simple example, an application requests a user identifier; this is done through the zero-knowledge proof (zk proof) generation. The server generates an authentication request.
 
@@ -42,7 +43,7 @@ On scanning, mobile needs to implement the following:
 3. Generate proofs using a specific handler. It can be a signature proof or a zero-knowledge proof.
 4. Prepare an authentication response message.
 
-On mobile user generates ZK proof using [auth](https://github.com/iden3/circuits/blob/master/circuits/authentication.circom) circuit that will prove identity ownership, and send the response to the callback URL
+On mobile, a user generates the ZK proof using [auth](https://github.com/iden3/circuits/blob/master/circuits/lib/authentication.circom) circuit that will prove identity ownership, and send the response to the callback URL.
 
 
 _Auth response_
@@ -105,7 +106,7 @@ The client, after receiving an authorization response, performs the verification
 
 ZK proof is based on the [Circom 2.0](https://docs.circom.io/) language.
 
-Auth Circuit Repository: [https://github.com/iden3/circuits/blob/master/circuits/authentication.circom](https://github.com/iden3/circuits/blob/master/circuits/authentication.circom)
+Auth Circuit Repository: [auth](hhttps://github.com/iden3/circuits/blob/master/circuits/lib/authentication.circom)
 
 The circuit verifies that the user is the owner of the identity and his auth key is not revoked in the provided user state.
 
