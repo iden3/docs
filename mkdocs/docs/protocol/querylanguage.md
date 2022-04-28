@@ -277,7 +277,7 @@ timestamp
    7. Create proof-sharing response protocol message and send it to the verifier.
 - Flow diagram
 
-  ![verifier-user-query.png](../../imgs/verifier-user-query.png)
+  ![verifier-user-query.png](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/verifier-user-query.png)
 
 
 ## Next Steps
