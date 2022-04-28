@@ -2,7 +2,7 @@
 
 Hello and welcome!!
 
-In this guide, we'll explain how to create your first [zero-knowledge Snark](../../basics/key-concepts#zk-snarks) circuit using [Circom](https://docs.circom.io) and [SnarkJS](https://github.com/iden3/snarkjs).
+In this guide, we'll explain how to create your first [zero-knowledge Snark](https://github.com/iden3/docs/blob/master/mkdocs/docs/basics/key-concepts.md#zk-snarks) circuit using [Circom](https://docs.circom.io) and [SnarkJS](https://github.com/iden3/snarkjs).
 
 [Circom](https://circom.iden3.io) is a library that allows you to build circuits to be used in zero-knowledge proofs. 
 
