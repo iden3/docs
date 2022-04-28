@@ -1,6 +1,6 @@
 # Introduction
 
->Identity is a uniquely human concept. It is that ineffable “I” of self-consciousness, something that is understood worldwide by every person living in every culture. As René Descartes said, Cogito ergo sum — I think, therefore I am. [Source](http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html)
+>Identity is a uniquely human concept. It is that ineffable “I” of self-consciousness, something that is understood worldwide by every person living in every culture. As René Descartes said, Cogito ergo sum — I think, therefore I am. ([Source](http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html))
 
  What constitutes your identity? What makes you who you are? What is it about you that distinguishes you from others? Philosophers have argued over these questions since the beginning of civilization. Suffice to say there are no simple answers. Identity is a difficult concept to pin down.
 
