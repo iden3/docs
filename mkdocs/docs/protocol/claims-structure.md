@@ -62,7 +62,7 @@ Value:
 ```
 
 ### Claim Schema 
-Schemas define the type of data inside a claim [link](../spec#claims).
+Schemas define the type of data inside a claim [link](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/spec.md#claims).
 
 _Index slots_ **i_2**, **i_3** and _value slots_ **v_2**, **v_3** are the data slots for user data.
 
