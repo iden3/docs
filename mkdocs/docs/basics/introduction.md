@@ -12,7 +12,7 @@ Nevertheless, we don't need a precise definition to see that there are problems 
 
 How can we improve on this?
 
-It's clear that we're at an inflection point with respect to how the digital world interacts with the physical world.
+It is clear that we are at an inflection point for how the digital world interacts with the physical world.
 
 **The legacy systems of the physical world have not kept up with the rising importance of the digital world.** As both worlds continue to merge, this scenario will need to change.
 
