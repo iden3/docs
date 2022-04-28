@@ -4,7 +4,7 @@
 
 At iden3, our goal is to democratize identity. We believe that everyone should be empowered to become their own [certification authority](https://en.wikipedia.org/wiki/Certificate_authority).
 
-**What do we Mean by Identity?**
+**What Do We Mean by Identity?**
 
 An identity can be a person, a company, an organization, a [DAO](https://hackernoon.com/what-is-a-dao-c7e84aa1bd69), or a government. Identity can even be a thing: a chair, a room, a bot, and so on. When we talk about identities, we are referring to "identities as accounts".
 
@@ -120,9 +120,9 @@ But since R clearly knows its private key, R' can't tell whether A is valid or n
 
 <!-- TODO *image coming soon* -->
 
-### ZK-snarks
+### ZK-SNARKs
 
-You can think of zk-snarks as an efficient way to produce zero-knowledge proofs. These are the proofs that are short enough to be published on blockchain and that can be read later by a verifier.
+You can think of zk-SNARKs as an efficient way to produce zero-knowledge proofs. These are the proofs that are short enough to be published on blockchain and that can be read later by a verifier.
 
 ## Merkle Trees
 
@@ -277,8 +277,7 @@ Luckily, these sorts of inefficiencies are largely illusory. Since fairly simple
 >Note: while we won't get into the details here, one of the keys to these optimizations is that sparse Merkle trees are mostly sparse. This means many of the subtrees will end up being zero subtrees. Since H(0), H(H(0)), H(H(H(0))), and so on are all constant values, the zero-subtrees can be cached (calculated once, stored, and then omitted from Merkle proofs), greatly reducing the size of computations.
 
 
-
-### Why do we use Merkle Trees at iden3?
+### Why Do We use Merkle Trees at iden3?
 
 At iden3, one of our major goals is scalability. Specifically, we believe that anybody should be able to create as many identities as they want. And that **any identity should be able to generate as many claims as it wants.**
 
