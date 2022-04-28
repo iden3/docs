@@ -1,6 +1,6 @@
 #  Iden3 Protocol Specifications (Version 0)
 
-> These specifications are still being built and updated regularly. Consider it as a work-in-progress.
+> These specifications are under development and are being updated regularly. Consider it as a work-in-progress.
 
 ## Basis
 
@@ -13,16 +13,16 @@
 
 ### Merkle Tree
 
-A Merkle Tree (MT) or a hash tree is a cryptographically verifiable data structure where every "leaf" node of the tree contains the cryptographic hash of a data block, and every "non-leaf" node contains the cryptographic hash of its child nodes.
+A Merkle tree (MT) or a hash tree is a cryptographically verifiable data structure where every "leaf" node of the tree contains the cryptographic hash of a data block, and every "non-leaf" node contains the cryptographic hash of its child nodes.
 
 The MTs used in the protocol have a few particularities:
 - **Binary**: Each node can only have two children.
-- **Sparse and Deterministic**: The contained data is indexed, and each data block is placed at the leaf that corresponds to that data block's index, so insert order doesn't influence the final Merkle Tree Root. This also means that some nodes are empty.
+- **Sparse and Deterministic**: The contained data is indexed, and each data block is placed at the leaf that corresponds to that data block's index, so insert order doesn't influence the final Merkle tree Root. This also means that some nodes are empty.
 - **ZK-friendly**: The used hash function, [poseidon](https://www.poseidon-hash.info/), plays well with the zero-knowledge proofs (ZKP) used in different parts of the protocol.
 
 In order to ensure that these particularities are respected and to have a history of all the changes that occurred on different trees (without revealing the actual content stored in the leaves), **the root of each MT is indirectly stored on the blockchain**. The EVM-based blockchains are chosen for this purpose.
 
-The `Merkle Tree` specification is defined in [this document](https://github.com/iden3/iden3-docs/blob/master/source/docs/MerkleTree.pdf). In future, the MT implementation could be changed.
+The `Merkle tree` specification is defined in [this document](https://github.com/iden3/iden3-docs/blob/master/source/docs/MerkleTree.pdf). In future, the MT implementation could be changed.
 
 ### Zero-knowledge Proof (ZKP)
 
@@ -44,7 +44,7 @@ Read more technical information about zkSNARKs in [this article](https://medium.
 
 A claim is a statement made by one identity about another identity or about itself. Each claim is composed of two parts: the index part and the value part.
 Claims are stored on the leaves of an MT. The index is hashed and is used to determine the leaf position where the value of the claim will be stored.
-A special transition validation function can be used to restrict how leaves are stored on the Merkle Tree, i.e. make the MT append-only, (leaves can only be added and cannot be updated or deleted).
+A special transition validation function can be used to restrict how leaves are stored on the Merkle tree, i.e. make the MT append-only, (leaves can only be added and cannot be updated or deleted).
 
 ### Properties
 
@@ -195,7 +195,7 @@ graph TD
     N["claim"]
 ```
 
-To accomplish this (and other properties covered in this document), identities are built by [Merkle Trees](#MerkleTree), where the claims are placed as the leaves, and the `Root` is published (indirectly through the identity state) on the blockchain. With this construction, the identities can issue, update, and revoke claims.
+To accomplish this (and other properties covered in this document), identities are built by [Merkle trees](#MerkleTree), where the claims are placed as the leaves, and the `Root` is published (indirectly through the identity state) on the blockchain. With this construction, the identities can issue, update, and revoke claims.
 
 The protocol construction is designed to enable zero-knowledge features. It means that the identities have the ability to prove the ownership of the properties of the claims in issued and received claims and verify that a particular claim is not revoked.
 
@@ -222,7 +222,7 @@ An **identity type** specifies the specifications that an identity follows (such
 **Identifier Structure**:
 - `ID` (genesis): Base58 [ `type` | `genesis_state` | `checksum` ]
 	- `type`: 2 bytes specifying the type
-	- `genesis_state`: First 27 bytes from the identity state (using the Genesis Claim Merkle Tree)
+	- `genesis_state`: First 27 bytes from the identity state (using the Genesis Claim Merkle tree)
 	- `checksum`: Addition (with overflow) of all the ID bytes Little Endian 16 bits ( [ `type` | `genesis_state` ] )
 
 
@@ -240,7 +240,7 @@ The `Genesis State` is the initial state of any identity, and does not need to b
 #### Identity State Transition Function
 The `ITF` (Identity State Transition Function) is verified each time a state is updated. This ensures that the identity follows the protocol while updating.
 
-An Identity Merkle Tree is a sparse binary tree that allows only the addition of the leaves (no edition or deletion). Adding new claims, updating them through versions and revoking need to be done according to the `ITF`. To ensure this, we use zero-knowledge proofs in a way that when an identity is publishing a new state to the smart contract, it also sends a zero-knowledge proof (`π`), proving that the `ϕ` is satisfied following the `ITF`. In this way, all the identity states published on the blockchain are validated to be following the protocol.
+An Identity Merkle tree is a sparse binary tree that allows only the addition of the leaves (no edition or deletion). Adding new claims, updating them through versions and revoking need to be done according to the `ITF`. To ensure this, we use zero-knowledge proofs in a way that when an identity is publishing a new state to the smart contract, it also sends a zero-knowledge proof (`π`), proving that the `ϕ` is satisfied following the `ITF`. In this way, all the identity states published on the blockchain are validated to be following the protocol.
 
 > NOTE: In the initial version of the implementation, there will be no checks to verify that the trees are append-only in the smart contract. This is due to the fact that complex computations are required to generate the zk proofs for multiple claim additions, (a requirement for scalability).
 
@@ -279,7 +279,7 @@ If an updatable claim is added to the MT with version `v!=0`, claim version `v-1
 
 We prove the identity ownership inside a zkSNARK proof. This means that the user can generate a zk-proof that s/he knows a `private key` corresponding to the `operational key for authorization` claim added to the Claims Tree, without revealing the `claim` and its position. This is coded inside a circom circuit, which can be used in other circuits (such as the `id state update` circuit).
 
-The full circuit can be found here: https://github.com/iden3/circuits/blob/master/circuits/idOwnershipBySignature.circom
+The full circuit can be found here: https://github.com/iden3/circuits/blob/master/circuits/lib/idOwnershipBySignature.circom
 
 ### Identity Key Rotation
 
@@ -323,7 +323,7 @@ The Identity State Update can be generalized as an `ITF_min` (minor Identity Tra
 The `IdS` (Identity State) is calculated by concatenating the roots of the three user trees:
 - `IdS`: `H(ClR || ReR || RoR)`where `H` is the Hash function defined by the Identity Type (for example, Poseidon).
 
-All trees are SMT (Sparse Merkle Trees) and use the hash function defined by the Identity Type.
+All trees are SMT (sparse Merkle trees) and use the hash function defined by the Identity Type.
 - Leaves in `ClT` (Claims Tree) are claims ((4 + 4) * 253 bits = 253 bytes)
 
 See [**Claim Structure**](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/spec.md#structure)
@@ -346,7 +346,7 @@ leaf: [253 bits ] tree root
 As seen in the diagram, only the `IdS` is stored on the blockchain.  In order to save the stored bytes on the blockchain, it is desirable that only one "hash" representing the current state of the Identity is stored on the smart contract. This one "hash" is the `IdS` (Identity State), which is linked to a timestamp and a block on the blockchain.
 
 All the public data must be made available for any holder so that
-they can build fresh Merkle Tree proofs of both the `ReT` and `RoT`.  This allows the holder to:
+they can build fresh Merkle tree proofs of both the `ReT` and `RoT`.  This allows the holder to:
 
 - Prove recent non-revocation / "current" version without interaction with the issuer.
 - Hide a particular `ClR` from all the other`ClR`s to avoid an issuer from discovering a claim hidden behind a zk proof. For this purpose, `ClR` is added to `RoR`.
