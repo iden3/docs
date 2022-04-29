@@ -25,7 +25,7 @@
 
 # Iden3 Docs
 
-Welcome to the documentation site of the Iden3 project, future-proof tech stack for self-sovereign identity.
+Welcome to the documentation site of the Iden3 project, a future-proof tech stack for self-sovereign identity.
 
 ---
 
@@ -33,15 +33,15 @@ Welcome to the documentation site of the Iden3 project, future-proof tech stack 
 
 ---
 
-## Versatility of applications
+## Versatility of Applications
 
-The main idea of the iden3 protocol is that each identity is self-soverign and can issue claims on another identity (which can be for an individual, an organisation or a system/machine).
+The main idea of the iden3 protocol is that each identity is self-sovereign and can issue claims for another identity (which can be for an individual, an organisation or a system/machine).
 
-This simple and unique characteristics can lead to creation complex adaptive systems and the following use cases:
+These simple and unique characteristics can lead to the creation of the complex adaptive systems and can have the following use cases:
 
 <ul>
     <li>Decentralised trust models / web-of-trust</li>
-    <li>Decentralised ID verification / proof-of-personhood</li>
+    <li>Decentralised Id verification / proof-of-personhood</li>
     <li>Decentralised voting systems</li>
     <li>Interaction with DeFi / dApps / Web3</li>
     <li>Decentralised payment identifiers</li>
@@ -52,25 +52,18 @@ This simple and unique characteristics can lead to creation complex adaptive sys
     <li>NFT ownership</li>
 </ul>
 
-## Iden3 protocol libraries
+## Iden3 Protocol Libraries
 
-- **Crypto library ([go-iden3-crypto](https://github.com/iden3/go-iden3-crypto))**
-    <br />Implementation of Poseidon hash and Baby JubJub Eliptic curve
+- **Crypto Library ([go-iden3-crypto](https://github.com/iden3/go-iden3-crypto))**: Implementation of Poseidon Hash and Baby JubJub Eliptic Curve
 
-- **Merkle tree sql library ([go-merkletree-sql](https://github.com/iden3/go-merkletree-sql))**
-    <br />Implementation of Sparse Merkle tree
+- **Merkle Tree SQL Library ([go-merkletree-sql](https://github.com/iden3/go-merkletree-sql))**: Implementation of Sparse Merkle Tree
 
-- **Core library ([go-iden3-core](https://github.com/iden3/go-iden3-core))**
-    <br />Identity core primitives
+- **Core Library ([go-iden3-core](https://github.com/iden3/go-iden3-core))**: Identity Core Primitives
 
-- **Circuits ([circuits](https://github.com/iden3/circuits))**
-    <br />Identity circuits
+- **Circuits ([circuits](https://github.com/iden3/circuits))**: Identity Circuits
 
-- **Go-circuits ([go-circuits](https://github.com/iden3/go-circuits))**
-    <br />Library for transformation go-core primitives to json inputs for identity circuits
+- **Go-circuits ([go-circuits](https://github.com/iden3/go-circuits))**: Library for Transformation Go-core Primitives to JSON Inputs for Identity Circuits
 
-- **Prover server ([prover-server](https://github.com/iden3/prover-server))**
-    <br />Wrapper on snarkjs for ZK proof generation
+- **Prover Server ([prover-server](https://github.com/iden3/prover-server))**: Wrapper on SnarkJS for Zk-proof Generation
 
-- **Authorization library ([go-iden3-auth](https://github.com/iden3/go-iden3-auth))**
-    <br />Library for authentication with zkp verification (edited)
+- **Authorization Library ([go-iden3-auth](https://github.com/iden3/go-iden3-auth))**: Library for Authentication with Zk-proof Verification <!-- (edited) -->
