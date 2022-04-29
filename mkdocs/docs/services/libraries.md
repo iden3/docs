@@ -1,4 +1,4 @@
-## Iden3 Protocol Libraries
+# Iden3 Protocol Libraries
 
 - **Crypto Library ([go-iden3-crypto](https://github.com/iden3/go-iden3-crypto))**
     <br />Implementation of Poseidon Hash and Baby JubJub Eliptic Curve
