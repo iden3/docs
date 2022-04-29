@@ -19,4 +19,4 @@
     <br />Wrapper on SnarkJSfor Zk-proof Generation
 
 - **Authorization Library ([go-iden3-auth](https://github.com/iden3/go-iden3-auth))**
-    <br />Library for Authentication with Zk-proof Verification (edited)
+    <br />Library for Authentication with Zk-proof Verification <!-- (edited) -->
