@@ -1,22 +1,22 @@
-## Iden3 protocol libraries
+## Iden3 Protocol Libraries
 
-- **Crypto library ([go-iden3-crypto](https://github.com/iden3/go-iden3-crypto))**
-    <br />Implementation of Poseidon hash and Baby JubJub Eliptic curve
+- **Crypto Library ([go-iden3-crypto](https://github.com/iden3/go-iden3-crypto))**
+    <br />Implementation of Poseidon Hash and Baby JubJub Eliptic Curve
 
-- **Merkle tree sql library ([go-merkletree-sql](https://github.com/iden3/go-merkletree-sql))**
-    <br />Implementation of Sparse Merkle tree
+- **Merkle Tree SQL Library ([go-merkletree-sql](https://github.com/iden3/go-merkletree-sql))**
+    <br />Implementation of Sparse Merkle Tree
 
-- **Core library ([go-iden3-core](https://github.com/iden3/go-iden3-core))**
-    <br />Identity core primitives
+- **Core Library ([go-iden3-core](https://github.com/iden3/go-iden3-core))**
+    <br />Identity Core Primitives
 
 - **Circuits ([circuits](https://github.com/iden3/circuits))**
-    <br />Identity circuits
+    <br />Identity Circuits
 
-- **Go-circuits ([go-circuits](https://github.com/iden3/go-circuits))**
-    <br />Library for transformation go-core primitives to json inputs for identity circuits
+- **Go Circuits ([go-circuits](https://github.com/iden3/go-circuits))**
+    <br />Library for Transforming Go-core Primitives to JSON Inputs for Identity Circuits
 
-- **Prover server ([prover-server](https://github.com/iden3/prover-server))**
-    <br />Wrapper on snarkjs for ZK proof generation
+- **Prover Server ([prover-server](https://github.com/iden3/prover-server))**
+    <br />Wrapper on SnarkJSfor Zk-proof Generation
 
-- **Authorization library ([go-iden3-auth](https://github.com/iden3/go-iden3-auth))**
-    <br />Library for authentication with zkp verification (edited)
+- **Authorization Library ([go-iden3-auth](https://github.com/iden3/go-iden3-auth))**
+    <br />Library for Authentication with Zk-proof Verification (edited)
