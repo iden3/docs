@@ -244,7 +244,7 @@ An Identity Merkle tree is a sparse binary tree that allows only the addition of
 
 > NOTE: In the initial version of the implementation, there will be no checks to verify that the trees are append-only in the smart contract. This is due to the fact that complex computations are required to generate the zk proofs for multiple claim additions, (a requirement for scalability).
 
-The full circuit can be found here: https://github.com/iden3/circuits/blob/master/circuits/idState.circom
+The full circuit can be found here: https://github.com/iden3/circuits/blob/master/circuits/stateTransition.circom
 
 <!--
 ##### Direct identity ITF_min
@@ -472,7 +472,7 @@ In the proof that shows "that a claim was issued at time at least t", there is a
 
 Where `t1` is any time and `t2` is the recent time.
 
-The full circuit can be found at: https://github.com/iden3/circuits/blob/master/circuits/credential.circom
+The full circuit can be found at: https://github.com/iden3/circuits/tree/master/circuits/lib
 
 <!--
 [//]: # (### Indirect Identities)
