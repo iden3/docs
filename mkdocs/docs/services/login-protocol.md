@@ -187,7 +187,7 @@ decisions made in the design of this protocol. -->
       |                                         |
       +                                         +
 
-Read the login protocol specifications [here](login_spec.md).
+Read the login protocol specifications [here:](https://docs.iden3.io/protocol/zklogin/).
 
 #### Define New NonceDB
 
