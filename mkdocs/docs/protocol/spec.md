@@ -226,7 +226,7 @@ An **identity type** specifies the specifications that an identity follows (such
 	- `checksum`: Addition (with overflow) of all the ID bytes Little Endian 16 bits ( [ `type` | `genesis_state` ] )
 
 
-#### Identity State
+#### Identity State 
 
 The **identity states** are published on the blockchain under the identifier, anchoring the state of the identity with the timestamp when it is published. In this way, the claims of the identity can be proved against the anchored identity state at a certain timestamp. To transition from one state to the other, identities follow the transition functions.
 
