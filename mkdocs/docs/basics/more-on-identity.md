@@ -2,7 +2,7 @@
 
 ### Why Does Identity Matter?
 
-In the [words of Vitalik](https://vitalik.ca/general/2019/04/03/collusion.html):
+In the words of [Vitalik](https://vitalik.ca/general/2019/04/03/collusion.html):
 
 >Mechanisms that do not rely on identity cannot solve the problem of concentrated interests outcompeting dispersed communities; an identity-free mechanism that empowers distributed communities cannot avoid over-empowering centralized plutocrats pretending to be distributed communities.
 
@@ -52,16 +52,9 @@ To quote the words of [Timothy Ruff](https://medium.com/evernym/7-myths-of-self-
 
 Imagine if you could vote every two weeks to express your political sentiments regarding interest rates.
 
-Imagine if you could have a direct say in any decision rather than relying on elected politicians to represent you.
+Imagine if you could have a direct say in any decision rather than relying on elected politicians to represent you. Imagine if those in power were held accountable in real-time rather than once every few years. This is the promise of liquid democracy. Liquid democracy exists somewhere in the sweet spot between direct and representative democracy.
 
-Imagine if those in power were held accountable in real-time rather than once every few years.
-
-This is the promise of liquid democracy.
-Liquid democracy exists somewhere in the sweet spot between direct and representative democracy.
-
-As with direct democracy, everyone has the opportunity to vote on every issue. However, unlike direct democracy, you also have the choice to delegate your vote to someone else.
-
-You can even choose to delegate your votes on different issues to different people.
+As with direct democracy, everyone has the opportunity to vote on every issue. However, unlike direct democracy, you also have the choice to delegate your vote to someone else. You can even choose to delegate your votes on different issues to different people.
 
 For example, on environmental issues, you might choose to delegate your vote to your favourite environmentalist. Whereas on issues concerning government debt and taxation you might choose your father.
 
@@ -69,19 +62,13 @@ This ability to delegate is recursive. It means that if your father, in turn, ch
 
 If you're unhappy with your father's decision, you can take that power away from him/her, and either vote yourself or re-delegate to someone you deem more trustworthy.
 
-Under such a system, those with the most delegations become our representatives. But unlike representative democracy, they are held accountable in real time.
+Under such a system, those with the most delegations become our representatives. But unlike representative democracy, they are held accountable in real-time.
 
->A system like this addresses the uninformed voters' issue that a direct democracy creates by allowing these voters allot their votes to experts. It also addresses the corruption issues of representative democracy because citizens can rescind their vote from someone instantly, forcing delegates to vote in the best interest of their constituents. It is the best of both worlds that truly gives the power of influence to the voters. [Source](https://media.consensys.net/liquid-democracy-and-emerging-governance-models-df8f3ce712af)
+>A system like this addresses the uninformed voters' issue that a direct democracy creates by allowing these voters allot their votes to experts. It also addresses the corruption issues of representative democracy because citizens can rescind their vote from someone instantly, forcing delegates to vote in the best interest of their constituents. It is the best of both worlds that truly gives the power of influence to the voters. ([Source](https://media.consensys.net/liquid-democracy-and-emerging-governance-models-df8f3ce712af))
 
 This sounds almost too good to be true. A fair, transparent, and corruption-free government! Why haven't we implemented this before?
 
-Since there is no central government under this form of democracy, we need to figure out how to allow citizens to vote in a secure, private, and decentralized way. It turns out this is a pretty hard problem to solve.
-
-It has actually been impossible to solve. Until now.
- 
-This is the first time in our history that technology exists to turn this dream into reality. 
-
-Of course, we're talking about public blockchains.
+Since there is no central government under this form of democracy, we need to figure out how to allow citizens to vote in a secure, private, and decentralized way. It turns out this is a pretty hard problem to solve. It has actually been impossible to solve. Until now. This is the first time in our history that technology exists to turn this dream into reality. Of course, we're talking about public blockchains.
 
 Right now, we're in the experimentation phase. There are still some hard challenges that need to be overcome.
 
@@ -93,10 +80,8 @@ Privacy is important because it ensures voters can't be discriminated against fo
 
 But perhaps the hardest challenge is to ensure that one person is not able to vote multiple times (what's known in the jargon as a Sybil attack).
 
-The key to solving the last two challenges is a voting protocol that requires basic verification and reputation for each user whilst protecting their pseudonymous identity.
-
-In other words, a voting protocol with a built-in decentralized identity system.
+The key to solving the last two challenges is a voting protocol that requires basic verification and reputation for each user whilst protecting their pseudonymous identity. In other words, a voting protocol with a built-in decentralized identity system.
 
 Put another way, decentralized identity is the big unlock that's needed to turn liquid democracy into a reality.
 
-P.S. It turns out that solving the privacy problem helps solve the scalability problem too, but we won't get into that here.
+**P.S.** It turns out that solving the privacy problem helps solve the scalability problem too, but we won't get into that here.

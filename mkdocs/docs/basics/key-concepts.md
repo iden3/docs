@@ -4,27 +4,25 @@
 
 At iden3, our goal is to democratize identity. We believe that everyone should be empowered to become their own [certification authority](https://en.wikipedia.org/wiki/Certificate_authority).
 
-What do we mean by identity?
+**What Do We Mean by Identity?**
 
-An identity can be a person, a company, an organization, a [DAO](https://hackernoon.com/what-is-a-dao-c7e84aa1bd69), or a government. Identity can even be a thing: a chair, a room, a bot, and so on.
-
-When we talk about identities, we are referring to "identities as accounts".
+An identity can be a person, a company, an organization, a [DAO](https://hackernoon.com/what-is-a-dao-c7e84aa1bd69), or a government. Identity can even be a thing: a chair, a room, a bot, and so on. When we talk about identities, we are referring to "identities as accounts".
 
 Generally speaking, these accounts are going to be smart contracts. So **you can think of identities as smart contracts**, where the address of the contract is the identifier of that identity.
 
-Key takeaways:
+**Key Takeaways**:
 
-- **Anything** can be an identity
+- **Anything** can be an identity.
 
-- One person can define and have many identities
+- One person can define and have many identities.
 
-- In Ethereum, an identity is an **account** or a smart contract
+- In Ethereum, an identity is an **account** or a smart contract.
 
 ## Claims
 
 An [identity](#identity)  can provide a claim. You can think of a claim as a statement: something an identity is saying.
 
-Most of the time, these statements refer to other identities. In other words **claims usually create relations between identities.**
+Most of the time, these statements refer to other identities. In other words, **claims usually create relations between identities.**
 
 For example, when a university (identity) says that a student (identity) has a degree, this is a statement (claim) about the student. This statement creates a relation between the student and the university.
 
@@ -66,11 +64,11 @@ This is where indirect claims come in handy. Instead of paying gas every time to
 
 The idea is that with relayers, millions of users can create millions of claims on mainnet **without** spending any **gas** (since the relayer is responsible for batching the claims and publishing the transactions).
 
-On top of this, using [zero-knowledge proofs](#zero-knowledge-proofs) we can ensure that the relayer is trustless. In other words, we can make sure that the relayer can't lie about the claims we sent it. The worst a relayer can do is to not publish them (and if this happens, we, as the users, always have the choice to change relayers).
+On top of this, using [zero-knowledge proofs](#zero-knowledge-proofs), we can ensure that the relayer is trustless. In other words, we can make sure that the relayer can't lie about the claims we sent it. The worst a relayer can do is to not publish them (and if this happens, we, as the users, always have the choice to change relayers).
 
 ## Zero-knowledge Proofs
 
-*In cryptography, a zero-knowledge proof or zero-knowledge protocol is a method by which one party (the prover) can prove to another party (the verifier) that they know a value x, without conveying any information apart from the fact that they know the value x.* [Source](https://en.wikipedia.org/wiki/Zero-knowledge_proof). 
+*In cryptography, a zero-knowledge proof or zero-knowledge protocol is a method by which one party (the prover) can prove to another party (the verifier) that they know a value x, without conveying any information apart from the fact that they know the value x.* ([Source](https://en.wikipedia.org/wiki/Zero-knowledge_proof))
 
 In other words, zero-knowledge proofs allow us to prove something specific without revealing any extra information.
 
@@ -98,9 +96,7 @@ A non-reusable proof is a received proof that is not valid to be sent to a third
 
 For example, imagine that you belong to a political party, P. And P has made a private claim that you belong to it.
 
-Now, you want to prove to another identity that you belong to P, but you don't want that this identity can pass on that proof to others. In other words, you want to make sure the proof stays between the two of you.
-
-We can do this using zero-knowledge proofs.
+Now, you want to prove to another identity that you belong to P, but you don't want that this identity can pass on that proof to others. In other words, you want to make sure the proof stays between the two of you.We can do this using zero-knowledge proofs.
 
 How?
 
@@ -124,9 +120,9 @@ But since R clearly knows its private key, R' can't tell whether A is valid or n
 
 <!-- TODO *image coming soon* -->
 
-### zk-snarks
+### ZK-SNARKs
 
-You can think of zk-snarks as an efficient way to produce zero-knowledge proofs. These are the proofs that are short enough to be published on blockchain and that can be read later by a verifier.
+You can think of zk-SNARKs as an efficient way to produce zero-knowledge proofs. These are the proofs that are short enough to be published on blockchain and that can be read later by a verifier.
 
 ## Merkle Trees
 
@@ -134,9 +130,9 @@ A Merkle tree is a [binary tree](https://en.wikipedia.org/wiki/Binary_tree) buil
 
 We care about Merkle trees because we want to build a data structure that:
 
-1. Can store lots of data (**scalability**)
-2. Makes it easy to prove that some data exists (**proof of membership**)
-3. Allows us to check that data hasn't been altered (**tamper resistance**)
+- Can store lots of data (**scalability**)
+- Makes it easy to prove that some data exists (**proof of membership**)
+- Allows us to check that data hasn't been altered (**tamper resistance**)
 
 Merkle trees satisfy the three properties mentioned above.
 
@@ -229,7 +225,7 @@ If the calculated root is equal to the on-chain root, we’ve proven that data0 
 
 In technical terms:
 
-*This means that if there are n nodes in the tree, only about log(n) items need to be shown. And since each step just requires computing the hash of the child block, it takes about log(n) time for us to verify it. And so even if the Merkle tree contains a very large number of blocks, we can still prove membership in a relatively short time. Verification thus runs in time and space that’s logarithmic in the number of nodes in the tree.* [Source](https://d28rh4a8wq0iu5.cloudfront.net/bitcointech/readings/princeton_bitcoin_book.pdf) (pg 35)
+*This means that if there are n nodes in the tree, only about log(n) items need to be shown. And since each step just requires computing the hash of the child block, it takes about log(n) time for us to verify it. And so even if the Merkle tree contains a very large number of blocks, we can still prove membership in a relatively short time. Verification thus runs in time and space that’s logarithmic in the number of nodes in the tree.* ([Source](https://d28rh4a8wq0iu5.cloudfront.net/bitcointech/readings/princeton_bitcoin_book.pdf) (pg 35))
 
 ### Scalability
 
@@ -247,18 +243,23 @@ In addition to inheriting the *tamper-resistance* and *proof of membership* prop
 #### Proof of Non-membership
 
 ![](../imgs/sparse-merkle-tree-0.png)
+
 Now consider that we only have two pieces of data -- `data0` and `data3` -- with indices `0` and `3` respectively.  To construct a sparse Merkle tree, we populate the 0th and 3rd leaves with this data, leaving the 1st and 2nd leaves empty.
 
 ![](../imgs/sparse-merkle-tree-1.png)
+
 Well, almost empty! To be precise, we fill the 1st and 2nd leaves in with a special placeholder value like `null`.
 
 ![](../imgs/sparse-merkle-tree-2.png)
+
 With this placeholder, we can now build up the rest of the tree.
 
 ![](../imgs/sparse-merkle-tree-3.png)
+
 Now, what happens if we want to prove that a piece of (indexed) data -- `data2` -- is not a member of this tree?
 
 ![](../imgs/sparse-merkle-tree-4.png)
+
 Thanks to the way our data is indexed, proving that `data2` is not a member of the tree is equivalent to proving that the value of the leaf at index `2` is `null`!
 
 Put another way, proving non-membership of a `data` block is equivalent to proving membership of `null` (a simple Merkle proof). And as we saw in our previous post, doing this efficiently is a basic property of a Merkle tree.
@@ -271,13 +272,12 @@ One drawback to sparse Merkle trees is that they are really big. This means that
 
 > For example, a sparse Merkle tree usually has 2^256 leaves vs. 2^32 for a normal Merkle tree. This means that naive implementations require 256 operations to read or write (vs 32).
 
-Luckily, these sorts of inefficiencies are largely illusory. Since fairly simple [optimizations exist](https://ethresear.ch/t/optimizing-sparse-merkle-trees/3751) to get around them!
+Luckily, these sorts of inefficiencies are largely illusory. Since fairly simple [optimizations](https://ethresear.ch/t/optimizing-sparse-merkle-trees/3751) exist to get around them!
 
 >Note: while we won't get into the details here, one of the keys to these optimizations is that sparse Merkle trees are mostly sparse. This means many of the subtrees will end up being zero subtrees. Since H(0), H(H(0)), H(H(H(0))), and so on are all constant values, the zero-subtrees can be cached (calculated once, stored, and then omitted from Merkle proofs), greatly reducing the size of computations.
 
 
-
-### Why do we use Merkle Trees at iden3?
+### Why Do We use Merkle Trees at iden3?
 
 At iden3, one of our major goals is scalability. Specifically, we believe that anybody should be able to create as many identities as they want. And that **any identity should be able to generate as many claims as it wants.**
 
@@ -287,9 +287,7 @@ Achieving this goal requires minimizing the amount of data stored on-chain. This
 
 Even if you're a government that is making millions of claims a day, you can just construct a tree (off-chain) with each claim as a separate data block, and simply calculate and store the root on-chain.
 
-In other words, Merkle trees allow prolific claim generators to add/modify **millions of claims** in a single transaction.
-
-This makes it easy to scale the claims.
+In other words, Merkle trees allow prolific claim generators to add/modify **millions of claims** in a single transaction. This makes it easy to scale the claims.
 
 ### Definitions
 
@@ -302,9 +300,9 @@ It must be efficiently computable (for any given input string, we can figure out
 
 For a hash function to be cryptographically secure, it must have three additional properties: 
 
-1. Collision Resistance
-2. Hiding
-3. Puzzle-friendliness
+- Collision Resistance
+- Hiding
+- Puzzle-friendliness
 
 While we would not get into the details here, let's briefly discuss what each of these properties stands for.
 

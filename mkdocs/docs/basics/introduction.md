@@ -1,6 +1,6 @@
 # Introduction
 
->Identity is a uniquely human concept. It is that ineffable “I” of self-consciousness, something that is understood worldwide by every person living in every culture. As René Descartes said, Cogito ergo sum — I think, therefore I am. [Source](http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html)
+>Identity is a uniquely human concept. It is that ineffable “I” of self-consciousness, something that is understood worldwide by every person living in every culture. As René Descartes said, Cogito ergo sum — I think, therefore I am. ([Source](http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html))
 
  What constitutes your identity? What makes you who you are? What is it about you that distinguishes you from others? Philosophers have argued over these questions since the beginning of civilization. Suffice to say there are no simple answers. Identity is a difficult concept to pin down.
 
@@ -12,7 +12,7 @@ Nevertheless, we don't need a precise definition to see that there are problems 
 
 How can we improve on this?
 
-It's clear that we're at an inflection point with respect to how the digital world interacts with the physical world.
+It is clear that we are at an inflection point for how the digital world interacts with the physical world.
 
 **The legacy systems of the physical world have not kept up with the rising importance of the digital world.** As both worlds continue to merge, this scenario will need to change.
 
