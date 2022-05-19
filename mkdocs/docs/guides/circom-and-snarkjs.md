@@ -1,18 +1,16 @@
-# How to use circom and snarkjs
+# How to Use Circom and SnarkJS?
 
-Hello and welcome!
+Hello and welcome!!
 
-In this guide we'll guide you through the creation of your first [zero-knowledge snark](../../basics/key-concepts#zk-snarks) circuit using [circom](https://docs.circom.io) and [snarkjs](https://github.com/iden3/snarkjs).
+In this guide, we'll explain how to create your first [zero-knowledge Snark](https://github.com/iden3/docs/blob/master/mkdocs/docs/basics/key-concepts.md#zk-snarks) circuit using [Circom](https://docs.circom.io) and [SnarkJS](https://github.com/iden3/snarkjs).
 
-[Circom](https://circom.iden3.io) is a library that allows you to build circuits to be used in zero knowledge proofs. 
+[Circom](https://circom.iden3.io) is a library that allows you to build circuits to be used in zero-knowledge proofs. 
 
-While [snarkjs](https://github.com/iden3/snarkjs) is an independent implementation of the zk-snarks protocol -- fully written in JavaScript.
+While [SnarkJS](https://github.com/iden3/snarkjs) is an independent implementation of the zk-SNARK protocol (fully written in JavaScript), Circom is designed to work with SnarkJS. In other words, any circuit you build in Circom can be used in SnarkJS.
 
-Circom is designed to work with snarkjs. In other words, any circuit you build in circom can be used in snarkjs.
+We'll start by covering various techniques to write circuits; then we shall move on to creating and verifying a proof off-chain, and finally, finish it off by repeating this process on-chain (on Ethereum).
 
-We'll start by covering the various techniques to write circuits, then move on to creating and verifying a proof off-chain, and finish off by doing the same thing on-chain on Ethereum.
+If you have zero knowledge about zero-knowledge 😋 or are unsure about what a zk-SNARK is, we recommend you read [this page](../../basics/key-concepts) first.
 
-If you have zero knowledge about zero-knowledge 😋 or are unsure about what a zk-snark is, we recommend you read [this page](../../basics/key-concepts) first.
-
-To get started follow along from [here](https://docs.circom.io/getting-started/installation/).
+To get started, click [here](https://docs.circom.io/getting-started/installation/).
 
