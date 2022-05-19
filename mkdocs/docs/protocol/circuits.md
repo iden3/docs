@@ -1,9 +1,8 @@
 # Circuits
 
-## Template docs example
+## Template Docs Example
 
-This is for understanding how the graphs in this docs describe templates and circuits.
-Just compare .circom code with its visual graph below.
+Let's understand how circuits and templates can be described by their graphs. Just compare the following .circom code with its visual graph displayed underneath.
 
 The code:
 ```
@@ -42,12 +41,12 @@ graph TB
 ```
 
 
-## Basic templates
+## Basic Templates
 
-These are templates which are not used independently to create circuits but rather as building blocks for other templates.
+Basic templates are not used independently to create circuits but are used as the building blocks for other templates.
 
 ### checkClaimExists
-The circuit checks that the claim exists in the sparse merkle tree. By "exists" we mean that a value Hv (hash of all values slots) is located by path Hi (hash of all index slots) in the tree.
+This circuit checks if a claim exists in the sparse Merkle tree. By "exists", we mean that a value Hv (hash of all values slots) is located by path Hi (hash of all index slots) in the tree.
 
 ```mermaid
 graph TB
@@ -71,7 +70,7 @@ graph TB
 
 ### checkClaimNonRev
 
-The circuit checks that the claim does not exist in the sparse merkle tree. That means that the tree leaf is empty by a path, which is defined by the claim nonce.
+The circuit checks that the claim does not exist in the sparse Merkle tree. That means that the tree leaf is empty by a path, which is defined by the claim nonce.
 
 ```mermaid
 graph TB
@@ -95,7 +94,7 @@ graph TB
 
 ### checkChallengeSignature
 
-The circuit checks that the challenge signature is correct. The public key for verification is extracted from the claim.
+This circuit checks if the challenge signature is correct. The public key for verification is extracted from the claim.
 
 ```mermaid
 graph TB
@@ -116,7 +115,7 @@ graph TB
 
 ### verifyIdenStateMatchesRoot
 
-The circuit calculate identity state from three merkle tree roots and checks if it is equal to expected state.
+The circuit calculates the identity state from the three Merkle tree roots and checks if it is equal to the expected state.
 
 ```mermaid
 graph TB
@@ -133,45 +132,44 @@ graph TB
     class calcRoot,equal circuitStyle
 ```
 
-### query
+### Query
 
-The circuit check that an expression with in, operator and value is true.
+This circuit checks that an expression within an operator and its value are true.
 
 For example in="1", operator="4", value=["5","2","3"] is true because "4" is "not in" operator and "1" is not in the ["5","2","3"] array.
 
-See all the operators in the circuit comments.
+See all the operators in the circuit comments. The circuit graph is not represented here due to complexity.
 
-The circuit graph is not represented due to complexity.
+## Functional Templates
 
-## Functional templates
-
-These are the templates which Iden3 system mostly uses directly to generate and verify proofs. A functional template may use basic of other functional templates as building blocks.
+These are the templates that the Iden3 system mostly uses to generate and verify proofs directly. A functional template may use other functional templates as its building blocks.
 
 ### idOwnershipBySignature
-The circuits check ownership of specific identity as follows:
+This circuit checks the ownership of a specific identity in the following way:
 
-- The claim with public key should exist in claims tree
-- The claim with public key should not be revoked
-- The signature of a challenge should be valid
-- The state should equal to expected from blockchain
+1. The claim with the public key should exist in the claims tree.
+2. The claim with the public key should not be revoked.
+3. The signature of a challenge should be valid.
+4. The state should be equal to "expected" from the blockchain.
 
-The above enable verifier to check that some challenge is signed by identity which state is timestamped in blockchain and includes non revoked claim with relevant public key.
+The above criteria enable a verifier to check that the challenge is signed by an identity, which state is timestamped on the blockchain and if it includes the non-revoked claim with the relevant public key.
 
 ### CredentialAtomicQueryMTP
-The circuits check that an issuer have issued claim for identity and validates ownership of that identity as follows:
+This circuit checks that an issuer has issued a claim for identity and validates the ownership of that identity in the following manner:
 
-- Check identity ownership by idOwnershipBySignature template
-- Verify claim subject, schema and expiration time
-- Check issuer claim exists in issuer claims tree
-- Check issuer claim is not revoked by an issuer
-- Check the issuer claim satisfies a query
+1. Checks the identity ownership by idOwnershipBySignature template
+2. Verifies the claim subject, the schema and the expiration time.
+3. Checks if the issuer claim exists in the issuer claims tree.
+4. Checks if the issuer claim is not revoked by an issuer.
+5. Checks if the issuer claim satisfies a query.
 
 ### CredentialAtomicQuerySig
-The circuits check that an issuer have issued claim for identity and validates ownership of that identity as follows:
+This circuit checks that an issuer has issued a claim for identity and validates ownership of that identity in the following manner:
 
-- Check identity ownership by idOwnershipBySignature template
-- Verify claim subject, schema and expiration time
-- Check issuer claim exists in issuer claims tree
-- Verify claim signature by issuer
-- Verify issuer state matches that one from blockchain as public input
-- Check the issuer claim satisfies a query
+1. Checks the identity ownership by idOwnershipBySignature template.
+2. Verifies the claim subject, the schema and the expiration time
+3. Checks if the issuer claim exists in the issuer claims tree.
+4. Verifies the claim signature by the issuer.
+5. Verifies if the issuer state matches with the one from the blockchain as the public input.
+6. Checks if the issuer claim satisfies a query.
+ 
