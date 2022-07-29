@@ -42,6 +42,7 @@ nav:
       - Claim:
           - Structure: "protocol/claims-structure.md"
           - AuthBJJCredential: "protocol/bjjkey.md"
+          - Claim Schema : "protocol/claim-schema.md"
   - Services and protocols:
 #    - Libraries: "services/libraries.md"
     - Login protocol: "protocol/zklogin.md"
