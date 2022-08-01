@@ -29,6 +29,14 @@ jobs:
       # Installs material theme
       - name: install material theme
         run: pip install mkdocs-material
+        
+      # Installs material theme
+      - name: install mkdocs markdown graphviz
+        run: pip3 install mkdocs-markdown-graphviz
+        
+      # Installs material theme
+      - name: install mkdocs mermaid2 plugin
+        run: pip install mkdocs-mermaid2-plugin
 
       # Builds docs
       - name: build
