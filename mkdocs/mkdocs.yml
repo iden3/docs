@@ -14,7 +14,7 @@ repo_url: https://github.com/iden3/docs
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
-  - mkdocs_markdown_graphviz
+  - mkdocs_graphviz
   - def_list
   - attr_list
   - md_in_html
