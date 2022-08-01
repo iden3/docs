@@ -32,7 +32,7 @@ jobs:
         
       # Installs material theme
       - name: install mkdocs markdown graphviz
-        run: pip3 install mkdocs-markdown-graphviz
+        run: pip install mkdocs-graphviz
         
       # Installs material theme
       - name: install mkdocs mermaid2 plugin
