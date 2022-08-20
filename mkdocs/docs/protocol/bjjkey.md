@@ -7,7 +7,7 @@ This claim must be presented in most circuits for identity verification.
 
 A Baby Jubjub key uses a specific elliptic curve defined over the large prime subgroup of the BN128 elliptic curve. To know more about the bjj key, you can [visit this page](https://iden3-docs.readthedocs.io/en/latest/_downloads/33717d75ab84e11313cc0d8a090b636f/Baby-Jubjub.pdf).
 
-X and Y values of the bjj public key are part of the Index data slots [I_3] and [I_4].
+X and Y values of the bjj public key are part of the Index data slots [I_2] and [I_3].
 
 You can find below an example of a claim entry:
 
