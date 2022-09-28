@@ -72,7 +72,8 @@ nav:
     - Main Circuits: "protocol/main-circuits.md"
     - Template Circuits: "protocol/template-circuits.md"
   - Circom / snarkjs: "circom-snarkjs/index.md"
-  - Tutorial: 
+  - Contracts: 
+    - State Contract: "contracts/overview.md"
   - Publications: "publications/publications.md"
 
 # If you declare plugins, you need to declare all of them, 
