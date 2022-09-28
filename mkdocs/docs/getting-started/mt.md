@@ -12,60 +12,60 @@ In addition to inheriting the tamper-resistance and proof-of-membership properti
 
 A Sparse Merkle Tree is the core data structure used in Iden3 protocol to represent an identity. In particular, the leaves of a Sparse Merkle Tree are the claims issued by an identity. 
 
-1. **Update the required dependencies.**
+1.**Update the required dependencies.**
 
-    ```bash
-    go get github.com/iden3/go-merkletree-sql 
-    ```
+```bash
+go get github.com/iden3/go-merkletree-sql 
+```
 
-2. **Design a Sparse Merkle Tree.**
+2.**Design a Sparse Merkle Tree.**
 
 
-    ```go
-    package main
+```go
+package main
 
-    import (
-        "context"
-        "fmt"
-        "math/big"
+import (
+    "context"
+    "fmt"
+    "math/big"
 
-        merkletree "github.com/iden3/go-merkletree-sql"
-        "github.com/iden3/go-merkletree-sql/db/memory"
-    )
+    merkletree "github.com/iden3/go-merkletree-sql"
+    "github.com/iden3/go-merkletree-sql/db/memory"
+)
 
-    // Sparse MT
-    func main() {
+// Sparse MT
+func main() {
 
-        ctx := context.Background()
+    ctx := context.Background()
 
-        // Tree storage
-        store := memory.NewMemoryStorage()
+    // Tree storage
+    store := memory.NewMemoryStorage()
 
-        // Generate a new MerkleTree with 32 levels
-        mt, _ := merkletree.NewMerkleTree(ctx, store, 32)
+    // Generate a new MerkleTree with 32 levels
+    mt, _ := merkletree.NewMerkleTree(ctx, store, 32)
 
-        // Add a leaf to the tree with index 1 and value 10
-        index1 := big.NewInt(1)
-        value1 := big.NewInt(10)
-        mt.Add(ctx, index1, value1)
+    // Add a leaf to the tree with index 1 and value 10
+    index1 := big.NewInt(1)
+    value1 := big.NewInt(10)
+    mt.Add(ctx, index1, value1)
 
-        // Add another leaf to the tree
-        index2 := big.NewInt(2)
-        value2 := big.NewInt(15)
-        mt.Add(ctx, index2, value2)
+    // Add another leaf to the tree
+    index2 := big.NewInt(2)
+    value2 := big.NewInt(15)
+    mt.Add(ctx, index2, value2)
 
-        // Proof of membership of a leaf with index 1
-        proofExist, value, _ := mt.GenerateProof(ctx, index1, mt.Root())
+    // Proof of membership of a leaf with index 1
+    proofExist, value, _ := mt.GenerateProof(ctx, index1, mt.Root())
 
-        fmt.Println("Proof of membership:", proofExist.Existence)
-        fmt.Println("Value corresponding to the queried index:", value)
+    fmt.Println("Proof of membership:", proofExist.Existence)
+    fmt.Println("Value corresponding to the queried index:", value)
 
-        // Proof of non-membership of a leaf with index 4
-        proofNotExist, _, _ := mt.GenerateProof(ctx, big.NewInt(4), mt.Root())
+    // Proof of non-membership of a leaf with index 4
+    proofNotExist, _, _ := mt.GenerateProof(ctx, big.NewInt(4), mt.Root())
 
-        fmt.Println("Proof of membership:", proofNotExist.Existence)
-    }
-    ```
+    fmt.Println("Proof of membership:", proofNotExist.Existence)
+}
+```
 
 A data block inside the tree is represented by a `index` and a `value`. The index represents the position in the tree and it must be unique. The value represents the associated value stored in the tree.
 

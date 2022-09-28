@@ -4,41 +4,41 @@ The most important building block of an identity is the Key Authorization Claim.
 
 An [Auth Claim](https://docs.iden3.io/protocol/bjjkey/) **must** be included as a leaf inside the  Identity Tree. All the actions performed by an Idenitity (such as claim issuance or revocation) require users to prove via a digital signature that they own the private key associated with the public key stored in the `AuthClaim`.
 
-1. **Define the claim schema.**
+1.**Define the claim schema.**
 
-    The [auth schema](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/auth.json-ld) is pre-defined and should always be the same when creating an `AuthClaim`. The schema hash is: *`ca938857241db9451ea329256b9c06e5`*. According to the this schema, the X and Y coordinate of the Baby Jubjub public key must be stored, respectively, in the first and second index data slot.
+The [auth schema](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/auth.json-ld) is pre-defined and should always be the same when creating an `AuthClaim`. The schema hash is: *`ca938857241db9451ea329256b9c06e5`*. According to the this schema, the X and Y coordinate of the Baby Jubjub public key must be stored, respectively, in the first and second index data slot.
 
-2. **Generate an AuthClaim.** 
+2.**Generate an AuthClaim.** 
 
-    ```go
-    package main
+```go
+package main
 
-    import (
-        "encoding/json"
-        "fmt"
+import (
+    "encoding/json"
+    "fmt"
 
-        "github.com/iden3/go-iden3-core"
-        "github.com/iden3/go-iden3-crypto/babyjub"
-    )
+    "github.com/iden3/go-iden3-core"
+    "github.com/iden3/go-iden3-crypto/babyjub"
+)
 
-    // Create auth claim
-    func main() {
+// Create auth claim
+func main() {
 
-        authSchemaHash, _ := core.NewSchemaHashFromHex("ca938857241db9451ea329256b9c06e5")
+    authSchemaHash, _ := core.NewSchemaHashFromHex("ca938857241db9451ea329256b9c06e5")
 
-        // Add revocation nonce. Used to invalidate the claim. This may be a random number in the real implementation.
-        revNonce := uint64(1)
+    // Add revocation nonce. Used to invalidate the claim. This may be a random number in the real implementation.
+    revNonce := uint64(1)
 
-        // Create auth Claim 
-        authClaim, _ := core.NewClaim(authSchemaHash,
-        core.WithIndexDataInts(babyJubjubPubKey.X, babyJubjubPubKey.Y),
-        core.WithRevocationNonce(revNonce))
+    // Create auth Claim 
+    authClaim, _ := core.NewClaim(authSchemaHash,
+    core.WithIndexDataInts(babyJubjubPubKey.X, babyJubjubPubKey.Y),
+    core.WithRevocationNonce(revNonce))
 
-        authClaimToMarshal, _ := json.Marshal(authClaim)
+    authClaimToMarshal, _ := json.Marshal(authClaim)
 
-        fmt.Println(string(authClaimToMarshal))
-    }
-    ```
+    fmt.Println(string(authClaimToMarshal))
+}
+```
 
 Here is what the claim would look like: 
 

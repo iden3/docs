@@ -2,7 +2,7 @@
 
 When an identity adds a new claim to her Claims Tree, the root of the tree and, consequently, the identity state change. The process of moving from one state to another is defined [**State Transition**](https://docs.iden3.io/protocol/spec/#identity-state-transition-function).
 
-The State Transtion is executed inside a circuit. The `stateTransition` [circuit](../../circuits/main-circuits.md#statetransition) encodes a set of rules that must be respected to complete the state transition such as:
+The State Transtion is executed inside a circuit. The `stateTransition` [circuit](../../protocol/main-circuits.md#statetransition) encodes a set of rules that must be respected to complete the state transition such as:
 
 - The prover is the owner of the identity (checked using a digital signature by the private key corresponding the `authClaim`)
 - The `authClaim` of the prover hasn't been revoked.

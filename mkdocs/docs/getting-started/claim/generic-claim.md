@@ -4,60 +4,60 @@ A [Claim](https://docs.iden3.io/protocol/spec/#claims) is a statement made by on
 
 Claims can be viewed as Soul Bound Tokens (SBTs) on steroids. Similar to SBTs, the ownership is cryptographically guaranteed allowing control and reusability across platforms. Differently to SBTs, claims live off-chain ensuring users privacy over their Personal Identifiable Information.
 
-1. **Update the required dependencies.**
+1.**Update the required dependencies.**
 
-	```bash
-	go get github.com/iden3/go-iden3-core
-	```
+```bash
+go get github.com/iden3/go-iden3-core
+```
 
-2. **Define the claim schema**.
+2.**Define the claim schema**.
 
-	A [claim schema](./claim-schema.md) defines how a set of data must be stored inside a claim. In this example, we will use a schema called [`KYCAgeCredential`](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/kyc-v2.json-ld). According to this schema the birthday is stored in the first index slot of the [claim data structure](https://docs.iden3.io/protocol/claims-structure), while the documentType is stored in the second data slot.
+A [claim schema](./claim-schema.md) defines how a set of data must be stored inside a claim. In this example, we will use a schema called [`KYCAgeCredential`](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/kyc-v2.json-ld). According to this schema the birthday is stored in the first index slot of the [claim data structure](https://docs.iden3.io/protocol/claims-structure), while the documentType is stored in the second data slot.
 
-    The hash of the schema is generated from the content of the schema document following the [Claim Schema Generation Rules](./claim-schema.md). For our example, the hash of the schema is: *`2e2d1c11ad3e500de68d7ce16a0a559e`*
+The hash of the schema is generated from the content of the schema document following the [Claim Schema Generation Rules](./claim-schema.md). For our example, the hash of the schema is: *`2e2d1c11ad3e500de68d7ce16a0a559e`*
 
-3. **Create a generic claim.**  
+3.**Create a generic claim.**  
 
-	```go
-	package main
+```go
+package main
 
-	import (
-		"encoding/json"
-		"fmt"
-		"math/big"
-		"time"
+import (
+	"encoding/json"
+	"fmt"
+	"math/big"
+	"time"
 
-		core "github.com/iden3/go-iden3-core"
-	)
+	core "github.com/iden3/go-iden3-core"
+)
 
-	// create basic claim
-	func main() {
+// create basic claim
+func main() {
 
-		// set claim expriation date to 2361-03-22T00:44:48+05:30
-		t := time.Date(2361, 3, 22, 0, 44, 48, 0, time.UTC)
-		
-		// set schema
-		ageSchema, _ := core.NewSchemaHashFromHex ("2e2d1c11ad3e500de68d7ce16a0a559e")  
+	// set claim expriation date to 2361-03-22T00:44:48+05:30
+	t := time.Date(2361, 3, 22, 0, 44, 48, 0, time.UTC)
+	
+	// set schema
+	ageSchema, _ := core.NewSchemaHashFromHex ("2e2d1c11ad3e500de68d7ce16a0a559e")  
 
-		// define data slots
-		birthday := big.NewInt(19960424)
-		documentType := big.NewInt(1)	
-		
-		// set revocation nonce 
-		revocationNonce := uint64(1909830690)
+	// define data slots
+	birthday := big.NewInt(19960424)
+	documentType := big.NewInt(1)	
+	
+	// set revocation nonce 
+	revocationNonce := uint64(1909830690)
 
-		// set ID of the claim subject
-		id, _ := core.IDFromString("113TCVw5KMeMp99Qdvub9Mssfz7krL9jWNvbdB7Fd2")
+	// set ID of the claim subject
+	id, _ := core.IDFromString("113TCVw5KMeMp99Qdvub9Mssfz7krL9jWNvbdB7Fd2")
 
-		// create claim 
-		claim, _ := core.NewClaim(ageSchema, core.WithExpirationDate(t), core.WithRevocationNonce(revocationNonce), core.WithIndexID(id), core.WithIndexDataInts(birthday, documentType))
+	// create claim 
+	claim, _ := core.NewClaim(ageSchema, core.WithExpirationDate(t), core.WithRevocationNonce(revocationNonce), core.WithIndexID(id), core.WithIndexDataInts(birthday, documentType))
 
-		// transform claim from bytes array to json 
-		claimToMarshal, _ := json.Marshal(claim)
+	// transform claim from bytes array to json 
+	claimToMarshal, _ := json.Marshal(claim)
 
-		fmt.Println(string(claimToMarshal))
-	}
-	```
+	fmt.Println(string(claimToMarshal))
+}
+```
 
 Here is what the claim would look like:
 ```

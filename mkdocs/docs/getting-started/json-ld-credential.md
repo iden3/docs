@@ -2,7 +2,7 @@
 
 ### JSON-LD Credential and Claim
 
-A [Claim](./generic-claim.md) is the core data structure used by Iden3 to represent information. A claim by itself doesn't contain enough meaningful information to be read, understood and consumed (e.g. by the wallet). For example it doesn't tell anything about the meaning of values stored inside the data slots. 
+A [Claim](../protocol/claims-structure.md) is the core data structure used by Iden3 to represent information. A claim by itself doesn't contain enough meaningful information to be read, understood and consumed (e.g. by the wallet). For example it doesn't tell anything about the meaning of values stored inside the data slots. 
 
 The JSON-LD credential is able to pack the information contained in a claim in a more human-readable way. Furthermore, a JSON-LD credential does not only contain the claim itself but other proofs needed for the subject of the claim needs to consume the claim with other Verifiers.
 
@@ -115,7 +115,7 @@ The second part ofthe JSON-LD Credential contains a cryptographic proof that the
 
 > In this case the claim was issued by signature, in the case of claim of Merkle Tree Type the proof array would also contain a second value, namely the `Iden3SparseMerkleProof` of inclusion of the issued claim inside the issuer's Claims Tree 
 
-The subject of the claim will store the JSON-LD format credential inside their wallet. Starting from the details contained inside the Credential he/she will be able to generate zk proofs and present it to Verifiers in the form of [JWZ](../verifier/verification-library/jwz.md).
+The subject of the claim will store the JSON-LD format credential inside their wallet. Starting from the details contained inside the Credential he/she will be able to generate zk proofs and present it to Verifiers.
 
 - [] Why we need that JSON-LD Credential?
 - [] How am I able to get from the credential to core-claim? Is it gonna match? Is it also able to parse revocation nonce etcetera? 

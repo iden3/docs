@@ -2,40 +2,41 @@
 
 In Iden3 Protocol the public and private key pair is used to manage an identity and to authenticate in the name of an identity. In particular, Baby Jubjub is the elliptic curve used in Iden3. [This curve](https://github.com/iden3/iden3-docs/blob/master/source/docs/Baby-Jubjub.pdf) is designed to work efficiently with zkSNARKs.
 
-1. **Initiate a Go Module**
+1.**Initiate a Go Module**
 
-    ```bash
-    go mod init example/iden3-tutorial
-    ```
+```bash
+go mod init example/iden3-tutorial
+```
 
-2. **Update the required dependencies.**
+2.**Update the required dependencies.**
 
-    ```bash
-    go get github.com/iden3/go-iden3-crypto/babyjub
-    ```
+```bash
+go get github.com/iden3/go-iden3-crypto/babyjub
+```
     
-3. **Generate a baby jubjub public key.**
-    ``` go
-    package main
+3.**Generate a baby jubjub public key.**
 
-    import (
-        "fmt"
-        "github.com/iden3/go-iden3-crypto/babyjub"
-    )
+``` go
+package main
 
-    // BabyJubJub key
-    func main() {
+import (
+    "fmt"
+    "github.com/iden3/go-iden3-crypto/babyjub"
+)
 
-        // generate babyJubjub private key randomly
-        babyJubjubPrivKey := babyjub.NewRandPrivKey()
+// BabyJubJub key
+func main() {
 
-        // generate public key from private key
-        babyJubjubPubKey := babyJubjubPrivKey.Public()
+    // generate babyJubjub private key randomly
+    babyJubjubPrivKey := babyjub.NewRandPrivKey()
 
-        // print public key
-	    fmt.Println(babyJubjubPubKey)
-    }
-    ```
+    // generate public key from private key
+    babyJubjubPubKey := babyJubjubPrivKey.Public()
+
+    // print public key
+    fmt.Println(babyJubjubPubKey)
+}
+```
 
 Here is an example of a public key generated using Baby Jubjub:
 

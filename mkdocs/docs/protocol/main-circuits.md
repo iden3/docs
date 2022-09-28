@@ -67,8 +67,6 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQueryMTP.circom)
 
-> coming soon!
-
 This circuit checks that an issuer has issued a claim for identity and validates the ownership of that identity in the following manner:
 
 1. Checks the identity ownership by idOwnershipBySignature template
