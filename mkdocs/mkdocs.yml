@@ -43,6 +43,27 @@ nav:
           - Structure: "protocol/claims-structure.md"
           - AuthBJJCredential: "protocol/bjjkey.md"
           - Claim Schema : "protocol/claim-schema.md"
+  - Core Tutorial:  
+    - Introduction: "getting-started/getting-started.md"
+    - Core Components:
+      - Baby Jubjub Keypair: "getting-started/babyjubjub.md"
+      - Sparse Merkle Tree: "getting-started/mt.md"
+      - Claim: 
+        - Generic Claim: "getting-started/claim/generic-claim.md"
+        - Auth Claim: "getting-started/claim/auth-claim.md"
+        - Claim Schema: "getting-started/claim/claim-schema.md"
+      - Identity: 
+        - Identity Structure: "getting-started/identity/identity-structure.md"
+        - Identity State: "getting-started/identity/identity-state.md"
+        - Identifier: "getting-started/identity/identifier.md"
+    - Issue Claim: 
+      - Overview: "getting-started/issue-claim-overview.md"
+      - via Signature: "getting-started/signature-claim/signature.md"
+      - via Merkle Tree: 
+        - Intro to State Transition: "getting-started/state-transition/state-transition.md"
+        - Add Claim to the Claims Tree: "getting-started/state-transition/new-identity-state.md"
+        - Generate Proof for State Transition: "getting-started/state-transition/state-transition-proof.md"
+        - Verify the Proof On-Chain: "getting-started/state-transition/on-chain-state-transition.md"
   - Services and protocols:
 #    - Libraries: "services/libraries.md"
     - Login protocol: "protocol/zklogin.md"
@@ -51,9 +72,7 @@ nav:
     - Main Circuits: "protocol/main-circuits.md"
     - Template Circuits: "protocol/template-circuits.md"
   - Circom / snarkjs: "circom-snarkjs/index.md"
-#  - Guides:
-#    - Circom and snarkjs: "guides/circom-and-snarkjs.md"
-#    - Centralized login: "guides/centralized-login.md"
+  - Tutorial: 
   - Publications: "publications/publications.md"
 
 # If you declare plugins, you need to declare all of them, 
