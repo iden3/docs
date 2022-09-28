@@ -47,7 +47,9 @@ nav:
 #    - Libraries: "services/libraries.md"
     - Login protocol: "protocol/zklogin.md"
     - Proof Query language: "protocol/querylanguage.md"
-  - Circuits: "protocol/circuits.md"
+  - Circuits:
+    - Main Circuits: "protocol/main-circuits.md"
+    - Template Circuits: "protocol/template-circuits.md"
   - Circom / snarkjs: "circom-snarkjs/index.md"
 #  - Guides:
 #    - Circom and snarkjs: "guides/circom-and-snarkjs.md"
