@@ -1,10 +1,10 @@
 ### State Contract
 
-[**State.sol - Github**](https://github.com/iden3/contracts/blob/master/contracts/State.sol)
+[**State.sol - Github**](https://github.com/iden3/contracts/blob/master/contracts/state/State.sol)
 
-The state contract stores the state of each identity operating within Polygon ID. Each identity has an [identifier](../getting-started/identity/identifier.md) and an [identity state](../getting-started/identity/identity-state.md) associated to it. Each identifier and the corresponding identity state are stored inside the [`identities`](https://github.com/iden3/contracts/blob/master/contracts/State.sol#L54) mapping. 
+The state contract stores the state of each identity operating within Polygon ID. Each identity has an [identifier](../getting-started/identity/identifier.md) and an [identity state](../getting-started/identity/identity-state.md) associated to it. Each identifier and the corresponding identity state are stored inside the [`identities`](https://github.com/iden3/contracts/blob/master/contracts/state/State.sol#L54) mapping. 
 
-An identity gets updated by executing the [state transition function](../getting-started/state-transition/on-chain-state-transition.md). The State contract verifier the proof on-chain via its [`transitState`](https://github.com/iden3/contracts/blob/master/contracts/State.sol#L87) function.
+An identity gets updated by executing the [state transition function](../getting-started/state-transition/on-chain-state-transition.md). The State contract verifier the proof on-chain via its [`transitState`](https://github.com/iden3/contracts/blob/master/contracts/state/State.sol#L87) function.
 
 The State contract provides a timestamp of the changes that occur inside an identity state. No personal information (such as claims) is stored on-chain nor it is inferrable from the information stored on-chain.
 
