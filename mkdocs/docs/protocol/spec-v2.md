@@ -2,6 +2,8 @@
 
 The new version of the Protocol contains new features such as Identity Profiles and Global Identities State Tree (GIST). These features are designed to add a further level of identity privacy: users are now able to hide their [Identifier](../getting-started/identity/identifier.md) when interacting with others. 
 
+> Call ID as genesis ID to separate it from the Profile ID!
+
 ## Identity Profiles 
 
 In the introduction, it was mentioned that these new features allow users to hide their Identifier during interactions. Technically, the global unique Identifier `ID` (deterministically [calculated](https://docs.iden3.io/protocol/spec/#genesis-id) from the Genesis State) is replaced by a new identifier, namely the `Profile ID`. 
@@ -12,7 +14,7 @@ A Profile ID is generated starting from the `ID` and hashing it with a (random) 
 
 [ `IDtype` (2 bytes) | `profile_state` (27 bytes) | `checksum` (2 bytes) ]
 
-- `IDtype` :  genesis ID type
+- `IDtype` :  same type as the one encoded in `ID`
 - `profile_state` : First 27 bytes from the poseidonHash(`ID`, `profile_nonce`), where `profile_nonce` is any random number
 - `checksum` Addition (with overflow) of all the ID bytes Little Endian 16 bits ([ `typeID`| `profile_state`])
 
@@ -41,9 +43,15 @@ Identity Profiles do not represent any additional attack vector for the security
 
 ## GIST
 
-GIST, namely Global Identities State Tree, is a [Sparse Merkle Tree](../getting-started/mt.md) that contains the state of all the identities that use the protocol. In particular, each leaf is indexed by the hash of its `ID` (key of the leaf) and contains the most recent state of that Identity (value of the leaf). 
+GIST, namely Global Identities State Tree, is a [Sparse Merkle Tree](../getting-started/mt.md) that contains the state of all the identities that use the protocol. In particular, each leaf is indexed by the hash of its `ID` (key of the leaf) and contains the most recent state of that Identity (value of the leaf).
 
-The root of the GIST is stored inside the [State Contract](../contracts/state.md). Everytime a user executes a state transition function the new state will be added to the GIST and the root of the GIST will be updated. 
+> Underline that ID is the actual unique ID!
+
+The root of the GIST is stored inside the [State Contract](../contracts/state.md). Every time a user executes a [State Transition function](../getting-started/state-transition/state-transition.md), the new state of an identity will be [added to the GIST stored on chain](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol#L190)
+
+```solidity
+_gistData.add(PoseidonUnit1L.poseidon([id]), newState);
+```
 
 This design allows users to prove ownership of an Identity without revealing which identity they own! 
 
@@ -52,6 +60,13 @@ This design allows users to prove ownership of an Identity without revealing whi
 <div align="center"><span style="font-size: 17px;"></div>
 </div>
 
+> The Global Identities State Tree doesn't replace the V1 Identity State Tree! The output of the State Transition function is *only* to update the Identity State Tree. The update of the GIST is the only extra step executed inside the contract after the State Transition is executed
+
+
 ## Auth V2
 
-> The Global Identities State Tree doesn't replace the V1 Identity State Tree. 
+New authorization circuit based on profiles! It allows you to hide your actual Identifier and show a different one! Profile ID 
+
+Based on the GIST you can prove that your latest state is something! While we can hide our identifier and our state when proving it. By mixing it with profiles, we can hide our actual identifiers and only display our profile! 
+
+> The Global Identities State Tree doesn't replace the V1 Identity State Tree! 
