@@ -95,3 +95,41 @@ At the mkdocs directory execute:
 ```
 mkdocs serve
 ```
+auth 
+
+    ** signal input genesisID;
+    // random number, which should be stored by user
+    // if there is a need to generate the same userID (ProfileID) output for different proofs
+    signal input profileNonce;
+
+    // user state
+    ** signal input state;
+    ** signal input claimsTreeRoot;
+    ** signal input revTreeRoot;
+    ** signal input rootsTreeRoot;
+
+    // Auth claim
+    ** signal input authClaim[8];
+
+    // auth claim. merkle tree proof of inclusion to claim tree
+    ** signal input authClaimIncMtp[IdOwnershipLevels];
+
+    // auth claim - rev nonce. merkle tree proof of non-inclusion to rev tree
+    ** signal input authClaimNonRevMtp[IdOwnershipLevels];
+    ** signal input authClaimNonRevMtpNoAux;
+    ** signal input authClaimNonRevMtpAuxHi;
+    ** signal input authClaimNonRevMtpAuxHv;
+
+    // challenge signature
+    ** signal input challenge;
+    ** signal input challengeSignatureR8x;
+    ** signal input challengeSignatureR8y;
+    ** signal input challengeSignatureS;
+
+    // global identity state tree on chain
+    signal input gistRoot;
+    // proof of inclusion or exclusion of the user in the global state
+    signal input gistMtp[onChainLevels];
+    signal input gistMtpAuxHi;
+    signal input gistMtpAuxHv;
+    signal input gistMtpNoAux;
