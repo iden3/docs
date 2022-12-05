@@ -133,7 +133,9 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 #### Scope
 
 - Prover is owner of an identity by signing a message using [`idOwnershipBySignature` template](./template-circuits.md#idownershipbysignature)
-- Verifies that a leaf that has the hash of `genesisID` as key and the `userState` as value is included inside the GIST using the [SMT Verifier Circomlib template](https://github.com/iden3/circomlib/blob/master/circuits/smt/smtverifier.circom)
+- Check if the identity state is the genesis state, and ID is an owner of the state
+If identity state is genesis, verifies that a leaf that has the hash of `genesisID` as key and the `userState` as value is not included inside the GIST using the [SMT Verifier Circomlib template](https://github.com/iden3/circomlib/blob/master/circuits/smt/smtverifier.circom) with flag 1
+- If identity state is NOT genesis, verifies that a leaf that has the hash of `genesisID` as key and the `userState` as value is included inside the GIST using the [SMT Verifier Circomlib template](https://github.com/iden3/circomlib/blob/master/circuits/smt/smtverifier.circom) with flag 0
 - Calcualte the [`userID`](./spec-v2.md#identity-profiles) output using the [SelectProfile](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/lib/utils/idUtils.circom#L174) Template starting from the `genesisID` and the `profileNonce`. If profileNonce != 0, the userID is calcualted as `H(genesisId, profileNonce)`. If profileNonce = 0, the userID equals to the `genesisID`.
 
 ## credentialAtomicQueryMTP
