@@ -959,11 +959,12 @@ The full circuit can be found at: https://github.com/iden3/circuits/tree/master/
 [//]: # (- recursion)
 -->
 
-## Identity Communication
+<!-- ## Identity Communication
     
 ### Issuer - Holder (Credential Request Procedure)
 
 The same procedure works for already issued claims and the new claims: 
+
 - The issuer has issued a claim linking a property to the holder, and the holder requests the credential of the issued claim.
 - The holder requests the issue of a new claim linking a property to the holder.
 
@@ -1014,7 +1015,7 @@ sequenceDiagram
     Exchange_SC->>Exchange_SC: validate
     Exchange_SC->>Exchange_SC: action
     Exchange_SC->>A: result
-```
+``` -->
 <!--
 [//]: # (## Naming system)
 
