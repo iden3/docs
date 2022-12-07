@@ -90,6 +90,26 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 ## authentication V2
 
+Authentication Circuit V2 supports the [Identity Profile](../protocol/spec.md#identity-profiles-new). The scope of the circuit is the same as the [Authentication Circuit V1](../protocol/main-circuits.md#authentication): to allow a user to prove that he/she is in control of an identity by signing a challenge. By verifying an auth proof, a subject can authenticate a user by their Identifier.
+
+In V1 the Identifier of the user was always its `GenesisID`. In V2 the Identifier of the user can hide their actual GenesisID and authenticate themselves with a different one, namely the `Identity Profile`. So, how is that possible? 
+
+The Auth V2 circuit doesn't modify the core logic of the Auth Circuit. It maintains the same logic while adding two features: 
+
+**Check the inclusion of the genesis ID inside the GIST**
+
+The circuit takes the root of the [GIST](../protocol/spec.md#gist-new) (stored on-chain inside the State Contract) and the merkle proof of inclusion of the user inside the GIST as extra [inputs](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/lib/authV2.circom#L40). 
+
+The logic of the circuit verifies whether the leaf (that contains the hash of the user's genesisID as a key and the user's state as value) is [included inside the GIST](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/lib/authV2.circom#L76).
+
+**Calculate the Identity Profile and return it as output**
+
+The circuit takes a `profileNonce` as an extra [input](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/lib/authV2.circom#L14). 
+
+The logic of the circuit [calculates](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/lib/authV2.circom#L101) the `Identity Profile` by hashing together the `GenesisID` and the `profileNonce` and returns it as the only output of the circuit. 
+
+If a user wants to authenticate using their `GenesisID` it is still possible by passing 0 as Profile Nonce.
+
 - [**Github**](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/lib/authV2.circom)
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/authV2.circom)
