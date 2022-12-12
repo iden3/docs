@@ -250,13 +250,13 @@ The full circuit can be found here: https://github.com/iden3/circuits/blob/maste
 
 Identity Profiles allow users to hide their [`Genesis ID`](#genesis-id) during interactions. Instead, users will be identified by their `Identity Profile`.
 
-An Identity Profile is generated starting from the `GenesisID` and hashing it with a (random) nonce. 
+An Identity Profile is generated from the `GenesisID` and hashing it with a (random) nonce. 
 
 `Identity Profile` has the same [structure as the `Genesis ID`](./spec.md#identifier-format). It is a byte array of 31 bytes, encoded in base58.
 
 [ `IDtype` (2 bytes) | `profile_state` (27 bytes) | `checksum` (2 bytes) ]
 
-- `IDtype` :  same type as the one encoded in `Genesis ID`
+- `IDtype` :  inherited type from `Genesis ID`
 - `profile_state` : First 27 bytes from the poseidonHash(`Genesis ID`, `profile_nonce`), where `profile_nonce` is any random number
 - `checksum` Addition (with overflow) of all the ID bytes Little Endian 16 bits ([ `typeID`| `profile_state`])
 
@@ -267,19 +267,19 @@ Identity Profiles are irreversible and indistinguishable:
 - **Irreversible**, thanks to the properties of the underlying hash function, meaning that it is impossible to retrieve the `Genesis ID` from an `Identity Profile`, unless you know the nonce.  
 - **indistinguishable**, the data format of Identity Profiles is the same as Genesis IDs. It follows that an external party cannot tell if an identity is using its Genesis ID or one of its many Identity Profiles.
 
-An Identity can now receive claims to a specific Identity Profile. An Identity Profile keeps all the properties of [Genesis IDs](#genesis-id)) while adding:
+An Identity can receive claims to a specific Identity Profile. An Identity Profile keeps all the properties of [Genesis IDs](#genesis-id)) while adding:
 
 - **Anti-track**
 
-Since users are no longer consistently identified with the same identifier in their interactions across different platforms, it becomes impossible to track the action of a single user. Even if platforms collude.
+Since users are no longer consistently identified with the same identifier in their interactions across different platforms, it becomes harder to track the action of a single user. Even if platforms collude.
 
 - **Faculty to decide which profile to show**
 
-Users can decide which profiles to show as it is only based on the nonce. The Identity Profile is not tied to a specific Issuer or Verifier. An Identity can create an Identity Profile and reuse it across interaction with different actors, for example in the case of a Profile with all their business information just by reusing the same nonce. For interactions that require the maximum level of privacy, an Identity can create a single-use Identity Profile by choosing a random nonce and never reusing it again. 
+Users can decide which profiles to show as it is only based on the nonce. An Identity can create an Identity Profile and reuse it across interaction with different actors, for example in the case of a Profile with all their business information just by reusing the same nonce. For interactions that require the maximum level of privacy, an Identity can create a single-use Identity Profile by choosing a random nonce and never reusing it again. 
 
 - **Reusability of claims across different profiles**
 
-Users can get claims issued to an Identity Profile (or to their global Genesis ID) and generate proof, based on these claims, from a different Identity Profile. The Verifier will be only able to see a valid proof coming from the Identity Profile that the user decided to use. No connection between the two identities is leaked.
+Users can get claims issued to an Identity Profile (or to their Genesis ID) and generate proof, based on these claims, from a different Identity Profile. The Verifier will be only able to see a valid proof coming from the Identity Profile that the user decided to use. No connection between the two identities is leaked.
 
 Despite being able to create multiples Identity Profiles, the control of the Identity is still still managed by the underlying [Private Key](./spec#keys)
 
@@ -301,9 +301,6 @@ This design allows users to prove ownership of an Identity by proving that this 
 <img src= "../imgs/GIST.png" align="center" width="400"/>
 <div align="center"><span style="font-size: 17px;"></div>
 </div>
-
-> The Global Identities State Tree doesn't replace the Identity State Tree! The State Transition still updates user's [Identity State Tree](../getting-started/identity/identity-structure.md). The update of the GIST is am extra step executed inside the contract after the State Transition is executed
-
 
 <!--
 ##### Direct identity ITF_min
