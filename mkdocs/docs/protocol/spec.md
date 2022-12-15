@@ -106,8 +106,8 @@ Ht-->Hv
 
 ```
 Index:
- i_0: [ 128 bits ] claim schema
-      [ 32 bits ] header flags
+ i_0: [ 128  bits ] claim schema
+      [ 32 bits ] option flags
           [3] Subject:
             000: A.1 Self
             001: invalid
@@ -117,7 +117,11 @@ Index:
             101: B.v Object Value
           [1] Expiration: bool
           [1] Updatable: bool
-          [27] 0
+          [3] Merklized: data is merklized root is stored in the:
+            000: none
+            001: C.i Root Index (root located in i_2)
+            010: C.v Root Value (root located in v_2)
+          [24] 0
       [ 32 bits ] version (optional?)
       [ 61 bits ] 0 - reserved for future use
  i_1: [ 248 bits] identity (case b) (optional)
@@ -126,10 +130,10 @@ Index:
  i_3: [ 253 bits] 0
 Value:
  v_0: [ 64 bits ]  revocation nonce
-         [ 64 bits ]  expiration date (optional)
-         [ 125 bits] 0 - reserved
+      [ 64 bits ]  expiration date (optional)
+      [ 125 bits] 0 - reserved
  v_1: [ 248 bits] identity (case c) (optional)
-        [  5 bits ] 0
+      [  5 bits ] 0
  v_2: [ 253 bits] 0
  v_3: [ 253 bits] 0
 ```
