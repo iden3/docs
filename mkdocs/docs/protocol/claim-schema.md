@@ -22,7 +22,7 @@ The `countryCode` should be stored in IndexDataSlotA while the `documentType` in
 ...
 ```
 
-A claim issuer could reuse [exisitng claim schemas](https://github.com/iden3/claim-schema-vocab/tree/main/schemas/json-ld) or create new ones from scratch.
+A claim issuer could reuse [existing claim schemas](https://github.com/iden3/claim-schema-vocab/tree/main/schemas/json-ld) or create new ones from scratch.
 
 ## Example: Auth Claim Schema 
 
