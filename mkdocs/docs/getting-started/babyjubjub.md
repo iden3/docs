@@ -1,6 +1,6 @@
 # Baby Jubjub Key Pair
 
-In Iden3 Protocol the public and private key pair is used to manage an identity and to authenticate in the name of an identity. In particular, Baby Jubjub is the elliptic curve used in Iden3. [This curve](https://github.com/iden3/iden3-docs/blob/master/source/docs/Baby-Jubjub.pdf) is designed to work efficiently with zkSNARKs.
+In Iden3 Protocol the public and private key pair is used to manage an identity and to authenticate in the name of an identity. In particular, Baby Jubjub is the elliptic curve used in Iden3. [This curve](../publications/pdfs/Baby-Jubjub.pdf) is designed to work efficiently with zkSNARKs.
 
 1.**Initiate a Go Module**
 

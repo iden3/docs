@@ -276,7 +276,7 @@ timestamp
 
 **Flow Diagram**:
 
-  ![verifier-user-query.png](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/verifier-user-query.png)
+  ![verifier-user-query.png](../imgs/verifier-user-query.png)
 
 
 ## Next Steps
