@@ -76,11 +76,12 @@ For atomic claims, these operations could cover a lot of use-cases.
 
 
 where:
-  *allowedIssuers*: A list of issuers whom the verifier trusts.
-  *schema*: A list of schemas that claims can use for proof generation.
-  *challenge*: Used to verify that the provided proof belongs to the existing user session.
-  *req*: A query request to the circuit.
->
+
+- *allowedIssuers*: A list of issuers whom the verifier trusts.
+- *schema*: A list of schemas that claims can use for proof generation.
+- *challenge*: Used to verify that the provided proof belongs to the existing user session.
+- *req*: A query request to the circuit.
+
 *Example: Multiple requests in one query* (WIP)
 
 ```json
