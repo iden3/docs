@@ -28,72 +28,78 @@ import (
 
 // Change Identity State
 func main() {
-    // GENESIS STATE:
+	// GENESIS STATE:
 
-    // 1. Generate Merkle Tree Proof for authClaim at Genesis State
-    authMTPProof, _, _ := clt.GenerateProof(ctx, hIndex, clt.Root())
+	// 1. Generate Merkle Tree Proof for authClaim at Genesis State
+	authMTPProof, _, _ := clt.GenerateProof(ctx, hIndex, clt.Root())
 
-    // 2. Generate the Non-Revocation Merkle tree proof for the authClaim at Genesis State
-    authNonRevMTPProof, _, _ := ret.GenerateProof(ctx, new(big.Int).SetUint64(revNonce), ret.Root())
+	// 2. Generate the Non-Revocation Merkle tree proof for the authClaim at Genesis State
+	authNonRevMTPProof, _, _ := ret.GenerateProof(ctx, new(big.Int).SetUint64(revNonce), ret.Root())
 
-    // Snapshot of the Genesis State
-    genesisTreeState := circuits.TreeState{
-        State:          state,
-        ClaimsRoot:     clt.Root(),
-        RevocationRoot: ret.Root(),
-        RootOfRoots:    rot.Root(),
-    }
-    // STATE 1:
+	// Snapshot of the Genesis State
+	genesisTreeState := circuits.TreeState{
+		State:          state,
+		ClaimsRoot:     clt.Root(),
+		RevocationRoot: ret.Root(),
+		RootOfRoots:    rot.Root(),
+	}
+	// STATE 1:
 
-    // Before updating the claims tree, add the claims tree root at Genesis state to the Roots tree.
-    rot.Add(ctx, clt.Root().BigInt(), big.NewInt(0))
+	// Before updating the claims tree, add the claims tree root at Genesis state to the Roots tree.
+	rot.Add(ctx, clt.Root().BigInt(), big.NewInt(0))
 
-    // Create a new random claim
-    schemaHex := hex.EncodeToString([]byte("myAge_test_claim"))
-    schema, _ := core.NewSchemaHashFromHex(schemaHex)
+	// Create a new random claim
+	schemaHex := hex.EncodeToString([]byte("myAge_test_claim"))
+	schema, _ := core.NewSchemaHashFromHex(schemaHex)
 
-    code := big.NewInt(51)
+	code := big.NewInt(51)
 
-    newClaim, _ := core.NewClaim(schema, core.WithIndexDataInts(code, nil))
+	newClaim, _ := core.NewClaim(schema, core.WithIndexDataInts(code, nil))
 
-    // Get hash Index and hash Value of the new claim
-    hi, hv, _ := newClaim.HiHv()
+	// Get hash Index and hash Value of the new claim
+	hi, hv, _ := newClaim.HiHv()
 
-    // Add claim to the Claims tree
-    clt.Add(ctx, hi, hv)
+	// Add claim to the Claims tree
+	clt.Add(ctx, hi, hv)
 
-    // Fetch the new Identity State
-    newState, _ := merkletree.HashElems(
-        clt.Root().BigInt(),
-        ret.Root().BigInt(),
-        rot.Root().BigInt())
+	// Fetch the new Identity State
+	newState, _ := merkletree.HashElems(
+		clt.Root().BigInt(),
+		ret.Root().BigInt(),
+		rot.Root().BigInt())
 
-    // Sign a message (hash of the genesis state + the new state) using your private key
-    hashOldAndNewStates, _ := poseidon.Hash([]*big.Int{state.BigInt(), newState.BigInt()})
+	// Snapshot of the new tree State
+	newTreeState := circuits.TreeState{
+		State:          newState,
+		ClaimsRoot:     clt.Root(),
+		RevocationRoot: ret.Root(),
+		RootOfRoots:    rot.Root(),
+	}
 
-    signature := babyJubjubPrivKey.SignPoseidon(hashOldAndNewStates)
+	// Sign a message (hash of the genesis state + the new state) using your private key
+	hashOldAndNewStates, _ := poseidon.Hash([]*big.Int{state.BigInt(), newState.BigInt()})
 
-    // Generate state transition inputs
-    stateTransitionInputs := circuits.StateTransitionInputs{
-        ID:                id,
-        OldTreeState:      genesisTreeState,
-        NewState:          newState,
-        IsOldStateGenesis: true,
-        AuthClaim: circuits.Claim{
-            Claim: authClaim,
-            Proof: authMTPProof,
-            NonRevProof: &circuits.ClaimNonRevStatus{
-                Proof: authNonRevMTPProof,
-            },
-        },
-        Signature: signature,
-    }
+	signature := babyJubjubPrivKey.SignPoseidon(hashOldAndNewStates)
 
-    // Perform marshalling of the state transition inputs
-    inputBytes, _ := stateTransitionInputs.InputsMarshal()
+	authClaimNewStateIncMtp, _, _ := clt.GenerateProof(ctx, hIndex, newTreeState.ClaimsRoot)
 
-    fmt.Println(string(inputBytes))
+	// Generate state transition inputs
+	stateTransitionInputs := circuits.StateTransitionInputs{
+		ID:                      id,
+		OldTreeState:            genesisTreeState,
+		NewTreeState:            newTreeState,
+		IsOldStateGenesis:       true,
+		AuthClaim:               authClaim,
+		AuthClaimIncMtp:         authMTPProof,
+		AuthClaimNonRevMtp:      authNonRevMTPProof,
+		AuthClaimNewStateIncMtp: authClaimNewStateIncMtp,
+		Signature:               signature,
+	}
 
+	// Perform marshalling of the state transition inputs
+	inputBytes, _ := stateTransitionInputs.InputsMarshal()
+
+	fmt.Println(string(inputBytes))
 }
 ```
 
