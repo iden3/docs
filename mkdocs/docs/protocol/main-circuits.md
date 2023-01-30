@@ -117,7 +117,7 @@ If a user wants to authenticate using their `GenesisID` it is still possible by 
 #### Instantiation Parameters
 
 - `IdOwnershipLevels` Merkle tree depth level for Claims tree
-- `onChainLevels` Merkle tree depth of [GIST](./spec-v2.md#gist) stored on chain
+- `onChainLevels` Merkle tree depth of [GIST](./spec.md#GIST-(NEW)) stored on chain
 
 #### Inputs
 
@@ -138,7 +138,7 @@ If a user wants to authenticate using their `GenesisID` it is still possible by 
 | challengeSignatureS          |  Signature of the challenge (S point)           | Private
 | userState          | Prover's Identity State            | Public
 | genesisID            | Prover's (Genesis) Identifier           | Private
-| profileNonce            | Nonce for a specific [Identity Profile](spec-v2.md#identity-profiles)           | Private
+| profileNonce            | Nonce for a specific [Identity Profile](spec.md#identity-profiles-(new))           | Private
 | gistRoot            | Root of GIST           | Private
 | gistMtp[onChainLevels]            | Merkle Tree Proof of membership of Genesis ID inside GIST          | Private
 | gistMtpAuxHi            | Auxiliary Node Index           | Private
@@ -156,7 +156,7 @@ If a user wants to authenticate using their `GenesisID` it is still possible by 
 - Check if the identity state is the genesis state, and ID is an owner of the state
 If identity state is genesis, verifies that a leaf that has the hash of `genesisID` as key and the `userState` as value is not included inside the GIST using the [SMT Verifier Circomlib template](https://github.com/iden3/circomlib/blob/master/circuits/smt/smtverifier.circom) with flag 1
 - If identity state is NOT genesis, verifies that a leaf that has the hash of `genesisID` as key and the `userState` as value is included inside the GIST using the [SMT Verifier Circomlib template](https://github.com/iden3/circomlib/blob/master/circuits/smt/smtverifier.circom) with flag 0
-- Calcualte the [`userID`](./spec-v2.md#identity-profiles) output using the [SelectProfile](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/lib/utils/idUtils.circom#L174) Template starting from the `genesisID` and the `profileNonce`. If profileNonce != 0, the userID is calcualted as `H(genesisId, profileNonce)`. If profileNonce = 0, the userID equals to the `genesisID`.
+- Calcualte the [`userID`](./spec.md#identity-profiles-(new)) output using the [SelectProfile](https://github.com/iden3/circuits/blob/feature/circuits_v0.2/circuits/lib/utils/idUtils.circom#L174) Template starting from the `genesisID` and the `profileNonce`. If profileNonce != 0, the userID is calcualted as `H(genesisId, profileNonce)`. If profileNonce = 0, the userID equals to the `genesisID`.
 
 ## credentialAtomicQueryMTP
 

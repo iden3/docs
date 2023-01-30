@@ -14,7 +14,7 @@ go get github.com/iden3/go-iden3-core
 
 A [claim schema](./claim-schema.md) defines how a set of data must be stored inside a claim. In this example, we will use a schema called [`KYCAgeCredential`](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/kyc-v2.json-ld). According to this schema the birthday is stored in the first index slot of the [claim data structure](https://docs.iden3.io/protocol/claims-structure), while the documentType is stored in the second data slot.
 
-The hash of the schema is generated from the content of the schema document following the [Claim Schema Generation Rules](./claim-schema.md). For our example, the hash of the schema is: *`2e2d1c11ad3e500de68d7ce16a0a559e`*
+The hash of the schema is generated from the content of the schema document following the [Claim Schema Generation Rules](../../protocol/claim-schema.md). For our example, the hash of the schema is: *`2e2d1c11ad3e500de68d7ce16a0a559e`*
 
 3.**Create a generic claim.**  
 
