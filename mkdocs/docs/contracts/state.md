@@ -2,7 +2,7 @@
 
 [**StateV2.sol - Github**](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol)
 
-The State Contract stores the [GIST State](../protocol/spec.md#gist-new). The GIST State represents a snapshot of the state of all the identities operating in the system.
+The State Contract stores the [GIST State](../protocol/spec.md#gist-new). The GIST State represents a snapshot of the state of all the identities operating in the system. The design of the State Contract allows identities to authenticate themselves using [Identity Profiles](../protocol/spec.md#identity-profiles-new)
 
 Every time that an identity is updated, for example when a claim is added or revoked, it needs to perform a [State Transition](../getting-started/state-transition/on-chain-state-transition.md). The output of the state transition function is a zero knowledge proof that can be verified by the State contract.
 The State contract verifies the proof on-chain via its [`transitState`](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol#L148) function.

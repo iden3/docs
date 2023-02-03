@@ -275,7 +275,7 @@ An Identity can receive claims to a specific Identity Profile. An Identity Profi
 
 - **Anti-track**
 
-Since users are no longer consistently identified with the same identifier in their interactions across different platforms, it becomes harder to track the action of a single user. Even if platforms collude.
+Since users are no longer consistently identified with the same identifier in their interactions across different platforms, it becomes harder to track the action of a single user. Even if platforms collude. Even more, the user can interact with the same platform using different Identity Profiles, making it impossible to track the user across different interactions inside the same platform.
 
 - **Faculty to decide which profile to show**
 
@@ -291,12 +291,14 @@ Despite being able to create multiples Identity Profiles, the control of the Ide
 
 ### GIST (NEW)
 
-GIST, namely Global Identities State Tree, is a [Sparse Merkle Tree](../getting-started/mt.md) that contains the state of all the identities using Iden3 protocol. In particular, each leaf is indexed by the hash of its `Genesis ID` (key of the leaf) and contains the most recent state of that Identity (value of the leaf).
+GIST, namely Global Identities State Tree, is a [Sparse Merkle Tree](../getting-started/mt.md) that contains the state of all the identities using Iden3 protocol. In particular, each leaf is indexed by the hash of its `Genesis ID` (key of the leaf) and contains the most recent state of that Identity (value of the leaf). 
 
-The root of the GIST is stored inside the [State Contract](../contracts/state.md). Every time a user executes a [State Transition function](../getting-started/state-transition/state-transition.md), the new state of an identity is [added to the GIST stored on-chain](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol#L190)
+The choice of using the hash of the Genesis ID as key of the leaf (instead of the Genesis ID itself) is to avoid that all the leaf accumulates in the same branch of the tree, since the Genesis ID has a fixed prefix. This would make the tree very unbalanced and inefficient. Instead, by using the hash of the Genesis ID, we randomize the position of the leaf in the tree, making it more balanced.
+
+The GIST is stored inside the [State Contract](../contracts/state.md). Every time a user executes a [State Transition function](../getting-started/state-transition/state-transition.md), the new state of an identity is [added to the GIST stored on-chain](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol#L190)
 
 ```solidity
-gistTree.add(H(genesisID, state))
+gistTree.add(H(genesisID), state)
 ```
 
 This design allows users to prove ownership of an Identity by proving that this is included in the GIST without revealing which one is their Genesis ID!
