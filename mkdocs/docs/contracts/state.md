@@ -15,5 +15,5 @@ The `verifier.sol` contract is automatically generated using circom and can be u
 
 State contract addresses:
 
-- [Mumbai: 0x46Fd04eEa588a3EA7e9F055dd691C688c4148ab3](https://mumbai.polygonscan.com/address/0x46Fd04eEa588a3EA7e9F055dd691C688c4148ab3)
-- [Polygon Mainnet: 0xb8a86e138C3fe64CbCba9731216B1a638EEc55c8](https://polygonscan.com/address/0xb8a86e138C3fe64CbCba9731216B1a638EEc55c8)
+- [Mumbai: 0xEA9aF2088B4a9770fC32A12fD42E61BDD317E655](https://mumbai.polygonscan.com/address/0xEA9aF2088B4a9770fC32A12fD42E61BDD317E655)
+> Polygon Mainnet to be added soon
