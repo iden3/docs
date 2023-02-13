@@ -65,6 +65,9 @@ nav:
         - Add Claim to the Claims Tree: "getting-started/state-transition/new-identity-state.md"
         - Generate Proof for State Transition: "getting-started/state-transition/state-transition-proof.md"
         - Verify the Proof On-Chain: "getting-started/state-transition/on-chain-state-transition.md"
+    - Claim Revocation: 
+      - Revoke Claim: "getting-started/claim-revocation.md"
+
   - Services and protocols:
 #    - Libraries: "services/libraries.md"
     - Login protocol: "protocol/zklogin.md"
