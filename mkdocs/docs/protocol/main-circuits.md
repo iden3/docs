@@ -3,19 +3,21 @@
 This iden3 circuits are the heart of the protocol. The main ones are: 
 
 - [`stateTransition.circom`](main-circuits.md#statetransition), checks the execution of the [identity state transition](../getting-started/state-transition/state-transition.md) by taking the old identity state and the new identity state as inputs.
-- [`authV2.circom`](main-circuits.md#authentication-v1), checks that the prover is owner of an identity.
-- [`credentialAtomicQueryMTPV2.circom`](main-circuits.md#credentialatomicquerymtp), checks that a claim issued to the prover (and added to issuer's Claims Tree) satisfies a query set by the verifier.
-- [`credentialAtomicQueryMTPV2OnChain.circom`](main-circuits.md#credentialatomicquerymtp), checks that a claim issued to the prover (and added to issuer's Claims Tree) satisfies a query set by the verifier and the verifier is a smart contract.
-- [`credentialAtomicQuerySig.circom`](main-circuits.md#credentialatomicquerysig) checks that a claim issued to the prover (and signed by the Issuer) satisfies a query set by the verifier.
-- [`credentialAtomicQuerySigV2OnChain.circom`](main-circuits.md#credentialatomicquerysig) checks that a claim issued to the prover (and signed by the Issuer) satisfies a query set by the verifier and the verifier is a smart contract.
+- [`authV2.circom`](main-circuits.md#authv2), checks that the prover is owner of an identity.
+- [`credentialAtomicQueryMTPV2.circom`](./main-circuits.md#credentialatomicquerymtpv2), checks that a claim issued to the prover (and added to issuer's Claims Tree) satisfies a query set by the verifier.
+- [`credentialAtomicQueryMTPV2OnChain.circom`](./main-circuits.md#credentialatomicquerymtpv2onchain), checks that a claim issued to the prover (and added to issuer's Claims Tree) satisfies a query set by the verifier and the verifier is a smart contract.
+- [`credentialAtomicQuerySigV2.circom`](./main-circuits.md#credentialatomicquerysigv2) checks that a claim issued to the prover (and signed by the Issuer) satisfies a query set by the verifier.
+- [`credentialAtomicQuerySigV2OnChain.circom`](./main-circuits.md#credentialatomicquerymtpv2onchain) checks that a claim issued to the prover (and signed by the Issuer) satisfies a query set by the verifier and the verifier is a smart contract.
 
-> You can find all the source code on [Github - Iden3 Circuits](https://github.com/iden3/circuits). All the proving and verification keys necessary to use the circuits were generated after a Trusted Setup Ceremony. Details here:  [Iden3 Protocol Phase2 Trusted Setup Ceremony](https://github.com/iden3/phase2ceremony#auth-circuit)
+> You can find all the source code on [Github - Iden3 Circuits](https://github.com/iden3/circuits). All the proving and verification keys necessary to use the circuits were generated after a Trusted Setup Ceremony. Details here:  [Iden3 Protocol Phase2 Trusted Setup Ceremony](https://github.com/0xPolygonID/phase2ceremony)
 
 ## stateTransition
 
 - [**Github**](https://github.com/iden3/circuits/blob/master/circuits/lib/stateTransition.circom)
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/stateTransition.circom)
+
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
 
 #### Instantiation Parameters
 
@@ -56,11 +58,7 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 - Verifies that the auth claim exists in the `newClaimsTreeRoot` using [`checkClaimExists(IdOwnershipLevels)` template](https://github.com/iden3/circuits/blob/master/circuits/lib/stateTransition.circom#L91)
 - Verifies that the new state (`newUserState`) matches the hash of the new claims tree root (`newClaimsTreeRoot`), revocation tree root (`newRevTreeRoot`) and roots tree root (`newRootsTreeRoot`) using [`checkIdenStateMatchesRoots()`](https://github.com/iden3/circuits/blob/master/circuits/lib/stateTransition.circom#L96)
 
-#### Circuit Specific Files (From Trusted Setup)
 
-- [Final zkey `circuit_final.zkey`](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/circuits/v0.1.0/auth/circuit_final.zkey)
-- [Verification Key `verification_key.json`](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/circuits/v0.1.0/auth/verification_key.json)
-- [WASM Witness Generator `circuit.wasm`](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/circuits/v0.1.0/auth/circuit.wasm)
 
 <!-- ## authV1 (Deprecated)
 
@@ -103,6 +101,8 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/authV2.circom)
 
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+
 #### Instantiation Parameters
 
 - `IdOwnershipLevels` Merkle tree depth levels for Identity Trees (claims Tree, revocation Tree and roots Tree)
@@ -136,7 +136,9 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 #### Output
 
-| userID          |  Identifier of the user, assigned to H(genesisID, nonce) if nonce != 0, assigned to genesisID if nonce = 0  | Private
+| Input                          | Description              | Public or Private
+| -----------                    | -----------          |  ----------
+| userID          |  Identifier of the user, assigned to H(genesisID, nonce) if nonce != 0, assigned to genesisID if nonce = 0  | Public
 
 #### Scope
 
@@ -146,9 +148,12 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 ## credentialAtomicQueryMTPV2
 
-- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/lib/query/credentialAtomicQueryMTP.circom)
+- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/offchain/credentialAtomicQueryMTPOffChain.circom)
 
-- [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/offchain/credentialAtomicQueryMTPOffChain.circom)
+- [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQueryMTPV2.circom)
+
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+
 
 The circuit takes a query by a verifier and a claim owned by the prover and generate a proof that the claim satisfies the query. In particular, it checks that: 
 
@@ -161,17 +166,23 @@ The circuit takes a query by a verifier and a claim owned by the prover and gene
 
 ## credentialAtomicQueryMTPV2OnChain 
 
-- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/lib/query/credentialAtomicQueryMTP.circom)
+- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/onchain/credentialAtomicQueryMTPOnChain.circom)
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQueryMTPV2OnChain.circom)
+
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+
 
 > WIP
 
 ## credentialAtomicQuerySigV2
 
-- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/onchain/credentialAtomicQueryMTPOnChain.circom)
+- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/offchain/credentialAtomicQuerySigOffChain.circom)
 
-- [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQuerySigOffChain.circom)
+- [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQuerySigV2.circom)
+
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+
 
 This circuit checks that an issuer has issued a claim for identity and validates ownership of that identity in the following manner:
 
@@ -182,11 +193,14 @@ This circuit checks that an issuer has issued a claim for identity and validates
 5. Verifies that the claim is not revoked by the issuer and is not expired
 6. Verifies that the query posed by the verifier is satisfied by the claim
 
-## credentialAtomicQueryMTPV2OnChain 
+## credentialAtomicQuerySigV2OnChain 
 
-- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/lib/query/credentialAtomicQuerySIG.circom)
+- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/onchain/credentialAtomicQuerySigOnChain.circom)
 
-- [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQuerySIGV2OnChain.circom)
+- [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQuerySigV2OnChain.circom)
+
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+
 
 > WIP
 
