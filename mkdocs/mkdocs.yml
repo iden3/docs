@@ -51,11 +51,12 @@ nav:
       - Claim: 
         - Generic Claim: "getting-started/claim/generic-claim.md"
         - Auth Claim: "getting-started/claim/auth-claim.md"
-        - Claim Schema: "getting-started/claim/claim-schema.md"
+        # - Claim Schema: "getting-started/claim/claim-schema.md"
       - Identity: 
         - Identity Structure: "getting-started/identity/identity-structure.md"
         - Identity State: "getting-started/identity/identity-state.md"
         - Identifier: "getting-started/identity/identifier.md"
+        - Identity Profiles: "getting-started/identity/identity-profile.md"
     - Issue Claim: 
       - Overview: "getting-started/issue-claim-overview.md"
       - via Signature: "getting-started/signature-claim/signature.md"
@@ -64,6 +65,9 @@ nav:
         - Add Claim to the Claims Tree: "getting-started/state-transition/new-identity-state.md"
         - Generate Proof for State Transition: "getting-started/state-transition/state-transition-proof.md"
         - Verify the Proof On-Chain: "getting-started/state-transition/on-chain-state-transition.md"
+    - Claim Revocation: 
+      - Revoke Claim: "getting-started/claim-revocation.md"
+
   - Services and protocols:
 #    - Libraries: "services/libraries.md"
     - Login protocol: "protocol/zklogin.md"

@@ -106,8 +106,8 @@ Ht-->Hv
 
 ```
 Index:
- i_0: [ 128 bits ] claim schema
-      [ 32 bits ] header flags
+ i_0: [ 128  bits ] claim schema
+      [ 32 bits ] option flags
           [3] Subject:
             000: A.1 Self
             001: invalid
@@ -117,7 +117,11 @@ Index:
             101: B.v Object Value
           [1] Expiration: bool
           [1] Updatable: bool
-          [27] 0
+          [3] Merklized: data is merklized root is stored in the:
+            000: none
+            001: C.i Root Index (root located in i_2)
+            010: C.v Root Value (root located in v_2)
+          [24] 0
       [ 32 bits ] version (optional?)
       [ 61 bits ] 0 - reserved for future use
  i_1: [ 248 bits] identity (case b) (optional)
@@ -126,10 +130,10 @@ Index:
  i_3: [ 253 bits] 0
 Value:
  v_0: [ 64 bits ]  revocation nonce
-         [ 64 bits ]  expiration date (optional)
-         [ 125 bits] 0 - reserved
+      [ 64 bits ]  expiration date (optional)
+      [ 125 bits] 0 - reserved
  v_1: [ 248 bits] identity (case c) (optional)
-        [  5 bits ] 0
+      [  5 bits ] 0
  v_2: [ 253 bits] 0
  v_3: [ 253 bits] 0
 ```
@@ -245,6 +249,64 @@ An Identity Merkle tree is a sparse binary tree that allows only the addition of
 > NOTE: In the initial version of the implementation, there will be no checks to verify that the trees are append-only in the smart contract. This is due to the fact that complex computations are required to generate the zk proofs for multiple claim additions, (a requirement for scalability).
 
 The full circuit can be found here: https://github.com/iden3/circuits/blob/master/circuits/stateTransition.circom
+
+### Identity Profiles (NEW)
+
+Identity Profiles allow users to hide their [`Genesis ID`](#genesis-id) during interactions. Instead, users will be identified by their `Identity Profile`.
+
+An Identity Profile is generated from the `GenesisID` and hashing it with a (random) nonce. 
+
+`Identity Profile` has the same [structure as the `Genesis ID`](./spec.md#identifier-format). It is a byte array of 31 bytes, encoded in base58.
+
+[ `IDtype` (2 bytes) | `profile_state` (27 bytes) | `checksum` (2 bytes) ]
+
+- `IDtype` :  inherited type from `Genesis ID`
+- `profile_state` : First 27 bytes from the poseidonHash(`Genesis ID`, `profile_nonce`), where `profile_nonce` is any random number
+- `checksum` Addition (with overflow) of all the ID bytes Little Endian 16 bits ([ `typeID`| `profile_state`])
+
+<!-- > Here's how the [checksum](https://github.com/iden3/go-iden3-core/blob/2f1886532b353d1eb550ccc790cb5a6dc5bc7b32/core/id.go#L118) is calculated -->
+
+Identity Profiles are irreversible and indistinguishable:
+
+- **Irreversible**, thanks to the properties of the underlying hash function, meaning that it is impossible to retrieve the `Genesis ID` from an `Identity Profile`, unless you know the nonce.  
+- **indistinguishable**, the data format of Identity Profiles is the same as Genesis IDs. It follows that an external party cannot tell if an identity is using its Genesis ID or one of its many Identity Profiles.
+
+An Identity can receive claims to a specific Identity Profile. An Identity Profile keeps all the properties of [Genesis IDs](#genesis-id)) while adding:
+
+- **Anti-track**
+
+Since users are no longer consistently identified with the same identifier in their interactions across different platforms, it becomes harder to track the action of a single user. Even if platforms collude. Even more, the user can interact with the same platform using different Identity Profiles, making it impossible to track the user across different interactions inside the same platform.
+
+- **Faculty to decide which profile to show**
+
+Users can decide which profiles to show as it is only based on the nonce. An Identity can create an Identity Profile and reuse it across interaction with different actors, for example in the case of a Profile with all their business information just by reusing the same nonce. For interactions that require the maximum level of privacy, an Identity can create a single-use Identity Profile by choosing a random nonce and never reusing it again. 
+
+- **Reusability of claims across different profiles**
+
+Users can get claims issued to an Identity Profile (or to their Genesis ID) and generate proof, based on these claims, from a different Identity Profile. The Verifier will be only able to see a valid proof coming from the Identity Profile that the user decided to use. No connection between the two identities is leaked.
+
+Despite being able to create multiples Identity Profiles, the control of the Identity is still still managed by the underlying [Private Key](./spec#keys)
+
+<!-- Identity Profiles do not represent any additional attack vector for the security of the protocol. While the nonce has to be kept secret, losing the nonce will only reveal the link between the `Genesis ID` and an `Identity Profile` without any risk of losing control of the identity. **The control of an Identity is still managed by the underlying [Babyjubjub Private Key](./spec#keys)** -->
+
+### GIST (NEW)
+
+GIST, namely Global Identities State Tree, is a [Sparse Merkle Tree](../getting-started/mt.md) that contains the state of all the identities using Iden3 protocol. In particular, each leaf is indexed by the hash of its `Genesis ID` (key of the leaf) and contains the most recent state of that Identity (value of the leaf). 
+
+The choice of using the hash of the Genesis ID as key of the leaf (instead of the Genesis ID itself) is to avoid that all the leaf accumulates in the same branch of the tree, since the Genesis ID has a fixed prefix. This would make the tree very unbalanced and inefficient. Instead, by using the hash of the Genesis ID, we randomize the position of the leaf in the tree, making it more balanced.
+
+The GIST is stored inside the [State Contract](../contracts/state.md). Every time a user executes a [State Transition function](../getting-started/state-transition/state-transition.md), the new state of an identity is [added to the GIST stored on-chain](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol#L190)
+
+```solidity
+gistTree.add(H(genesisID), state)
+```
+
+This design allows users to prove ownership of an Identity by proving that this is included in the GIST without revealing which one is their Genesis ID!
+
+<div align="center">
+<img src= "../imgs/GIST.png" align="center" width="400"/>
+<div align="center"><span style="font-size: 17px;"></div>
+</div>
 
 <!--
 ##### Direct identity ITF_min
@@ -959,11 +1021,12 @@ The full circuit can be found at: https://github.com/iden3/circuits/tree/master/
 [//]: # (- recursion)
 -->
 
-## Identity Communication
+<!-- ## Identity Communication
     
 ### Issuer - Holder (Credential Request Procedure)
 
 The same procedure works for already issued claims and the new claims: 
+
 - The issuer has issued a claim linking a property to the holder, and the holder requests the credential of the issued claim.
 - The holder requests the issue of a new claim linking a property to the holder.
 
@@ -1014,7 +1077,7 @@ sequenceDiagram
     Exchange_SC->>Exchange_SC: validate
     Exchange_SC->>Exchange_SC: action
     Exchange_SC->>A: result
-```
+``` -->
 <!--
 [//]: # (## Naming system)
 
