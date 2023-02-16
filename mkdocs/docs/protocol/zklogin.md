@@ -106,7 +106,7 @@ The client, after receiving an authorization response, performs the verification
 
 ZK proof is based on the [Circom 2.0](https://docs.circom.io/) language.
 
-Auth Circuit Repository: [auth](hhttps://github.com/iden3/circuits/blob/master/circuits/lib/authentication.circom)
+Auth Circuit Repository: [auth](https://github.com/iden3/circuits/blob/master/circuits/lib/authentication.circom)
 
 The circuit verifies that the user is the owner of the identity and his auth key is not revoked in the provided user state.
 

@@ -46,7 +46,7 @@ Privacy by design            | Decentralised                     |  Open source
 ## Iden3 protocol libraries
 
 - **Crypto library ([go-iden3-crypto](https://github.com/iden3/go-iden3-crypto))**
-    <br />Implementation of Poseidon hash and Baby JubJub Eliptic curve
+    <br />Implementation of Poseidon hash and Baby JubJub Elliptic curve
 
 - **Merkle tree sql library ([go-merkletree-sql](https://github.com/iden3/go-merkletree-sql))**
     <br />Implementation of Sparse Merkle tree
