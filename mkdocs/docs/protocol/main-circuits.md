@@ -173,7 +173,11 @@ The circuit takes a query by a verifier and a claim owned by the prover and gene
 - [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
 
 
-> WIP
+This circuit should be used for smart contract verifiers. This circuits does all the checks that the the [credentialAtomicQueryMTPV2](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/main-circuits.md#credentialatomicquerymtpv2) circuit does, plus the following:
+
+1. Check that prover controls the identity the same way as the AuthV2 circuit checks it
+2. Calculates hash of the query inputs, like claimSchema, slotIndex, operator, claimPathKey, claimPathNotExists and values as an output for all the query related inputs.
+This reduces the number of public inputs and much cheaper for Smart Contracts to verify the proof.
 
 ## credentialAtomicQuerySigV2
 
@@ -202,9 +206,8 @@ This circuit checks that an issuer has issued a claim for identity and validates
 - [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
 
 
-> WIP
+This circuit should be used for smart contract verifiers. This circuits does all the checks that the the [credentialAtomicQuerySigV2](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/main-circuits.md#credentialatomicquerysigv2) circuit does, plus the following:
 
-
-
-
-
+1. Check that prover controls the identity the same way as the AuthV2 circuit checks it
+2. Calculates hash of the query inputs, like claimSchema, slotIndex, operator, claimPathKey, claimPathNotExists and values as an output for all the query related inputs.
+This reduces the number of public inputs and much cheaper for Smart Contracts to verify the proof.
