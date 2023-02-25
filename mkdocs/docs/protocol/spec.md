@@ -304,7 +304,7 @@ gistTree.add(H(genesisID), state)
 This design allows users to prove ownership of an Identity by proving that this is included in the GIST without revealing which one is their Genesis ID!
 
 <div align="center">
-<img src= "../imgs/GIST.png" align="center" width="400"/>
+<img src= "../../../imgs/GIST.png" align="center" width="400"/>
 <div align="center"><span style="font-size: 17px;"></div>
 </div>
 
