@@ -376,3 +376,10 @@ The proposed approach enables to generate ZK proofs based over [Verifiable Crede
 - Prove non membership of an entry with a specific path. Namely, a user can prove that an entry with a specific path doesn’t exist inside a VC.
 - Prove non membership of a entry with a specific path and value. Namely, a user can prove that an entry with a specific path and value doesn’t exist inside a VC.
 - The proof can be verified inside smart contract making VC compatible with on-chain interactions.
+
+## Implementations
+
+Implementation of the proposed approach is available in the following repositories:
+
+- Go - https://github.com/iden3/go-schema-processor
+- JS - https://github.com/iden3/js-jsonld-merklization
