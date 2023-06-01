@@ -73,6 +73,7 @@ nav:
     - Login protocol: "protocol/zklogin.md"
     - Proof Query language: "protocol/querylanguage.md"
     - JSON-LD merklization: "w3c/merklization.md"
+    - Reverse hash service: "services/rhs.md"
   - Circuits:
     - Main Circuits: "protocol/main-circuits.md"
     - Template Circuits: "protocol/template-circuits.md"
