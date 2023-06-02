@@ -17,7 +17,7 @@ The public data of identity includes:
 - Roots of the identity trees: Claims tree(ClT), Revocation tree(ReT), and Roots tree(RoT).
 - All the nodes of the Revocation tree and Roots tree are public.
 
-The Reverse Hash Service stores nodes of SMTs (In our case, the CIT / ReT / RoT and identity state. This service enables users to perform reverse hash lookups and construct proofs of `existence` or `non-existence` of elements without revealing the specific element being proved. The main objective of this service is to enhance the privacy and security of iden3 identities while ensuring data integrity.
+The Reverse Hash Service stores nodes of SMTs (In our case, the CIT / ReT / RoT and identity state). This service enables users to perform reverse hash lookups and construct proofs of `existence` or `non-existence` of elements without revealing the specific element being proved. The main objective of this service is to enhance the privacy and security of iden3 identities while ensuring data integrity.
 
 ### Non-revocation proof
 
