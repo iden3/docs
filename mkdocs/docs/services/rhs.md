@@ -137,7 +137,7 @@ If identity is published to RHS then we can check the credential status by doing
 ```json
 ...{    
 "type": "Iden3ReverseSparseMerkleTreeProof"    
-"id": "https://rhs-staging.polygonid.me/node",    
+"id": "https://rhs-staging.polygonid.me",    
 "revocationNonce": 3409889195,
 }...
 ```
