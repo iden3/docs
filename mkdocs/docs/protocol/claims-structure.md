@@ -33,10 +33,11 @@ Other flags contained inside i_0 indicate:
 - Whether the claim is updatable.
 - Whether the claim is merklized and where the root of the tree is located. It can be either inside i_2 or v_2
 
-```go
+```
 h_i = H(i_0, i_1, i_2, i_3)
 h_v = H(v_0, v_1, v_2, v_3)
 h_t = H(h_i, h_v)
+```
 
 ```
 Index:
@@ -72,8 +73,6 @@ Value:
  v_3: [ 253 bits] 0
 ```
 
-```
-
 ### Claim Schema 
 Schemas define the type of data inside a claim [link](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/spec.md#claims).
 
@@ -82,6 +81,6 @@ _Index slots_ **i_2**, **i_3** and _value slots_ **v_2**, **v_3** are the data s
 #### Index vs Value 
 **When to Use Index Slots and Value Slots?**
 
-Claims are stored in the Merkle tree and the hash of the index slots ( hash(i_0,i_1,i_2,i_3) ) is unique for the whole tree. It means that you cannot have two claims with the same index inside the tree. 
+Claims are stored in the Merkle tree and the hash of the index slots ( hash(i_0, i_1, i_2, i_3) ) is unique for the whole tree. It means that you cannot have two claims with the same index inside the tree.
 
-As opposite to the index, the values slots could be the same for different claims if their indexes are different. 
+As opposite to the index, the values slots could be the same for different claims if their indexes are different.

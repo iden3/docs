@@ -374,7 +374,7 @@ The Identity State Update can be generalized as an `ITF_min` (minor Identity Tra
 
 #### Definitions
 
-- `IdS`: Identity State
+- `IdState`: Identity State
 - `ClT`: Claims Tree
     - `ClR`: Claims Tree Root
 - `ReT`: Revocation Tree
@@ -382,8 +382,8 @@ The Identity State Update can be generalized as an `ITF_min` (minor Identity Tra
 - `RoT`: Roots Tree
     - `RoR`: Roots Tree Root
 
-The `IdS` (Identity State) is calculated by concatenating the roots of the three user trees:
-- `IdS`: `H(ClR || ReR || RoR)`where `H` is the Hash function defined by the Identity Type (for example, Poseidon).
+The `IdState` (Identity State) is calculated by concatenating the roots of the three user trees:
+- `IdState`: `Hash(ClR || ReR || RoR)`where `Hash` is the Hash function defined by the Identity Type (for example, Poseidon).
 
 All trees are SMT (sparse Merkle trees) and use the hash function defined by the Identity Type.
 - Leaves in `ClT` (Claims Tree) are claims ((4 + 4) * 253 bits = 253 bytes)
@@ -405,7 +405,7 @@ leaf: [253 bits ] tree root
 ![](https://i.imgur.com/3ZS1ZvJ.png)
 > Identity State Diagram for Direct Identity
 
-As seen in the diagram, only the `IdS` is stored on the blockchain.  In order to save the stored bytes on the blockchain, it is desirable that only one "hash" representing the current state of the Identity is stored on the smart contract. This one "hash" is the `IdS` (Identity State), which is linked to a timestamp and a block on the blockchain.
+As seen in the diagram, only the `IdState` is stored on the blockchain.  In order to save the stored bytes on the blockchain, it is desirable that only one "hash" representing the current state of the Identity is stored on the smart contract. This one "hash" is the `IdState` (Identity State), which is linked to a timestamp and a block on the blockchain.
 
 All the public data must be made available for any holder so that
 they can build fresh Merkle tree proofs of both the `ReT` and `RoT`.  This allows the holder to:
@@ -420,12 +420,12 @@ The place and the method to access the publicly available data are specified in 
 
 #### Publish Claims
 
-The first step in publishing a claim involves adding a new leaf to the `ClT`, which updates the identity `ClR`. Claims can be optionally published in batches, adding more than one leaf to the `ClT` in a single transaction. After the `ClT` has been updated, the identity must follow an Identity State Update so that anyone is able to verify the newly added claims. This involves adding the new `ClR` to the `RoT`, which in turn will update the `RoR`. Post that, the new `IdS` is calculated and through a transaction it is updated in the Identities State Smart Contract (from now on, referred to as "the smart contract") on the blockchain. Once the updated `IdS` is in the smart contract, anyone can verify the validity of the newly added claims.
+The first step in publishing a claim involves adding a new leaf to the `ClT`, which updates the identity `ClR`. Claims can be optionally published in batches, adding more than one leaf to the `ClT` in a single transaction. After the `ClT` has been updated, the identity must follow an Identity State Update so that anyone is able to verify the newly added claims. This involves adding the new `ClR` to the `RoT`, which in turn will update the `RoR`. Post that, the new `IdState` is calculated and through a transaction it is updated in the Identities State Smart Contract (from now on, referred to as "the smart contract") on the blockchain. Once the updated `IdState` is in the smart contract, anyone can verify the validity of the newly added claims.
 
-The procedure to update the `IdS` in the smart contract can be achieved with the following criteria:
-- **Bad scalability (no batch), good privacy, and correctness**: The identity uploads the new `IdS` to the smart contract with proof of a correct transition from the old `IdS` to the new one. Only one claim is added to the `ClT` in the transition.
+The procedure to update the `IdState` in the smart contract can be achieved with the following criteria:
+- **Bad scalability (no batch), good privacy, and correctness**: The identity uploads the new `IdState` to the smart contract with proof of a correct transition from the old `IdState` to the new one. Only one claim is added to the `ClT` in the transition.
 - **Good scalability (batch), good privacy, and correctness**: Same as before, but many claims are added (batch) in the transition (with a single proof for all newly added claims)
-- **Good scalability (batch), good privacy but no correctness**: The identity uploads the new `IdS` to the smart contract, without proving correctness on the transition.
+- **Good scalability (batch), good privacy but no correctness**: The identity uploads the new `IdState` to the smart contract, without proving correctness on the transition.
 
 The criteria for correctness are as follows:
 - Revocation of a claim cannot be reverted.
@@ -441,11 +441,11 @@ Sometimes, it is desirable for an identity to invalidate a statement made throug
 
 Separating these two processes allows a design in which the `ClT` (Claim Tree) remains private, but the revocation/version information is public, allowing a holder to generate a fresh proof of the "current validity" without requesting access to the private `ClT`.
 
-To achieve this, every Identity has a `ClT` (Claim Tree) and a separate `ReT`(Revocation Tree). While the Claim Tree would be private and only the root public, the revocation tree would be entirely public. The roots of both the trees (`ClT` and `ReT`) are linked via the `IdS` (Identity State) which is published in the smart contract. The Revocation Tree could be published in IPFS or other public storage systems.
+To achieve this, every Identity has a `ClT` (Claim Tree) and a separate `ReT`(Revocation Tree). While the Claim Tree would be private and only the root public, the revocation tree would be entirely public. The roots of both the trees (`ClT` and `ReT`) are linked via the `IdState` (Identity State) which is published in the smart contract. The Revocation Tree could be published in IPFS or other public storage systems.
 
 Proving that a claim is valid (and thus not revoked/updated) consists of two proofs:
-- Prove that the claim was issued at some time t (this proof is generated once by the issuer and uses a `IdS`-`ClR` at time t stored in the smart contract).
-- Prove that the claim has not been revoked/updated recently (this proof is generated by the holder with a recent `ReR` (Revocation Tree Root) by querying the public `ReT` (Revocation Tree), and verified against a recent `IdS`).
+- Prove that the claim was issued at some time t (this proof is generated once by the issuer and uses a `IdState`-`ClR` at time t stored in the smart contract).
+- Prove that the claim has not been revoked/updated recently (this proof is generated by the holder with a recent `ReR` (Revocation Tree Root) by querying the public `ReT` (Revocation Tree), and verified against a recent `IdState`).
 
 #### Revoke Claims
 
@@ -485,16 +485,16 @@ where `t` is any time.
 #### Prove that the Claim is Currently Valid
 
 ##### Prove that the Claim Hasn't Been Revoked Recently 
-- Requires proving the inexistence of a link between the claim revocation nonce and a recent `IdS_t` (`t` must be recent according to the verifier requirements [1]) published in the smart contract.  This proof requires:
+- Requires proving the inexistence of a link between the claim revocation nonce and a recent `IdS_t` (`t` must be recent according to the verifier requirements [1]) published in the smart contract. This proof requires:
     - Claim (Nonce)
     - t (Recent Time)
     - MTP !Nonce -> `ReR_t`
     - `ClR_t`
     - `RoR_t`
-    - `IdS_t`
+    - `IdState_t`
 
 [1] The verifier needs to decide a time span to define how recent the
-`IdS_t` used in the proof needs to be.  Using the current `IdS`instead of recent could lead to data races, so it is better to select an `IdS` that is no more than X hours old.
+`IdState_t` used in the proof needs to be.  Using the current `IdState`instead of recent could lead to data races, so it is better to select an `IdState` that is no more than X minutes old.
 
 ##### Proof of Last Version
 

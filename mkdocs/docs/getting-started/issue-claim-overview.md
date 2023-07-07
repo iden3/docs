@@ -10,7 +10,7 @@ The claim gets signed by the issuer using her private key. The proof of issuance
 
 ## Via Merkle tree
 
-The claim gets added to the issuer’s [Claims Tree](./identity/identity-structure.md). This action modifies the structure of the Merkle Tree and, therefore, the state has to be updated with the new Merkle root. The **state transition** involves an on-chain transaction. In this case, the proof of issuance is the membership of the claim iself inside the issuer’s Claims Tree.
+The claim gets added to the issuer’s [Claims Tree](./identity/identity-state.md). This action modifies the structure of the Merkle Tree and, therefore, the state has to be updated with the new Merkle root. The **state transition** involves an on-chain transaction. In this case, the proof of issuance is the membership of the claim itself inside the issuer’s Claims Tree.
 
 ## Similarities and Differences
 
@@ -20,4 +20,3 @@ The process of updating the on-chain state (in the case of Merkle Tree (MT)) may
 A further element of difference regards the uniqueness of the claim: in the MT case, there couldn’t be two claims with the same index [Claim Data Structure](https://docs.iden3.io/protocol/claims-structure). This is guaranteed by the characteristic of [Sparse Merkle Tree](./mt.md). With S, an issuer could sign as many claims they want with the same index. Let’s consider an example: a passport issued as a claim. This claim contains the identifier of the passport owner inside its index. MT approach provides a cryptographic guarantee that the issuer cannot duplicate the passport by issuing a claim with the same identifier. S doesn’t.
 
 > Note: This section describes the claim issuance on a protocol level. The way in which issuers and users’ wallets communicate and transfer claims is defined on a platform level. This will be the subject of Polygon ID light issuer tutorial coming out this Autumn. 
- 
