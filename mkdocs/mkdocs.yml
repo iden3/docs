@@ -53,10 +53,11 @@ nav:
         - Auth Claim: "getting-started/claim/auth-claim.md"
         # - Claim Schema: "getting-started/claim/claim-schema.md"
       - Identity: 
-        - Identity Structure: "getting-started/identity/identity-structure.md"
+        - Identity Types: "getting-started/identity/identity-types.md"
         - Identity State: "getting-started/identity/identity-state.md"
         - Identifier: "getting-started/identity/identifier.md"
         - Identity Profiles: "getting-started/identity/identity-profile.md"
+        - OnChain Identity: "getting-started/identity/onchain-identity.md"
     - Issue Claim: 
       - Overview: "getting-started/issue-claim-overview.md"
       - via Signature: "getting-started/signature-claim/signature.md"

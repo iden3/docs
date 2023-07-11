@@ -3,6 +3,7 @@ site/
 
 # Editors
 .vscode/
+.idea
 
 # System files
 **/.DS_Store

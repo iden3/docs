@@ -10,9 +10,9 @@ Claims can be viewed as Soul Bound Tokens (SBTs) on steroids. Similar to SBTs, t
 go get github.com/iden3/go-iden3-core
 ```
 
-2.**Define the claim schema**.
+2.**Specify the credential schema**.
 
-A [claim schema](./claim-schema.md) defines how a set of data must be stored inside a claim. In this example, we will use a schema called [`KYCAgeCredential`](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/kyc-v2.json-ld). According to this schema the birthday is stored in the first index slot of the [claim data structure](https://docs.iden3.io/protocol/claims-structure), while the documentType is stored in the second data slot.
+A [credential schema](./claim-schema.md) defines how a set of data must be stored inside a claim. In this example, we will use a schema called [`KYCAgeCredential`](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/kyc-v2.json-ld). According to this schema the birthday is stored in the first index slot of the [claim data structure](https://docs.iden3.io/protocol/claims-structure), while the documentType is stored in the second data slot.
 
 The hash of the schema is generated from the content of the schema document following the [Claim Schema Generation Rules](../../protocol/claim-schema.md). For our example, the hash of the schema is: *`2e2d1c11ad3e500de68d7ce16a0a559e`*
 
@@ -67,20 +67,20 @@ Here is what the claim would look like:
 In particular, the first 4 values of the claim represent the `Index` part of the claim while the last 4 represent the `Value`.
 ```
 Index:
-{
-"3613283249068442770038516118105710406958", // Claim Schema hash
-"86645363564555144061174553487309804257148595648980197130928167920533372928", // ID Subject of the claim
-"19960424", // First index data slot stores the date of birth
-"1"  //  Second index data slot stores the document type
-}
+[
+    "3613283249068442770038516118105710406958", // Claim Schema hash
+    "86645363564555144061174553487309804257148595648980197130928167920533372928", // ID Subject of the claim
+    "19960424", // First index data slot stores the date of birth
+    "1"  //  Second index data slot stores the document type
+]
 
 Value:
-{ 
-"227737944108667786680629310498", // Revocation nonce 
-"0",
-"0", // first value data slot
-"0"  // second value data slot
-}	
+[ 
+    "227737944108667786680629310498", // Revocation nonce 
+    "0",
+    "0", // first value data slot
+    "0"  // second value data slot
+]	
 ```
 
 The data stored in the first position of the Index contains a reference to the schemahash of the claim. As defined in the [`KYCAgeCredential` schema](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/kyc-v2.json-ld), the value birthday must be stored in the first index data slot while the second index stores the documentType. Other schemas may provide different rules on where to store the data.

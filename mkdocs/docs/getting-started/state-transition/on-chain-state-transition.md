@@ -11,10 +11,9 @@ The `transitState` public function of the contract takes the proof generated in 
 ```js
 networks: {
    mumbai: {
-      url: `${process.env.ALCHEMY_MUMBAI_URL}`,
-      accounts: [`0x${process.env.MUMBAI_PRIVATE_KEY}`],
-   } 
-...
+      url: `${process.env.MUMBAI_RPC_URL}`,
+      accounts: [`${process.env.MUMBAI_PRIVATE_KEY}`]
+   }
 }
 ```
 
