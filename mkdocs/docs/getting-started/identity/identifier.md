@@ -49,7 +49,7 @@ The Identity State hasn't been published on-chain yet as claims haven't been iss
 There are two [identity types](./identity-types.md), which differ in many aspects and because of this have two different ways to generate the Genesis State:
 
 1. **Regular Identity**: The Genesis State is the initial Identity State (hash of Identity SMT Roots). This identity is primarily controlled by Baby JubJub keys. At least one BJJ public key must be added into Claims Tree during the identity creation.
-2. **Ethereum-controlled Identity**: The Genesis State is derived from the Ethereum address. This identity is primarily controlled by Ethereum account from which it's Genesis State and Identifier are derived.
+2. **Ethereum-controlled Identity**: The Genesis State is derived from the Ethereum address. This identity is primarily controlled by Ethereum account from which its Genesis State and Identifier are derived.
 
 ## W3C DID representation
 

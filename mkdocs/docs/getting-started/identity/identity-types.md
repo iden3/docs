@@ -26,9 +26,9 @@ where:
 
 ### Limitations of Regular Identity
 
-Currently, adding Ethereum key to the Claims Tree and using it for authentication and proving is not practical, because
-it's very computationally expensive to verify ECDSA signatures in zk-circuits. Also, having user's Ethereum address
-there's no way to get user identifier from it, so dApps would need to authenticate user additionally to get the
+Currently, adding an Ethereum key to the Claims Tree and using it for authentication and proving is not practical, because
+it's very computationally expensive to verify ECDSA signatures in zk-circuits. Also, having the user's Ethereum address
+there's no way to get a user identifier from it, so dApps would need to authenticate the user additionally to get the
 identifier.
 
 ## Ethereum-controlled Identity
@@ -79,7 +79,7 @@ did:polygonid:polygon:mumbai:2qCU58EJgrELSJT6EzT27Rw9DhvwamAdbMLpePztYq
 
 ### Authentication Method
 
-Ethereum-controlled Identity can be authenticated by verifying Identifier matches to Ethereum account that sent a
+Ethereum-controlled Identity can be authenticated by verifying if the Identifier matches the Ethereum account that sent a
 transaction (`msg.sender`).
 
 In case Ethereum-controlled Identity performs State Transition and adds BJJ keys to it's Claims Tree, it can also
@@ -94,7 +94,7 @@ Ethereum has two types of accounts:
 
 ### Smart Contract (SC)
 
-Smart contract can control identity and perform state transitions. In case such a smart contract manages its identity
+Smart contracts can control identity and perform state transitions. In case such a smart contract manages its identity
 trees on chain, it becomes an OnChain Identity.
 
 ### Externally Owned Account (EOA)
@@ -109,7 +109,7 @@ Note: The EOA-controlled identity is not yet fully supported in iden3 protocol (
   to authenticate & prove statements.
 * No support for credential issuance with BJJ signature, only SMT proofs available.
 
-Last to limitations can be overcome by adding BJJ keys to Claims Tree and performing state transition. Afterwards, it's possible to use BJJ keys for authentication, proving & credential issuance. See [Identity Type Comparison](#identity-type-comparison) for more details.
+The last two limitations can be overcome by adding BJJ keys to Claims Tree and performing state transition. Afterwards, it's possible to use BJJ keys for authentication, proving & credential issuance. See [Identity Type Comparison](#identity-type-comparison) for more details.
 
 ## Identity Type Comparison
 
