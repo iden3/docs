@@ -16,6 +16,7 @@
 A Merkle tree (MT) or a hash tree is a cryptographically verifiable data structure where every "leaf" node of the tree contains the cryptographic hash of a data block, and every "non-leaf" node contains the cryptographic hash of its child nodes.
 
 The MTs used in the protocol have a few particularities:
+
 - **Binary**: Each node can only have two children.
 - **Sparse and Deterministic**: The contained data is indexed, and each data block is placed at the leaf that corresponds to that data block's index, so insert order doesn't influence the final Merkle tree Root. This also means that some nodes are empty.
 - **ZK-friendly**: The used hash function, [poseidon](https://www.poseidon-hash.info/), plays well with the zero-knowledge proofs (ZKP) used in different parts of the protocol.
@@ -224,6 +225,7 @@ An Identifier is determined by its identity type and the `Genesis Identity State
 An **identity type** specifies the specifications that an identity follows (such as the hash function used by the identity). In this way, when the hash function changes, the identifiers of the identities will also change, allowing us to identify the type of identity.
 
 **Identifier Structure**:
+
 - `ID` (genesis): Base58 [ `type` | `genesis_state` | `checksum` ]
 	- `type`: 2 bytes specifying the type
 	- `genesis_state`: First 27 bytes from the identity state (using the Genesis Claim Merkle tree)
@@ -364,6 +366,7 @@ When an identity revokes all the `claims` of the type `operational key authoriza
 ### Identity State Update
 
 The Identity State Update is the procedure used to update information about what this identity has claimed. This involves three different actions:
+
 - Add a claim.
 - Update a claim (by incrementing the version and changing the claim value part).
 - Revoke a claim.
@@ -382,13 +385,17 @@ The Identity State Update can be generalized as an `ITF_min` (minor Identity Tra
 - `RoT`: Roots Tree
     - `RoR`: Roots Tree Root
 
-The `IdState` (Identity State) is calculated by concatenating the roots of the three user trees:
-- `IdState`: `Hash(ClR || ReR || RoR)`where `Hash` is the Hash function defined by the Identity Type (for example, Poseidon).
+
+The `IdS` (Identity State) is calculated by concatenating the roots of the three user trees:
+
+- `IdS`: `H(ClR || ReR || RoR)` where `H` is the Hash function defined by the Identity Type (for example, Poseidon).
 
 All trees are SMT (sparse Merkle trees) and use the hash function defined by the Identity Type.
+
 - Leaves in `ClT` (Claims Tree) are claims ((4 + 4) * 253 bits = 253 bytes)
 
 See [**Claim Structure**](#structure)
+
 - Leaves in `ReT` (Revocation Tree) are Revocation Nonce + Version (64 bits + 32 bits = 12 bytes)
 ```
 Revocation Tree Leaf:
@@ -422,12 +429,15 @@ The place and the method to access the publicly available data are specified in 
 
 The first step in publishing a claim involves adding a new leaf to the `ClT`, which updates the identity `ClR`. Claims can be optionally published in batches, adding more than one leaf to the `ClT` in a single transaction. After the `ClT` has been updated, the identity must follow an Identity State Update so that anyone is able to verify the newly added claims. This involves adding the new `ClR` to the `RoT`, which in turn will update the `RoR`. After that, the new `IdState` is calculated and through a transaction it is updated in the Identities State Smart Contract (from now on, referred to as "the smart contract") on the blockchain. Once the updated `IdState` is in the smart contract, anyone can verify the validity of the newly added claims.
 
-The procedure to update the `IdState` in the smart contract can be achieved with the following criteria:
-- **Bad scalability (no batch), good privacy, and correctness**: The identity uploads the new `IdState` to the smart contract with proof of a correct transition from the old `IdState` to the new one. Only one claim is added to the `ClT` in the transition.
+
+The procedure to update the `IdS` in the smart contract can be achieved with the following criteria:
+
+- **Bad scalability (no batch), good privacy, and correctness**: The identity uploads the new `IdS` to the smart contract with proof of a correct transition from the old `IdS` to the new one. Only one claim is added to the `ClT` in the transition.
 - **Good scalability (batch), good privacy, and correctness**: Same as before, but many claims are added (batch) in the transition (with a single proof for all newly added claims)
 - **Good scalability (batch), good privacy but no correctness**: The identity uploads the new `IdState` to the smart contract, without proving correctness on the transition.
 
 The criteria for correctness are as follows:
+
 - Revocation of a claim cannot be reverted.
 - Updatable claims are only updated with increasing versions, and only one version is valid at a time.
 
@@ -444,8 +454,9 @@ Separating these two processes allows a design in which the `ClT` (Claim Tree) r
 To achieve this, every Identity has a `ClT` (Claim Tree) and a separate `ReT`(Revocation Tree). While the Claim Tree would be private and only the root public, the revocation tree would be entirely public. The roots of both the trees (`ClT` and `ReT`) are linked via the `IdState` (Identity State) which is published in the smart contract. The Revocation Tree could be published in IPFS or other public storage systems.
 
 Proving that a claim is valid (and thus not revoked/updated) consists of two proofs:
-- Prove that the claim was issued at some time t (this proof is generated once by the issuer and uses a `IdState`-`ClR` at time t stored in the smart contract).
-- Prove that the claim has not been revoked/updated recently (this proof is generated by the holder with a recent `ReR` (Revocation Tree Root) by querying the public `ReT` (Revocation Tree), and verified against a recent `IdState`).
+
+- Prove that the claim was issued at some time t (this proof is generated once by the issuer and uses a `IdS`-`ClR` at time t stored in the smart contract).
+- Prove that the claim has not been revoked/updated recently (this proof is generated by the holder with a recent `ReR` (Revocation Tree Root) by querying the public `ReT` (Revocation Tree), and verified against a recent `IdS`).
 
 #### Revoke Claims
 
@@ -499,8 +510,9 @@ where `t` is any time.
 ##### Proof of Last Version
 
 This is very similar to proving that a claim has not been recently revoked except that in this case, not only the nonce in the claim is checked, but also the version.
+
 - Requires proving the inexistence of a link between the claim revocation nonce
-  + version and a recent `IdS_t` (`t` must be recent according to the verifier requirements [1]) published in the smart contract.  This proof requires:
+version and a recent `IdS_t` (`t` must be recent according to the verifier requirements [1]) published in the smart contract.  This proof requires:
     - Claim (Nonce, Version)
     - t
     - MTP !(Nonce, Version) -> `ReR_t`
@@ -517,10 +529,12 @@ A claim can be made expirable by setting an expiration flag in the options and s
 #### Zero-knowledge Proof of Valid Credentials
 
 A zero-knowledge proof allows hiding some information about a claim while proving that it was issued by a particular identity and that it is currently valid. The same checks mentioned in the previous sections are performed:
+
 - Prove that a claim was issued at least at time t.
 - Prove that the claim is currently valid.
 
 In the proof that shows "that a claim was issued at time at least t", there is an additional part that is added to hide a particular `IdS_t1` that is used (in order to hide the claim from the issuer. See Appendix Title 2). The proof then requires:
+
     - Claim
     - t
     - MTP Claim -> `ClR_t1`
