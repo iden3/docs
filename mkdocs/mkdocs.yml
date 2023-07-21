@@ -10,6 +10,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.tracking
+    - content.code.copy
 repo_url: https://github.com/iden3/docs
 markdown_extensions:
   - pymdownx.arithmatex:
@@ -75,6 +76,7 @@ nav:
     - Proof Query language: "protocol/querylanguage.md"
     - JSON-LD merklization: "w3c/merklization.md"
     - Reverse hash service: "services/rhs.md"
+    - On-chain credential status: "protocol/onchain-credential-status.md"
   - Circuits:
     - Main Circuits: "protocol/main-circuits.md"
     - Template Circuits: "protocol/template-circuits.md"
