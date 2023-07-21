@@ -7,7 +7,7 @@ Iden3 is a Self-Sovereign Identity (SSI) solution that allows users to leverage 
 
 ## Login Workflow
 
-[Login Workflow](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/login.png)
+![Login Workflow](../imgs/login.png)
 
 In a simple example, an application requests a user identifier; this is done through the zero-knowledge proof (zk proof) generation. The server generates an authentication request.
 

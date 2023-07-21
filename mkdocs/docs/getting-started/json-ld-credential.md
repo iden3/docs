@@ -1,8 +1,8 @@
-# JSON-LD Credentials
+# W3C Verifiable Credentials
 
 ### JSON-LD Credential and Claim
 
-A [Claim](../protocol/claims-structure.md) is the core data structure used by Iden3 to represent information. A claim by itself doesn't contain enough meaningful information to be read, understood and consumed (e.g. by the wallet). For example it doesn't tell anything about the meaning of values stored inside the data slots. 
+A [Claim](../protocol/claims-structure.md) is the core data structure used by Iden3 to represent information. A claim by itself doesn't contain enough meaningful information to be read, understood and consumed (e.g. by the wallet). For example, it doesn't tell anything about the meaning of values stored inside the data slots. 
 
 The JSON-LD credential is able to pack the information contained in a claim in a more human-readable way. Furthermore, a JSON-LD credential does not only contain the claim itself but other proofs needed for the subject of the claim needs to consume the claim with other Verifiers.
 
