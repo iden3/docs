@@ -1,18 +1,19 @@
 ### State Contract
 
-[**State.sol - Github**](https://github.com/iden3/contracts/blob/master/contracts/State.sol)
+[**StateV2.sol - Github**](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol)
 
-The state contract stores the state of each identity operating within Polygon ID. Each identity has an [identifier](../getting-started/identity/identifier.md) and an [identity state](../getting-started/identity/identity-state.md) associated to it. Each identifier and the corresponding identity state are stored inside the [`identities`](https://github.com/iden3/contracts/blob/master/contracts/State.sol#L54) mapping. 
+The State Contract stores the [Global Identity State Tree](../protocol/spec.md#gist-new). The GIST State represents a snapshot of the states of all the identities operating in the system. The design of the State Contract allows identities to authenticate themselves using [Identity Profiles](../protocol/spec.md#identity-profiles-new)
 
-An identity gets updated by executing the [state transition function](../getting-started/state-transition/on-chain-state-transition.md). The State contract verifier the proof on-chain via its [`transitState`](https://github.com/iden3/contracts/blob/master/contracts/State.sol#L87) function.
+Every time that an identity is updated, for example when a credential is issued using SMT Proof or revoked, it needs to perform a [State Transition](../getting-started/state-transition/on-chain-state-transition.md). This process consists of generating a zk-proof or a digitally signed message that proves that the identity is authorized to perform the state transition.
+Then State contract verifies the proof on-chain via its [transitState](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol) (for zk-proofs) or [transitStateGeneric](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol) (generic as name suggests) function.
 
-The State contract provides a timestamp of the changes that occur inside an identity state. No personal information (such as claims) is stored on-chain nor it is inferrable from the information stored on-chain.
+Note that the actual zk-proof verification is performed by calling the `verifyProof` function inside the [verifier.sol](https://github.com/iden3/contracts/blob/master/contracts/lib/verifier.sol) from the [`transitState`](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol) function inside the State Contract.
 
-Note that the actual proof verification is executed by calling the `verifyProof` function inside the [verifier.sol](https://github.com/iden3/contracts/blob/master/contracts/lib/verifier.sol). 
+Whenever an identity is updated, the State contract updates the corresponding leaf of the GIST Tree. This process is managed by the [SMTLib](https://github.com/iden3/contracts/blob/master/contracts/lib/SmtLib.sol) which is a Sparse Merkle Tree implementation that manages the GIST Tree and keeps track of its history.
 
-The `verifier.sol` contract is automatically generated using circom and can be used as a standalone contract to verify the proof. `State.sol` implements further logic once the proof is verified (such as updating the identity state).
+The `verifier.sol` contract is automatically generated using circom and can be used as a standalone contract to verify state transition zk-proof. `StateV2` implements further logic once the proof is verified (such as updating the GIST State).
 
-State contract addresses:
+### State contract addresses
 
-- [Mumbai: 0x46Fd04eEa588a3EA7e9F055dd691C688c4148ab3](https://mumbai.polygonscan.com/address/0x46Fd04eEa588a3EA7e9F055dd691C688c4148ab3)
-- [Polygon Mainnet: 0xb8a86e138C3fe64CbCba9731216B1a638EEc55c8](https://polygonscan.com/address/0xb8a86e138C3fe64CbCba9731216B1a638EEc55c8)
+- Polygon Mainnet: [0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D](https://polygonscan.com/address/0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D)
+- Polygon Mumbai Testnet: [0x134B1BE34911E39A8397ec6289782989729807a4](https://mumbai.polygonscan.com/address/0x134B1BE34911E39A8397ec6289782989729807a4)

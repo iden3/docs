@@ -4,9 +4,9 @@ The most important building block of an identity is the Key Authorization Claim.
 
 An [Auth Claim](https://docs.iden3.io/protocol/bjjkey/) **must** be included as a leaf inside the  Identity Tree. All the actions performed by an Idenitity (such as claim issuance or revocation) require users to prove via a digital signature that they own the private key associated with the public key stored in the `AuthClaim`.
 
-1.**Define the claim schema.**
+1.**Specify the credential schema**
 
-The [auth schema](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/auth.json-ld) is pre-defined and should always be the same when creating an `AuthClaim`. The schema hash is: *`ca938857241db9451ea329256b9c06e5`*. According to the this schema, the X and Y coordinate of the Baby Jubjub public key must be stored, respectively, in the first and second index data slot.
+The [auth claim schema](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/auth.json-ld) is pre-defined and should always be the same when creating an `AuthClaim`. The schema hash is: *`ca938857241db9451ea329256b9c06e5`*. According to this schema, X and Y coordinates of the Baby Jubjub public key must be stored, respectively, in the first and second index data slot.
 
 2.**Generate an AuthClaim.** 
 

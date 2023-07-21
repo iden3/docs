@@ -1,21 +1,21 @@
-# Claim Schema
+# Credential Schema
 
-The reusability of claims across platforms and services is guaranteed by [Claim Schema](https://docs.iden3.io/protocol/claim-schema/) consistency. 
+The reusability of credentials across platforms and services is guaranteed by [Credential Schema](https://docs.iden3.io/protocol/claim-schema/) consistency. 
 
-Polygon ID use [JSON-LD documents](https://json-ld.org/learn.html) to represent Claim Schemas.
+Polygon ID use [JSON-LD documents](https://json-ld.org/learn.html) to represent Credential Schemas.
 
-As an issuer it is advised to check if any of the [existing claim schemas](https://github.com/0xPolygonID/schemas/tree/main/jsonld) can accomodate the type of information you are interested to issue.
+As an issuer it is advised to check if any of the [existing credential schemas](https://github.com/0xPolygonID/schemas/tree/main/jsonld) can accommodate the type of information you are interested to issue.
 
-If not, here's the guide to create a new claim schema. Let us create a shared and reusable claim schema of type **ProofOfDaoMembership**.
+If not, here's the guide to create a new credential schema. Let us create a shared and reusable credential schema of type **ProofOfDaoMembership**.
 
 1.**Define the value to be included in the schema.**
 
-The ProofOfDaoMembership claim should attest that a person covers a role inside a specific DAO.
+The ProofOfDaoMembership credential should attest that a person executes a role inside a specific DAO.
 
-Information such as the identifier of the DAO or the identifier of the subject of the claim don't need to be encoded inside one of the four data slots allocated for claim information (i_2,i_3, v_2, v_3): 
+Information such as the identifier of the DAO or the identifier of the subject of the credential don't need to be encoded inside one of the four data slots allocated for claim information (i_2,i_3, v_2, v_3): 
 
-- The information about the specific DAO can be inferred from the claim issuer identifier
-- The information about the individual subject of the claim is already stored in the i_1 or v_1 data slot of the claim
+- The information about the specific DAO can be inferred from the credential issuer identifier
+- The information about the individual subject of the claim is already stored in the i_1 or v_1 data slot of the Claim.
 
 A further information that must be included in the claim is the *role* of the individual inside a DAO. This will be the added inside one of the data slots (i_2,i_3,v_2,v_3). 
 

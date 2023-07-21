@@ -48,24 +48,6 @@ For example, when a university (identity) says that a student (identity) has a d
 
 - ... Almost anything!
 
-### Direct Claims
-
-If an identity wants to create many claims, it can put all the claims in a database, construct a [Merkle tree](#merkle-trees) of that database, and just publish (with a transaction) the root of the Merkle tree on-chain.
-
-If the identity wants to update the claims later, it can repeat the same process and publish the new root of the Merkle tree.
-
-For example, one could imagine a government adding/modifying millions of claims in a single transaction.
-
-### Indirect Claims
-
-While direct claims scale really well for identities that make a lot of claims (since millions of claims can be batched in a single transaction), an average user will probably only need to make a few claims a day, and so won't benefit from this batching.
-
-This is where indirect claims come in handy. Instead of paying gas every time to update the Merkle root on-chain, indirect claims allow users to send claims off-chain to a **relayer**.
-
-The idea is that with relayers, millions of users can create millions of claims on mainnet **without** spending any **gas** (since the relayer is responsible for batching the claims and publishing the transactions).
-
-On top of this, using [zero-knowledge proofs](#zero-knowledge-proofs), we can ensure that the relayer is trustless. In other words, we can make sure that the relayer can't lie about the claims we sent it. The worst a relayer can do is to not publish them (and if this happens, we, as the users, always have the choice to change relayers).
-
 ## Zero-knowledge Proofs
 
 *In cryptography, a zero-knowledge proof or zero-knowledge protocol is a method by which one party (the prover) can prove to another party (the verifier) that they know a value x, without conveying any information apart from the fact that they know the value x.* ([Source](https://en.wikipedia.org/wiki/Zero-knowledge_proof))
@@ -124,9 +106,15 @@ But since R clearly knows its private key, R' can't tell whether A is valid or n
 
 You can think of zk-SNARKs as an efficient way to produce zero-knowledge proofs. These are the proofs that are short enough to be published on blockchain and that can be read later by a verifier.
 
+## Digital Signatures
+
+A digital signature is a mathematical scheme for demonstrating the authenticity of digital messages or documents. A valid digital signature gives a recipient reason to believe that the message was created by a known sender, that the sender cannot deny having sent the message (authentication and non-repudiation), and that the message was not altered in transit (integrity). ([Source](https://en.wikipedia.org/wiki/Digital_signature))
+
+We use digital signatures for user authentication purposes and to prove that a claim was issued by a specific identity.
+
 ## Merkle Trees
 
-A Merkle tree is a [binary tree](https://en.wikipedia.org/wiki/Binary_tree) built using hash pointers (if you're unfamiliar with what a hash pointer or function is, see the definitions section at the bottom of this page).
+In cryptography and computer science, a Merkle tree is a tree in which every leaf node is labelled with the hash of a data block and every non-leaf node is labelled with the cryptographic hash of the labels of its child nodes. ([Source](https://en.wikipedia.org/wiki/Merkle_tree))
 
 We care about Merkle trees because we want to build a data structure that:
 
@@ -315,8 +303,7 @@ While we would not get into the details here, let's briefly discuss what each of
 
 #### Hash Pointers
 
-A hash pointer is simply a pointer to where some information is stored together with a cryptographic hash of the
-information. **A pointer gives you a way to retrieve the information, whereas a hash pointer gives you a way to verify that the information hasn’t changed.**
+A hash pointer is simply a pointer to where some information is stored together with a cryptographic hash of the information. **A pointer gives you a way to retrieve the information, whereas a hash pointer gives you a way to verify that the information wasn't changed.**
 
 In other words, a hash pointer is a pointer to where data is stored along with a cryptographic hash of the value of that data at some fixed point in time.
 

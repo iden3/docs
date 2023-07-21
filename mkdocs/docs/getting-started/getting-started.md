@@ -5,7 +5,7 @@ The first part of the tutorial walks you through the core components of Iden3 pr
 - [Baby Jubjub Keypair](babyjubjub.md)
 - [Sparse Merkle Tree](mt.md) 
 - [Claim](claim/generic-claim.md)
-- [Identity](identity/identity-structure.md)
+- [Identity](identity/identity-types.md)
 
 Having understood the primitives you will be then able to start [**issuing claims**](./issue-claim-overview.md).
 
