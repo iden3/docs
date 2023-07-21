@@ -22,7 +22,7 @@ The MTs used in the protocol have a few particularities:
 
 In order to ensure that these particularities are respected and to have a history of all the changes that occurred on different trees (without revealing the actual content stored in the leaves), **the root of each MT is indirectly stored on the blockchain**. The EVM-based blockchains are chosen for this purpose.
 
-The `Merkle tree` specification is defined in [this document](https://github.com/iden3/iden3-docs/blob/master/source/docs/MerkleTree.pdf). In future, the MT implementation could be changed.
+The `Merkle tree` specification is defined in [this document](../publications/pdfs/Merkle-Tree.pdf). In future, the MT implementation could be changed.
 
 ### Zero-knowledge Proof (ZKP)
 
@@ -50,7 +50,7 @@ A special transition validation function can be used to restrict how leaves are 
 
 - It is impossible to generate proof of a statement on behalf of an identity without its consent.
 - Claims can be revoked.
-- Claims can be updated by creating new versions. When a claim is revoked, no further versions can be made. Claims can be set to be updatable or not with a flag (See [**Claim Structure**](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/spec.md#structure)).
+- Claims can be updated by creating new versions. When a claim is revoked, no further versions can be made. Claims can be set to be updatable or not with a flag (See [**Claim Structure**](#structure)).
 
 ```mermaid
 graph LR
@@ -75,8 +75,8 @@ graph LR
 - There are two types of claims regarding destination:
     - Claims about identity's own properties. Example: Operational Key, Ethereum Address, etc.
     - Claims about another identity's properties:
-        - **(Another) Identity has a Property**: Directional relation between an identity and a property (See [**Claim Structure**](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/spec.md#structure): identity stored in hIndex, i_1).
-        - **Property is Owned by (Another) Identity**: Directional relation between a property and an identity (See [**Claim Structure**](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/spec.md#structure): identity stored in hValue, v_1).
+        - **(Another) Identity has a Property**: Directional relation between an identity and a property (See [**Claim Structure**](#structure): identity stored in hIndex, i_1).
+        - **Property is Owned by (Another) Identity**: Directional relation between a property and an identity (See [**Claim Structure**](#structure): identity stored in hValue, v_1).
 
 > NOTE: Some of these properties are only guaranteed by a transition validation function (explained above in this document).
 
@@ -159,7 +159,7 @@ This way, each time that a key is used for signing, the identity can (and must) 
 ### Types of Keys
 
 - Baby Jubjub: Used for authentication. This type of key is designed to be efficient while working with zkSNARKs.
-  The `Baby Jubjub Elliptic Curve` specification is defined in [this document](https://github.com/iden3/iden3-docs/blob/master/source/docs/Baby-Jubjub.pdf).
+  The `Baby Jubjub Elliptic Curve` specification is defined in [this document](../publications/pdfs/Baby-Jubjub.pdf).
 
 
 ## Identity
@@ -239,7 +239,7 @@ The identity states can be published on the blockchain in one of the two ways: *
 
 The `Genesis State` is the initial state of any identity, and does not need to be published on the blockchain, as the claims under it can be verified against the identifier itself (that contains that identity state).
 
-![](https://github.com/iden3/docs/blob/master/mkdocs/docs/imgs/identity_state_transition.png)
+![](../imgs/identity_state_transition.png)
 
 #### Identity State Transition Function
 The `ITF` (Identity State Transition Function) is verified each time a state is updated. This ensures that the identity follows the protocol while updating.
@@ -388,7 +388,7 @@ The `IdState` (Identity State) is calculated by concatenating the roots of the t
 All trees are SMT (sparse Merkle trees) and use the hash function defined by the Identity Type.
 - Leaves in `ClT` (Claims Tree) are claims ((4 + 4) * 253 bits = 253 bytes)
 
-See [**Claim Structure**](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/spec.md#structure)
+See [**Claim Structure**](#structure)
 - Leaves in `ReT` (Revocation Tree) are Revocation Nonce + Version (64 bits + 32 bits = 12 bytes)
 ```
 Revocation Tree Leaf:
@@ -453,7 +453,7 @@ To prevent revealing anything about the content of the claim in the `ReT`, the c
 
 To prevent reversing revocation of a claim, the `ReT` needs to follow some transition rules like `ClT`, enforced by a zk proof (for space and verification efficiency).
 
-Apart from the revoking procedure, there is a method to define the validity of a claim based on expiration, by explicitly setting an expiration date in the claim (See [**Claim Structure**](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/spec.md#structure)). Revoking and Expiration are compatible methods to invalidate claims.
+Apart from the revoking procedure, there is a method to define the validity of a claim based on expiration, by explicitly setting an expiration date in the claim (See [**Claim Structure**](#structure)). Revoking and Expiration are compatible methods to invalidate claims.
 
 #### Update Claims
 

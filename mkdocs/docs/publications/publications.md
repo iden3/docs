@@ -2,10 +2,10 @@
 
 ### Research Papers
 
-- [Baby Jubjub Elliptic Curve](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/baby-jubjub/baby-jubjub.rst) ([pdf](../pdfs/Baby-Jubjub.pdf ':ignore'))
-- [EdDSA For Baby Jubjub Elliptic Curve with MiMC-7 Hash](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/ed-dsa/ed-dsa.rst) ([pdf](../pdfs/Ed-DSA.pdf ':ignore'))
-- [4-bit Window Pedersen Hash on the Baby Jubjub Elliptic Curve](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/pedersen-hash/pedersen.rst) ([pdf](../pdfs/Pedersen-Hash.pdf ':ignore'))
-- [Sparse Merkle Trees](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/merkle-tree/merkle-tree.rst) ([pdf](../pdfs/Merkle-Tree.pdf ':ignore'))
+- [Baby Jubjub Elliptic Curve](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/baby-jubjub/baby-jubjub.rst) ([pdf](./pdfs/Baby-Jubjub.pdf ':ignore'))
+- [EdDSA For Baby Jubjub Elliptic Curve with MiMC-7 Hash](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/ed-dsa/ed-dsa.rst) ([pdf](./pdfs/Ed-DSA.pdf ':ignore'))
+- [4-bit Window Pedersen Hash on the Baby Jubjub Elliptic Curve](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/pedersen-hash/pedersen.rst) ([pdf](./pdfs/Pedersen-Hash.pdf ':ignore'))
+- [Sparse Merkle Trees](https://github.com/iden3/iden3-docs/blob/master/source/iden3_repos/research/publications/zkproof-standards-workshop-2/merkle-tree/merkle-tree.rst) ([pdf](./pdfs/Merkle-Tree.pdf ':ignore'))
 
 ### Videos
 
