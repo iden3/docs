@@ -56,7 +56,7 @@ c. If the `id` doesn't have the `contractAddress` parameter, and you are not all
   c. If the parameter doesn't exist and the `revocationNonce` field is empty, consider this VC document invalid.
 6. Generate revocation proof call method `getRevocationStatus` from the issuer smart contract using `issuer id` and `nonce` from `step 5`.
     
-```json 
+```golang 
 const response = await this.onchainContract.getRevocationStatus(id, nonce);  
 ```
     
