@@ -14,7 +14,7 @@ type CredentialStatus struct {
 
 The `id` field is a composite field that contains encoded information in the following format:
 
-`did:[did-method]:[blockchain]:[network]:[id]/credentialStatus(revocationNonce=value)(contractAddress={chainID}:{contractAddress})`
+`did:[did-method]:[blockchain]:[network]:[id]/credentialStatus?revocationNonce=value&contractAddress={chainID}:{contractAddress}`
 
 `type` - credential type
 
@@ -24,7 +24,7 @@ Example:
 
 ```json
 {
-"id": "did:polygonid:polygon:main:2qCU58EJgrEMWhziKqC3qNXJkZPY8XCxDSBM4mqPkM/credentialStatusrevocationNonce=1234&contractAddress=1:0xf3bB959314B5D1e4587e1f597ccc289216608ac5",
+"id": "did:polygonid:polygon:main:2qCU58EJgrEMWhziKqC3qNXJkZPY8XCxDSBM4mqPkM/credentialStatus?revocationNonce=1234&contractAddress=1:0xf3bB959314B5D1e4587e1f597ccc289216608ac5",
 "type": "Iden3OnchainSparseMerkleTreeProof2023",
 "revocationNonce": "1234"
 }
@@ -49,7 +49,7 @@ Example of how to build a `non-revocation` proof with the `Iden3OnchainSparseMer
 a. If the `contractAddress` parameter is not empty, use this address to build the non-revocation proof.
 b. If the `contractAddress` is empty, extract the contract address from the `id` field (refer to [this code snippet](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L345-L354)).
 c. If the `id` doesn't have the `contractAddress` parameter, and you are not allowed to extract the contract address from the `id`, consider this VC document invalid.
-4. Extract `chainID` from `contractAddress` parameter. If `chainID` not exists - return an error.
+4. Extract `chainID` from `contractAddress` parameter. If `chainID` does not exist - return an error.
 5. Parse the `id` to obtain the `revocationNonce`:
   a. You can extract the `revocationNonce` from the `id` parameter `revocationNonce`.
   b. If the `id` doesn't have the `revocationNonce`, you can get the `revocationNonce` from the `revocationNonce` field.
