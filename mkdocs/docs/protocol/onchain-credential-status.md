@@ -12,7 +12,7 @@ type CredentialStatus struct {
 }
 ```
 
-The `id` field is a composite field that contains encoded information in the following format:
+The `ID` field is a composite field that contains encoded information in the following format:
 
 `did:[did-method]:[blockchain]:[network]:[id]/credentialStatus?(revocationNonce=value)&(contractAddress={chainID}:{contractAddress})`
 
@@ -30,6 +30,16 @@ Example:
 }
 ```
 
+The `revocationNonce` and `contractAddress` parameters inside the ID field are optional. Here's an example without them:
+
+```json
+{
+"id": "did:polygonid:polygon:main:2qCU58EJgrEMWhziKqC3qNXJkZPY8XCxDSBM4mqPkM/credentialStatus",
+"type": "Iden3OnchainSparseMerkleTreeProof2023",
+"revocationNonce": "1234"
+}
+```
+
 ## Process ID field
 
 In the context of `OnChainCredentialStatus`, the `id` field can contain two additional optional parameters: `revocationNonce` and `contractAddress`.
@@ -38,6 +48,25 @@ In the context of `OnChainCredentialStatus`, the `id` field can contain two addi
 If `contractAddress` is not set, find the default contract address by parsing DID [extracting the on-chain issuer contract address](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L345-L354) and getting `chainID` from the DID network. Use the blockchain name, network and contract address from the DID to make on-chain revocation request. If the DID doesn't have a contract address inside and `contractAddress` parameter is empty, this VC document should be considered invalid.
 
 If `revocationNonce` is not set, the `revocationNonce` value from the struct will be used instead.
+
+### Extract core.Id from the Credential Status ID field
+
+Here is how we can extract the `core.Id` from the `credentialStatus.id` field. The user will set it as the `id` parameter in the smart contract call. 
+
+1. Users should utilize the core library (js https://github.com/iden3/js-iden3-core or golang https://github.com/iden3/go-iden3-core/tree/v2) to extract the ID from the DID.
+
+    Code snippet for Golang: https://github.com/iden3/go-iden3-core/blob/v2/w3c/did_w3c.go#L165
+    
+    Code snippet for Javascript: https://github.com/iden3/js-iden3-core/blob/main/src/did/did.ts#L93
+  
+2. Here, the user gets the DID struct from `credentialStatus.id`. Then the user can use this function https://github.com/iden3/go-iden3-core/blob/v2/did.go#L184 to extract the `core.id` from the DID.
+
+    !!!info
+        Pseudo Go code:
+
+        issuerDID, _ := core.ParseDID(credentialStatus.id)
+
+        issuerID, _ := core.IDFromDID(issuerDID)
 
 ## Workflow
 
@@ -168,3 +197,4 @@ const response = await this.onchainContract.getRevocationStatus(id, nonce);
 ```
   
 Also, you can use the signature of getRevocationStauts `0xeb62ed0e` instead of the ABI.
+
