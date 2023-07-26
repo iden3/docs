@@ -2,7 +2,7 @@
 
 ## Identity
 
-At iden3, our goal is to democratize identity. We believe that everyone should be empowered to become their own [certification authority](https://en.wikipedia.org/wiki/Certificate_authority).
+At Iden3, our goal is to democratize identity. We believe that everyone should be empowered to become their own [certification authority](https://en.wikipedia.org/wiki/Certificate_authority).
 
 **What Do We Mean by Identity?**
 
@@ -66,19 +66,19 @@ With zero-knowledge proof, you can prove that you hold the key that belongs to a
 
 #### ICO Participation
 
-Say an ICO is available only to the KYC-approved or authorized users. With zk proofs, you can prove that you are an authorized person to participate in the ICO without revealing who you are or how much you spent.
+Say an ICO is available only to KYC-approved or authorized users. With ZK proofs, you can prove that you are an authorized person to participate in the ICO without revealing who you are or how much you spent.
 
 #### Anonymous Voting
 
-Similar to the above, zk proofs allow you to prove that you are an eligible identity, without revealing your identity.
+Similar to the above, ZK proofs allow you to prove that you are an eligible identity, without revealing your identity.
 
 ### Non-reusable Proofs
 
 A non-reusable proof is a received proof that is not valid to be sent to a third identity.
 
-For example, imagine that you belong to a political party, P. And P has made a private claim that you belong to it.
+For example, imagine that you belong to a given political party. This party has made a private claim that you belong to it.
 
-Now, you want to prove to another identity that you belong to P, but you don't want that this identity can pass on that proof to others. In other words, you want to make sure the proof stays between the two of you.We can do this using zero-knowledge proofs.
+Now, you want to prove to another identity that you belong to the party, but you don't want that this identity to pass on that proof to others. In other words, you want to make sure the proof stays between the two of you.We can do this using zero-knowledge proofs.
 
 How?
 
@@ -104,7 +104,7 @@ But since R clearly knows its private key, R' can't tell whether A is valid or n
 
 ### ZK-SNARKs
 
-You can think of zk-SNARKs as an efficient way to produce zero-knowledge proofs. These are the proofs that are short enough to be published on blockchain and that can be read later by a verifier.
+You can think of ZK-SNARKs as an efficient way to produce zero-knowledge proofs. These are the proofs that are short enough to be published on blockchain and that can be read later by a verifier.
 
 ## Digital Signatures
 
@@ -114,36 +114,33 @@ We use digital signatures for user authentication purposes and to prove that a c
 
 ## Merkle Trees
 
-In cryptography and computer science, a Merkle tree is a tree in which every leaf node is labelled with the hash of a data block and every non-leaf node is labelled with the cryptographic hash of the labels of its child nodes. ([Source](https://en.wikipedia.org/wiki/Merkle_tree))
+In cryptography and computer science, a Merkle tree is a tree in which every leaf node is labeled with the hash of a data block and every non-leaf node is labeled with the cryptographic hash of the labels of its child nodes. ([Source](https://en.wikipedia.org/wiki/Merkle_tree))
 
 We care about Merkle trees because we want to build a data structure that:
 
 - Can store lots of data (**scalability**)
 - Makes it easy to prove that some data exists (**proof of membership**)
-- Allows us to check that data hasn't been altered (**tamper resistance**)
+- Allows us to check that the data hasn't been altered (**tamper resistance**)
 
 Merkle trees satisfy the three properties mentioned above.
 
 ### Specifications
 
-Before we take a closer look at these properties, let's go through how to build a Merkle tree with some data.
+Before we take a closer look at these properties, let's go through how to build a Merkle tree with some given data.
 
 ![](../imgs/merkle-tree-specification-visual-0.png)
 
-Suppose we have several blocks containing data and that these blocks form the leaves of our tree.
+Suppose we have several blocks containing data and that these blocks form the leaves of our tree. The first step is to create a parent node for each data block. These parent nodes form the next level in the tree and store the hash of their descendent data block.
 
 ![](../imgs/merkle-tree-specification-visual-1.png)
 
-The first step is to create a parent node for each data block. These parent nodes form the next level in the tree and store the hash of their descendent data block.
+Next, we group these parent nodes into pairs and store the hash of each pair one level up the tree.
 
 ![](../imgs/merkle-tree-specification-visual-2.png)
 
-Next, we group these parent nodes into pairs and store the hash of each pair one level up the tree.
-
-![](../imgs/merkle-tree-specification-visual-3.png)
-
 We continue doing this until we are left with a single block, the root of the tree, also called Merkle Root.
 
+![](../imgs/merkle-tree-specification-visual-3.png)
 
 ### Tamper Resistance
 
@@ -177,7 +174,7 @@ Merkle trees allow us to quickly check membership (through a neat mechanism know
 
 ![](../imgs/merkle-tree-proof-of-membership-visual-0.png)
 
-Suppose, as usual, we remember just the root (on-chain). And we want to prove that a certain data block - data0 - is a member of the Merkle tree.
+Suppose that, as usual, we remember just the root (on-chain). And we want to prove that a certain data block, data0, is a member of the Merkle tree.
 
 ![](../imgs/merkle-tree-proof-of-membership-visual-1.png)
 
@@ -222,7 +219,7 @@ Storing data on a blockchain is expensive. Merkle trees help us in minimizing th
 As we saw in the previous sections, to ensure tamper-resistance and Proof of Membership, we need to store only the root of the tree, not the whole tree. This means that no matter how big the tree is, the only piece of data we actually need to store on-chain is the root.
 
 ### Sparse Merkle Trees
-At iden3, we use a slightly more complex data structure called a sparse Merkle tree. 
+At Iden3, we use a slightly more complex data structure called a sparse Merkle tree. 
 
 A sparse Merkle tree is like a standard Merkle tree, except that its contained data is indexed, and each data block is placed at the leaf that corresponds to that block's index.
 
@@ -262,18 +259,21 @@ One drawback to sparse Merkle trees is that they are really big. This means that
 
 Luckily, these sorts of inefficiencies are largely illusory. Since fairly simple [optimizations](https://ethresear.ch/t/optimizing-sparse-merkle-trees/3751) exist to get around them!
 
->Note: while we won't get into the details here, one of the keys to these optimizations is that sparse Merkle trees are mostly sparse. This means many of the subtrees will end up being zero subtrees. Since H(0), H(H(0)), H(H(H(0))), and so on are all constant values, the zero-subtrees can be cached (calculated once, stored, and then omitted from Merkle proofs), greatly reducing the size of computations.
+!!!note
+    While we won't get into the details here, one of the keys to these optimizations is that sparse Merkle trees are mostly sparse. This means many of the subtrees will end up being zero subtrees. 
+    
+    Since H(0), H(H(0)), H(H(H(0))), and so on are all constant values, the zero-subtrees can be cached (calculated once, stored, and then omitted from Merkle proofs), greatly reducing the size of computations.
 
 
-### Why Do We use Merkle Trees at iden3?
+### Why Do We use Merkle Trees at Iden3?
 
-At iden3, one of our major goals is scalability. Specifically, we believe that anybody should be able to create as many identities as they want. And that **any identity should be able to generate as many claims as it wants.**
+At Iden3, one of our major goals is scalability. Specifically, we believe that anybody should be able to create as many identities as they want. And that **any identity should be able to generate as many claims as it wants.**
 
-Imagine if you had to make a new transaction to the blockchain every time you wanted to make a new claim? Even worse, imagine you're a government and you're responsible for making millions of claims every day!
+Imagine if you had to make a new transaction to the blockchain every time you wanted to make a new claim? Even worse, imagine you're a government institution and you're responsible for making millions of claims every day.
 
 Achieving this goal requires minimizing the amount of data stored on-chain. This is where Merkle trees come into the picture.
 
-Even if you're a government that is making millions of claims a day, you can just construct a tree (off-chain) with each claim as a separate data block, and simply calculate and store the root on-chain.
+Even if you're a government institution that is making millions of claims a day, you can just construct a tree (off-chain) with each claim as a separate data block, and simply calculate and store the root on-chain.
 
 In other words, Merkle trees allow prolific claim generators to add/modify **millions of claims** in a single transaction. This makes it easy to scale the claims.
 
@@ -298,8 +298,7 @@ While we would not get into the details here, let's briefly discuss what each of
 
 **Hiding** means that given an output there's no feasible way to figure out the input that generated it.
 
-**Puzzle-friendliness** is a little more complicated. Intuitively, it means that it is very hard to target the hash function to come out to some particular output value y. Don't worry if you can't understand why this property is useful. In our context of things, it is not very important.
-
+**Puzzle-friendliness**, intuitively, means that it is very hard to target the hash function to come out to some particular output value y. 
 
 #### Hash Pointers
 
