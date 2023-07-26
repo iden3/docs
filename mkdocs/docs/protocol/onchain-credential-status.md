@@ -33,7 +33,7 @@ Example:
 ## Process ID field
 
 In the context of `OnChainCredentialStatus`, the `id` field can contain two additional optional parameters: `revocationNonce` and `contractAddress`.
-`revocationNonce` is a credential revocation `nonce`, while `contractAddress` is the address of a smart contract that holds public information of identity such as revocation trees and roots tree, etc. The `contractAddress` field is composed by two parts: `chainID` and `contractAddress`. Use `chainID` to select the correct network.
+`revocationNonce` is a credential revocation `nonce`, while `contractAddress` is the address of a smart contract that implements an on-chain issuer interface. The `contractAddress` field is composed by two parts: `chainID` and `contractAddress`. Use `chainID` to select the correct network.
 
 If `contractAddress` is not set, find the default contract address by parsing DID [extracting the on-chain issuer contract address](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L345-L354) and getting `chainID` from the DID network. Use the blockchain name, network and contract address from the DID to make on-chain revocation request. If the DID doesn't have a contract address inside and `contractAddress` parameter is empty, this VC document should be considered invalid.
 
@@ -48,13 +48,13 @@ Example of how to build a `non-revocation` proof with the `Iden3OnchainSparseMer
 3. Parse the `id` as a valid DID and extract the on-chain issuer contract address from this `id`:
 a. If the `contractAddress` parameter is not empty, use this address to build the non-revocation proof.
 b. If the `contractAddress` is empty, extract the contract address from the `id` field (refer to [this code snippet](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L345-L354)).
-c. If the `id` doesn't have the `contractAddress` parameter, and you are not allowed to extract the contract address from the `id`, consider this VC document invalid.
-4. Extract `chainID` from `contractAddress` parameter. If `chainID` does not exist - return an error.
+c. If the `id` doesn't have the `contractAddress` parameter, and you are not allowed to extract the contract address from the `DID`, consider this VC document invalid.
+4. Extract `chainID` from `contractAddress` parameter. If `chainID` does not exist - try to extract `chainID` from DID. If both empty - return an error.
 5. Parse the `id` to obtain the `revocationNonce`:
   a. You can extract the `revocationNonce` from the `id` parameter `revocationNonce`.
   b. If the `id` doesn't have the `revocationNonce`, you can get the `revocationNonce` from the `revocationNonce` field.
   c. If the parameter doesn't exist and the `revocationNonce` field is empty, consider this VC document invalid.
-6. Generate revocation proof call method `getRevocationStatus` from the issuer smart contract using `issuer id` and `nonce` from `step 5`.
+6. Generate revocation proof call method `getRevocationStatus` from the issuer smart contract using the information you received earlier.
     
 ```golang 
 const response = await this.onchainContract.getRevocationStatus(id, nonce);  
