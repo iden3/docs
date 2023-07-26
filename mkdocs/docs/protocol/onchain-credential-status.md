@@ -14,7 +14,7 @@ type CredentialStatus struct {
 
 The `id` field is a composite field that contains encoded information in the following format:
 
-`did:[did-method]:[blockchain]:[network]:[id]/credentialStatus?revocationNonce=value&contractAddress={chainID}:{contractAddress}`
+`did:[did-method]:[blockchain]:[network]:[id]/credentialStatus?(revocationNonce=value)&(contractAddress={chainID}:{contractAddress})`
 
 `type` - credential type
 
