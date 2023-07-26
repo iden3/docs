@@ -60,20 +60,21 @@ did:<method>:<network>:<subnet>:<id>
 ```
 
 Example of valid DIDs:
+
 1.
     ```
     did:iden3:eth:mainnet:11AbuG9EKnWVXK1tooT2NyStQod2EnLhfccSajkwJA
     ```
     where:
-    * `did:iden3` is DID method
-    * `eth:mainnet` is the network identifier for the Mumbai testnet
-    * `id`, base58-encoded id.
+    * `did:iden3` is DID method  
+    * `eth:mainnet` is the network identifier for the Ethereum Mainnet
+    * `id`, base58-encoded id.  
 
 2.
     ```
     did:polygonid:polygon:mumbai:2qCU58EJgrEMAMwdTehMoxtopwP1gKXCEt9GGeVDaG
     ```
     where:
-    * `did:polygonid` is DID method
-    * `polygon:mumbai` is the network identifier for the Mumbai testnet
-    * `id`, base58-encoded id.
+    * `did:polygonid` is DID method  
+    * `polygon:mumbai` is the network identifier for the Mumbai testnet  
+    * `id`, base58-encoded id.  

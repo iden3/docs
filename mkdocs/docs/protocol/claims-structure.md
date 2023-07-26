@@ -19,9 +19,10 @@ Ht-->Hv
 ## Common Structure
 
 A claim always contains a subject, that can be:
+
 - **Self**: The claim says something about itself.  The subject is implicit, and it's the identity that makes claim.
-- **OtherIden**: The claim says something about some other identity (identifies by other's ID).
-- **Object**: The claim says something about an object (identifies by the object's ID).
+- **OtherIden**: The claim says something about some other identity (identified by other's ID).
+- **Object**: The claim says something about an object (identified by the object's ID).
 
 If the subject is _Self_ -  _identity_, sections  i_1, v_1 can be empty. 
 

@@ -5,7 +5,7 @@
 The login protocol is based on the signature protocol, in which a user signs a packet using an authorized kSign key. For the login case, the user desires to assert a particular identity (an
 Ethereum address in this case) to a server so that s/he is allowed access to the service while being identified.
 
-![Login Overview](https://github.com/iden3/docs/blob/master/mkdocs/docs/services/images/login_overview.png)
+![Login Overview](./images/login_overview.png)
 
 ## Assumptions
 
@@ -21,7 +21,7 @@ Ethereum address in this case) to a server so that s/he is allowed access to the
 
 ## Protocol Flow
 
-![Login Flow](https://github.com/iden3/docs/blob/master/mkdocs/docs/services/images/login_flow.png)
+![Login Flow](./images/login_flow.png)
 
 Challenges contain a cryptographic nonce and have a timeout that
 indicates the validity of the nonce in the challenge. A signed challenge with a timed out nonce must be rejected by the server. The server must store a list of the nonces that have not timed out and have not been signed yet to guarantee the freshness.
