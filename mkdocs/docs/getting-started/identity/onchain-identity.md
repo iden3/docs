@@ -6,7 +6,7 @@ The OnChain Identity manages its own identity trees on chain. It can issue crede
 
 ## OnChain Issuer
 
-And OnChain Issuer is a special case of OnChain Identity, which is used to issue credentials to other identities.
+The OnChain Issuer is a special case of OnChain Identity, which is used to issue credentials to other identities.
 
 ## Libraries and Contracts
 
