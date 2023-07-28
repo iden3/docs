@@ -53,14 +53,17 @@ If `revocationNonce` is not set, the `revocationNonce` value from the struct wil
 
 Example of how to build a `non-revocation` proof with the `Iden3OnchainSparseMerkleTreeProof2023` credential status type:
 
+1. Extract the `credentialStatus` object from the verifiable credential.
 1. Parse core.DID from credentialStatus.id field with [js](https://github.com/iden3/js-iden3-core/blob/baa0ead8a3e2340bb4d78132ec63e6e24d806da9/src/did/did.ts#L160)|[go](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/w3c/did_w3c.go#L165)
 1. Extract core.Id fome core.DID with [js](https://github.com/iden3/js-iden3-core/blob/baa0ead8a3e2340bb4d78132ec63e6e24d806da9/src/did/did.ts#L160)|[go](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L184)
-1. Extract the `credentialStatus` object from the verifiable credential.
-1. Extract the `id` field from the `credentialStatus` object.
-1. Parse the `id` as a valid DID and extract the on-chain issuer contract address from this `id`:
-a. If the `contractAddress` parameter is not empty, use this address to build the non-revocation proof.
-b. If the `contractAddress` is empty, extract the contract address from the `id` field (refer to [this code snippet](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L345-L354)).
-c. If the `id` doesn't have the `contractAddress` parameter, and you are not allowed to extract the contract address from the `DID`, consider this VC document invalid.
+1. Use the DID from step two to extract the on-chain issuer contract address:
+
+    a. If the `contractAddress` parameter is not empty, use this address to build the non-revocation proof.
+
+    b. If the `contractAddress` is empty, extract the contract address from the `id` field (refer to [this code snippet](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L345-L354)).
+    
+    c. If the `id` doesn't have the `contractAddress` parameter, and you are not allowed to extract the contract address from the `DID`, consider this VC document invalid.
+
 1. Extract `chainID` from `contractAddress` parameter. If `chainID` does not exist - try to extract `chainID` from DID. If both empty - return an error.
 1. Parse the `id` to obtain the `revocationNonce`:
   a. You can extract the `revocationNonce` from the `id` parameter `revocationNonce`.
