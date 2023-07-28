@@ -61,14 +61,18 @@ Example of how to build a `non-revocation` proof with the `Iden3OnchainSparseMer
     a. If the `contractAddress` parameter is not empty, use this address to build the non-revocation proof.
 
     b. If the `contractAddress` is empty, extract the contract address from the `id` field (refer to [this code snippet](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L345-L354)).
-    
+
     c. If the `id` doesn't have the `contractAddress` parameter, and you are not allowed to extract the contract address from the `DID`, consider this VC document invalid.
 
 1. Extract `chainID` from `contractAddress` parameter. If `chainID` does not exist - try to extract `chainID` from DID. If both empty - return an error.
 1. Parse the `id` to obtain the `revocationNonce`:
-  a. You can extract the `revocationNonce` from the `id` parameter `revocationNonce`.
-  b. If the `id` doesn't have the `revocationNonce`, you can get the `revocationNonce` from the `revocationNonce` field.
-  c. If the parameter doesn't exist and the `revocationNonce` field is empty, consider this VC document invalid.
+
+    a. You can extract the `revocationNonce` from the `id` parameter `revocationNonce`.
+
+    b. If the `id` doesn't have the `revocationNonce`, you can get the `revocationNonce` from the `revocationNonce` field.
+
+    c. If the parameter doesn't exist and the `revocationNonce` field is empty, consider this VC document invalid.
+
 1. Generate revocation proof call method `getRevocationStatus` from the issuer smart contract using the information you received earlier.
     
 ```golang 
