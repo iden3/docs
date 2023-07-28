@@ -1,6 +1,6 @@
 # OnChain Credential Status
 
-On-chain identity verification requires the ability to check whether a claim has been revoked using a smart contract. To accomplish this, the claim must include information about the smart contract, such as its address, blockchain, and network. This information can be stored in the `CredentialStatus` structure.
+On-chain identity verification requires the ability to check whether a credential has been revoked using a smart contract. To accomplish this, the credential should have the `CredentialStatus` structure of type `Iden3OnchainSparseMerkleTreeProof2023` and include a revocation nonce with information about the smart contract, such as its address, blockchain, and network.
 
 The `CredentialStatus` structure should contain the following fields:
 
@@ -186,5 +186,5 @@ const response = await this.onchainContract.getRevocationStatus(id, nonce);
   ]
 ```
   
-Also, you can use the signature of getRevocationStauts `0xeb62ed0e` instead of the ABI.
+Also, you can use the method ID of getRevocationStatus `0xeb62ed0e` instead of the ABI.
 
