@@ -49,41 +49,24 @@ If `contractAddress` is not set, find the default contract address by parsing DI
 
 If `revocationNonce` is not set, the `revocationNonce` value from the struct will be used instead.
 
-### Extract core.Id from the Credential Status ID field
-
-Here is how we can extract the `core.Id` from the `credentialStatus.id` field. The user will set it as the `id` parameter in the smart contract call. 
-
-1. Users should utilize the core library (js https://github.com/iden3/js-iden3-core or golang https://github.com/iden3/go-iden3-core/tree/v2) to extract the ID from the DID.
-
-    Code snippet for Golang: https://github.com/iden3/go-iden3-core/blob/v2/w3c/did_w3c.go#L165
-    
-    Code snippet for Javascript: https://github.com/iden3/js-iden3-core/blob/main/src/did/did.ts#L93
-  
-2. Here, the user gets the DID struct from `credentialStatus.id`. Then the user can use this function https://github.com/iden3/go-iden3-core/blob/v2/did.go#L184 to extract the `core.id` from the DID.
-
-    !!!info
-        Pseudo Go code:
-
-        issuerDID, _ := core.ParseDID(credentialStatus.id)
-
-        issuerID, _ := core.IDFromDID(issuerDID)
-
 ## Workflow
 
 Example of how to build a `non-revocation` proof with the `Iden3OnchainSparseMerkleTreeProof2023` credential status type:
 
+1. Parse core.DID from credentialStatus.id field with [js](https://github.com/iden3/js-iden3-core/blob/baa0ead8a3e2340bb4d78132ec63e6e24d806da9/src/did/did.ts#L160)|[go](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/w3c/did_w3c.go#L165)
+1. Extract core.Id fome core.DID with [js](https://github.com/iden3/js-iden3-core/blob/baa0ead8a3e2340bb4d78132ec63e6e24d806da9/src/did/did.ts#L160)|[go](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L184)
 1. Extract the `credentialStatus` object from the verifiable credential.
-2. Extract the `id` field from the `credentialStatus` object.
-3. Parse the `id` as a valid DID and extract the on-chain issuer contract address from this `id`:
+1. Extract the `id` field from the `credentialStatus` object.
+1. Parse the `id` as a valid DID and extract the on-chain issuer contract address from this `id`:
 a. If the `contractAddress` parameter is not empty, use this address to build the non-revocation proof.
 b. If the `contractAddress` is empty, extract the contract address from the `id` field (refer to [this code snippet](https://github.com/iden3/go-iden3-core/blob/014f51e92da5c0c89c95c31e42bfca1652d2ad14/did.go#L345-L354)).
 c. If the `id` doesn't have the `contractAddress` parameter, and you are not allowed to extract the contract address from the `DID`, consider this VC document invalid.
-4. Extract `chainID` from `contractAddress` parameter. If `chainID` does not exist - try to extract `chainID` from DID. If both empty - return an error.
-5. Parse the `id` to obtain the `revocationNonce`:
+1. Extract `chainID` from `contractAddress` parameter. If `chainID` does not exist - try to extract `chainID` from DID. If both empty - return an error.
+1. Parse the `id` to obtain the `revocationNonce`:
   a. You can extract the `revocationNonce` from the `id` parameter `revocationNonce`.
   b. If the `id` doesn't have the `revocationNonce`, you can get the `revocationNonce` from the `revocationNonce` field.
   c. If the parameter doesn't exist and the `revocationNonce` field is empty, consider this VC document invalid.
-6. Generate revocation proof call method `getRevocationStatus` from the issuer smart contract using the information you received earlier.
+1. Generate revocation proof call method `getRevocationStatus` from the issuer smart contract using the information you received earlier.
     
 ```golang 
 const response = await this.onchainContract.getRevocationStatus(id, nonce);  
