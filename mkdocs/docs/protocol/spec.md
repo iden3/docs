@@ -29,7 +29,7 @@ The `Merkle tree` specification is defined in [this document](../publications/pd
 
 In cryptography, a zero-knowledge proof is a method by which one party (the prover) can prove to a second party (the verifier) that the prover knows a value x (that fulfills some constraints), without revealing any other information apart from the fact that s/he knows the value x.
 
-The technologies that implement these techniques are evolving rapidly. As of now, the protocol uses zkSNARKs Groth16, but in future, the zk protocol could be changed.
+The technologies that implement these techniques are evolving rapidly. As of now, the protocol uses zkSNARKs Groth16, but in future, the ZK protocol could be changed.
 zkSNARK stands for "Zero-knowledge Succinct Non-interactive Argument of Knowledge", and has the following properties:
 
 - **Non-interactive**: With a single message (credential) from the prover, the verifier can verify the proof.  This is good because it allows sending proofs to a smart contract that can verify these proofs immediately.
@@ -79,7 +79,8 @@ graph LR
         - **(Another) Identity has a Property**: Directional relation between an identity and a property (See [**Claim Structure**](#structure): identity stored in hIndex, i_1).
         - **Property is Owned by (Another) Identity**: Directional relation between a property and an identity (See [**Claim Structure**](#structure): identity stored in hValue, v_1).
 
-> NOTE: Some of these properties are only guaranteed by a transition validation function (explained above in this document).
+!!!note
+    Some of these properties are only guaranteed by a transition validation function (explained above in this document).
 
 ### Structure
 
@@ -91,18 +92,18 @@ h_t = H(h_i, h_v)
 
 ```mermaid
 graph TD
-Hi-->i0
-Hi-->i1
-Hi-->i2
-Hi-->i3
+    Hi-->i0
+    Hi-->i1
+    Hi-->i2
+    Hi-->i3
 
-Hv-->v0
-Hv-->v1
-Hv-->v2
-Hv-->v3
+    Hv-->v0
+    Hv-->v1
+    Hv-->v2
+    Hv-->v3
 
-Ht-->Hi
-Ht-->Hv
+    Ht-->Hi
+    Ht-->Hv
 ```
 
 ```
@@ -216,7 +217,8 @@ For the initial implementation of the protocol, the Genesis Claims Tree will con
 
 While an identity does not add, update or revoke claims after the Genesis State, its identity state does not need to be published on the blockchain, and the `Genesis Claims` can be verified directly against the `Genesis ID`. This is because the Genesis ID is built by the Merkle Root that holds those claims.
 
-> NOTE: The Genesis ID is calculated with the Identity State as a hash of the Genesis Claims Tree Root, an empty Revocation Tree Root and an empty Roots Tree Root.
+!!!note
+    The Genesis ID is calculated with the Identity State as a hash of the Genesis Claims Tree Root, an empty Revocation Tree Root and an empty Roots Tree Root.
 
 #### Identifier Format
 
@@ -248,7 +250,8 @@ The `ITF` (Identity State Transition Function) is verified each time a state is 
 
 An Identity Merkle tree is a sparse binary tree that allows only the addition of the leaves (no edition or deletion). Adding new claims, updating them through versions and revoking need to be done according to the `ITF`. To ensure this, we use zero-knowledge proofs in a way that when an identity is publishing a new state to the smart contract, it also sends a zero-knowledge proof (`π`), proving that the `ϕ` is satisfied following the `ITF`. In this way, all the identity states published on the blockchain are validated to be following the protocol.
 
-> NOTE: In the initial version of the implementation, there will be no checks to verify that the trees are append-only in the smart contract. This is due to the fact that complex computations are required to generate the zk proofs for multiple claim additions, (a requirement for scalability).
+!!!note
+    In the initial version of the implementation, there will be no checks to verify that the trees are append-only in the smart contract. This is due to the fact that complex computations are required to generate the ZK proofs for multiple claim additions, (a requirement for scalability).
 
 The full circuit can be found here: https://github.com/iden3/circuits/blob/master/circuits/stateTransition.circom
 
@@ -273,7 +276,7 @@ Identity Profiles are irreversible and indistinguishable:
 - **Irreversible**, thanks to the properties of the underlying hash function, meaning that it is impossible to retrieve the `Genesis ID` from an `Identity Profile`, unless you know the nonce.  
 - **indistinguishable**, the data format of Identity Profiles is the same as Genesis IDs. It follows that an external party cannot tell if an identity is using its Genesis ID or one of its many Identity Profiles.
 
-An Identity can receive claims to a specific Identity Profile. An Identity Profile keeps all the properties of [Genesis IDs](#genesis-id)) while adding:
+An Identity can receive claims to a specific Identity Profile. An Identity Profile keeps all the properties of [Genesis IDs](#genesis-id) while adding:
 
 - **Anti-track**
 
@@ -287,7 +290,7 @@ Users can decide which profiles to show as it is only based on the nonce. An Ide
 
 Users can get claims issued to an Identity Profile (or to their Genesis ID) and generate proof, based on these claims, from a different Identity Profile. The Verifier will be only able to see a valid proof coming from the Identity Profile that the user decided to use. No connection between the two identities is leaked.
 
-Despite being able to create multiples Identity Profiles, the control of the Identity is still still managed by the underlying [Private Key](./spec#keys)
+Despite being able to create multiples Identity Profiles, the control of the Identity is still still managed by the underlying [Private Key](#keys).
 
 <!-- Identity Profiles do not represent any additional attack vector for the security of the protocol. While the nonce has to be kept secret, losing the nonce will only reveal the link between the `Genesis ID` and an `Identity Profile` without any risk of losing control of the identity. **The control of an Identity is still managed by the underlying [Babyjubjub Private Key](./spec#keys)** -->
 
@@ -351,9 +354,10 @@ An identity can self-issue and revoke many `private keys` and the corresponding 
 
 Any private key for which a corresponding claim exists in the Identity Claims Tree and does not exist in the Identity Revocation Tree, can be used to create a zero-knowledge proof for valid credentials. Such proof should pass verification by a verifier as it is able to check the latest identity state in the blockchain.
 
-In the same way, any valid and non-revoked identity private key can be used to create a valid zk proof for the Identity State Transition Function.
+In the same way, any valid and non-revoked identity private key can be used to create a valid ZK proof for the Identity State Transition Function.
 
-> NOTE: An identity may lose some privacy while disclosing its state to a verifier, which can track all the proofs of the same identity in that manner. However, this issue can be mitigated if the identity state is published to the blockchain via a Relay. In such a case, only the Relay state needs to be disclosed to a verifier.
+!!!note 
+    An identity may lose some privacy while disclosing its state to a verifier, which can track all the proofs of the same identity in that manner. However, this issue can be mitigated if the identity state is published to the blockchain via a Relay. In such a case, only the Relay state needs to be disclosed to a verifier.
 
 <!-- ==TBD: Identity recovery procedure in case of a private key and state database loss== -->
 
@@ -386,9 +390,9 @@ The Identity State Update can be generalized as an `ITF_min` (minor Identity Tra
     - `RoR`: Roots Tree Root
 
 
-The `IdS` (Identity State) is calculated by concatenating the roots of the three user trees:
+The `IdState` (Identity State) is calculated by concatenating the roots of the three user trees:
 
-- `IdS`: `H(ClR || ReR || RoR)` where `H` is the Hash function defined by the Identity Type (for example, Poseidon).
+- `IdState`: `H(ClR || ReR || RoR)` where `H` is the Hash function defined by the Identity Type (for example, Poseidon).
 
 All trees are SMT (sparse Merkle trees) and use the hash function defined by the Identity Type.
 
@@ -418,7 +422,7 @@ All the public data must be made available for any holder so that
 they can build fresh Merkle tree proofs of both the `ReT` and `RoT`.  This allows the holder to:
 
 - Prove recent non-revocation / "current" version without interaction with the issuer.
-- Hide a particular `ClR` from all the other`ClR`s to avoid an issuer from discovering a claim hidden behind a zk proof. For this purpose, `ClR` is added to `RoR`.
+- Hide a particular `ClR` from all the other`ClR`s to avoid an issuer from discovering a claim hidden behind a ZK proof. For this purpose, `ClR` is added to `RoR`.
 
 The place and the method to access the publicly available data are specified in the Identities State smart contract. Two possible initial options are:
 
@@ -430,9 +434,9 @@ The place and the method to access the publicly available data are specified in 
 The first step in publishing a claim involves adding a new leaf to the `ClT`, which updates the identity `ClR`. Claims can be optionally published in batches, adding more than one leaf to the `ClT` in a single transaction. After the `ClT` has been updated, the identity must follow an Identity State Update so that anyone is able to verify the newly added claims. This involves adding the new `ClR` to the `RoT`, which in turn will update the `RoR`. After that, the new `IdState` is calculated and through a transaction it is updated in the Identities State Smart Contract (from now on, referred to as "the smart contract") on the blockchain. Once the updated `IdState` is in the smart contract, anyone can verify the validity of the newly added claims.
 
 
-The procedure to update the `IdS` in the smart contract can be achieved with the following criteria:
+The procedure to update the `IdState` in the smart contract can be achieved with the following criteria:
 
-- **Bad scalability (no batch), good privacy, and correctness**: The identity uploads the new `IdS` to the smart contract with proof of a correct transition from the old `IdS` to the new one. Only one claim is added to the `ClT` in the transition.
+- **Bad scalability (no batch), good privacy, and correctness**: The identity uploads the new `IdState` to the smart contract with proof of a correct transition from the old `IdState` to the new one. Only one claim is added to the `ClT` in the transition.
 - **Good scalability (batch), good privacy, and correctness**: Same as before, but many claims are added (batch) in the transition (with a single proof for all newly added claims)
 - **Good scalability (batch), good privacy but no correctness**: The identity uploads the new `IdState` to the smart contract, without proving correctness on the transition.
 
@@ -443,7 +447,8 @@ The criteria for correctness are as follows:
 
 To have or to not have the guarantee of the correctness is specified in the Identity Type so that any verifier knows about the guarantees provided by the protocol for the issuer claims.
 
-> NOTE: Good scalability refers to the verification process and the costs related to the smart contract. Batching with zkSNARKs can have a high computation load on the prover.
+!!!note
+    Good scalability refers to the verification process and the costs related to the smart contract. Batching with zkSNARKs can have a high computation load on the prover.
 
 #### Revocation Tree
 
@@ -455,14 +460,14 @@ To achieve this, every Identity has a `ClT` (Claim Tree) and a separate `ReT`(Re
 
 Proving that a claim is valid (and thus not revoked/updated) consists of two proofs:
 
-- Prove that the claim was issued at some time t (this proof is generated once by the issuer and uses a `IdS`-`ClR` at time t stored in the smart contract).
-- Prove that the claim has not been revoked/updated recently (this proof is generated by the holder with a recent `ReR` (Revocation Tree Root) by querying the public `ReT` (Revocation Tree), and verified against a recent `IdS`).
+- Prove that the claim was issued at some time t (this proof is generated once by the issuer and uses a `IdState`-`ClR` at time t stored in the smart contract).
+- Prove that the claim has not been revoked/updated recently (this proof is generated by the holder with a recent `ReR` (Revocation Tree Root) by querying the public `ReT` (Revocation Tree), and verified against a recent `IdState`).
 
 #### Revoke Claims
 
 To prevent revealing anything about the content of the claim in the `ReT`, the claim contains a revocation nonce in the value part, which is added as a leaf in the `ReT` to revocate the claim.
 
-To prevent reversing revocation of a claim, the `ReT` needs to follow some transition rules like `ClT`, enforced by a zk proof (for space and verification efficiency).
+To prevent reversing revocation of a claim, the `ReT` needs to follow some transition rules like `ClT`, enforced by a ZK proof (for space and verification efficiency).
 
 Apart from the revoking procedure, there is a method to define the validity of a claim based on expiration, by explicitly setting an expiration date in the claim (See [**Claim Structure**](#structure)). Revoking and Expiration are compatible methods to invalidate claims.
 
@@ -470,11 +475,11 @@ Apart from the revoking procedure, there is a method to define the validity of a
 
 To update a claim, a new claim is added to the `ClT` with an increased version value in the index position of the claim (notice that the previous version of the claim is not touched). Then, a leaf is added to the `ReT` containing the revocation nonce and the highest invalid version (that is, all the claims with that nonce and version equal or lower to the one in the leaf are invalid). This means that when a claim is updated, the same revocation nonce is used in the claim.
 
-To prevent downgrading the version of a claim, and forcing to have only one valid updatable claim at a time, the `ReT` needs to follow the transition rules (like the `ClT` does) enforced by a zk proof (for space and verification efficiency).
+To prevent downgrading the version of a claim, and forcing to have only one valid updatable claim at a time, the `ReT` needs to follow the transition rules (like the `ClT` does) enforced by a ZK proof (for space and verification efficiency).
 
 Updating and revoking are compatible methods to invalidate claims: an updatable claim can be revoked, which means no future (or past) updates would be valid.
 
-In case when a claim needs to be revoked completely, without the possibility to update, the highest version and the revocation nonce should be added to the `ReT`.
+In case a claim needs to be revoked completely, without the possibility to update, the highest version and the revocation nonce should be added to the `ReT`.
 
 ### Prove Claims (Credentials)
 
@@ -483,20 +488,20 @@ In case when a claim needs to be revoked completely, without the possibility to 
 
 #### Prove that a Claim was Issued at Time t
 
-- Requires proving a link between the claim and `IdS_t` (Identity State at time t) published in the smart contract. This proof requires:
+- Requires proving a link between the claim and `IdState_t` (Identity State at time t) published in the smart contract. This proof requires:
     - Claim
     - t 
     - MTP Claim -> `ClR_t`
     - `RoR_t` (Roots Tree at time t)
     - `ReR_t` (Revocation Tree Root at time t)
-    - `IdS_t`
+    - `IdState_t`
 
 where `t` is any time.
 
 #### Prove that the Claim is Currently Valid
 
 ##### Prove that the Claim Hasn't Been Revoked Recently 
-- Requires proving the inexistence of a link between the claim revocation nonce and a recent `IdS_t` (`t` must be recent according to the verifier requirements [1]) published in the smart contract. This proof requires:
+- Requires proving the inexistence of a link between the claim revocation nonce and a recent `IdState_t` (`t` must be recent according to the verifier requirements [1]) published in the smart contract. This proof requires:
     - Claim (Nonce)
     - t (Recent Time)
     - MTP !Nonce -> `ReR_t`
@@ -512,13 +517,13 @@ where `t` is any time.
 This is very similar to proving that a claim has not been recently revoked except that in this case, not only the nonce in the claim is checked, but also the version.
 
 - Requires proving the inexistence of a link between the claim revocation nonce
-version and a recent `IdS_t` (`t` must be recent according to the verifier requirements [1]) published in the smart contract.  This proof requires:
+version and a recent `IdState_t` (`t` must be recent according to the verifier requirements [1]) published in the smart contract.  This proof requires:
     - Claim (Nonce, Version)
     - t
     - MTP !(Nonce, Version) -> `ReR_t`
     - `ClR_t`
     - `RoR_t`
-    - `IdS_t`
+    - `IdState_t`
 
 Where `t` is a recent time.
 
@@ -533,18 +538,18 @@ A zero-knowledge proof allows hiding some information about a claim while provin
 - Prove that a claim was issued at least at time t.
 - Prove that the claim is currently valid.
 
-In the proof that shows "that a claim was issued at time at least t", there is an additional part that is added to hide a particular `IdS_t1` that is used (in order to hide the claim from the issuer. See Appendix Title 2). The proof then requires:
+In the proof that shows "that a claim was issued at time at least t", there is an additional part that is added to hide a particular `IdState_t1` that is used (in order to hide the claim from the issuer). The proof then requires:
 
     - Claim
     - t
     - MTP Claim -> `ClR_t1`
     - `RoR_t1` (Roots Tree at time t1)
     - `ReR_t1` (Revocation Tree Root at time t1)
-    - `IdS_t1`
+    - `IdState_t1`
     - MTP `ClR_t1` ->`RoR_t2`
     - `ClR_t2` (Claims Tree Root at time t2)
     - `ReR_t2` (Revocation Tree Root at time t2)
-    - `IdS_t2`
+    - `IdState_t2`
 
 Where `t1` is any time and `t2` is the recent time.
 
@@ -612,9 +617,9 @@ The full circuit can be found at: https://github.com/iden3/circuits/tree/master/
 
 [//]: # (- *Good scalability &#40;batch&#41;, good privacy, correctness*: All the proofs are)
 
-[//]: # (  private, the relay builds a relay root transition proof with zk proofs)
+[//]: # (  private, the relay builds a relay root transition proof with ZK proofs)
 
-[//]: # (  from the users. Requires 1 level of recursion in zk proofs.)
+[//]: # (  from the users. Requires 1 level of recursion in ZK proofs.)
 
 [//]: # (- *Good scalability &#40;batch&#41;, good privacy, no correctness*: The relay uploads a)
 
@@ -1291,3 +1296,4 @@ sequenceDiagram
 
 [//]: # ()
 [//]: # (![]&#40;../../imgs/treesAndProofs.png&#41;)
+-->
