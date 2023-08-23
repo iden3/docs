@@ -1,6 +1,6 @@
 # Verify the Proof On-Chain
 
-In order to complete the State Transition process it is necessary to verify the proof inside the `StateV2.sol` contract.
+In order to complete the State Transition process it is necessary to verify the proof inside the `State.sol` contract.
 
 The `transitState` public function of the contract takes the proof generated in the previous section and verifies it on-chain. On verification, the `identities` mapping associated with the `ID` that is executing the transition gets updated.
 
@@ -17,12 +17,12 @@ networks: {
 }
 ```
 
-2.**Add [StateV2.sol](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol#L148) contract and its dependencies ([Poseidon.sol](https://github.com/iden3/contracts/blob/master/contracts/lib/Poseidon.sol) and [Smt.sol](https://github.com/iden3/contracts/blob/master/contracts/lib/Smt.sol)) inside the contracts folder**
+2.**Add [State.sol](https://github.com/iden3/contracts/blob/master/contracts/state/State.sol#L148) contract and its dependencies ([Poseidon.sol](https://github.com/iden3/contracts/blob/master/contracts/lib/Poseidon.sol) and [Smt.sol](https://github.com/iden3/contracts/blob/master/contracts/lib/Smt.sol)) inside the contracts folder**
 
 3.**Import the state contract from the existing Mumbai testnet address**
 
 ```js
-const contract = await hre.ethers.getContractAt("StateV2", "0xEA9aF2088B4a9770fC32A12fD42E61BDD317E655");
+const contract = await hre.ethers.getContractAt("State", "0xEA9aF2088B4a9770fC32A12fD42E61BDD317E655");
 ```
 
 4.**Add inputs from the proof generated in the previous section**

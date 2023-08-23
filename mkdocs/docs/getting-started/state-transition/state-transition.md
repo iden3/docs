@@ -10,12 +10,12 @@ This proof can be:
 
 ## ZK State Transition Verifier
 
-State Contract has `transitState` [smart contract function](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol), which verifies proof of `stateTransition` [circuit](../../protocol/main-circuits.md#statetransition), which represents a set of rules that identity holder needs to follow to complete the state transition such as:
+State Contract has `transitState` [smart contract function](https://github.com/iden3/contracts/blob/master/contracts/state/State.sol), which verifies proof of `stateTransition` [circuit](../../protocol/main-circuits.md#statetransition), which represents a set of rules that identity holder needs to follow to complete the state transition such as:
 
 - The prover is the owner of the identity (checked using a digital signature by the private key corresponding the `authClaim`)
 - The `authClaim` of the prover hasn't been revoked.
  
-The identity state gets updated by calling the `transitState` [smart contract function](https://github.com/iden3/contracts/blob/master/contracts/state/StateV2.sol#L148). To call this function, it is necessary to pass in the proof generated previously.
+The identity state gets updated by calling the `transitState` [smart contract function](https://github.com/iden3/contracts/blob/master/contracts/state/State.sol#L148). To call this function, it is necessary to pass in the proof generated previously.
 
 ## Ethereum State Transition Verifier
 

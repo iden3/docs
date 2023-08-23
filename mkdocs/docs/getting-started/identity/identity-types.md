@@ -37,13 +37,9 @@ This type of identity was introduced to overcome some of the limitations of regu
 accounts to authenticate, prove statements and control identity (perform state transitions). That eliminates strict
 requirement to have Baby JubJub keys.
 
-Genesis Identifier and Genesis State are directly derived from the Ethereum address:
+Genesis state is always zero for Ethereum-controlled Identity.
 
-```
-genesisState = zeroPadding + ethAddress
-```
-
-So id generation is done in the following way:
+Genesis Identifier is directly derived from the Ethereum address in the following way:
 
 ```
 genesisId = idType + zeroPadding + ethAddress + checksum
@@ -63,11 +59,16 @@ idType: 0212 // DID method: PolygonID; Network: Polygon Mumbai
 +
 ethAddress: 0x0dcd1bf9a1b36ce34237eeafef220932846bcd82
 +
-checksum: 450a // checksum of idType + zeroPadding + ethAddress
+// uint16 sum of bytes of the byte string: idType + zeroPadding + ethAddress.
+// Note that the bytes of the uint16 are in reversed order, e.g. if sum is 0x0a45 then checksum is 0x450a
+checksum: 450a
 ===
-id: 0212000000000000000dcd1bf9a1b36ce34237eeafef220932846bcd82450a (bytes)
-id: 2qCU58EJgrELSJT6EzT27Rw9DhvwamAdbMLpePztYq (base58)
+id: 0A4582CD6B84320922EFAFEE3742E36CB3A1F91BCD0D000000000000001202 (bytes, reversed order)
+id: A5tDcNxacVgBQ4yHRvqv1FMR7cqNG74xGDhBWMidaq (base58)
 ```
+
+Note, that smart contracts use little-endian byte order, so the resulting identifier is reversed.
+
 
 ### DID representation
 
