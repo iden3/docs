@@ -120,7 +120,7 @@ The last two limitations can be overcome by adding BJJ keys to Claims Tree and p
 | Keys                               | BJJ keys                    | Ethereum Account (SC or EOA) | Ethereum Account (SC or EOA) + BJJ keys                    |
 | Authentication Method (off-chain)  | JWZ with ZKP using BJJ keys | JWS with Ethereum Signature  | JWS with Ethereum Signature or JWZ with ZKP using BJJ keys |
 | Authentication Method (on-chain)   | ZKP using BJJ keys          | Ethereum Account             | Ethereum Account or ZKP using BJJ keys                     |
-| State Transition Method            | ZKP using BJJ keys          | Ethereum Account             | Ethereum Account or ZKP using BJJ keys                     |
+| State Transition Method            | ZKP using BJJ keys          | Ethereum Account             | Only Ethereum Account                                      |
 | Key Rotation Support               | Only BJJ keys               | Can add BJJ keys             | Only BJJ keys                                              |
 | Profiles Support                   | Yes                         | No                           | Yes                                                        |
 | Credential Issuance with MTP proof | Yes                         | Yes                          | Yes                                                        |
