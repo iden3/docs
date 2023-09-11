@@ -29,3 +29,7 @@ OnChain Identity State Transition is performed by calling `transitState` functio
 It also verifies whether roots were changed since the last state transition as a result of possible claims/revocations added to the relevant trees.
 
 As the last step, it calls `transitStateGeneric` function of the `State` contract, which is designed to be generic and in the future will be used to perform state transitions of other types of identities and/or other transition logic.
+
+#### State data consistency warning
+
+Please be aware that both the `State` contract and `IdentityLib` do not impose any restrictions on users who wish to perform a state transition using `IdentityLib.transitState()` and then subsequently perform another state transition using the `State.transitState()` contract with BJJ keys authentication. This sequence of actions has the potential to create inconsistent state data between the `State` and On-chain Identity smart contracts. It is the responsibility of the on-chain identity owner to take steps to prevent such situations from occurring.
