@@ -28,5 +28,5 @@ The OnChain Issuer is a special case of OnChain Identity, which is used to issue
 OnChain Identity State Transition is performed by calling `transitState` function of the `IdentityLib` library. The function calculates new state from the claims, revocations and roots tree roots.
 It also verifies whether roots were changed since the last state transition as a result of possible claims/revocations added to the relevant trees.
 
-As the last step, it calls `transitStateGeneric` function of the `State` contract, which is designed to be generic and in the future will be used to perform state transitions of other types of identities.
-As of current implementation, it supports only OnChain Identity State Transition. Before saving new state, it authenticates a call by checking if identity id is derived from `msg.sender`. 
+As the last step, it calls `transitStateGeneric` function of the `State` contract, which is designed to be generic and in the future will be used to perform state transitions of other types of identities and/or other transition logic.
+As of current implementation, it supports only OnChain Identity State Transition. Before saving new state, it authenticates a call by checking if identity id is derived from `msg.sender`.
