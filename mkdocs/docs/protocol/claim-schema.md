@@ -6,7 +6,7 @@ Schemas are described via JSON-LD documents. A claim issuer could reuse existing
 
 ## Example: KYCAgeCredential Schema 
 
-- [Github Document](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/kyc-v3.json-ld)
+- [Github Document](https://github.com/iden3/claim-schema-vocab/blob/main/schemas/json-ld/kyc-v4.jsonld)
 
 ```json
 {
@@ -17,7 +17,7 @@ Schemas are described via JSON-LD documents. A claim issuer could reuse existing
       "id": "@id",
       "type": "@type",
       "KYCAgeCredential": {
-        "@id": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld#KYCAgeCredential",
+        "@id": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v4.jsonld#KYCAgeCredential",
         "@context": {
           "@version": 1.1,
           "@protected": true,
@@ -34,7 +34,7 @@ Schemas are described via JSON-LD documents. A claim issuer could reuse existing
             "@type": "xsd:integer"
           }
         }
-      },
+      }
     }
   ]
 }
@@ -47,16 +47,14 @@ The last part of the document contains a reference to the value types `birthday`
 
 ## Schema Hash
 
-The Schema Hash is a unique identifier for a Claim Schema. It is derived by hashing the string that represents unique identifier `@id` of the Claim Schema type. In the previous example, the hash pre-image is the string `https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld#KYCAgeCredential`.
-
+The Schema Hash is a unique identifier for a Claim Schema. It is derived by hashing the string that represents unique identifier `@id` of the Claim Schema type. In the previous example, the hash pre-image is the string `https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v4.jsonld#KYCAgeCredential`.
+`
 For example, in the case of the Auth Claim the schema hash would be 
 
 ```golang
 var sHash core.SchemaHash
-h := Keccak256([]byte("https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld#KYCAgeCredential"))
+h := Keccak256([]byte("https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v4.jsonld#KYCAgeCredential"))
 copy(sHash[:], h[len(h)-16:])
 sHashHex, _ := sHash.MarshalText()
-
 fmt.Println(string(sHashHex))
-// f21e8faf5c95292b6bfbc53f8143a9d4
 ```
