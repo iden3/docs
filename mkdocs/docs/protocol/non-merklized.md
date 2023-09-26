@@ -2,11 +2,11 @@
 
 ## Motivation
 
-While Iden3 protocol allows to have a root of  merklized JSON-LD document for proving the inclusion of the credential entries in the tree, that increases level of privacy and flexibility for the credential data there is also a need to issue a core claim with a data itself. This is useful as for onchain issuers that can’t work with ld schemas in smart contracts and also for use case when the actual data must be saved, e.g. Auth BJJ credential public key representation.
+While Iden3 protocol allows to "merklize" the whole JSON-LD document (transform the document into key-value pairs and put them into a sparse merkle tree for later proving of credential field value in the tree), which removes limits on amount and structure of the credential data, there's still a need to issue a core claim with the data itself. This is particularly useful for onchain issuers, which can’t work with json-ld schemas in smart contracts (for many reasons), and also for use cases when the actual data must be saved for cheaper access inside circuits (e.g. Auth BJJ credential public key representation).
 
 **Core Concept**
 
-Non merklized credentials now can be created relying on JSON-LD schemas.
+Non-merklized credentials now can be created relying on JSON-LD schemas.
 
 Example of such context: `https://schema.iden3.io/core/jsonld/auth.jsonld`
 
@@ -59,14 +59,29 @@ other possible values:
 
 See more information regarding data slot indexes [here](https://www.notion.so/Identity-Core-77fe2f04c8ad4e0296e2b90400d7ae3a?pvs=21). When user creates schema he should choose the slot to put the field.
 
-Nested structures are supported and path are created using concatenation with `.` e.g for birthday field in the Index Data Slot A mapping entry looks like that: `"...slotIndexA=passportInfo.birthday"`
+Nested structures are supported and path is created using concatenation with `.` e.g for birthday field in the Index Data Slot A mapping entry looks like that:
+
+`"iden3:v1:slotIndexA=passportInfo.birthday"`
 
 ```json
 {
-  ...
-			...
+  "@context": [
+    {
+      "@version": 1.1,
+      "@protected": true,
+      "id": "@id",
+      "type": "@type",
+      "Passport": {
+        "@id": "uuid:urn:229a9afc-4aad-48e4-b113-bf2ca6f3a98f",
+        "@context": {
+          "@version": 1.1,
+          "@protected": true,
+          "id": "@id",
+          "type": "@type",
+          "kyc-vocab": "https://github.com/iden3/claim-schema-vocab/blob/main/credentials/kyc.md#",
+          "xsd": "http://www.w3.org/2001/XMLSchema#",
           "passportInfo": {
-            "@id": "vocab:passportInfo",
+            "@id": "kyc-vocab:passportInfo",
             "@context": {
               "@version": 1.1,
               "@protected": true,
@@ -76,12 +91,14 @@ Nested structures are supported and path are created using concatenation with `.
               "type": "@type",
               "birthday": {
                 "@type": "xsd:integer",
-                "@id": "vocab:birthday"
+                "@id": "kyc-vocab:birthday"
               }
             }
           }
-      ...
-  ...
+        }
+      }
+    }
+  ]
 }
 ```
 
@@ -94,7 +111,7 @@ Meanwhile `@type` filed for each field must contain one of the supported primiti
 
 List of supported data types:
 
-```jsx
+```json
 XSD namespace {
   Boolean = 'http://www.w3.org/2001/XMLSchema#boolean',
   Integer = 'http://www.w3.org/2001/XMLSchema#integer',
@@ -113,7 +130,7 @@ https://github.com/0xPolygonID/js-sdk/releases/tag/v1.1.0
 
 To create non-merklized credential in go-schema-processor / JS-sdk  merklized Root Position must be set to None (default value) and ld context must contain `iden3_serialization` attribute.
 
-```go
+```golang
 processor.CoreClaimOptions{
 		  ..,
 			MerklizedRootPosition: verifiable.CredentialMerklizedRootPositionNone,
