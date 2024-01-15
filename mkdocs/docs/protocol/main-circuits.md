@@ -11,13 +11,18 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 > You can find all the source code on [Github - Iden3 Circuits](https://github.com/iden3/circuits). All the proving and verification keys necessary to use the circuits were generated after a Trusted Setup Ceremony. Details here:  [Iden3 Protocol Phase2 Trusted Setup Ceremony](https://github.com/0xPolygonID/phase2ceremony)
 
+## Circuits that are in beta:
+- [`credentialAtomicQueryV3.circom`](./main-circuits.md#credentialatomicqueryv3) checks that a claim issued to the prover and signed by the Issuer or included to the Issuer's state and  satisfies a query set by the verifier.
+- [`credentialAtomicQueryV3OnChain.circom`](./main-circuits.md#credentialatomicqueryv3onchain) checks that a claim issued to the prover and signed by the Issuer or included to the Issuer's state satisfies a query set by the verifier (smart contract). Authentication is optional.  
+
+
 ## stateTransition
 
 - [**Github**](https://github.com/iden3/circuits/blob/master/circuits/lib/stateTransition.circom)
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/stateTransition.circom)
 
-- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/feature/trusted-setup-v1.0.0.zip)
 
 #### Instantiation Parameters
 
@@ -25,29 +30,28 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 #### Inputs
 
-| Input                          | Description              | Public or Private
-| -----------                    | -----------          |  ----------
-| userID                      | Prover's (Genesis) Identifier                | Public
-| oldUserState             | Prover's Identity State (before transition)                 | Public
-| newUserState     | Prover's Identity State (after transition)           | Public
-| isOldStateGenesis               | "1" indicates that the old state is genesis: it means that this is the first State Transition, otherwise "0"              | Public
-| claimsTreeRoot                | Prover's Claims Tree Root                | Private
-| authClaimMtp[idOwnershipLevels] | Merkle Tree Proof of Auth Claim inside Prover's Claims tree                 | Private
-| authClaim[8]    | Prover's Auth Claim                | Private
-| revTreeRoot    | Prover's Revocation Tree Root                 | Private
-| authClaimNonRevMtp[idOwnershipLevels]    | Merkle Tree Proof of non membership of Auth Claim inside Prover's Revocation Tree                | Private
-| authClaimNonRevMtpNoAux              | Flag that indicates whether to check the auxiliary Node                  | Private
-| authClaimNonRevMtpAuxHv               | Auxiliary Node Value              | Private
-| authClaimNonRevMtpAuxHi          | Auxiliary Node Index           | Private
-| rootsTreeRoot          | Prover's Roots Tree Root            | Private
-| signatureR8x            | Signature of the challenge (Rx point)           | Private
-| signatureR8y            | Signature of the challenge (Ry point)           | Private
-| signatureS            | Signature of the challenge (S point)             | Private
-| newClaimsTreeRoot            | Claim Tree Root of the Prover after State Transtion is executed             | Private
-| newAuthClaimMtp[IdOwnershipLevels];            | Merkle Tree Proof of existance of the Prover's Auth Claim inside the Claims Tree after State Transtion is executed        | Private
-| newRevTreeRoot            | Revocation Tree Root of the Prover after State Transtion is executed             | Private
-| newRootsTreeRoot            | Roots Tree Root of the Prover after State Transtion is executed             | Private
-
+| Input                                 | Description                                                                                                        | Public or Private |
+|---------------------------------------|--------------------------------------------------------------------------------------------------------------------|-------------------|
+| userID                                | Prover's (Genesis) Identifier                                                                                      | Public            |
+| oldUserState                          | Prover's Identity State (before transition)                                                                        | Public            |
+| newUserState                          | Prover's Identity State (after transition)                                                                         | Public            |
+| isOldStateGenesis                     | "1" indicates that the old state is genesis: it means that this is the first State Transition, otherwise "0"       | Public            |
+| claimsTreeRoot                        | Prover's Claims Tree Root                                                                                          | Private           |
+| authClaimMtp[idOwnershipLevels]       | Merkle Tree Proof of Auth Claim inside Prover's Claims tree                                                        | Private           |
+| authClaim[8]                          | Prover's Auth Claim                                                                                                | Private           |
+| revTreeRoot                           | Prover's Revocation Tree Root                                                                                      | Private           |
+| authClaimNonRevMtp[idOwnershipLevels] | Merkle Tree Proof of non membership of Auth Claim inside Prover's Revocation Tree                                  | Private           |
+| authClaimNonRevMtpNoAux               | Flag that indicates whether to check the auxiliary Node                                                            | Private           |
+| authClaimNonRevMtpAuxHv               | Auxiliary Node Value                                                                                               | Private           |
+| authClaimNonRevMtpAuxHi               | Auxiliary Node Index                                                                                               | Private           |
+| rootsTreeRoot                         | Prover's Roots Tree Root                                                                                           | Private           |
+| signatureR8x                          | Signature of the challenge (Rx point)                                                                              | Private           |
+| signatureR8y                          | Signature of the challenge (Ry point)                                                                              | Private           |
+| signatureS                            | Signature of the challenge (S point)                                                                               | Private           |
+| newClaimsTreeRoot                     | Claim Tree Root of the Prover after State Transtion is executed                                                    | Private           |
+| newAuthClaimMtp[IdOwnershipLevels];   | Merkle Tree Proof of existance of the Prover's Auth Claim inside the Claims Tree after State Transtion is executed | Private           |
+| newRevTreeRoot                        | Revocation Tree Root of the Prover after State Transtion is executed                                               | Private           |
+| newRootsTreeRoot                      | Roots Tree Root of the Prover after State Transtion is executed                                                    | Private           |
 
 #### Scope
 
@@ -101,7 +105,7 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/authV2.circom)
 
-- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/feature/trusted-setup-v1.0.0.zip)
 
 #### Instantiation Parameters
 
@@ -110,35 +114,35 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 #### Inputs
 
-| Input                          | Description              | Public or Private
-| -----------                    | -----------          |  ----------
-| genesisID                      | genesis ID of the prover                | Private
-| profileNonce                      | Random number, stored by the user              | Private
-| state                      | Prover's Identity State                | Private
-| claimsTreeRoot                      | Prover's Claims Tree Root                | Private
-| revTreeRoot    | Prover's Revocation Tree Root                 | Private
-| rootsTreeRoot    | Prover's Roots Tree Root                 | Private
-| authClaim[8]     | Prover's Auth Claim           | Private
-| authClaimIncMtp[IdOwnershipLevels]             | Merkle Tree Proof of Auth Claim inclusion inside Prover's Claims tree                 | Private
-| authClaimNonRevMtp[IdOwnershipLevels]               | Merkle Tree Proof of non inclusion of Auth Claim Nonce inside Prover's Revocation Tree              | Private
-| authClaimNonRevMtpNoAux                | Flag that indicates whether to check the auxiliary Node                | Private
-| authClaimNonRevMtpAuxHi    | Auxiliary Node Index                | Private
-| authClaimNonRevMtpAuxHv | Auxiliary Node Value                 | Private
-| challenge    | Message to be signed by the Prover to prove control of an Identity                | Public
-| challengeSignatureR8x              | Signature of the challenge (Rx point)                    | Private
-| challengeSignatureR8y               | Signature of the challenge (Ry point)                | Private
-| challengeSignatureS          |  Signature of the challenge (S point)           | Private
-| gistRoot          |  Root of the GIST stored on chain          | Private
-| gistMtp[onChainLevels]          |  Merkle Tree Proof of Inclusion of the user state inside the global state          | Private
-| gistMtpAuxHi          |  Auxiliary Node Index           | Private
-| gistMtpAuxHv          |  Auxiliary Node Value      | Private
-| gistMtpNoAux          |  Flag that indicates whether to check the auxiliary Node           | Private
+| Input                                 | Description                                                                            | Public or Private |
+|---------------------------------------|----------------------------------------------------------------------------------------|-------------------|
+| genesisID                             | genesis ID of the prover                                                               | Private           |
+| profileNonce                          | Random number, stored by the user                                                      | Private           |
+| state                                 | Prover's Identity State                                                                | Private           |
+| claimsTreeRoot                        | Prover's Claims Tree Root                                                              | Private           |
+| revTreeRoot                           | Prover's Revocation Tree Root                                                          | Private           |
+| rootsTreeRoot                         | Prover's Roots Tree Root                                                               | Private           |
+| authClaim[8]                          | Prover's Auth Claim                                                                    | Private           |
+| authClaimIncMtp[IdOwnershipLevels]    | Merkle Tree Proof of Auth Claim inclusion inside Prover's Claims tree                  | Private           |
+| authClaimNonRevMtp[IdOwnershipLevels] | Merkle Tree Proof of non inclusion of Auth Claim Nonce inside Prover's Revocation Tree | Private           |
+| authClaimNonRevMtpNoAux               | Flag that indicates whether to check the auxiliary Node                                | Private           |
+| authClaimNonRevMtpAuxHi               | Auxiliary Node Index                                                                   | Private           |
+| authClaimNonRevMtpAuxHv               | Auxiliary Node Value                                                                   | Private           |
+| challenge                             | Message to be signed by the Prover to prove control of an Identity                     | Public            |
+| challengeSignatureR8x                 | Signature of the challenge (Rx point)                                                  | Private           |
+| challengeSignatureR8y                 | Signature of the challenge (Ry point)                                                  | Private           |
+| challengeSignatureS                   | Signature of the challenge (S point)                                                   | Private           |
+| gistRoot                              | Root of the GIST stored on chain                                                       | Private           |
+| gistMtp[onChainLevels]                | Merkle Tree Proof of Inclusion of the user state inside the global state               | Private           |
+| gistMtpAuxHi                          | Auxiliary Node Index                                                                   | Private           |
+| gistMtpAuxHv                          | Auxiliary Node Value                                                                   | Private           |
+| gistMtpNoAux                          | Flag that indicates whether to check the auxiliary Node                                | Private           |
 
 #### Output
 
-| Input                          | Description              | Public or Private
-| -----------                    | -----------          |  ----------
-| userID          |  Identifier of the user, assigned to H(genesisID, nonce) if nonce != 0, assigned to genesisID if nonce = 0  | Public
+| Input  | Description                                                                                               | Public or Private |
+|--------|-----------------------------------------------------------------------------------------------------------|-------------------|
+| userID | Identifier of the user, assigned to H(genesisID, nonce) if nonce != 0, assigned to genesisID if nonce = 0 | Public            |
 
 #### Scope
 
@@ -152,7 +156,7 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQueryMTPV2.circom)
 
-- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/feature/trusted-setup-v1.0.0.zip)
 
 
 The circuit takes a query by a verifier and a claim owned by the prover and generate a proof that the claim satisfies the query. In particular, it checks that: 
@@ -170,7 +174,7 @@ The circuit takes a query by a verifier and a claim owned by the prover and gene
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQueryMTPV2OnChain.circom)
 
-- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/feature/trusted-setup-v1.0.0.zip)
 
 
 This circuit should be used for smart contract verifiers. This circuits does all the checks that the the [credentialAtomicQueryMTPV2](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/main-circuits.md#credentialatomicquerymtpv2) circuit does, plus the following:
@@ -185,7 +189,7 @@ This reduces the number of public inputs and much cheaper for Smart Contracts to
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQuerySigV2.circom)
 
-- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/feature/trusted-setup-v1.0.0.zip)
 
 
 This circuit checks that an issuer has issued a claim for identity and validates ownership of that identity in the following manner:
@@ -203,7 +207,7 @@ This circuit checks that an issuer has issued a claim for identity and validates
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/credentialAtomicQuerySigV2OnChain.circom)
 
-- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/feature/trusted-setup-v1.0.0.zip)
 
 
 This circuit should be used for smart contract verifiers. This circuits does all the checks that the the [credentialAtomicQuerySigV2](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/main-circuits.md#credentialatomicquerysigv2) circuit does, plus the following:
@@ -211,3 +215,56 @@ This circuit should be used for smart contract verifiers. This circuits does all
 1. Check that prover controls the identity the same way as the AuthV2 circuit checks it
 2. Calculates hash of the query inputs, like claimSchema, slotIndex, operator, claimPathKey, claimPathNotExists and values as an output for all the query related inputs.
 This reduces the number of public inputs and much cheaper for Smart Contracts to verify the proof.
+
+
+## credentialAtomicQueryV3
+
+- [**Github**](https://github.com/iden3/circuits/blob/develop/circuits/offchain/credentialAtomicQueryV3OffChain.circom)
+
+- [**Example of instantiation**](https://github.com/iden3/circuits/blob/develop/circuits/credentialAtomicQueryV3.circom)
+
+- [**Circuit Specific Files (version 1.0.0-beta.0, NOT Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+
+
+This circuit checks that an issuer has issued a claim for identity and validates ownership of that identity in the following manner:
+
+1. Verifies that the identity or identity profile is the subject of the credential. 
+2. Verifies that the schema in the core claim representation contains hash of the credential type identifier.
+3. Verifies that credential is not expired.
+4. Depending on the proof of the verifiable credential (Iden3SparseMerkleTreeProof of BJJSignature) determines the proof verification flow and tree roots to verify.
+    1. Verification of BJJSignature Proof
+        1. Verifies that AuthBJJ credential of issuer (signing key) has a protocol defined schema hash.
+        2. Verifies that AuthBJJ credential of issuer (signing key) is not revoked by the issuer.
+        3. Verifies that signature is valid and created by AuthBJJ credential of issuer.
+        4. Verifies that core representation of Auth BJJ credential is included to the issuer state.
+        5. Verifies that user credential is not revoked in case revocation check is not skipped.
+        6. Verifies that passed issuer state is built from passed tree roots.
+    2. Verification of Iden3SparseMerkleTreeProof: 
+        1. Verifies that core representation of user credential is included to the issuer state.
+        2. Verifies that user credential is not revoked in case revocation check is not skipped.
+        3. Verifies that passed issuer state is built from passed tree roots in case revocation check is not skipped.
+5. Verifies query
+    1. Verifies that field of credential is a part of merklized root from core claim representation in case schema is for merklized credential.
+    2. Verifies that field of credential is a located at the expected data slot of core claim representation in case schema is for non-merklized credential.
+    3. Verifies that credential data satisfies query condition. 
+6.  Calculates nullifier in case nullifier session id, verifierID are is present and credential is issued on the user profile.
+7.  Calculates the selective disclosure operator result in case it's requested.
+8.  Generates user profile in case profile nonce is set.
+9.  Calculates link id in case links session id is set.
+
+## credentialAtomicQueryV3Onchain
+
+
+- [**Github**](https://github.com/iden3/circuits/blob/develop/circuits/onchain/credentialAtomicQueryV3OnChain.circom)
+
+- [**Example of instantiation**](https://github.com/iden3/circuits/blob/develop/circuits/credentialAtomicQueryV3OnChain.circom)
+
+- [**Circuit Specific Files ( version 1.0.0-beta.0, NOT Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+
+
+This circuit should be used for smart contract verifiers. This circuits does all the checks that the the credentialAtomicQueryV3 circuit does, plus the following:
+
+1. Checks that prover controls the identity in the same way as the AuthV2 circuit checks it in case auth is enabled.
+2. Verifies credential query in the same way as credentialAtomicQueryV3 does.
+3. Calculates hash of the query inputs, like claimSchema, slotIndex, operator, claimPathKey, claimPathNotExists and values as an output for all the query related inputs.
+   This reduces the number of public inputs and much cheaper for Smart Contracts to verify the proof.
