@@ -4,16 +4,16 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 
 - [`stateTransition.circom`](main-circuits.md#statetransition), checks the execution of the [identity state transition](../getting-started/state-transition/state-transition.md) by taking the old identity state and the new identity state as inputs.
 - [`authV2.circom`](main-circuits.md#authv2), checks that the prover is owner of an identity.
-- [`credentialAtomicQueryMTPV2.circom`](./main-circuits.md#credentialatomicquerymtpv2), checks that a claim issued to the prover (and added to issuer's Claims Tree) satisfies a query set by the verifier.
-- [`credentialAtomicQueryMTPV2OnChain.circom`](./main-circuits.md#credentialatomicquerymtpv2onchain), checks that a claim issued to the prover (and added to issuer's Claims Tree) satisfies a query set by the verifier and the verifier is a smart contract.
-- [`credentialAtomicQuerySigV2.circom`](./main-circuits.md#credentialatomicquerysigv2) checks that a claim issued to the prover (and signed by the Issuer) satisfies a query set by the verifier.
-- [`credentialAtomicQuerySigV2OnChain.circom`](./main-circuits.md#credentialatomicquerymtpv2onchain) checks that a claim issued to the prover (and signed by the Issuer) satisfies a query set by the verifier and the verifier is a smart contract.
+- [`credentialAtomicQueryMTPV2.circom`](./main-circuits.md#credentialatomicquerymtpv2), checks that a claim issued to the prover (added to issuer's Claims Tree) satisfies a query set by the verifier.
+- [`credentialAtomicQueryMTPV2OnChain.circom`](./main-circuits.md#credentialatomicquerymtpv2onchain), checks that a claim issued to the prover (added to issuer's Claims Tree) satisfies a query set by the verifier and the verifier is a smart contract.
+- [`credentialAtomicQuerySigV2.circom`](./main-circuits.md#credentialatomicquerysigv2) checks that a claim issued to the prover (signed by the Issuer) satisfies a query set by the verifier.
+- [`credentialAtomicQuerySigV2OnChain.circom`](./main-circuits.md#credentialatomicquerymtpv2onchain) checks that a claim issued to the prover (signed by the Issuer) satisfies a query set by the verifier and the verifier is a smart contract.
 
 > You can find all the source code on [Github - Iden3 Circuits](https://github.com/iden3/circuits). All the proving and verification keys necessary to use the circuits were generated after a Trusted Setup Ceremony. Details here:  [Iden3 Protocol Phase2 Trusted Setup Ceremony](https://github.com/0xPolygonID/phase2ceremony)
 
-## Circuits that are in beta:
-- [`credentialAtomicQueryV3.circom`](./main-circuits.md#credentialatomicqueryv3) checks that a claim issued to the prover and signed by the Issuer or included to the Issuer's state and  satisfies a query set by the verifier.
-- [`credentialAtomicQueryV3OnChain.circom`](./main-circuits.md#credentialatomicqueryv3onchain) checks that a claim issued to the prover and signed by the Issuer or included to the Issuer's state satisfies a query set by the verifier (smart contract). Authentication is optional.  
+## Circuits that are in beta
+- [`credentialAtomicQueryV3.circom`](./main-circuits.md#credentialatomicqueryv3) checks that a claim issued to the prover (signed by the Issuer or included to the Issuer's state) and satisfies a query set by the verifier.
+- [`credentialAtomicQueryV3OnChain.circom`](./main-circuits.md#credentialatomicqueryv3onchain) checks that a claim issued to the prover (signed by the Issuer or included to the Issuer's state) and satisfies a query set by the verifier (smart contract). Authentication check inside circuit can be disabled in case Ethereum-based identity authenticates with Ethereum account.
 
 
 ## stateTransition
@@ -62,42 +62,6 @@ This iden3 circuits are the heart of the protocol. The main ones are:
 - Verifies that the auth claim exists in the `newClaimsTreeRoot` using [`checkClaimExists(IdOwnershipLevels)` template](https://github.com/iden3/circuits/blob/master/circuits/lib/stateTransition.circom#L91)
 - Verifies that the new state (`newUserState`) matches the hash of the new claims tree root (`newClaimsTreeRoot`), revocation tree root (`newRevTreeRoot`) and roots tree root (`newRootsTreeRoot`) using [`checkIdenStateMatchesRoots()`](https://github.com/iden3/circuits/blob/master/circuits/lib/stateTransition.circom#L96)
 
-
-
-<!-- ## authV1 (Deprecated)
-
-- [**Github**](https://github.com/iden3/circuits/blob/master/circuits/lib/authentication.circom)
-
-- [**Example of instantiation**](https://github.com/iden3/circuits/blob/master/circuits/auth.circom)
-
-#### Instantiation Parameters
-
-- `IdOwnershipLevels` Merkle tree depth level for Claims tree
-
-#### Inputs
-
-| Input                          | Description              | Public or Private
-| -----------                    | -----------          |  ----------
-| userClaimsTreeRoot                      | Prover's Claims Tree Root                | Private
-| userAuthClaimMtp[IdOwnershipLevels]             | Merkle Tree Proof of Auth Claim inside Prover's Claims tree                 | Private
-| userAuthClaim[8]     | Prover's Auth Claim           | Private
-| userRevTreeRoot    | Prover's Revocation Tree Root                 | Private
-| userAuthClaimNonRevMtp[IdOwnershipLevels]               | Merkle Tree Proof of non membership of Auth Claim inside Prover's Revocation Tree              | Private
-| userAuthClaimNonRevMtpNoAux                | Flag that indicates whether to check the auxiliary Node                | Private
-| userAuthClaimNonRevMtpAuxHv | Auxiliary Node Value                 | Private
-| userAuthClaimNonRevMtpAuxHi    | Auxiliary Node Index                | Private
-| userRootsTreeRoot    | Prover's Roots Tree Root                 | Private
-| challenge    | Message to be signed by the Prover to prove control of an Identity                | Public
-| challengeSignatureR8x              | Signature of the challenge (Rx point)                    | Private
-| challengeSignatureR8y               | Signature of the challenge (Ry point)                | Private
-| challengeSignatureS          |  Signature of the challenge (S point)           | Private
-| userState          | Prover's Identity State            | Public
-| userID            | Prover's (Genesis) Identifier           | Public
-
-#### Scope
-
-- Prover is owner of an identity by signing a message using [`idOwnershipBySignature` template](./template-circuits.md#idownershipbysignature)
-- Contains `userID` as unconstrained input. This is needed as public input as it should be used by the verifier to authenticate the prover. -->
 
 ## authV2 
 
@@ -223,48 +187,47 @@ This reduces the number of public inputs and much cheaper for Smart Contracts to
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/develop/circuits/credentialAtomicQueryV3.circom)
 
-- [**Circuit Specific Files (version 1.0.0-beta.0, NOT Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (version 1.0.0-beta.0, NO Trusted Setup!)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
 
 
 This circuit checks that an issuer has issued a claim for identity and validates ownership of that identity in the following manner:
 
 1. Verifies that the identity or identity profile is the subject of the credential. 
-2. Verifies that the schema in the core claim representation contains hash of the credential type identifier.
-3. Verifies that credential is not expired.
-4. Depending on the proof of the verifiable credential (Iden3SparseMerkleTreeProof of BJJSignature) determines the proof verification flow and tree roots to verify.
-    1. Verification of BJJSignature Proof
-        1. Verifies that AuthBJJ credential of issuer (signing key) has a protocol defined schema hash.
-        2. Verifies that AuthBJJ credential of issuer (signing key) is not revoked by the issuer.
-        3. Verifies that signature is valid and created by AuthBJJ credential of issuer.
-        4. Verifies that core representation of Auth BJJ credential is included to the issuer state.
-        5. Verifies that user credential is not revoked in case revocation check is not skipped.
-        6. Verifies that passed issuer state is built from passed tree roots.
-    2. Verification of Iden3SparseMerkleTreeProof: 
-        1. Verifies that core representation of user credential is included to the issuer state.
-        2. Verifies that user credential is not revoked in case revocation check is not skipped.
-        3. Verifies that passed issuer state is built from passed tree roots in case revocation check is not skipped.
-5. Verifies query
-    1. Verifies that field of credential is a part of merklized root from core claim representation in case schema is for merklized credential.
-    2. Verifies that field of credential is a located at the expected data slot of core claim representation in case schema is for non-merklized credential.
-    3. Verifies that credential data satisfies query condition. 
-6.  Calculates nullifier in case nullifier session id, verifierID are is present and credential is issued on the user profile.
-7.  Calculates the selective disclosure operator result in case it's requested.
-8.  Generates user profile in case profile nonce is set.
-9.  Calculates link id in case links session id is set.
+2. Verifies that the schema in the core claim representation contains a hash of the credential type identifier.
+3. Verifies that the credential is not expired.
+4. Verifies that the credential is not revoked (in case the revocation check is not skipped).
+5. Verifies that the provided issuer state for non-revocation check is built from the provided tree roots (in case the revocation check is not skipped).
+6. Depending on the proof of the verifiable credential (Iden3SparseMerkleTreeProof of BJJSignature) determines the proof verification flow and tree roots to verify.
+    1. Verification of BJJSignature Proof:
+        1. Verifies that AuthBJJ credential of the issuer (signing key) has a protocol-defined schema hash.
+        2. Verifies that AuthBJJ credential of the issuer (signing key) is not revoked by the issuer.
+        3. Verifies that the signature is valid and created with a private key corresponding to AuthBJJ credential of the issuer.
+        4. Verifies that the core claim representation of AuthBJJ credential is included in the issuer state.
+        5. Verifies that the provided issuer state for AuthBJJ issuance check is built from the provided tree roots.
+    2. Verification of Iden3SparseMerkleTreeProof:
+        1. Verifies that the core claim representation of the user credential is included in the issuer state.
+        2. Verifies that the provided issuer state for issuance check is built from the provided tree roots.
+7. Verifies query:
+    1. Verifies that the credential field is a part of the merklized root from core claim representation (in case schema is for merklized credential).
+    2. Verifies that the credential field is located at the expected data slot of core claim representation (in case schema is for non-merklized credential).
+    3. Verifies that credential data satisfies the query condition. 
+8. Calculates nullifier in case nullifier session id and verifierID are set and credential has been issued to the user profile.
+9. Outputs the field value in case selective disclosure is requested.
+10. Generates user profile in case profile nonce is set.
+11. Calculates link id in case links session id is set.
 
 ## credentialAtomicQueryV3Onchain
-
 
 - [**Github**](https://github.com/iden3/circuits/blob/develop/circuits/onchain/credentialAtomicQueryV3OnChain.circom)
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/develop/circuits/credentialAtomicQueryV3OnChain.circom)
 
-- [**Circuit Specific Files ( version 1.0.0-beta.0, NOT Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (version 1.0.0-beta.0, NO Trusted Setup!)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
 
 
-This circuit should be used for smart contract verifiers. This circuits does all the checks that the the credentialAtomicQueryV3 circuit does, plus the following:
+This circuit should be used for smart contract verifiers. This circuit does all the checks that the credentialAtomicQueryV3 circuit does, plus the following:
 
-1. Checks that prover controls the identity in the same way as the AuthV2 circuit checks it in case auth is enabled.
+1. Checks that the prover controls the identity in the same way AuthV2 circuit checks it (in case auth is enabled).
 2. Verifies credential query in the same way as credentialAtomicQueryV3 does.
-3. Calculates hash of the query inputs, like claimSchema, slotIndex, operator, claimPathKey, claimPathNotExists and values as an output for all the query related inputs.
-   This reduces the number of public inputs and much cheaper for Smart Contracts to verify the proof.
+3. Calculates hash of the query inputs, like claimSchema, slotIndex, operator, claimPathKey, claimPathNotExists, and values as an output for all the query-related inputs.
+   This reduces the number of public inputs and makes it much cheaper for Smart Contracts to verify the proof.
