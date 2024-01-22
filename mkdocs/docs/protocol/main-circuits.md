@@ -141,7 +141,7 @@ The circuit takes a query by a verifier and a claim owned by the prover and gene
 - [**Circuit Specific Files (From Trusted Setup)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/feature/trusted-setup-v1.0.0.zip)
 
 
-This circuit should be used for smart contract verifiers. This circuits does all the checks that the the [credentialAtomicQueryMTPV2](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/main-circuits.md#credentialatomicquerymtpv2) circuit does, plus the following:
+This circuit should be used for smart contract verifiers. This circuits does all the checks that the [credentialAtomicQueryMTPV2](https://github.com/iden3/docs/blob/master/mkdocs/docs/protocol/main-circuits.md#credentialatomicquerymtpv2) circuit does, plus the following:
 
 1. Check that prover controls the identity the same way as the AuthV2 circuit checks it
 2. Calculates hash of the query inputs, like claimSchema, slotIndex, operator, claimPathKey, claimPathNotExists and values as an output for all the query related inputs.
@@ -197,7 +197,7 @@ This circuit checks that an issuer has issued a claim for identity and validates
 3. Verifies that the credential is not expired.
 4. Verifies that the credential is not revoked (in case the revocation check is not skipped).
 5. Verifies that the provided issuer state for non-revocation check is built from the provided tree roots (in case the revocation check is not skipped).
-6. Depending on the proof of the verifiable credential (Iden3SparseMerkleTreeProof of BJJSignature) determines the proof verification flow and tree roots to verify.
+6. Depending on the proof of the verifiable credential (Iden3SparseMerkleTreeProof or BJJSignature) determines the proof verification flow and the tree roots to verify.
     1. Verification of BJJSignature Proof:
         1. Verifies that AuthBJJ credential of the issuer (signing key) has a protocol-defined schema hash.
         2. Verifies that AuthBJJ credential of the issuer (signing key) is not revoked by the issuer.
@@ -227,7 +227,7 @@ This circuit checks that an issuer has issued a claim for identity and validates
 
 This circuit should be used for smart contract verifiers. This circuit does all the checks that the credentialAtomicQueryV3 circuit does, plus the following:
 
-1. Checks that the prover controls the identity in the same way AuthV2 circuit checks it (in case auth is enabled).
+1. Checks that the prover controls the identity in the same way AuthV2 circuit checks it if auth is enabled.
 2. Verifies credential query in the same way as credentialAtomicQueryV3 does.
 3. Calculates hash of the query inputs, like claimSchema, slotIndex, operator, claimPathKey, claimPathNotExists, and values as an output for all the query-related inputs.
    This reduces the number of public inputs and makes it much cheaper for Smart Contracts to verify the proof.
