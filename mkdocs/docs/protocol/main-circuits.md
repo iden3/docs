@@ -187,7 +187,7 @@ This reduces the number of public inputs and much cheaper for Smart Contracts to
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/develop/circuits/credentialAtomicQueryV3.circom)
 
-- [**Circuit Specific Files (version 1.0.0-beta.0, NO Trusted Setup!)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (version 1.0.0-beta.1, NO Trusted Setup!)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
 
 
 This circuit checks that an issuer has issued a claim for identity and validates ownership of that identity in the following manner:
@@ -222,7 +222,7 @@ This circuit checks that an issuer has issued a claim for identity and validates
 
 - [**Example of instantiation**](https://github.com/iden3/circuits/blob/develop/circuits/credentialAtomicQueryV3OnChain.circom)
 
-- [**Circuit Specific Files (version 1.0.0-beta.0, NO Trusted Setup!)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
+- [**Circuit Specific Files (version 1.0.0-beta.1, NO Trusted Setup!)**](https://iden3-circuits-bucket.s3.eu-west-1.amazonaws.com/latest.zip)
 
 
 This circuit should be used for smart contract verifiers. This circuit does all the checks that the credentialAtomicQueryV3 circuit does, plus the following:
