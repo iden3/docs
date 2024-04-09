@@ -24,7 +24,7 @@ The `verifier.sol` contract is automatically generated using circom and can be u
 
 [**IdentityTreeStore.sol - Github**](https://github.com/iden3/contracts/blob/master/contracts/identitytreestore/IdentityTreeStore.sol)
 
-The identity tree store contract is responsible for storing revocation tree nodes and tree roots of Identity. In case
+The identity tree store contract is responsible for storing revocation and roots tree nodes of Identity. In case
 when identity is using onchain [RHS](https://docs.iden3.io/services/rhs/) and [Iden3OnchainSparseMerkleTreeProof2023](https://iden3-communication.io/w3c/status/overview/) credential status.
 
 ### IdentityTreeStore contract addresses (On-chain RHS)
