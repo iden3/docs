@@ -1,4 +1,4 @@
-### State Contract
+### Contracts
 
 [**State.sol - Github**](https://github.com/iden3/contracts/blob/master/contracts/state/State.sol)
 
@@ -17,3 +17,18 @@ The `verifier.sol` contract is automatically generated using circom and can be u
 
 - Polygon Mainnet: [0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D](https://polygonscan.com/address/0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D)
 - Polygon Mumbai Testnet: [0x134B1BE34911E39A8397ec6289782989729807a4](https://mumbai.polygonscan.com/address/0x134B1BE34911E39A8397ec6289782989729807a4)
+- Polygon Amoy Testnet: [0x1a4cC30f2aA0377b0c3bc9848766D90cb4404124](https://www.oklink.com/amoy/address/0x1a4cc30f2aa0377b0c3bc9848766d90cb4404124)
+
+
+<br/>
+
+[**IdentityTreeStore.sol - Github**](https://github.com/iden3/contracts/blob/master/contracts/identitytreestore/IdentityTreeStore.sol)
+
+The identity tree store contract is responsible for storing revocation and roots tree nodes of Identity. In case
+when identity is using onchain [RHS](https://docs.iden3.io/services/rhs/) and [Iden3OnchainSparseMerkleTreeProof2023](https://iden3-communication.io/w3c/status/overview/) credential status.
+
+### IdentityTreeStore contract addresses (On-chain RHS)
+
+- Polygon Mainnet: [0xbEeB6bB53504E8C872023451fd0D23BeF01d320B](https://polygonscan.com/address/0xbEeB6bB53504E8C872023451fd0D23BeF01d320B)
+- Polygon Mumbai Testnet: [0x16A1ae4c460C0a42f0a87e69c526c61599B28BC9](https://mumbai.polygonscan.com/address/0x16A1ae4c460C0a42f0a87e69c526c61599B28BC9)
+- Polygon Amoy Testnet: [0x3d3763eC0a50CE1AdF83d0b5D99FBE0e3fEB43fb](https://www.oklink.com/amoy/address/0x3d3763ec0a50ce1adf83d0b5d99fbe0e3feb43fb)
