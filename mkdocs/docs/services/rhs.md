@@ -135,7 +135,7 @@ Note, that the Hash field of the Node struct is a hash of the Children field, ho
 If identity holder wants to publish his identity state to RHS he needs to do the following:
 
 1. Save the state of identity to RHS `{ Hash: state, Children: [ClaimsTreeRoot, RevocationTreeRoot, RootsTreeRoot] }`
-2. Save the nodes of Revocation tree and Roots tree to RHS for the intermediate nodes `{ Hash: hash, Children: [left, right] }` where left and right are the hashes of the children of the node. And for the leaf nodes `{ Hash: hash, Children: [1, key, value] }`
+2. Save the nodes of Revocation tree and Roots tree to RHS for the intermediate nodes `{ Hash: hash, Children: [left, right] }` where left and right are the hashes of the children of the node. And for the leaf nodes `{ Hash: hash, Children: [key, value, 1] }`
 
 ### Example with **off-chain RHS storage**:
 
