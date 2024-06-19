@@ -57,7 +57,7 @@ other possible values:
 
 `slotValueB`  slotValueB is value data slot  with index 7
 
-See more information regarding data slot indexes [here](https://www.notion.so/Identity-Core-77fe2f04c8ad4e0296e2b90400d7ae3a?pvs=21). When user creates schema he should choose the slot to put the field.
+When a user creates a schema, he should choose the slot to put the field.
 
 Nested structures are supported and path is created using concatenation with `.` e.g for birthday field in the Index Data Slot A mapping entry looks like that:
 
