@@ -63,11 +63,15 @@ ethAddress: 0x0dcd1bf9a1b36ce34237eeafef220932846bcd82
 // Note that the bytes of the uint16 are in reversed order, e.g. if sum is 0x0a45 then checksum is 0x450a
 checksum: 450a
 ===
-id: 0A4582CD6B84320922EFAFEE3742E36CB3A1F91BCD0D000000000000001202 (bytes, reversed order)
-id: A5tDcNxacVgBQ4yHRvqv1FMR7cqNG74xGDhBWMidaq (base58)
+id: 0212000000000000000dcd1bf9a1b36ce34237eeafef220932846bcd82450a (bytes)
+id: 2qCU58EJgrELSJT6EzT27Rw9DhvwamAdbMLpePztYq (base58)
 ```
 
-Note, that smart contracts use little-endian byte order, so the resulting identifier is reversed.
+Note that identifiers in Smart Contracts are represented using little-endian byte order (because of how zero-knowledge proofs are verified), so the identifier for smart contracts is reversed:
+```
+id: 000a4582cd6b84320922efafee3742e36cb3a1f91bcd0d000000000000001202 (bytes32, reversed byte order with appended zero byte in the front)
+id: 18148217572028590643859359173103611579212110941630801448409877263163593218 (uint256, same reversed bytes but encoded as uin256)
+```
 
 
 ### DID representation
