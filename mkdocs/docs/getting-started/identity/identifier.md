@@ -36,7 +36,7 @@ Here is what the output would look like:
 ID: 11AbuG9EKnWVXK1tooT2NyStQod2EnLhfccSajkwJA
 ```
 
-The identity gets published, together with all other identities, inside the struct `StateLib.Data internal _stateData` state variable, which is part of the `State` [contract](../../contracts/state.md). While the ID remains constant, the Identity State will get updated as soon as the identity adds or revokes claims in its trees. 
+The identity gets published, together with all other identities, inside the struct `StateLib.Data internal _stateData` state variable, which is part of the `State` [contract](../../contracts/contracts.md). While the ID remains constant, the Identity State will get updated as soon as the identity adds or revokes claims in its trees. 
 
 > No Personal Identifiable Information (PPI) is stored on-chain. From the IdState is impossible to retrieve any information (represented as claim) stored inside the Identity Claims Tree
 
