@@ -1,8 +1,6 @@
-# Proof Query Language
+# ZK Query Language
 
-> The specifications for the Proof Query Language are under development; consider it as a work-in-progress.
-
-## Goal of the Query Language
+## Goal of the ZK Query Language
 
 The initial idea is to have a generic circuit with the possibility to do a verification based on user-claims. As circuit setup is not a trivial task and especially, the trusted setup is a challenging thing for regular developers, we have to provide a simple generic query language based on the generic prebuilt circuits.
 
@@ -280,7 +278,7 @@ timestamp
   ![verifier-user-query.png](../imgs/verifier-user-query.png)
 
 
-## Next Steps
+## Next Steps (future enhancements)
 
 1. Make it possible to query multiple fields from the same schema, still, it is limited to four available slots, two indexes, and two values. With this combination, we can cover the more advanced use cases.
 2. Support more query operations.
