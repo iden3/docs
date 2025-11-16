@@ -1,0 +1,2946 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://docs.iden3.io/protocol/spec/" rel="canonical"/>
+<link href="../../basics/getting-started/" rel="prev"/>
+<link href="../claims-structure/" rel="next"/>
+<link href="../../favicon.ico" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
+<title>Iden3 protocol specs - Iden3 Documentation</title>
+<link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.ab4e12ef.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="black" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#iden3-protocol-specifications-version-0">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Iden3 Documentation" class="md-header__button md-logo" data-md-component="logo" href="../.." title="Iden3 Documentation">
+<img alt="logo" src="../../logo.svg"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Iden3 Documentation
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Iden3 protocol specs
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/iden3/docs" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../basics/introduction/">
+          
+  
+  
+  The basics
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="./">
+          
+  
+  
+  Iden3 protocol
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../getting-started/getting-started/">
+          
+  
+  
+  Core Tutorial
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../zklogin/">
+          
+  
+  
+  Services and protocols
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../main-circuits/">
+          
+  
+  
+  Circuits
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../circom-snarkjs/">
+        
+  
+  
+    
+  
+  Circom / snarkjs
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../contracts/contracts/">
+        
+  
+  
+    
+  
+  Contracts
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../publications/publications/">
+        
+  
+  
+    
+  
+  Publications
+
+      </a>
+</li>
+</ul>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Iden3 Documentation" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="Iden3 Documentation">
+<img alt="logo" src="../../logo.svg"/>
+</a>
+    Iden3 Documentation
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/iden3/docs" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    The basics
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_1_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_1">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    The basics
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../basics/introduction/">
+<span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../basics/key-concepts/">
+<span class="md-ellipsis">
+    
+  
+    Key concepts
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../basics/getting-started/">
+<span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-ellipsis">
+    
+  
+    Iden3 protocol
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Iden3 protocol
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    
+  
+    Iden3 protocol specs
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    
+  
+    Iden3 protocol specs
+  
+
+    
+  </span>
+</a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#basis">
+<span class="md-ellipsis">
+      
+        Basis
+      
+    </span>
+</a>
+<nav aria-label="Basis" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#glossary">
+<span class="md-ellipsis">
+      
+        Glossary
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#merkle-tree">
+<span class="md-ellipsis">
+      
+        Merkle Tree
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#zero-knowledge-proof-zkp">
+<span class="md-ellipsis">
+      
+        Zero-knowledge Proof (ZKP)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#claims">
+<span class="md-ellipsis">
+      
+        Claims
+      
+    </span>
+</a>
+<nav aria-label="Claims" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#definition">
+<span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#properties">
+<span class="md-ellipsis">
+      
+        Properties
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#structure">
+<span class="md-ellipsis">
+      
+        Structure
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reliability-of-a-claim-content">
+<span class="md-ellipsis">
+      
+        Reliability of a Claim Content
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#keys">
+<span class="md-ellipsis">
+      
+        Keys
+      
+    </span>
+</a>
+<nav aria-label="Keys" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#types-of-keys">
+<span class="md-ellipsis">
+      
+        Types of Keys
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity">
+<span class="md-ellipsis">
+      
+        Identity
+      
+    </span>
+</a>
+<nav aria-label="Identity" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#definition_1">
+<span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#genesis-id">
+<span class="md-ellipsis">
+      
+        Genesis ID
+      
+    </span>
+</a>
+<nav aria-label="Genesis ID" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+<span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identifier-format">
+<span class="md-ellipsis">
+      
+        Identifier Format
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-state">
+<span class="md-ellipsis">
+      
+        Identity State
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-state-transition-function">
+<span class="md-ellipsis">
+      
+        Identity State Transition Function
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-profiles-new">
+<span class="md-ellipsis">
+      
+        Identity Profiles (NEW)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#gist-new">
+<span class="md-ellipsis">
+      
+        GIST (NEW)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-ownership">
+<span class="md-ellipsis">
+      
+        Identity Ownership
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-key-rotation">
+<span class="md-ellipsis">
+      
+        Identity Key Rotation
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-revocation">
+<span class="md-ellipsis">
+      
+        Identity Revocation
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#interaction-between-identity-and-claims">
+<span class="md-ellipsis">
+      
+        Interaction between Identity and Claims
+      
+    </span>
+</a>
+<nav aria-label="Interaction between Identity and Claims" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-state-update">
+<span class="md-ellipsis">
+      
+        Identity State Update
+      
+    </span>
+</a>
+<nav aria-label="Identity State Update" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#definitions">
+<span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#publish-claims">
+<span class="md-ellipsis">
+      
+        Publish Claims
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#revocation-tree">
+<span class="md-ellipsis">
+      
+        Revocation Tree
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#revoke-claims">
+<span class="md-ellipsis">
+      
+        Revoke Claims
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#update-claims">
+<span class="md-ellipsis">
+      
+        Update Claims
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prove-claims-credentials">
+<span class="md-ellipsis">
+      
+        Prove Claims (Credentials)
+      
+    </span>
+</a>
+<nav aria-label="Prove Claims (Credentials)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prove-that-a-claim-was-issued-at-time-t">
+<span class="md-ellipsis">
+      
+        Prove that a Claim was Issued at Time t
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prove-that-the-claim-is-currently-valid">
+<span class="md-ellipsis">
+      
+        Prove that the Claim is Currently Valid
+      
+    </span>
+</a>
+<nav aria-label="Prove that the Claim is Currently Valid" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prove-that-the-claim-hasnt-been-revoked-recently">
+<span class="md-ellipsis">
+      
+        Prove that the Claim Hasn't Been Revoked Recently
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#proof-of-last-version">
+<span class="md-ellipsis">
+      
+        Proof of Last Version
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#proof-of-non-expiration">
+<span class="md-ellipsis">
+      
+        Proof of Non-Expiration
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#zero-knowledge-proof-of-valid-credentials">
+<span class="md-ellipsis">
+      
+        Zero-knowledge Proof of Valid Credentials
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Claim
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Claim
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../claims-structure/">
+<span class="md-ellipsis">
+    
+  
+    Structure
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../bjjkey/">
+<span class="md-ellipsis">
+    
+  
+    AuthBJJCredential
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../claim-schema/">
+<span class="md-ellipsis">
+    
+  
+    Claim Schema
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Core Tutorial
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Tutorial
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/getting-started/">
+<span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Core Components
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Components
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/babyjubjub/">
+<span class="md-ellipsis">
+    
+  
+    Baby Jubjub Keypair
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/mt/">
+<span class="md-ellipsis">
+    
+  
+    Sparse Merkle Tree
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Claim
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_3_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Claim
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/claim/generic-claim/">
+<span class="md-ellipsis">
+    
+  
+    Generic Claim
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/claim/auth-claim/">
+<span class="md-ellipsis">
+    
+  
+    Auth Claim
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_4" id="__nav_3_2_4_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Identity
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_4_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Identity
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/identity/identity-types/">
+<span class="md-ellipsis">
+    
+  
+    Identity Types
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/identity/identity-state/">
+<span class="md-ellipsis">
+    
+  
+    Identity State
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/identity/identifier/">
+<span class="md-ellipsis">
+    
+  
+    Identifier
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/identity/identity-profile/">
+<span class="md-ellipsis">
+    
+  
+    Identity Profiles
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/identity/onchain-identity/">
+<span class="md-ellipsis">
+    
+  
+    OnChain Identity
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Issue Claim
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Issue Claim
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/issue-claim-overview/">
+<span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/signature-claim/signature/">
+<span class="md-ellipsis">
+    
+  
+    via Signature
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    via Merkle Tree
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_3_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_3_3">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    via Merkle Tree
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/state-transition/state-transition/">
+<span class="md-ellipsis">
+    
+  
+    Intro to State Transition
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/state-transition/new-identity-state/">
+<span class="md-ellipsis">
+    
+  
+    Add Claim to the Claims Tree
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/state-transition/state-transition-proof/">
+<span class="md-ellipsis">
+    
+  
+    Generate Proof for State Transition
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/state-transition/on-chain-state-transition/">
+<span class="md-ellipsis">
+    
+  
+    Verify the Proof On-Chain
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Claim Revocation
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Claim Revocation
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../getting-started/claim-revocation/">
+<span class="md-ellipsis">
+    
+  
+    Revoke Claim
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Services and protocols
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Services and protocols
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../zklogin/">
+<span class="md-ellipsis">
+    
+  
+    Login protocol
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../querylanguage/">
+<span class="md-ellipsis">
+    
+  
+    Proof Query language
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../non-merklized/">
+<span class="md-ellipsis">
+    
+  
+    Non-merklized credentials
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../w3c/merklization/">
+<span class="md-ellipsis">
+    
+  
+    JSON-LD merklization
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../services/rhs/">
+<span class="md-ellipsis">
+    
+  
+    Reverse hash service
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    Circuits
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    Circuits
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../main-circuits/">
+<span class="md-ellipsis">
+    
+  
+    Main Circuits
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../template-circuits/">
+<span class="md-ellipsis">
+    
+  
+    Template Circuits
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../circom-snarkjs/">
+<span class="md-ellipsis">
+    
+  
+    Circom / snarkjs
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../contracts/contracts/">
+<span class="md-ellipsis">
+    
+  
+    Contracts
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../publications/publications/">
+<span class="md-ellipsis">
+    
+  
+    Publications
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#basis">
+<span class="md-ellipsis">
+      
+        Basis
+      
+    </span>
+</a>
+<nav aria-label="Basis" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#glossary">
+<span class="md-ellipsis">
+      
+        Glossary
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#merkle-tree">
+<span class="md-ellipsis">
+      
+        Merkle Tree
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#zero-knowledge-proof-zkp">
+<span class="md-ellipsis">
+      
+        Zero-knowledge Proof (ZKP)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#claims">
+<span class="md-ellipsis">
+      
+        Claims
+      
+    </span>
+</a>
+<nav aria-label="Claims" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#definition">
+<span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#properties">
+<span class="md-ellipsis">
+      
+        Properties
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#structure">
+<span class="md-ellipsis">
+      
+        Structure
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reliability-of-a-claim-content">
+<span class="md-ellipsis">
+      
+        Reliability of a Claim Content
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#keys">
+<span class="md-ellipsis">
+      
+        Keys
+      
+    </span>
+</a>
+<nav aria-label="Keys" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#types-of-keys">
+<span class="md-ellipsis">
+      
+        Types of Keys
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity">
+<span class="md-ellipsis">
+      
+        Identity
+      
+    </span>
+</a>
+<nav aria-label="Identity" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#definition_1">
+<span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#genesis-id">
+<span class="md-ellipsis">
+      
+        Genesis ID
+      
+    </span>
+</a>
+<nav aria-label="Genesis ID" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#description">
+<span class="md-ellipsis">
+      
+        Description
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identifier-format">
+<span class="md-ellipsis">
+      
+        Identifier Format
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-state">
+<span class="md-ellipsis">
+      
+        Identity State
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-state-transition-function">
+<span class="md-ellipsis">
+      
+        Identity State Transition Function
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-profiles-new">
+<span class="md-ellipsis">
+      
+        Identity Profiles (NEW)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#gist-new">
+<span class="md-ellipsis">
+      
+        GIST (NEW)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-ownership">
+<span class="md-ellipsis">
+      
+        Identity Ownership
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-key-rotation">
+<span class="md-ellipsis">
+      
+        Identity Key Rotation
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-revocation">
+<span class="md-ellipsis">
+      
+        Identity Revocation
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#interaction-between-identity-and-claims">
+<span class="md-ellipsis">
+      
+        Interaction between Identity and Claims
+      
+    </span>
+</a>
+<nav aria-label="Interaction between Identity and Claims" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identity-state-update">
+<span class="md-ellipsis">
+      
+        Identity State Update
+      
+    </span>
+</a>
+<nav aria-label="Identity State Update" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#definitions">
+<span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#publish-claims">
+<span class="md-ellipsis">
+      
+        Publish Claims
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#revocation-tree">
+<span class="md-ellipsis">
+      
+        Revocation Tree
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#revoke-claims">
+<span class="md-ellipsis">
+      
+        Revoke Claims
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#update-claims">
+<span class="md-ellipsis">
+      
+        Update Claims
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prove-claims-credentials">
+<span class="md-ellipsis">
+      
+        Prove Claims (Credentials)
+      
+    </span>
+</a>
+<nav aria-label="Prove Claims (Credentials)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prove-that-a-claim-was-issued-at-time-t">
+<span class="md-ellipsis">
+      
+        Prove that a Claim was Issued at Time t
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prove-that-the-claim-is-currently-valid">
+<span class="md-ellipsis">
+      
+        Prove that the Claim is Currently Valid
+      
+    </span>
+</a>
+<nav aria-label="Prove that the Claim is Currently Valid" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prove-that-the-claim-hasnt-been-revoked-recently">
+<span class="md-ellipsis">
+      
+        Prove that the Claim Hasn't Been Revoked Recently
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#proof-of-last-version">
+<span class="md-ellipsis">
+      
+        Proof of Last Version
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#proof-of-non-expiration">
+<span class="md-ellipsis">
+      
+        Proof of Non-Expiration
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#zero-knowledge-proof-of-valid-credentials">
+<span class="md-ellipsis">
+      
+        Zero-knowledge Proof of Valid Credentials
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="iden3-protocol-specifications-version-0">Iden3 Protocol Specifications (Version 0)</h1>
+<blockquote>
+<p>These specifications are under development and are being updated regularly. Consider it as a work-in-progress.</p>
+</blockquote>
+<h2 id="basis">Basis</h2>
+<h3 id="glossary">Glossary</h3>
+<ul>
+<li><strong>Issuer</strong>: An actor who makes a claim.</li>
+<li><strong>Holder</strong>: An actor who receives a claim.</li>
+<li><strong>Verifier</strong>: An actor who verifies if the content of a claim is issued by a specific identity and held by another specific identity.</li>
+<li><strong>Credential</strong>: Data that is needed to prove that a claim is issued by a specific identity and held by another specific identity. This data is composed of <strong>a claim and a proof</strong>.</li>
+</ul>
+<h3 id="merkle-tree">Merkle Tree</h3>
+<p>A Merkle tree (MT) or a hash tree is a cryptographically verifiable data structure where every "leaf" node of the tree contains the cryptographic hash of a data block, and every "non-leaf" node contains the cryptographic hash of its child nodes.</p>
+<p>The MTs used in the protocol have a few particularities:</p>
+<ul>
+<li><strong>Binary</strong>: Each node can only have two children.</li>
+<li><strong>Sparse and Deterministic</strong>: The contained data is indexed, and each data block is placed at the leaf that corresponds to that data block's index, so insert order doesn't influence the final Merkle tree Root. This also means that some nodes are empty.</li>
+<li><strong>ZK-friendly</strong>: The used hash function, <a href="https://www.poseidon-hash.info/">poseidon</a>, plays well with the zero-knowledge proofs (ZKP) used in different parts of the protocol.</li>
+</ul>
+<p>In order to ensure that these particularities are respected and to have a history of all the changes that occurred on different trees (without revealing the actual content stored in the leaves), <strong>the root of each MT is indirectly stored on the blockchain</strong>. The EVM-based blockchains are chosen for this purpose.</p>
+<p>The <code>Merkle tree</code> specification is defined in <a href="../../publications/pdfs/Merkle-Tree.pdf">this document</a>. In future, the MT implementation could be changed.</p>
+<h3 id="zero-knowledge-proof-zkp">Zero-knowledge Proof (ZKP)</h3>
+<p>In cryptography, a zero-knowledge proof is a method by which one party (the prover) can prove to a second party (the verifier) that the prover knows a value x (that fulfills some constraints), without revealing any other information apart from the fact that s/he knows the value x.</p>
+<p>The technologies that implement these techniques are evolving rapidly. As of now, the protocol uses zkSNARKs Groth16, but in future, the ZK protocol could be changed.
+zkSNARK stands for "Zero-knowledge Succinct Non-interactive Argument of Knowledge", and has the following properties:</p>
+<ul>
+<li><strong>Non-interactive</strong>: With a single message (credential) from the prover, the verifier can verify the proof.  This is good because it allows sending proofs to a smart contract that can verify these proofs immediately.</li>
+<li><strong>Efficient Verification</strong>: It is computationally efficient to verify proofs, both in terms of the size and the operations. This is apt for the protocol because verification happens on the blockchain with its inherent costs.</li>
+<li><strong>Heavy Proof Generation</strong>: Generating a proof is computationally very expensive and can be time-consuming even with powerful hardware.</li>
+<li><strong>Setup</strong>: A pre-existing setup between the prover and the verifier is required for the construction of zkSNARKs. In order to ensure that the verifier cannot cheat, one has to be sure that the keys used for the setup have been destroyed. There are protocols to ensure that, resulting in a "trusted setup".</li>
+</ul>
+<p>Read more technical information about zkSNARKs in <a href="https://medium.com/@VitalikButerin/zk-snarks-under-the-hood-b33151a013f6">this article</a> by Vitalik Buterin.</p>
+<h2 id="claims">Claims</h2>
+<h3 id="definition">Definition</h3>
+<p>A claim is a statement made by one identity about another identity or about itself. Each claim is composed of two parts: the index part and the value part.
+Claims are stored on the leaves of an MT. The index is hashed and is used to determine the leaf position where the value of the claim will be stored.
+A special transition validation function can be used to restrict how leaves are stored on the Merkle tree, i.e. make the MT append-only, (leaves can only be added and cannot be updated or deleted).</p>
+<h3 id="properties">Properties</h3>
+<ul>
+<li>It is impossible to generate proof of a statement on behalf of an identity without its consent.</li>
+<li>Claims can be revoked.</li>
+<li>Claims can be updated by creating new versions. When a claim is revoked, no further versions can be made. Claims can be set to be updatable or not with a flag (See <a href="#structure"><strong>Claim Structure</strong></a>).</li>
+</ul>
+<pre class="mermaid"><code>graph LR
+    revoked(Revoked claim)
+    no-claim--&gt;v0
+    v0--&gt;v1
+    v1-.-&gt;vN
+    vN--&gt;vN1
+    vN1--&gt;revoked
+
+    no-claim(No claim)
+    v0(Claim v0)
+    v1(Claim v1)
+    vN(Claim vN)
+    vN1(Claim vN+1)</code></pre>
+<ul>
+<li>Claims can be verified. This means that it is possible to demonstrate cryptographically that a given claim is:<ul>
+<li>Issued by a specific identity.</li>
+<li>Not revoked.</li>
+<li>Is of the last version of that claim if it is updatable.</li>
+</ul>
+</li>
+<li>There are two types of claims regarding destination:<ul>
+<li>Claims about identity's own properties. Example: Operational Key, Ethereum Address, etc.</li>
+<li>Claims about another identity's properties:<ul>
+<li><strong>(Another) Identity has a Property</strong>: Directional relation between an identity and a property (See <a href="#structure"><strong>Claim Structure</strong></a>: identity stored in hIndex, i_1).</li>
+<li><strong>Property is Owned by (Another) Identity</strong>: Directional relation between a property and an identity (See <a href="#structure"><strong>Claim Structure</strong></a>: identity stored in hValue, v_1).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some of these properties are only guaranteed by a transition validation function (explained above in this document).</p>
+</div>
+<h3 id="structure">Structure</h3>
+<div class="highlight"><pre><span></span><code>h_i = H(i_0, i_1, i_2, i_3)
+h_v = H(v_0, v_1, v_2, v_3)
+h_t = H(h_i, h_v)
+</code></pre></div>
+<pre class="mermaid"><code>graph TD
+    Hi--&gt;i0
+    Hi--&gt;i1
+    Hi--&gt;i2
+    Hi--&gt;i3
+
+    Hv--&gt;v0
+    Hv--&gt;v1
+    Hv--&gt;v2
+    Hv--&gt;v3
+
+    Ht--&gt;Hi
+    Ht--&gt;Hv</code></pre>
+<div class="highlight"><pre><span></span><code>Index:
+ i_0: [ 128  bits ] claim schema
+      [ 32 bits ] option flags
+          [3] Subject:
+            000: A.1 Self
+            001: invalid
+            010: A.2.i OtherIden Index
+            011: A.2.v OtherIden Value
+            100: B.i Object Index
+            101: B.v Object Value
+          [1] Expiration: bool
+          [1] Updatable: bool
+          [3] Merklized: data is merklized root is stored in the:
+            000: none
+            001: C.i Root Index (root located in i_2)
+            010: C.v Root Value (root located in v_2)
+          [24] 0
+      [ 32 bits ] version (optional?)
+      [ 61 bits ] 0 - reserved for future use
+ i_1: [ 248 bits] identity (case b) (optional)
+      [  5 bits ] 0
+ i_2: [ 253 bits] 0
+ i_3: [ 253 bits] 0
+Value:
+ v_0: [ 64 bits ]  revocation nonce
+      [ 64 bits ]  expiration date (optional)
+      [ 125 bits] 0 - reserved
+ v_1: [ 248 bits] identity (case c) (optional)
+      [  5 bits ] 0
+ v_2: [ 253 bits] 0
+ v_3: [ 253 bits] 0
+</code></pre></div>
+<h3 id="reliability-of-a-claim-content">Reliability of a Claim Content</h3>
+<p>The correctness of what is said in a claim is not verifiable by a protocol since every identity is free to claim whatever it wants. Since it is possible to know which identity issued which claim, the trust/reputation that the issuer has can affect its credibility.</p>
+<p>However, the protocol can guarantee exclusivity: there cannot be two claims with the same index. So it is impossible that an identity claims that a property (index part of the claim) is linked to two different identities (value part of the claim) at the same time.</p>
+<h2 id="keys">Keys</h2>
+<p>Keys are cryptographic elements that can be used to sign data. In a protocol, keys are used to authenticate certain interactions.</p>
+<p>These keys require the authorization of the identity (who owns these keys). This is done by adding a claim with a specific schema, linking the key(s) with the identity. </p>
+<p>This way, each time that a key is used for signing, the identity can (and must) prove the ownership of that key and the fact that the key is not revoked.</p>
+<!-- ==**TODO**==
+== - Explain what role the keys play in the iden3 protocol. Authenticate! Explain that the keys are used to sign to authenticate an identity ==
+== - And that in the case of zero-knowledge, it is not done as it would be done 'traditionally', but that the zero-knowledge proof itself already shows that the sender knows the private key == -->
+<h3 id="types-of-keys">Types of Keys</h3>
+<ul>
+<li>Baby Jubjub: Used for authentication. This type of key is designed to be efficient while working with zkSNARKs.
+  The <code>Baby Jubjub Elliptic Curve</code> specification is defined in <a href="../../publications/pdfs/Baby-Jubjub.pdf">this document</a>.</li>
+</ul>
+<h2 id="identity">Identity</h2>
+<h3 id="definition_1">Definition</h3>
+<p>An <code>identity</code> is characterized by the claims that the identity has issued, and the claims that the identity has received from other identities. In other words, an identity is built by what the identity has said, and what others have said about the identity.</p>
+<p>Each claim that an identity issues can be cryptographically proved and verified, ensuring that the claim existed under identity at a certain timestamp.</p>
+<pre class="mermaid"><code>graph TD
+    Root--&gt;A
+    Root--&gt;B
+
+    A--&gt;C
+    A--&gt;D
+    B--&gt;E
+    B--&gt;F
+
+    C--&gt;G
+    C--&gt;H
+    D--&gt;I
+    D--&gt;J
+    E--&gt;K
+    E--&gt;L
+    F--&gt;M
+    F--&gt;N
+
+    G["claim"]
+    H["claim"]
+    I["claim"]
+    J["claim"]
+    K["claim"]
+    L["claim"]
+    M["claim"]
+    N["claim"]</code></pre>
+<p>To accomplish this (and other properties covered in this document), identities are built by <a href="#MerkleTree">Merkle trees</a>, where the claims are placed as the leaves, and the <code>Root</code> is published (indirectly through the identity state) on the blockchain. With this construction, the identities can issue, update, and revoke claims.</p>
+<p>The protocol construction is designed to enable zero-knowledge features. It means that the identities have the ability to prove the ownership of the properties of the claims in issued and received claims and verify that a particular claim is not revoked.</p>
+<h3 id="genesis-id">Genesis ID</h3>
+<h4 id="description">Description</h4>
+<p>Each identity has a unique <code>identifier</code> that is determined by the initial identity state (hash of its Merkle Tree Roots). This identifier is called <code>Genesis ID</code>, under which the initial claims are placed (those that are contained in the initial state of the identity).</p>
+<!-- TODO: For the initial implementation of the protocol, the Genesis Claims Tree will contain at least a [claim of authorization of the Operational key](#link-to-the-spec-of-the-claim-once-is-done), that allows operating in the name of identity. -->
+<p>For the initial implementation of the protocol, the Genesis Claims Tree will contain at least a claim of authorization of the Operational Key that allows operation in the name of identity.
+ <!-- (identities operated by smart contracts are not specified in this version). -->
+</p>
+<p>While an identity does not add, update or revoke claims after the Genesis State, its identity state does not need to be published on the blockchain, and the <code>Genesis Claims</code> can be verified directly against the <code>Genesis ID</code>. This is because the Genesis ID is built by the Merkle Root that holds those claims.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Genesis ID is calculated with the Identity State as a hash of the Genesis Claims Tree Root, an empty Revocation Tree Root and an empty Roots Tree Root.</p>
+</div>
+<h4 id="identifier-format">Identifier Format</h4>
+<p>An Identifier is determined by its identity type and the <code>Genesis Identity State</code> (also called the <code>Genesis ID</code>). This is built by creating a Merkle Tree that holds the initial state claims, calculating its root, and hashing it together with an empty Revocation Tree Root &amp; an empty Roots Tree Root. Then we take the first 27 bytes of this result and add to it 2 bytes at the beginning (to specify the identity type), and 2 bytes at the end (for checksum).Thus, in total, an identifier is a byte array of 31 bytes, encoded in base58.</p>
+<p>An <strong>identity type</strong> specifies the specifications that an identity follows (such as the hash function used by the identity). In this way, when the hash function changes, the identifiers of the identities will also change, allowing us to identify the type of identity.</p>
+<p><strong>Identifier Structure</strong>:</p>
+<ul>
+<li><code>ID</code> (genesis): Base58 [ <code>type</code> | <code>genesis_state</code> | <code>checksum</code> ]<ul>
+<li><code>type</code>: 2 bytes specifying the type</li>
+<li><code>genesis_state</code>: First 27 bytes from the identity state (using the Genesis Claim Merkle tree)</li>
+<li><code>checksum</code>: Addition (with overflow) of all the ID bytes Little Endian 16 bits ( [ <code>type</code> | <code>genesis_state</code> ] )</li>
+</ul>
+</li>
+</ul>
+<h4 id="identity-state">Identity State</h4>
+<p>The <strong>identity states</strong> are published on the blockchain under the identifier, anchoring the state of the identity with the timestamp when it is published. In this way, the claims of the identity can be proved against the anchored identity state at a certain timestamp. To transition from one state to the other, identities follow the transition functions.</p>
+<p>The identity states can be published on the blockchain in one of the two ways: <strong>directly</strong> performing the transaction to publish the root or <strong>indirectly</strong> using a Relay. </p>
+<!-- The indirect method is described in the section [Indirect Identities](#Indirect-identities). -->
+<p>The <code>Genesis State</code> is the initial state of any identity, and does not need to be published on the blockchain, as the claims under it can be verified against the identifier itself (that contains that identity state).</p>
+<p><img alt="" src="../../imgs/identity_state_transition.png"/></p>
+<h4 id="identity-state-transition-function">Identity State Transition Function</h4>
+<p>The <code>ITF</code> (Identity State Transition Function) is verified each time a state is updated. This ensures that the identity follows the protocol while updating.</p>
+<p>An Identity Merkle tree is a sparse binary tree that allows only the addition of the leaves (no edition or deletion). Adding new claims, updating them through versions and revoking need to be done according to the <code>ITF</code>. To ensure this, we use zero-knowledge proofs in a way that when an identity is publishing a new state to the smart contract, it also sends a zero-knowledge proof (<code>π</code>), proving that the <code>ϕ</code> is satisfied following the <code>ITF</code>. In this way, all the identity states published on the blockchain are validated to be following the protocol.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the initial version of the implementation, there will be no checks to verify that the trees are append-only in the smart contract. This is due to the fact that complex computations are required to generate the ZK proofs for multiple claim additions, (a requirement for scalability).</p>
+</div>
+<p>The full circuit can be found here: https://github.com/iden3/circuits/blob/master/circuits/stateTransition.circom</p>
+<h3 id="identity-profiles-new">Identity Profiles (NEW)</h3>
+<p>Identity Profiles allow users to hide their <a href="#genesis-id"><code>Genesis ID</code></a> during interactions. Instead, users will be identified by their <code>Identity Profile</code>.</p>
+<p>An Identity Profile is generated from the <code>GenesisID</code> and hashing it with a (random) nonce. </p>
+<p><code>Identity Profile</code> has the same <a href="./#identifier-format">structure as the <code>Genesis ID</code></a>. It is a byte array of 31 bytes, encoded in base58.</p>
+<p>[ <code>IDtype</code> (2 bytes) | <code>profile_state</code> (27 bytes) | <code>checksum</code> (2 bytes) ]</p>
+<ul>
+<li><code>IDtype</code> :  inherited type from <code>Genesis ID</code></li>
+<li><code>profile_state</code> : First 27 bytes from the poseidonHash(<code>Genesis ID</code>, <code>profile_nonce</code>), where <code>profile_nonce</code> is any random number</li>
+<li><code>checksum</code> Addition (with overflow) of all the ID bytes Little Endian 16 bits ([ <code>typeID</code>| <code>profile_state</code>])</li>
+</ul>
+<!-- > Here's how the [checksum](https://github.com/iden3/go-iden3-core/blob/2f1886532b353d1eb550ccc790cb5a6dc5bc7b32/core/id.go#L118) is calculated -->
+<p>Identity Profiles are irreversible and indistinguishable:</p>
+<ul>
+<li><strong>Irreversible</strong>, thanks to the properties of the underlying hash function, meaning that it is impossible to retrieve the <code>Genesis ID</code> from an <code>Identity Profile</code>, unless you know the nonce.  </li>
+<li><strong>indistinguishable</strong>, the data format of Identity Profiles is the same as Genesis IDs. It follows that an external party cannot tell if an identity is using its Genesis ID or one of its many Identity Profiles.</li>
+</ul>
+<p>An Identity can receive claims to a specific Identity Profile. An Identity Profile keeps all the properties of <a href="#genesis-id">Genesis IDs</a> while adding:</p>
+<ul>
+<li><strong>Anti-track</strong></li>
+</ul>
+<p>Since users are no longer consistently identified with the same identifier in their interactions across different platforms, it becomes harder to track the action of a single user. Even if platforms collude. Even more, the user can interact with the same platform using different Identity Profiles, making it impossible to track the user across different interactions inside the same platform.</p>
+<ul>
+<li><strong>Faculty to decide which profile to show</strong></li>
+</ul>
+<p>Users can decide which profiles to show as it is only based on the nonce. An Identity can create an Identity Profile and reuse it across interaction with different actors, for example in the case of a Profile with all their business information just by reusing the same nonce. For interactions that require the maximum level of privacy, an Identity can create a single-use Identity Profile by choosing a random nonce and never reusing it again. </p>
+<ul>
+<li><strong>Reusability of claims across different profiles</strong></li>
+</ul>
+<p>Users can get claims issued to an Identity Profile (or to their Genesis ID) and generate proof, based on these claims, from a different Identity Profile. The Verifier will be only able to see a valid proof coming from the Identity Profile that the user decided to use. No connection between the two identities is leaked.</p>
+<p>Despite being able to create multiples Identity Profiles, the control of the Identity is still still managed by the underlying <a href="#keys">Private Key</a>.</p>
+<!-- Identity Profiles do not represent any additional attack vector for the security of the protocol. While the nonce has to be kept secret, losing the nonce will only reveal the link between the `Genesis ID` and an `Identity Profile` without any risk of losing control of the identity. **The control of an Identity is still managed by the underlying [Babyjubjub Private Key](./spec#keys)** -->
+<h3 id="gist-new">GIST (NEW)</h3>
+<p>GIST, namely Global Identities State Tree, is a <a href="../../getting-started/mt/">Sparse Merkle Tree</a> that contains the state of all the identities using Iden3 protocol. In particular, each leaf is indexed by the hash of its <code>Genesis ID</code> (key of the leaf) and contains the most recent state of that Identity (value of the leaf). </p>
+<p>The choice of using the hash of the Genesis ID as key of the leaf (instead of the Genesis ID itself) is to avoid that all the leaf accumulates in the same branch of the tree, since the Genesis ID has a fixed prefix. This would make the tree very unbalanced and inefficient. Instead, by using the hash of the Genesis ID, we randomize the position of the leaf in the tree, making it more balanced.</p>
+<p>The GIST is stored inside the <a href="../../contracts/contracts/">State Contract</a>. Every time a user executes a <a href="../../getting-started/state-transition/state-transition/">State Transition function</a>, the new state of an identity is <a href="https://github.com/iden3/contracts/blob/master/contracts/state/State.sol#L190">added to the GIST stored on-chain</a></p>
+<div class="highlight"><pre><span></span><code>gistTree<span class="p">.</span>add<span class="p">(</span>H<span class="p">(</span>genesisID<span class="p">),</span><span class="w"> </span>state<span class="p">)</span>
+</code></pre></div>
+<p>This design allows users to prove ownership of an Identity by proving that this is included in the GIST without revealing which one is their Genesis ID!</p>
+<div align="center">
+<img align="center" src="../../../imgs/GIST.png" width="400">
+<div align="center"><span style="font-size: 17px;"></span></div>
+</img></div>
+<!--
+##### Direct identity ITF_min
+
+###### Addition of non-updatable claim
+Prove that a leaf in the MT (claim) is only added but never deleted nor changed
+
+- `R_i -> leaf_claim==0`
+- `R_i+1 -> leaf_claim==claim`
+> 2 MerkleProofs with same siblings
+
+###### Addition of claim with versions
+- `v0`
+    - `R_i -> leaf_claim_v0==0`
+    - `R_i+1 -> leaf_claim_v0==claim_v0`
+> 2 MerkleProofs with same siblings
+
+If an updatable claim is added to the MT with version `v!=0`, claim version `v-1` must already exist in the MT
+
+- `v_n+1`
+    - `R_i -> leaf_claim_vn==claim_vn`
+    - `R_i -> leaf_claim_vn+1==0`
+    - `R_i+1 -> leaf_claim_vn+1==claim_vn+1`
+> 1 MerkleProof with siblings
+> 2 MerkleProof with same siblings
+-->
+<!-- ##### Indirect identity ITF_min
+==TODO== -->
+<h3 id="identity-ownership">Identity Ownership</h3>
+<p>We prove the identity ownership inside a zkSNARK proof. This means that the user can generate a zk-proof that s/he knows a <code>private key</code> corresponding to the <code>operational key for authorization</code> claim added to the Claims Tree, without revealing the <code>claim</code> and its position. This is coded inside a circom circuit, which can be used in other circuits (such as the <code>id state update</code> circuit).</p>
+<p>The full circuit can be found here: https://github.com/iden3/circuits/blob/master/circuits/lib/idOwnershipBySignature.circom</p>
+<h3 id="identity-key-rotation">Identity Key Rotation</h3>
+<p>An identity can self-issue and revoke many <code>private keys</code> and the corresponding <code>claims</code> of the type <code>operational key authorization</code>, enabling key rotation. To support verification of such claims, an identity state should be publicly available on the blockchain. An identity can publish the state to the blockchain directly or via the Relay.</p>
+<p>Any private key for which a corresponding claim exists in the Identity Claims Tree and does not exist in the Identity Revocation Tree, can be used to create a zero-knowledge proof for valid credentials. Such proof should pass verification by a verifier as it is able to check the latest identity state in the blockchain.</p>
+<p>In the same way, any valid and non-revoked identity private key can be used to create a valid ZK proof for the Identity State Transition Function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An identity may lose some privacy while disclosing its state to a verifier, which can track all the proofs of the same identity in that manner. However, this issue can be mitigated if the identity state is published to the blockchain via a Relay. In such a case, only the Relay state needs to be disclosed to a verifier.</p>
+</div>
+<!-- ==TBD: Identity recovery procedure in case of a private key and state database loss== -->
+<h3 id="identity-revocation">Identity Revocation</h3>
+<p>When an identity revokes all the <code>claims</code> of the type <code>operational key authorization</code>, it is considered <code>revoked</code> as this identity can no longer create proofs.</p>
+<h2 id="interaction-between-identity-and-claims">Interaction between Identity and Claims</h2>
+<h3 id="identity-state-update">Identity State Update</h3>
+<p>The Identity State Update is the procedure used to update information about what this identity has claimed. This involves three different actions:</p>
+<ul>
+<li>Add a claim.</li>
+<li>Update a claim (by incrementing the version and changing the claim value part).</li>
+<li>Revoke a claim.</li>
+</ul>
+<!--
+The Identity State Update can be generalized as an `ITF_min` (minor Identity Transition Function) that performs a minor update of the identity (where a minor update only concerns the claims of the identity but not the identity itself).
+-->
+<h4 id="definitions">Definitions</h4>
+<ul>
+<li><code>IdState</code>: Identity State</li>
+<li><code>ClT</code>: Claims Tree<ul>
+<li><code>ClR</code>: Claims Tree Root</li>
+</ul>
+</li>
+<li><code>ReT</code>: Revocation Tree<ul>
+<li><code>ReR</code>: Revocation Tree Root</li>
+</ul>
+</li>
+<li><code>RoT</code>: Roots Tree<ul>
+<li><code>RoR</code>: Roots Tree Root</li>
+</ul>
+</li>
+</ul>
+<p>The <code>IdState</code> (Identity State) is calculated by concatenating the roots of the three user trees:</p>
+<ul>
+<li><code>IdState</code>: <code>H(ClR || ReR || RoR)</code> where <code>H</code> is the Hash function defined by the Identity Type (for example, Poseidon).</li>
+</ul>
+<p>All trees are SMT (sparse Merkle trees) and use the hash function defined by the Identity Type.</p>
+<ul>
+<li>Leaves in <code>ClT</code> (Claims Tree) are claims ((4 + 4) * 253 bits = 253 bytes)</li>
+</ul>
+<p>See <a href="#structure"><strong>Claim Structure</strong></a></p>
+<ul>
+<li>Leaves in <code>ReT</code> (Revocation Tree) are Revocation Nonce + Version (64 bits + 32 bits = 12 bytes)
+<div class="highlight"><pre><span></span><code>Revocation Tree Leaf:
+leaf: [ 64 bits ] revocation nonce
+      [ 32 bits ] version
+      [157 bits ] 0
+</code></pre></div></li>
+<li>Leaves in <code>RoT</code> (Roots Tree) are tree roots (from the Claims Tree) (253 bits = 32 bytes)
+<div class="highlight"><pre><span></span><code>Roots Tree Leaf:
+leaf: [253 bits ] tree root
+</code></pre></div></li>
+</ul>
+<p><img alt="" src="https://i.imgur.com/3ZS1ZvJ.png"/></p>
+<blockquote>
+<p>Identity State Diagram for Direct Identity</p>
+</blockquote>
+<p>As seen in the diagram, only the <code>IdState</code> is stored on the blockchain.  In order to save the stored bytes on the blockchain, it is desirable that only one "hash" representing the current state of the Identity is stored on the smart contract. This one "hash" is the <code>IdState</code> (Identity State), which is linked to a timestamp and a block on the blockchain.</p>
+<p>All the public data must be made available for any holder so that
+they can build fresh Merkle tree proofs of both the <code>ReT</code> and <code>RoT</code>.  This allows the holder to:</p>
+<ul>
+<li>Prove recent non-revocation / "current" version without interaction with the issuer.</li>
+<li>Hide a particular <code>ClR</code> from all the other<code>ClR</code>s to avoid an issuer from discovering a claim hidden behind a ZK proof. For this purpose, <code>ClR</code> is added to <code>RoR</code>.</li>
+</ul>
+<p>The place and the method to access the publicly available data are specified in the Identities State smart contract. Two possible initial options are:</p>
+<ul>
+<li>IPFS, by adding a link to an <a href="https://docs.ipfs.io/guides/concepts/ipns/">IPNS address</a> (example: <code>ipfs://ipns/QmSrPmbaUKA3ZodhzPWZnpFgcPMFWF4QsxXbkWfEptTBJd</code>), which contains a standardized structure of the data.</li>
+<li>HTTPS, by adding a link to an HTTPS endpoint (example: <code>https://kyc.iden3.io/api/v1/public-state/aabbccdd</code>), which offers the data following a standardized API.</li>
+</ul>
+<h4 id="publish-claims">Publish Claims</h4>
+<p>The first step in publishing a claim involves adding a new leaf to the <code>ClT</code>, which updates the identity <code>ClR</code>. Claims can be optionally published in batches, adding more than one leaf to the <code>ClT</code> in a single transaction. After the <code>ClT</code> has been updated, the identity must follow an Identity State Update so that anyone is able to verify the newly added claims. This involves adding the new <code>ClR</code> to the <code>RoT</code>, which in turn will update the <code>RoR</code>. After that, the new <code>IdState</code> is calculated and through a transaction it is updated in the Identities State Smart Contract (from now on, referred to as "the smart contract") on the blockchain. Once the updated <code>IdState</code> is in the smart contract, anyone can verify the validity of the newly added claims.</p>
+<p>The procedure to update the <code>IdState</code> in the smart contract can be achieved with the following criteria:</p>
+<ul>
+<li><strong>Bad scalability (no batch), good privacy, and correctness</strong>: The identity uploads the new <code>IdState</code> to the smart contract with proof of a correct transition from the old <code>IdState</code> to the new one. Only one claim is added to the <code>ClT</code> in the transition.</li>
+<li><strong>Good scalability (batch), good privacy, and correctness</strong>: Same as before, but many claims are added (batch) in the transition (with a single proof for all newly added claims)</li>
+<li><strong>Good scalability (batch), good privacy but no correctness</strong>: The identity uploads the new <code>IdState</code> to the smart contract, without proving correctness on the transition.</li>
+</ul>
+<p>The criteria for correctness are as follows:</p>
+<ul>
+<li>Revocation of a claim cannot be reverted.</li>
+<li>Updatable claims are only updated with increasing versions, and only one version is valid at a time.</li>
+</ul>
+<p>To have or to not have the guarantee of the correctness is specified in the Identity Type so that any verifier knows about the guarantees provided by the protocol for the issuer claims.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Good scalability refers to the verification process and the costs related to the smart contract. Batching with zkSNARKs can have a high computation load on the prover.</p>
+</div>
+<h4 id="revocation-tree">Revocation Tree</h4>
+<p>Sometimes, it is desirable for an identity to invalidate a statement made through a claim. For regular claims, this involves revoking (a process that is ideally irreversible) and allows any verifier to be aware that an already published claim is made invalid by the issuer's identity. Similarly, for updatable claims, there must be a mechanism to invalidate old versions when a new one is published. Since confirming the current validity of a claim is a parallel process to confirming that a claim was published at some point, the "current validation" process can be separated.</p>
+<p>Separating these two processes allows a design in which the <code>ClT</code> (Claim Tree) remains private, but the revocation/version information is public, allowing a holder to generate a fresh proof of the "current validity" without requesting access to the private <code>ClT</code>.</p>
+<p>To achieve this, every Identity has a <code>ClT</code> (Claim Tree) and a separate <code>ReT</code>(Revocation Tree). While the Claim Tree would be private and only the root public, the revocation tree would be entirely public. The roots of both the trees (<code>ClT</code> and <code>ReT</code>) are linked via the <code>IdState</code> (Identity State) which is published in the smart contract. The Revocation Tree could be published in IPFS or other public storage systems.</p>
+<p>Proving that a claim is valid (and thus not revoked/updated) consists of two proofs:</p>
+<ul>
+<li>Prove that the claim was issued at some time t (this proof is generated once by the issuer and uses a <code>IdState</code>-<code>ClR</code> at time t stored in the smart contract).</li>
+<li>Prove that the claim has not been revoked/updated recently (this proof is generated by the holder with a recent <code>ReR</code> (Revocation Tree Root) by querying the public <code>ReT</code> (Revocation Tree), and verified against a recent <code>IdState</code>).</li>
+</ul>
+<h4 id="revoke-claims">Revoke Claims</h4>
+<p>To prevent revealing anything about the content of the claim in the <code>ReT</code>, the claim contains a revocation nonce in the value part, which is added as a leaf in the <code>ReT</code> to revocate the claim.</p>
+<p>To prevent reversing revocation of a claim, the <code>ReT</code> needs to follow some transition rules like <code>ClT</code>, enforced by a ZK proof (for space and verification efficiency).</p>
+<p>Apart from the revoking procedure, there is a method to define the validity of a claim based on expiration, by explicitly setting an expiration date in the claim (See <a href="#structure"><strong>Claim Structure</strong></a>). Revoking and Expiration are compatible methods to invalidate claims.</p>
+<h4 id="update-claims">Update Claims</h4>
+<p>To update a claim, a new claim is added to the <code>ClT</code> with an increased version value in the index position of the claim (notice that the previous version of the claim is not touched). Then, a leaf is added to the <code>ReT</code> containing the revocation nonce and the highest invalid version (that is, all the claims with that nonce and version equal or lower to the one in the leaf are invalid). This means that when a claim is updated, the same revocation nonce is used in the claim.</p>
+<p>To prevent downgrading the version of a claim, and forcing to have only one valid updatable claim at a time, the <code>ReT</code> needs to follow the transition rules (like the <code>ClT</code> does) enforced by a ZK proof (for space and verification efficiency).</p>
+<p>Updating and revoking are compatible methods to invalidate claims: an updatable claim can be revoked, which means no future (or past) updates would be valid.</p>
+<p>In case a claim needs to be revoked completely, without the possibility to update, the highest version and the revocation nonce should be added to the <code>ReT</code>.</p>
+<h3 id="prove-claims-credentials">Prove Claims (Credentials)</h3>
+<p><strong>Nomenclature</strong>
+- MTP: Merkle Tree Proof. The list of siblings in a path from a leaf to the root.</p>
+<h4 id="prove-that-a-claim-was-issued-at-time-t">Prove that a Claim was Issued at Time t</h4>
+<ul>
+<li>Requires proving a link between the claim and <code>IdState_t</code> (Identity State at time t) published in the smart contract. This proof requires:<ul>
+<li>Claim</li>
+<li>t </li>
+<li>MTP Claim -&gt; <code>ClR_t</code></li>
+<li><code>RoR_t</code> (Roots Tree at time t)</li>
+<li><code>ReR_t</code> (Revocation Tree Root at time t)</li>
+<li><code>IdState_t</code></li>
+</ul>
+</li>
+</ul>
+<p>where <code>t</code> is any time.</p>
+<h4 id="prove-that-the-claim-is-currently-valid">Prove that the Claim is Currently Valid</h4>
+<h5 id="prove-that-the-claim-hasnt-been-revoked-recently">Prove that the Claim Hasn't Been Revoked Recently</h5>
+<ul>
+<li>Requires proving the inexistence of a link between the claim revocation nonce and a recent <code>IdState_t</code> (<code>t</code> must be recent according to the verifier requirements [1]) published in the smart contract. This proof requires:<ul>
+<li>Claim (Nonce)</li>
+<li>t (Recent Time)</li>
+<li>MTP !Nonce -&gt; <code>ReR_t</code></li>
+<li><code>ClR_t</code></li>
+<li><code>RoR_t</code></li>
+<li><code>IdState_t</code></li>
+</ul>
+</li>
+</ul>
+<p>[1] The verifier needs to decide a time span to define how recent the
+<code>IdState_t</code> used in the proof needs to be.  Using the current <code>IdState</code>instead of recent could lead to data races, so it is better to select an <code>IdState</code> that is no more than X minutes old.</p>
+<h5 id="proof-of-last-version">Proof of Last Version</h5>
+<p>This is very similar to proving that a claim has not been recently revoked except that in this case, not only the nonce in the claim is checked, but also the version.</p>
+<ul>
+<li>Requires proving the inexistence of a link between the claim revocation nonce
+version and a recent <code>IdState_t</code> (<code>t</code> must be recent according to the verifier requirements [1]) published in the smart contract.  This proof requires:<ul>
+<li>Claim (Nonce, Version)</li>
+<li>t</li>
+<li>MTP !(Nonce, Version) -&gt; <code>ReR_t</code></li>
+<li><code>ClR_t</code></li>
+<li><code>RoR_t</code></li>
+<li><code>IdState_t</code></li>
+</ul>
+</li>
+</ul>
+<p>Where <code>t</code> is a recent time.</p>
+<h5 id="proof-of-non-expiration">Proof of Non-Expiration</h5>
+<p>A claim can be made expirable by setting an expiration flag in the options and specifying an expiration date in the Unix timestamp format in the corresponding claim value part (see <strong>Claim Format</strong>).</p>
+<h4 id="zero-knowledge-proof-of-valid-credentials">Zero-knowledge Proof of Valid Credentials</h4>
+<p>A zero-knowledge proof allows hiding some information about a claim while proving that it was issued by a particular identity and that it is currently valid. The same checks mentioned in the previous sections are performed:</p>
+<ul>
+<li>Prove that a claim was issued at least at time t.</li>
+<li>Prove that the claim is currently valid.</li>
+</ul>
+<p>In the proof that shows "that a claim was issued at time at least t", there is an additional part that is added to hide a particular <code>IdState_t1</code> that is used (in order to hide the claim from the issuer). The proof then requires:</p>
+<pre><code>- Claim
+- t
+- MTP Claim -&gt; `ClR_t1`
+- `RoR_t1` (Roots Tree at time t1)
+- `ReR_t1` (Revocation Tree Root at time t1)
+- `IdState_t1`
+- MTP `ClR_t1` -&gt;`RoR_t2`
+- `ClR_t2` (Claims Tree Root at time t2)
+- `ReR_t2` (Revocation Tree Root at time t2)
+- `IdState_t2`
+</code></pre>
+<p>Where <code>t1</code> is any time and <code>t2</code> is the recent time.</p>
+<p>The full circuit can be found at: https://github.com/iden3/circuits/tree/master/circuits/lib</p>
+<!--
+[//]: # (### Indirect Identities)
+
+[//]: # ()
+[//]: # (Sometimes it's not practical for an Identity to publish its Identity State)
+
+[//]: # (directly to the smart contract.  Some reasons could be:)
+
+[//]: # (- The Identity publishes very few Claims and wants a more lightweight)
+
+[//]: # (  procedure.)
+
+[//]: # (- The Identity doesn't own cryptocurrency to call the smart contract.)
+
+[//]: # (- The Identity wants to hide identifier from verifier.)
+
+[//]: # ()
+[//]: # (In those cases, the Identity must specify <!--in it's creation that it will be)
+
+[//]: # (using a Relay which will indirectly link its claims to the smart contract via)
+
+[//]: # (the Relay Identity State.  In this case, we say that the Identity under the)
+
+[//]: # (Relay is an indirect Identity, and the Claims that an indirect Identity issues)
+
+[//]: # (are Indirect Claims.)
+
+[//]: # ()
+[//]: # (Indirect claims are claims that appear in the user merkle tree whose Identity)
+
+[//]: # (State appears in a SetRoot Claim that appears in the Relay merkle tree whose)
+
+[//]: # (Identity State is in the blockchain.)
+
+[//]: # ()
+[//]: # (As mentioned, the claims of the Relay contain Identity States of other)
+
+[//]: # (Identities.  If correctness guarantees are desired, updating these claims requires two levels of proofs:)
+
+[//]: # (- Correct transition between the Relay Identity States)
+
+[//]: # (- Correct transition between the Identity States that appear in the Relay Claims &#40;in the Relay Claims Tree&#41;)
+
+[//]: # ()
+[//]: # (This can be achieved through the following means with the following properties)
+
+[//]: # (- *Bad scalability &#40;no batch&#41;, no privacy, correctness*: All the proofs are)
+
+[//]: # (  public &#40;and long&#41;)
+
+[//]: # (- *Bad scalability &#40;no batch&#41;, some privacy, correctness*: Only the user root)
+
+[//]: # (  correct transition proofs are private &#40;zero-knowledge&#41;)
+
+[//]: # (- *Good scalability &#40;batch&#41;, medium privacy, correctness*: All the proofs are)
+
+[//]: # (  private, but the relay builds the user root correct transaction proofs &#40;the)
+
+[//]: # (  relay learns about user claims&#41;)
+
+[//]: # (- *Good scalability &#40;batch&#41;, good privacy, correctness*: All the proofs are)
+
+[//]: # (  private, the relay builds a relay root transition proof with ZK proofs)
+
+[//]: # (  from the users. Requires 1 level of recursion in ZK proofs.)
+
+[//]: # (- *Good scalability &#40;batch&#41;, good privacy, no correctness*: The relay uploads a)
+
+[//]: # (  new root after adding set root claims with updated users claims.  User root)
+
+[//]: # (  updates are not proved for correctness.  The relay can add arbitrary user)
+
+[//]: # (  claims.)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # (                     ETH)
+
+[//]: # (                      /\)
+
+[//]: # (                      \/)
+
+[//]: # (                      ^)
+
+[//]: # (                      |)
+
+[//]: # (                      |)
+
+[//]: # (                     root)
+
+[//]: # (                      /\     Relay ID's)
+
+[//]: # (                     /  \    Merkle Tree)
+
+[//]: # (                    /____\)
+
+[//]: # (                    |)
+
+[//]: # (             [sub id state claim]   <-- Direct Claim)
+
+[//]: # (                      ^)
+
+[//]: # (                      |)
+
+[//]: # (                      |)
+
+[//]: # (                     root)
+
+[//]: # (                      /\     Indirect ID's)
+
+[//]: # (                     /  \    Merkle Tree)
+
+[//]: # (                    /____\)
+
+[//]: # (                      |)
+
+[//]: # (                   [claim]    <--- Indirect Claim)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # ()
+[//]: # (The correctness properties mentioned here are the following:)
+
+[//]: # (- Revocation of a Claim can't be later undone)
+
+[//]: # (- Updatable Claims are only updated with increasing versions, and only one)
+
+[//]: # (  version is valid at a time.)
+
+[//]: # (- An indirect claim can only be published by whoever controls the kOp of the)
+
+[//]: # (  Identity.)
+
+[//]: # (- An indirect claim can only be revoked/updated by whoever controls the kOp of)
+
+[//]: # (  the Identity.)
+
+[//]: # ()
+[//]: # (![]&#40;https://i.imgur.com/szBzG1x.png&#41;)
+
+[//]: # ()
+[//]: # (> Identity State Diagram for Indirect Identity, Option A)
+
+[//]: # ()
+[//]: # (![]&#40;https://i.imgur.com/mRIJa23.png&#41;)
+
+[//]: # ()
+[//]: # (> Identity State Diagram for Indirect Identity, Option B)
+
+[//]: # ()
+[//]: # (As seen in the two diagrams, the Roots Trees and Revocation Trees of the)
+
+[//]: # (Identities under the Relay can be linked to the Relay State in two ways.)
+
+[//]: # ()
+[//]: # (==TODO: Decide which one==)
+
+[//]: # ()
+[//]: # (- Correctness of Identity State transition depending on the type of identity:)
+
+[//]: # ()
+[//]: # (```mermaid)
+
+[//]: # (graph LR)
+
+[//]: # (    claim  direct)
+
+[//]: # (    claim indirect)
+
+[//]: # (    direct no_correctness)
+
+[//]: # (    direct correctness_depth_1)
+
+[//]: # (    indirect no_correctness)
+
+[//]: # (    indirect correctness_depth_1)
+
+[//]: # (    indirect correctness_depth_2+sig)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (Claims that must exist in the Genesis ID)
+
+[//]: # (- Only direct claims &#40;A&#41;)
+
+[//]: # (    - kOp claim)
+
+[//]: # (- Indirect claims via Relay &#40;B&#41;)
+
+[//]: # (    - kOp claim)
+
+[//]: # (    - Relay Identity claim)
+
+[//]: # ()
+[//]: # (#### Prove Claims &#40;Credentials&#41;)
+
+[//]: # ()
+[//]: # (Proving Indirect Claims requires doubling the contents of a Direct Claim proof)
+
+[//]: # (plus some extra information.)
+
+[//]: # ()
+[//]: # (nomenclature)
+
+[//]: # (- `RIdS`: Relay Identity State)
+
+[//]: # ()
+[//]: # (##### Prove that a claim was issued at time at least T)
+
+[//]: # ()
+[//]: # (- Direct existence proof for Claim -> `IdS_t1`)
+
+[//]: # (- Direct existence proof for SetStateClaim&#40;ID, v, `IdS_t1`&#41; -> `RIdS_t2`)
+
+[//]: # ()
+[//]: # (Where `t1` and `t2` are any times.)
+
+[//]: # ()
+[//]: # (Additionally, it must be proved that the Identity is Indirect, and that it has)
+
+[//]: # (authorized the Relay used in the proof.)
+
+[//]: # ()
+[//]: # (Assuming that the authorization of the Relay is done via the genesis Id, and)
+
+[//]: # (that the Relay can't be changed via a Claim update:)
+
+[//]: # (- Direct proof for ClaimAuthRelay&#40;`RID`&#41; -> `IdS_0`)
+
+[//]: # ()
+[//]: # (##### Prove that the claim is currently valid)
+
+[//]: # ()
+[//]: # (- Direct validity proof for Claim -> `IdS_t2`)
+
+[//]: # (- Direct validity proof for SetStateClaim&#40;ID, v, `IdS_t12`&#41; -> `RIdS_t3`)
+
+[//]: # ()
+[//]: # (Where `t2` and `t3` are recent times.)
+
+[//]: # ()
+[//]: # (The same proof of Relay authorization as in the previous section is needed.)
+
+[//]: # (## Trust levels)
+
+[//]: # (### Trust levels verifier-issuer)
+
+[//]: # ()
+[//]: # (The table shows what the protocol ensures to the verifier about assertions from the issuer &#40;and thus doesn't require the verifier to trust the issuer about it&#41;, in the cases:)
+
+[//]: # (- **NC**: No transition Correctness)
+
+[//]: # (- **C**: Transition Correctness)
+
+[//]: # ()
+[//]: # (|NC|C | Assertion |)
+
+[//]: # (|--|--|-----------|)
+
+[//]: # (| | | the contents of the Claims to be true |)
+
+[//]: # (| | ✓ | the Claim was not previously revoked and now it's valid |)
+
+[//]: # (| | ✓ | the Claim is revoked and will not be unrevoked |)
+
+[//]: # (| | ✓ | there are no multiple valid versions of a Claim |)
+
+[//]: # (| | ✓ | a current invalid version of a claim won't be valid in the future |)
+
+[//]: # (| | ✓ | an indirect Claim is issued by the indirect Identity and not by the Relay |)
+
+[//]: # (| ✓ | ✓ | the Claim was issued at least at time t |)
+
+[//]: # (## CRL &#40;Claims Requirements Language&#41;)
+
+[//]: # (**Claims Requirements Language** &#40;`CRL`&#41; is a standard that allows to define a set of rules &#40;`requirements`&#41; that must be accomplished in order to get access to operate with a certain action.)
+
+[//]: # ()
+[//]: # (It is defined by a specific syntax that allows entities to define a set of `requirements`, that later on an identity can take as input and from the identity's `ClaimsDB` generate a `proof` that satisfies those requirements.)
+
+[//]: # (Then, a verifier can take the `requirements` and the `proof` and check that they are fulfilled by the prover identity.)
+
+[//]: # ()
+[//]: # (`CRL` allows to specify which Claims issued from which Identities and containing which parameters are needed to get validated. Even allows to add levels of recursion, such as defining that a certain Claim is needed that is issued from any identity that holds a Claim of a certain type from another identity holding another Claim of another type issued by another specific identity.)
+
+[//]: # ()
+[//]: # (This allows a vast amount of complex specifications of requirements with arbitrary logic.)
+
+[//]: # ()
+[//]: # (### Flow)
+
+[//]: # (- Define a set of rules: `requirements`)
+
+[//]: # (  - the `requirements` has a specified format, that a prover & verifier understand)
+
+[//]: # (- a prover can take the `requirements` data packet and generate a `proof`)
+
+[//]: # (- the verifier will take the `requirements` & `proof` check if it verifies.)
+
+[//]: # ()
+[//]: # ()
+[//]: # (```mermaid)
+
+[//]: # (graph TD)
+
+[//]: # ()
+[//]: # (subgraph Legend)
+
+[//]: # (style e fill:#ecb3ff)
+
+[//]: # (e&#40;&#40;entity&#41;&#41;)
+
+[//]: # (style action fill:#b3ffd4)
+
+[//]: # (style data fill:#c2efef)
+
+[//]: # (data&#40;data&#41;)
+
+[//]: # (action)
+
+[//]: # (end)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (```mermaid)
+
+[//]: # (graph LR)
+
+[//]: # ()
+[//]: # (style prover fill:#ecb3ff)
+
+[//]: # (style verifier fill:#ecb3ff)
+
+[//]: # ()
+[//]: # (style D fill:#b3ffd4)
+
+[//]: # (style G fill:#b3ffd4)
+
+[//]: # (style V fill:#b3ffd4)
+
+[//]: # ()
+[//]: # (style db fill:#c2efef)
+
+[//]: # (style requirements fill:#c2efef)
+
+[//]: # (style proof fill:#c2efef)
+
+[//]: # (style true fill:#c2efef)
+
+[//]: # ()
+[//]: # (verifier&#40;&#40;verifier&#41;&#41; D&#40;define&#41;)
+
+[//]: # (D requirements)
+
+[//]: # ()
+[//]: # (prover&#40;&#40;prover&#41;&#41;G&#40;generate&#41;)
+
+[//]: # (db G)
+
+[//]: # (requirements G)
+
+[//]: # (Gproof)
+
+[//]: # ()
+[//]: # (requirements V&#40;verify&#41;)
+
+[//]: # (proof V)
+
+[//]: # ()
+[//]: # (V true)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (Modules:)
+
+[//]: # (- Automatic generation of proofs from a manifest by consulting the claim DB)
+
+[//]: # (- Automatic generation of proofs with interactive user selection of claims)
+
+[//]: # (- Automatic verification of a proof generated for a manifest)
+
+[//]: # ()
+[//]: # (### Levels of complexity when demonstrating claims)
+
+[//]: # ()
+[//]: # (1. demonstrate claim without Zero-Knowledge)
+
+[//]: # (2. demonstrate claim with properties without Zero-Knowledge)
+
+[//]: # (3. demonstrate claim with Zero-Knowledge)
+
+[//]: # (4. demonstrate claim with properties with Zero-Knowledge)
+
+[//]: # ()
+[//]: # (Case 1 is a subset of 2, and 3 is a subset of 4. So we will work on cases 2 and 4.)
+
+[//]: # ()
+[//]: # (> Example of claim)
+
+[//]: # (> ```)
+
+[//]: # (> Claim)
+
+[//]: # (>   From: ID)
+
+[//]: # (>   Recip: self.ID)
+
+[//]: # (>   Field1: 0xAABB)
+
+[//]: # (>   Field2: 0xCCDD)
+
+[//]: # (>   Field3: 0xFFEE)
+
+[//]: # (> ```)
+
+[//]: # ()
+[//]: # (- case 2:)
+
+[//]: # (    - claim:)
+
+[//]: # (        - type: ClaimType)
+
+[//]: # (        - ID: core.ID)
+
+[//]: # (        - recip: self.ID)
+
+[//]: # (        - fields: [)
+
+[//]: # (            "field1": "0xAABB",)
+
+[//]: # (            "field2": "0xCCDD")
+
+[//]: # (        ])
+
+[//]: # (- case 4:)
+
+[//]: # (    - claim:)
+
+[//]: # (        - type: ClaimType)
+
+[//]: # (        - ID: core.ID)
+
+[//]: # (        - recip: prv&#40;self.ID&#41;)
+
+[//]: # (        - fields: [)
+
+[//]: # (            "field1": prv&#40;"0xAABB"&#41; == F&#40;pub&#40;X&#41;&#41;,)
+
+[//]: # (            "field2": "0xCCDD")
+
+[//]: # (        ])
+
+[//]: # ()
+[//]: # (#### Things to demonstrate)
+
+[//]: # (- combination of claims)
+
+[//]: # (    - &#40;OR, AND, ...&#41;)
+
+[//]: # (- links between claims)
+
+[//]: # (    - claim1[field1]==claim2[field3])
+
+[//]: # (    - claim1.from==claim2.from)
+
+[//]: # (    - recursion/dependency)
+
+[//]: # (        - claim2.from=="IDx")
+
+[//]: # (        - claim1.from==claim2.recip)
+
+[//]: # (        - claim1.recip==self.ID)
+
+[//]: # (- link between claim properties and public variable)
+
+[//]: # (    - claim[field1]==F&#40;X, Y&#41; &#40;where Y is public var&#41;)
+
+[//]: # (- recursion)
+-->
+<!-- ## Identity Communication
+
+### Issuer - Holder (Credential Request Procedure)
+
+The same procedure works for already issued claims and the new claims: 
+
+- The issuer has issued a claim linking a property to the holder, and the holder requests the credential of the issued claim.
+- The holder requests the issue of a new claim linking a property to the holder.
+
+> NOTE: In HTTP, use polling to resolve the "Future".  In asynchronous messaging, request the resolution of the "Future" and wait for the reply.
+
+#### Direct Claims
+
+<pre class="mermaid"><code>sequenceDiagram
+    Holder-&gt;&gt;IssuerServer: req. Credential + auth?
+    IssuerServer-&gt;&gt;IssuerServer: Auto/Manual check
+    IssuerServer-&gt;&gt;IssuerServer: Add Claim to MT
+    IssuerServer-&gt;&gt;Holder: Future(Credential)
+    IssuerServer-&gt;&gt;SmartContract: Publish Root
+    SmartContract-&gt;&gt;IssuerServer: Ok
+    Holder-&gt;&gt;IssuerServer: Poll(Future(Credential))
+    IssuerServer-&gt;&gt;Holder: Credential</code></pre>
+#### Indirect Claims
+
+<pre class="mermaid"><code>sequenceDiagram
+    Holder-&gt;&gt;IssuerClient: req. Credential
+    IssuerClient-&gt;&gt;IssuerClient: Auto/Manual check
+    IssuerClient-&gt;&gt;IssuerClient: Add Claim to MT
+    IssuerClient-&gt;&gt;Relay: req. Credential (SetRoot)
+    Relay-&gt;&gt;Relay: Add Claim to MT
+    Relay-&gt;&gt;IssuerClient: Future(Credential1)
+    IssuerClient-&gt;&gt;Holder: Credential0, Future(Credential1)
+    Relay-&gt;&gt;SmartContract: Publish Root
+    SmartContract-&gt;&gt;Relay: Ok
+    Holder-&gt;&gt;Relay: Poll(Future(Credential1))
+    Relay-&gt;&gt;Holder: Credential</code></pre>
+### Holder - Verifier
+
+- Verifier requests a claim (or in general, a proof that involves some claims).
+- Holder shows a proof of the claim (or in general, a proof that involves some claims) to the verifier.
+
+```mermaid
+sequenceDiagram
+    participant A
+    Exchange_SC->>Exchange_SC: define CR with CRL
+    A->>Exchange_SC: get CR
+    Exchange_SC->>A: CR
+    A->>A: build proof using Claim DB
+    A->>Exchange_SC: proof
+    Exchange_SC->>Exchange_SC: validate
+    Exchange_SC->>Exchange_SC: action
+    Exchange_SC->>A: result
+``` -->
+<!--
+[//]: # (## Naming system)
+
+[//]: # (**Naming system** allows assigning unique human-readable names.)
+
+[//]: # ()
+[//]: # (==we had some ideas and implementations in the past; needs to be defined==)
+
+[//]: # ()
+[//]: # (## Identity Discovery)
+
+[//]: # (**Identity discover** allows identities to retrieve the information about how to communicate with other identities through a decentralized p2p network.)
+
+[//]: # ()
+[//]: # (# Addendum)
+
+[//]: # ()
+[//]: # (## Appendix Title 2)
+
+[//]: # ()
+[//]: # ([2] A ZK proof of a valid claim needs to link the claim to the Identity State)
+
+[//]: # (that is stored in the Identity State smart contract &#40;blockchain&#41;.  The link is)
+
+[//]: # (done via zero-knowledge &#40;the merkle tree proof which links the tree leaf)
+
+[//]: # (&#40;Claim&#41; to the Claims Tree Root &#40;linked to the Identity State&#41;&#41;.  When emitting)
+
+[//]: # (a credential &#40;Claim+Proof&#41;, the issuer needs to generate the merkle tree proof)
+
+[//]: # (for a particular Claims Tree Root &#40;and Identity State&#41;.  If the ZK proof)
+
+[//]: # (reveals that particular Root, and this ZK is public to the issuer, the issuer)
+
+[//]: # (can identify a small set of claims which contains the claim in the ZK proof)
+
+[//]: # (&#40;that is, the set of claims for which the issuer calculated a proof for that)
+
+[//]: # (particular Root&#41;.  This diminishes the privacy in great measure, and needs a)
+
+[//]: # (solution.)
+
+[//]: # ()
+[//]: # (### Solution 1 - Periodic generation of all credentials)
+
+[//]: # ()
+[//]: # (The issuer can periodically generate proofs for every claim ever issued, and)
+
+[//]: # (send these fresh credentials to the recipients.  This allows the recipients to)
+
+[//]: # (use a proof with a recent root in a ZK proof so that the issuer is unable to)
+
+[//]: # (distinguish the hidden claim between all the issued claims in that particular)
+
+[//]: # (root.)
+
+[//]: # ()
+[//]: # (Cons:)
+
+[//]: # (- The issuer has a periodic overhead &#40;computation + bandwidth&#41; that grows)
+
+[//]: # (  linearly &#40;actually n*log&#40;n&#41;&#41; with the number of issued claims)
+
+[//]: # ()
+[//]: # (### Solution 2 - Root of roots)
+
+[//]: # ()
+[//]: # (A merkle tree of Roots is generated by the Issuer and uploaded to the Smart)
+
+[//]: # (Contract.  This allows the recipients to hide the particular Root they are)
+
+[//]: # (using to prove a claim, and to prove that the Root is valid by proving)
+
+[//]: # (inclusion in the Roots Tree of the Issuer.)
+
+[//]: # ()
+[//]: # (Cons:)
+
+[//]: # (- The Root smart contract requires a new field for each identity: the root of)
+
+[//]: # (  the roots tree.)
+
+[//]: # (- For correctness, the root update should prove that the root of the roots tree)
+
+[//]: # (  is correctly updated.)
+
+[//]: # (- To build the merkle tree proof of the roots tree, the leaves &#40;roots&#41; and)
+
+[//]: # (  intermediate nodes are needed.  Although this data structure can be built from)
+
+[//]: # (  public data &#40;the history of roots from the blockchain&#41;, it should be cached)
+
+[//]: # (  somewhere &#40;the data structure size is O&#40;n&#41; where n is the number of root)
+
+[//]: # (  updates made by the identity&#41;.)
+
+[//]: # ()
+[//]: # (## MerkleTree)
+
+[//]: # ()
+[//]: # (Not all trees, but:)
+
+[//]: # ()
+[//]: # (# Open Questions)
+
+[//]: # ()
+[//]: # (## Genesis breaking version rules)
+
+[//]: # ()
+[//]: # (What happens when the Genesis Merkle Tree has a version claim at v != 0?  This breaks the transaction rules, which the genesis doesn't follow!)
+
+[//]: # ()
+[//]: # (## Temporarily disabling an updatable claim)
+
+[//]: # ()
+[//]: # (If an updatable claim needs to be temporarily disabled/unused, it can be upgraded and its value set to all 0.  This could be application-dependent.)
+
+[//]: # ()
+[//]: # (Example: A subdomain points to a user identity, but the user doesn't pay for renewal.  The owner of the domain doesn't want the subdomain to point to the user identity, so they make it point to NULL.)
+
+[//]: # ()
+[//]: # (---)
+
+[//]: # ()
+[//]: # (# Annex)
+
+[//]: # ()
+[//]: # (## Types of identity)
+
+[//]: # ()
+[//]: # (==Discuss:== Would be defined by a flag in the type field of the ID==)
+
+[//]: # (==The other option is that all the identities are updatable always &#40;does not exist immutable identity&#41;, but sometimes don't use that feature==)
+
+[//]: # ()
+[//]: # (- Updatable identity)
+
+[//]: # (   - publishes the root &#40;direct or indirectly&#41; on the blockchain)
+
+[//]: # (   - can add claims after the GenesisId)
+
+[//]: # (   - Before adding/revoking claims post genesis, doesn't need to publish in the blockchain)
+
+[//]: # (- Immutable identity)
+
+[//]: # (   - does not publish the root on the blockchain)
+
+[//]: # (   - can not add claims after the GenesisId)
+
+[//]: # (   - useful for identities that don't issue claims)
+
+[//]: # ()
+[//]: # (## Protocol/rules)
+
+[//]: # ()
+[//]: # (The `Identity State Transition` must be done following the protocol. This means that all the identities when updating their MerkleTree must follow the protocol, which means that to publish their root is needed to provide a ZKproof that the `root update` is done following the set of rules of the protocol.)
+
+[//]: # ()
+[//]: # (The state transition rules are different for regular identities &#40;direct claims&#41; and relay identities &#40;indirect claims&#41;.)
+
+[//]: # ()
+[//]: # (In the cases that an identity needs to add thousands of claims &#40;eg:100,000&#41; that are part of a non-updatable set &#40;linked to a timestamp&#41;, as the current state of technology does not allow to compute as much zkproofs in a reasonable time, the identity can create a new sub MerkleTree, and then adding a Claim to the main MerkleTree with the Root of the sub MerkleTree. )
+
+[//]: # (The claims in the sub MerkleTree need to be part of a non-updatable set because the rules of correctness of the sub MerkleTree can not be guaranteed for a possible sub tree update.)
+
+[//]: # ()
+[//]: # (![]&#40;https://i.imgur.com/k56Txjl.png&#41;)
+
+[//]: # (## Diagram of trees and proofs)
+
+[//]: # ()
+[//]: # (The following diagram shows the merkle trees and calculations involved in minor)
+
+[//]: # (identity state updates that allow the following actions:)
+
+[//]: # (- issue claim)
+
+[//]: # (- revoke claim)
+
+[//]: # ()
+[//]: # (The top right section shows the data stored in the identity states smart contract.)
+
+[//]: # ()
+[//]: # (On the right, the different kind of credential required data is shown:)
+
+[//]: # (- **A**: Credential Of Existence. Allows proving that a claim existed at some)
+
+[//]: # (  point.)
+
+[//]: # (- **B**: Credential Of Validity. Allows proving that a claim existed and has)
+
+[//]: # (  not been recently revoked.)
+
+[//]: # (- **C**: Credential Input for Zero-Knowledge Proof. Allows proving the)
+
+[//]: # (  validity of a claim in zero-knowledge.)
+
+[//]: # ()
+[//]: # (![]&#40;../../imgs/treesAndProofs.png&#41;)
+-->
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://t.me/iden3io" rel="noopener" target="_blank" title="t.me">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496m115 168.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7.2-.7.3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2.5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3.6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6.5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7.5 3.2.6 6.5.4 9.8z"></path></svg>
+</a>
+<a class="md-social__link" href="https://github.com/iden3/docs" rel="noopener" target="_blank" title="github.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</a>
+<a class="md-social__link" href="https://iden3.io/" rel="noopener" target="_blank" title="iden3.io">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 3.75C0 2.784.784 2 1.75 2h20.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0 1 22.25 22H1.75A1.75 1.75 0 0 1 0 20.25ZM22.5 7h-21v13.25c0 .138.112.25.25.25h20.5a.25.25 0 0 0 .25-.25Zm-10-3.5v2h10V3.75a.25.25 0 0 0-.25-.25ZM7 3.5v2h4v-2Zm-5.25 0a.25.25 0 0 0-.25.25V5.5h4v-2Z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "content.code.copy"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+<script src="../../javascripts/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
